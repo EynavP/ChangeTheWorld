@@ -1,10 +1,20 @@
 <resources>
     <string name="app_name">ChangeTheWorld</string>
-    <string name = "welcome_bac">Welcome Back</string>
+    <string name="welcome_bac">Welcome Back</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="forgot_pass">Forgot Password?</string>
     <string name="login">Login</string>
     <string name="don_t_have_">Don\' t have account?</string>
     <string name="create_new">Create a new account</string>
+    <string name="create_acco">Create Account</string>
+    <string name="create_a_ne">Create a new account</string>
+    <string name="fullname">Full Name</string>
+    <string name="mailaddress">Mail Address</string>
+    <string name="phonenumber">Phone Number</string>
+    <string name="localcurrency">Local Currency</string>
+    <string name="uploadPhoto">Photo</string>
+    <string name="uploadPassport">Passport</string>
+    <string name="already_hav">Already have an account?</string>
+
 </resources>

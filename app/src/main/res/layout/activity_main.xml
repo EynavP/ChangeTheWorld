@@ -9,9 +9,8 @@
     >
     <!-- Logo image -->
 
-    <!-- Welcome Back -->
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/logoImage"
         android:layout_width="284dp"
         android:layout_height="264dp"
         android:layout_alignParentLeft="true"
@@ -23,8 +22,8 @@
         android:layout_marginEnd="53dp"
         app:srcCompat="@drawable/logo" />
 
-    <!-- Username -->
 
+    <!-- Welcome Back -->
     <TextView
         android:id="@+id/welcome_bac"
         android:layout_width="215dp"
@@ -41,6 +40,8 @@
         android:textAppearance="@style/welcome_bac"
         app:lineHeight="34sp" />
 
+    <!-- Username -->
+
     <TextView
         android:id="@+id/username"
         android:layout_width="51dp"
@@ -53,10 +54,8 @@
         android:text="@string/username"
         android:textAppearance="@style/username"></TextView>
 
+
     <!-- enter UserName -->
-
-    <!-- Password -->
-
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="274dp"
@@ -72,6 +71,7 @@
         android:paddingStart="50dp"
         android:textColorHint="#11000000"></EditText>
 
+    <!-- Password -->
     <TextView
         android:id="@+id/password"
         android:layout_width="51dp"
@@ -86,7 +86,6 @@
 
     <!-- enter Password -->
 
-    <!-- Forgot Password button -->
     <EditText
         android:id="@+id/editTextTextPassword"
         android:layout_width="274dp"
@@ -102,7 +101,9 @@
         android:paddingStart="50dp"
         android:textColorHint="#11000000"></EditText>
 
+    <!-- Forgot Password button -->
     <Button
+        android:id="@+id/forgotPass"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_below="@+id/editTextTextPassword"
@@ -114,10 +115,7 @@
         android:textAppearance="@style/forgot_pass"
         android:textColor="@color/appBlueColor"></Button>
 
-    <!-- Don’t have account? -->
-
-    <!-- Create new account button -->
-
+        <!-- login button -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login"
         android:layout_width="200dp"
@@ -129,12 +127,11 @@
         android:layout_marginTop="94dp"
         android:layout_marginEnd="97dp"
         android:background="@drawable/login_button"
-
         android:text="@string/login"
         android:textColor="@color/white" />
 
-    <!-- username icon -->
 
+    <!-- Don’t have account? -->
     <TextView
         android:id="@+id/don_t_have_"
         android:layout_width="121dp"
@@ -147,7 +144,9 @@
         android:text="@string/don_t_have_"
         android:textAppearance="@style/don_t_have_" />
 
+    <!-- Create new account button -->
     <Button
+        android:id="@+id/createAccount"
         android:layout_width="185dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login"
@@ -159,6 +158,7 @@
         android:textAppearance="@style/forgot_pass"
         android:textColor="@color/appBlueColor"></Button>
 
+    <!-- username icon -->
     <ImageView
         android:id="@+id/usernameIcon"
         android:layout_width="38dp"

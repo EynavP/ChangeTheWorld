@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="appBlueColor">#008FD5</color>
+    <color name="newGery">#C0BDBD</color>
+
 </resources>
