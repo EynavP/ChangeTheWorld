@@ -4,67 +4,183 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loginbackground"
     tools:context=".MainActivity"
 
     >
+    <!-- Logo image -->
 
+    <!-- Welcome Back -->
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="337dp"
-        android:layout_height="385dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="284dp"
+        android:layout_height="264dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginLeft="56dp"
+
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="53dp"
         app:srcCompat="@drawable/logo" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName3"
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/imageView4"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="78dp"
-        android:layout_marginEnd="110dp"
-        android:background="#11000000"
-        android:drawableLeft="@drawable/username"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName"
-        android:textColor="#BFBABA"
-        android:textColorHint="#BFBABA"
-        android:textSize="20sp" />
+    <!-- Username -->
 
+    <TextView
+        android:id="@+id/welcome_bac"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="216dp"
+        android:layout_marginEnd="88dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="top"
+        android:text="@string/welcome_bac"
+        android:textAppearance="@style/welcome_bac"
+        app:lineHeight="34sp" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="51dp"
+        android:layout_height="13dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="73dp"
+        android:layout_marginTop="308dp"
+        android:gravity="top"
+        android:text="@string/username"
+        android:textAppearance="@style/username"></TextView>
+
+    <!-- enter UserName -->
+
+    <!-- Password -->
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="274dp"
+        android:layout_height="58dp"
+        android:layout_below="@+id/welcome_bac"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="57dp"
+        android:background="@drawable/empty_rectangle"
+        android:hint="@string/username"
+        android:paddingStart="50dp"
+        android:textColorHint="#11000000"></EditText>
+
+    <TextView
+        android:id="@+id/password"
+        android:layout_width="51dp"
+        android:layout_height="13dp"
+        android:layout_below="@+id/username"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="73dp"
+        android:layout_marginTop="79dp"
+        android:gravity="top"
+        android:text="@string/password"
+        android:textAppearance="@style/password"></TextView>
+
+    <!-- enter Password -->
+
+    <!-- Forgot Password button -->
     <EditText
         android:id="@+id/editTextTextPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextTextPersonName3"
-        android:layout_alignParentStart="true"
+        android:layout_width="274dp"
+        android:layout_height="58dp"
+        android:layout_below="@+id/editTextTextPersonName"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="110dp"
-        android:background="#11000000"
-        android:drawableLeft="@drawable/password"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textColor="#BFBABA"
-        android:textColorHint="#BFBABA" />
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="59dp"
+        android:background="@drawable/empty_rectangle"
+        android:hint="@string/password"
+        android:paddingStart="50dp"
+        android:textColorHint="#11000000"></EditText>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="177dp"
-        android:layout_height="38dp"
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/editTextTextPassword"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="228dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/forgot_pass"
+        android:textAppearance="@style/forgot_pass"
+        android:textColor="@color/appBlueColor"></Button>
+
+    <!-- Don’t have account? -->
+
+    <!-- Create new account button -->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/editTextTextPassword"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="109dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="124dp"
-        android:layout_marginBottom="85dp" />
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="94dp"
+        android:layout_marginEnd="97dp"
+        android:background="@drawable/login_button"
+
+        android:text="@string/login"
+        android:textColor="@color/white" />
+
+    <!-- username icon -->
+
+    <TextView
+        android:id="@+id/don_t_have_"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="81dp"
+        android:layout_marginTop="25dp"
+        android:gravity="top"
+        android:text="@string/don_t_have_"
+        android:textAppearance="@style/don_t_have_" />
+
+    <Button
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="168dp"
+        android:layout_marginTop="9dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/create_new"
+        android:textAppearance="@style/forgot_pass"
+        android:textColor="@color/appBlueColor"></Button>
+
+    <ImageView
+        android:id="@+id/usernameIcon"
+        android:layout_width="38dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/username"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="287dp"
+        app:srcCompat="@drawable/usericon" />
+
+    <!-- password icon -->
+    <ImageView
+        android:id="@+id/passwordIcon"
+        android:layout_width="38dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/usernameIcon"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="288dp"
+        app:srcCompat="@drawable/passwordicon" />
+
+
 </RelativeLayout>
+
+

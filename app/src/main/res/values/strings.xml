@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ChangeTheWorld</string>
+    <string name = "welcome_bac">Welcome Back</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="forgot_pass">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_">Don\' t have account?</string>
+    <string name="create_new">Create a new account</string>
 </resources>
