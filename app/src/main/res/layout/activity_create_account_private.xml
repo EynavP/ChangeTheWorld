@@ -1,396 +1,397 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CreateAccountPrivate">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Create Account -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CreateAccountPrivate">
 
-    <!-- Create a new account -->
+        <!-- Create Account -->
 
-    <TextView
-        android:id="@+id/create_acco"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="57dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="58dp"
-        android:fontFamily="sans-serif-black"
-        android:gravity="top"
-        android:text="@string/create_account"
-        android:textAppearance="@style/create_acco" />
+        <!-- Create a new account -->
 
-    <TextView
-        android:id="@+id/create_a_ne"
-        android:layout_width="125dp"
-        android:layout_height="17dp"
-        android:layout_below="@+id/create_acco"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="146dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="144dp"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="top"
-        android:text="@string/create_a_ne"
-        android:textAppearance="@style/create_a_ne" />
+        <TextView
+            android:id="@+id/create_acco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="57dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="58dp"
+            android:fontFamily="sans-serif-black"
+            android:gravity="top"
+            android:text="@string/create_account"
+            android:textAppearance="@style/create_acco" />
 
-    <!-- enter full name -->
+        <TextView
+            android:id="@+id/create_a_ne"
+            android:layout_width="125dp"
+            android:layout_height="17dp"
+            android:layout_below="@+id/create_acco"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="146dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="144dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="top"
+            android:text="@string/create_a_ne"
+            android:textAppearance="@style/create_a_ne" />
 
-    <!-- Full name -->
+        <!-- enter full name -->
 
-    <!-- enter mail address -->
+        <!-- Full name -->
 
-    <!-- Mail Address -->
+        <!-- enter mail address -->
 
-    <EditText
-        android:id="@+id/enterFullName"
-        android:layout_width="290dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/create_a_ne"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="62dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="63dp"
-        android:background="@drawable/empty_rectangle"
-        android:hint="@string/fullName"
-        android:paddingStart="50dp"
-        android:textColorHint="#11000000"
-        android:inputType="text"/>
+        <!-- Mail Address -->
 
-    <TextView
-        android:id="@+id/full_name"
-        android:layout_width="49dp"
-        android:layout_height="19dp"
-        android:layout_below="@+id/create_a_ne"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="65dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="301dp"
-        android:gravity="top"
-        android:text="@string/fullName"
-        android:textAppearance="@style/subtitles" />
+        <EditText
+            android:id="@+id/enterFullName"
+            android:layout_width="290dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/create_a_ne"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="63dp"
+            android:background="@drawable/empty_rectangle"
+            android:hint="@string/fullName"
+            android:paddingStart="50dp"
+            android:textColorHint="#11000000"
+            android:inputType="text" />
 
-    <EditText
-        android:id="@+id/enterMailAddress"
-        android:layout_width="290dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/enterFullName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="62dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="63dp"
-        android:background="@drawable/empty_rectangle"
-        android:hint="@string/mailAddress"
-        android:paddingStart="50dp"
-        android:textColorHint="#11000000"
-        android:inputType="textEmailAddress"/>
+        <TextView
+            android:id="@+id/full_name"
+            android:layout_width="49dp"
+            android:layout_height="19dp"
+            android:layout_below="@+id/create_a_ne"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="65dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="301dp"
+            android:gravity="top"
+            android:text="@string/fullName"
+            android:textAppearance="@style/subtitles" />
 
-    <TextView
-        android:id="@+id/mail_address"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/enterFullName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="63dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="277dp"
-        android:gravity="top"
-        android:text="@string/mailAddress"
-        android:textAppearance="@style/subtitles" />
+        <EditText
+            android:id="@+id/enterMailAddress"
+            android:layout_width="290dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/enterFullName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="63dp"
+            android:background="@drawable/empty_rectangle"
+            android:hint="@string/mailAddress"
+            android:paddingStart="50dp"
+            android:textColorHint="#11000000"
+            android:inputType="textEmailAddress" />
 
-    <EditText
-        android:id="@+id/enterPhoneNumber"
-        android:layout_width="290dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/enterMailAddress"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="64dp"
-        android:background="@drawable/empty_rectangle"
-        android:hint="@string/phoneNumber"
-        android:paddingStart="50dp"
-        android:textColorHint="#11000000"
-        android:inputType="phone"/>
+        <TextView
+            android:id="@+id/mail_address"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/enterFullName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="63dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="277dp"
+            android:gravity="top"
+            android:text="@string/mailAddress"
+            android:textAppearance="@style/subtitles" />
 
-    <TextView
-        android:id="@+id/phone_number"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/enterMailAddress"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="279dp"
-        android:gravity="top"
-        android:text="@string/phoneNumber"
-        android:textAppearance="@style/subtitles"
-        />
+        <EditText
+            android:id="@+id/enterPhoneNumber"
+            android:layout_width="290dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/enterMailAddress"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="61dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="64dp"
+            android:background="@drawable/empty_rectangle"
+            android:hint="@string/phoneNumber"
+            android:paddingStart="50dp"
+            android:textColorHint="#11000000"
+            android:inputType="phone" />
 
-    <Spinner
-        android:id="@+id/enterLocalCurrency"
-        android:layout_width="290dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/enterPhoneNumber"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="65dp"
-        android:background="@drawable/empty_rectangle"
-        android:paddingStart="50dp"
-        android:prompt="@string/localCurrency"
-        android:spinnerMode="dropdown"
-        android:textColorHint="#11E82424"
-        />
+        <TextView
+            android:id="@+id/phone_number"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/enterMailAddress"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="61dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="279dp"
+            android:gravity="top"
+            android:text="@string/phoneNumber"
+            android:textAppearance="@style/subtitles" />
 
-    <TextView
-        android:id="@+id/local_currency"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/enterPhoneNumber"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="279dp"
-        android:gravity="top"
-        android:text="@string/localCurrency"
-        android:textAppearance="@style/subtitles" />
+        <Spinner
+            android:id="@+id/enterLocalCurrency"
+            android:layout_width="290dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/enterPhoneNumber"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="65dp"
+            android:background="@drawable/empty_rectangle"
+            android:paddingStart="50dp"
+            android:prompt="@string/localCurrency"
+            android:spinnerMode="dropdown"
+            android:textColorHint="#11E82424" />
 
-    <EditText
-        android:id="@+id/enterNewUserName"
-        android:layout_width="290dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/enterLocalCurrency"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="65dp"
-        android:background="@drawable/empty_rectangle"
-        android:hint="@string/username"
-        android:paddingStart="50dp"
-        android:textColorHint="#11000000"
-        android:inputType="text"/>
+        <TextView
+            android:id="@+id/local_currency"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/enterPhoneNumber"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="61dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="279dp"
+            android:gravity="top"
+            android:text="@string/localCurrency"
+            android:textAppearance="@style/subtitles" />
 
-    <TextView
-        android:id="@+id/newUserName"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/enterLocalCurrency"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="279dp"
-        android:gravity="top"
-        android:text="@string/username"
-        android:textAppearance="@style/subtitles" />
+        <EditText
+            android:id="@+id/enterNewUserName"
+            android:layout_width="290dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/enterLocalCurrency"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="65dp"
+            android:background="@drawable/empty_rectangle"
+            android:hint="@string/username"
+            android:paddingStart="50dp"
+            android:textColorHint="#11000000"
+            android:inputType="text" />
 
-    <EditText
-        android:id="@+id/enterNewPassword"
-        android:layout_width="290dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/enterNewUserName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="65dp"
-        android:background="@drawable/empty_rectangle"
-        android:hint="@string/password"
-        android:paddingStart="50dp"
-        android:textColorHint="#11000000"
-        android:inputType="textPassword"/>
+        <TextView
+            android:id="@+id/newUserName"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/enterLocalCurrency"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="61dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="279dp"
+            android:gravity="top"
+            android:text="@string/username"
+            android:textAppearance="@style/subtitles" />
 
-    <TextView
-        android:id="@+id/newPassword"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/enterNewUserName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="279dp"
-        android:gravity="top"
-        android:text="@string/password"
-        android:textAppearance="@style/subtitles" />
+        <EditText
+            android:id="@+id/enterNewPassword"
+            android:layout_width="290dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/enterNewUserName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="65dp"
+            android:background="@drawable/empty_rectangle"
+            android:hint="@string/password"
+            android:paddingStart="50dp"
+            android:textColorHint="#11000000"
+            android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/uploadPhoto"
-        android:layout_width="105dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/enterNewPassword"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="47dp"
-        android:layout_marginTop="18dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:paddingStart="50dp"
-        android:text="@string/uploadPhoto"
-        android:textAppearance="@style/subtitles"
-        android:textColor="@color/newGery">
+        <TextView
+            android:id="@+id/newPassword"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/enterNewUserName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="61dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="279dp"
+            android:gravity="top"
+            android:text="@string/password"
+            android:textAppearance="@style/subtitles" />
 
-    </Button>
+        <Button
+            android:id="@+id/uploadPhoto"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/enterNewPassword"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="18dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingStart="50dp"
+            android:text="@string/uploadPhoto"
+            android:textAppearance="@style/subtitles"
+            android:textColor="@color/newGery">
 
-    <Button
-        android:id="@+id/uploadPassport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/enterNewPassword"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="246dp"
-        android:layout_marginTop="19dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:paddingStart="50dp"
-        android:text="@string/uploadPassport"
-        android:textAppearance="@style/subtitles"
-        android:textColor="@color/newGery">
+        </Button>
 
-    </Button>
+        <Button
+            android:id="@+id/uploadPassport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/enterNewPassword"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="246dp"
+            android:layout_marginTop="19dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingStart="50dp"
+            android:text="@string/uploadPassport"
+            android:textAppearance="@style/subtitles"
+            android:textColor="@color/newGery">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/createAccountButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/uploadPassport"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="103dp"
-        android:background="@drawable/login_button"
-        android:text="@string/create_account"
-        android:textColor="@color/white" />
+        </Button>
 
-    <!-- Don’t have account? -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/createAccountButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/uploadPassport"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="91dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="103dp"
+            android:background="@drawable/login_button"
+            android:text="@string/create_account"
+            android:textColor="@color/white" />
+
+        <!-- Don’t have account? -->
 
 
-    <TextView
-        android:id="@+id/don_t_have_"
-        android:layout_width="149dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/createAccountButton"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="92dp"
-        android:layout_marginTop="23dp"
-        android:gravity="top"
-        android:text="@string/already_hav"
-        android:textAppearance="@style/don_t_have_" />
+        <TextView
+            android:id="@+id/don_t_have_"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/createAccountButton"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="92dp"
+            android:layout_marginTop="23dp"
+            android:gravity="top"
+            android:text="@string/already_hav"
+            android:textAppearance="@style/don_t_have_" />
 
-    <Button
-        android:id="@+id/moveToLogin"
-        android:layout_width="68dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/createAccountButton"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="225dp"
-        android:layout_marginTop="13dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:gravity="top"
-        android:text="@string/login"
-        android:textAppearance="@style/forgot_pass"
-        android:textColor="@color/appBlueColor" />
+        <Button
+            android:id="@+id/moveToLogin"
+            android:layout_width="68dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/createAccountButton"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="13dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="top"
+            android:text="@string/login"
+            android:textAppearance="@style/forgot_pass"
+            android:textColor="@color/appBlueColor" />
 
-    <ImageView
-        android:id="@+id/fullnameicon"
-        android:layout_width="37dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/full_name"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="311dp"
-        app:srcCompat="@drawable/usericon"
-        android:contentDescription="@null"/>
+        <ImageView
+            android:id="@+id/fullnameicon"
+            android:layout_width="37dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/full_name"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="311dp"
+            app:srcCompat="@drawable/usericon"
+            android:contentDescription="@null" />
 
-    <ImageView
-        android:id="@+id/usernameicon"
-        android:layout_width="37dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/newUserName"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="312dp"
-        app:srcCompat="@drawable/usericon"
-        android:contentDescription="@null"/>
+        <ImageView
+            android:id="@+id/usernameicon"
+            android:layout_width="37dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/newUserName"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="312dp"
+            app:srcCompat="@drawable/usericon"
+            android:contentDescription="@null" />
 
-    <ImageView
-        android:id="@+id/passwordicon"
-        android:layout_width="37dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/newPassword"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="314dp"
-        app:srcCompat="@drawable/passwordicon"
-        android:contentDescription="@null"/>
+        <ImageView
+            android:id="@+id/passwordicon"
+            android:layout_width="37dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/newPassword"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="314dp"
+            app:srcCompat="@drawable/passwordicon"
+            android:contentDescription="@null" />
 
-    <ImageView
-        android:id="@+id/uploadphotoicon"
-        android:layout_width="37dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/passwordicon"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="317dp"
-        app:srcCompat="@drawable/uploadfile"
-        android:contentDescription="@null"/>
+        <ImageView
+            android:id="@+id/uploadphotoicon"
+            android:layout_width="37dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/passwordicon"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="317dp"
+            app:srcCompat="@drawable/uploadfile"
+            android:contentDescription="@null" />
 
-    <ImageView
-        android:id="@+id/uploadPassportIcon"
-        android:layout_width="37dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/passwordicon"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="121dp"
-        app:srcCompat="@drawable/uploadfile"
-        android:contentDescription="@null"/>
+        <ImageView
+            android:id="@+id/uploadPassportIcon"
+            android:layout_width="37dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/passwordicon"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="121dp"
+            app:srcCompat="@drawable/uploadfile"
+            android:contentDescription="@null" />
 
-    <ImageView
-        android:id="@+id/mailIcon"
-        android:layout_width="37dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/mail_address"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="311dp"
-        app:srcCompat="@drawable/mailicon"
-        android:contentDescription="@null"/>
+        <ImageView
+            android:id="@+id/mailIcon"
+            android:layout_width="37dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/mail_address"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="311dp"
+            app:srcCompat="@drawable/mailicon"
+            android:contentDescription="@null" />
 
-    <ImageView
-        android:id="@+id/phoneIcon"
-        android:layout_width="37dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/phone_number"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="310dp"
-        app:srcCompat="@drawable/phoneicon"
-        android:contentDescription="@null"/>
+        <ImageView
+            android:id="@+id/phoneIcon"
+            android:layout_width="37dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/phone_number"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="310dp"
+            app:srcCompat="@drawable/phoneicon"
+            android:contentDescription="@null" />
 
-    <ImageView
-        android:id="@+id/currencyIcon"
-        android:layout_width="37dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/phoneIcon"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="313dp"
-        app:srcCompat="@drawable/currencyicon"
-        android:contentDescription="@null"/>
+        <ImageView
+            android:id="@+id/currencyIcon"
+            android:layout_width="37dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/phoneIcon"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="37dp"
+            android:layout_marginEnd="313dp"
+            app:srcCompat="@drawable/currencyicon"
+            android:contentDescription="@null" />
 
-</RelativeLayout>
+    </RelativeLayout>
+</layout>

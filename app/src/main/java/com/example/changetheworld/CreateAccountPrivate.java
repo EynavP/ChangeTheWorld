@@ -29,7 +29,7 @@ public class CreateAccountPrivate extends AppCompatActivity {
     }
 
     public void returnLoginPage(){
-            Intent intent = new Intent(this,MainActivity.class);
-            startActivity(intent);
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 }
