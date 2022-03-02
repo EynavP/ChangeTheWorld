@@ -8,12 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.changetheworld.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    Button createAccount;
-    Button createBusinessAccount;
+    private Button createAccount;
+    private Button createBusinessAccount;
     private ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,14 @@ public class MainActivity extends AppCompatActivity {
         binding.login.setOnClickListener(view->{
             String userName = binding.editTextTextPersonName.getText().toString();
             String password = binding.editTextTextPassword.getText().toString();
-            Log.d("Main","button pressed" + userName + " " + password);
+            if (userName.isEmpty()){
+                Toast toast = Toast.makeText(this, "username invalid, please try Again",Toast.LENGTH_LONG);
+                toast.show();
+            }
+            if (password.isEmpty()){
+                Toast toast = Toast.makeText(this, "password invalid, please try Again",Toast.LENGTH_LONG);
+                toast.show();
+            }
         });
     }
 
@@ -41,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,CreateBusinessAccount.class);
         startActivity(intent);
     }
+
+
+
 
 
 }

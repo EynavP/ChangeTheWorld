@@ -72,7 +72,8 @@
             android:background="@drawable/empty_rectangle"
             android:hint="@string/username"
             android:paddingStart="50dp"
-            android:textColorHint="#11000000"/>
+            android:textColorHint="#11000000"
+            android:inputType="text"/>
 
         <!-- Password -->
         <TextView
@@ -102,7 +103,8 @@
             android:background="@drawable/empty_rectangle"
             android:hint="@string/password"
             android:paddingStart="50dp"
-            android:textColorHint="#11000000"/>
+            android:textColorHint="#11000000"
+            android:inputType="textPassword"/>
 
         <!-- Forgot Password button -->
         <Button
