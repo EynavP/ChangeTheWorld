@@ -55,7 +55,7 @@
             android:layout_marginTop="308dp"
             android:gravity="top"
             android:text="@string/username"
-            android:textAppearance="@style/username"></TextView>
+            android:textAppearance="@style/username"/>
 
 
         <!-- enter UserName -->
@@ -72,7 +72,7 @@
             android:background="@drawable/empty_rectangle"
             android:hint="@string/username"
             android:paddingStart="50dp"
-            android:textColorHint="#11000000"></EditText>
+            android:textColorHint="#11000000"/>
 
         <!-- Password -->
         <TextView
@@ -85,7 +85,7 @@
             android:layout_marginTop="79dp"
             android:gravity="top"
             android:text="@string/password"
-            android:textAppearance="@style/password"></TextView>
+            android:textAppearance="@style/password"/>
 
         <!-- enter Password -->
 
@@ -102,7 +102,7 @@
             android:background="@drawable/empty_rectangle"
             android:hint="@string/password"
             android:paddingStart="50dp"
-            android:textColorHint="#11000000"></EditText>
+            android:textColorHint="#11000000"/>
 
         <!-- Forgot Password button -->
         <Button
@@ -116,7 +116,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/forgot_pass"
             android:textAppearance="@style/forgot_pass"
-            android:textColor="@color/appBlueColor"></Button>
+            android:textColor="@color/appBlueColor"/>
 
         <!-- login button -->
         <androidx.appcompat.widget.AppCompatButton
@@ -135,33 +135,48 @@
 
 
         <!-- Don’t have account? -->
+
+        <!-- Create new account button -->
+
+        <!-- username icon -->
         <TextView
             android:id="@+id/don_t_have_"
             android:layout_width="121dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/login"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="81dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginLeft="148dp"
+            android:layout_marginTop="26dp"
             android:gravity="top"
             android:text="@string/don_t_have_"
             android:textAppearance="@style/don_t_have_" />
 
-        <!-- Create new account button -->
         <Button
-            android:id="@+id/createAccount"
+            android:id="@+id/createClientAccount"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/login"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="168dp"
-            android:layout_marginTop="9dp"
+            android:layout_marginLeft="208dp"
+            android:layout_marginTop="45dp"
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/create_new"
             android:textAppearance="@style/forgot_pass"
-            android:textColor="@color/appBlueColor"></Button>
+            android:textColor="@color/appBlueColor"/>
 
-        <!-- username icon -->
+        <Button
+            android:id="@+id/createBusinessAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="45dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/create_new_business"
+            android:textAppearance="@style/forgot_pass"
+            android:textColor="@color/appBlueColor"/>
+
         <ImageView
             android:id="@+id/usernameIcon"
             android:layout_width="38dp"

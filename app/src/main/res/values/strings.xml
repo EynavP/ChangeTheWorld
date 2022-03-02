@@ -6,15 +6,19 @@
     <string name="forgot_pass">Forgot Password?</string>
     <string name="login">Login</string>
     <string name="don_t_have_">Don\' t have account?</string>
-    <string name="create_new">Create a new account</string>
-    <string name="create_acco">Create Account</string>
+    <string name="create_new">Create a new client account</string>
+    <string name="create_new_business">Create a new business account</string>
+    <string name="create_account">Create Client Account</string>
+    <string name="create_account_button">Create Account</string>
     <string name="create_a_ne">Create a new account</string>
-    <string name="fullname">Full Name</string>
-    <string name="mailaddress">Mail Address</string>
-    <string name="phonenumber">Phone Number</string>
-    <string name="localcurrency">Local Currency</string>
+    <string name="fullName">Full Name</string>
+    <string name="mailAddress">Mail Address</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="localCurrency">Local Currency</string>
     <string name="uploadPhoto">Photo</string>
     <string name="uploadPassport">Passport</string>
     <string name="already_hav">Already have an account?</string>
+    <string name="create_business">Create Business Account</string>
+    <string name="businessName">Business Name</string>
 
 </resources>
