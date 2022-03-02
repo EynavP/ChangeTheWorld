@@ -4,57 +4,423 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".CreateBusinessAccount">
+        android:layout_height="wrap_content">
 
-        <!-- Create Business Account -->
-        <TextView
-            android:id="@+id/create_busi"
-            android:layout_width="262dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="61dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="71dp"
-            android:fontFamily="sans-serif-black"
-            android:gravity="top"
-            android:text="@string/create_business"
-            android:textAppearance="@style/create_busi" />
+            tools:context=".CreateBusinessAccount">
 
-        <TextView
-            android:id="@+id/create_a_new_business"
-            android:layout_width="125dp"
-            android:layout_height="17dp"
-            android:layout_below="@+id/create_busi"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="128dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="140dp"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="top"
-            android:text="@string/create_a_ne"
-            android:textAppearance="@style/create_a_ne" />
+            <!-- Create Business Account -->
 
-        <EditText
-            android:id="@+id/enterBusinessName"
-            android:layout_width="290dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/create_a_new_business"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="62dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="63dp"
-            android:background="@drawable/empty_rectangle"
-            android:hint="@string/businessName"
-            android:paddingStart="50dp"
-            android:textColorHint="#11000000"
-            android:inputType="text"/>
+            <TextView
+                android:id="@+id/create_busi"
+                android:layout_width="262dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="57dp"
+                android:layout_marginEnd="71dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="top"
+                android:text="@string/create_business"
+                android:textAppearance="@style/create_busi" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/create_a_new_business"
+                android:layout_width="125dp"
+                android:layout_height="17dp"
+                android:layout_below="@+id/create_busi"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="128dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="140dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="top"
+                android:text="@string/create_a_ne"
+                android:textAppearance="@style/create_a_ne" />
+
+            <EditText
+                android:id="@+id/enterBusinessName"
+                android:layout_width="290dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/create_a_new_business"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="62dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="63dp"
+                android:background="@drawable/empty_rectangle"
+                android:hint="@string/businessName"
+                android:inputType="text"
+                android:paddingStart="50dp"
+                android:textColorHint="#11000000" />
+
+            <TextView
+                android:id="@+id/businessName"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/create_a_new_business"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="65dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="243dp"
+                android:gravity="top"
+                android:text="@string/businessName"
+                android:textAppearance="@style/subtitles" />
+
+            <EditText
+                android:id="@+id/enterMailAddressBusiness"
+                android:layout_width="290dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/enterBusinessName"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="62dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="63dp"
+                android:background="@drawable/empty_rectangle"
+                android:hint="@string/mailAddress"
+                android:inputType="text"
+                android:paddingStart="50dp"
+                android:textColorHint="#11000000" />
+
+            <TextView
+                android:id="@+id/mailBusiness"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/create_a_new_business"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="69dp"
+                android:layout_marginEnd="243dp"
+                android:gravity="top"
+                android:text="@string/mailAddress"
+                android:textAppearance="@style/subtitles" />
+
+            <Spinner
+                android:id="@+id/enterBusinessState"
+                android:layout_width="290dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/enterMailAddressBusiness"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="63dp"
+                android:background="@drawable/empty_rectangle"
+                android:paddingStart="50dp"
+                android:prompt="@string/localCurrency"
+                android:spinnerMode="dropdown"
+                android:textColorHint="#11E82424"
+                android:contentDescription="@null"/>
+
+            <TextView
+                android:id="@+id/businessState"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/enterMailAddressBusiness"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="243dp"
+                android:gravity="top"
+                android:text="@string/State"
+                android:textAppearance="@style/subtitles" />
+
+            <EditText
+                android:id="@+id/enterBusinessPhone"
+                android:layout_width="290dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/enterBusinessState"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="62dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="63dp"
+                android:background="@drawable/empty_rectangle"
+                android:hint="@string/phoneNumber"
+                android:inputType="phone"
+                android:paddingStart="50dp"
+                android:textColorHint="#11000000" />
+
+            <TextView
+                android:id="@+id/businessPhone"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/enterBusinessState"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="243dp"
+                android:gravity="top"
+                android:text="@string/phoneNumber"
+                android:textAppearance="@style/subtitles" />
+
+            <EditText
+                android:id="@+id/enterBusinessUsername"
+                android:layout_width="290dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/enterBusinessPhone"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="62dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="63dp"
+                android:background="@drawable/empty_rectangle"
+                android:hint="@string/username"
+                android:inputType="text"
+                android:paddingStart="50dp"
+                android:textColorHint="#11000000" />
+
+            <TextView
+                android:id="@+id/businessUsername"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/enterBusinessPhone"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="243dp"
+                android:gravity="top"
+                android:text="@string/username"
+                android:textAppearance="@style/subtitles" />
+
+            <EditText
+                android:id="@+id/enterBusinessPassword"
+                android:layout_width="290dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/enterBusinessUsername"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="62dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="63dp"
+                android:background="@drawable/empty_rectangle"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:paddingStart="50dp"
+                android:textColorHint="#11000000" />
+
+            <TextView
+                android:id="@+id/businessPassword"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/enterBusinessUsername"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="243dp"
+                android:gravity="top"
+                android:text="@string/password"
+                android:textAppearance="@style/subtitles" />
+
+            <EditText
+                android:id="@+id/enterBusinessOwnerName"
+                android:layout_width="290dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/enterBusinessPassword"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="62dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="63dp"
+                android:background="@drawable/empty_rectangle"
+                android:hint="@string/businessOwnerName"
+                android:inputType="text"
+                android:paddingStart="50dp"
+                android:textColorHint="#11000000" />
+
+            <TextView
+                android:id="@+id/businessOwnerName"
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/enterBusinessPassword"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="212dp"
+                android:gravity="top"
+                android:text="@string/businessOwnerName"
+                android:textAppearance="@style/subtitles" />
+
+            <TextView
+                android:id="@+id/businessApprovalDoc"
+                android:layout_width="178dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/businessOwnerName"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="33dp"
+                android:layout_marginTop="83dp"
+                android:layout_marginEnd="182dp"
+                android:gravity="top"
+                android:text="@string/businessApproval"
+                android:textAppearance="@style/subtitles" />
+
+            <TextView
+                android:id="@+id/businessOwnerId"
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/businessApprovalDoc"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="34dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="221dp"
+                android:gravity="top"
+                android:text="@string/businessOwnerId"
+                android:textAppearance="@style/subtitles" />
+
+            <TextView
+                android:id="@+id/businessOpenHours"
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/enterBusinessOwnerName"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="227dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="28dp"
+                android:gravity="top"
+                android:text="@string/businessOpenHours"
+                android:textAppearance="@style/subtitles" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/createBusinessAccountButton"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/businessOpenHours"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="94dp"
+                android:layout_marginTop="81dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/login_button"
+                android:text="@string/create_account_button"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/businessNameIcon"
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/businessName"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="311dp"
+                app:srcCompat="@drawable/businessicon" />
+
+            <ImageView
+                android:id="@+id/businessMailIcon"
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/mailBusiness"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="47dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="312dp"
+                app:srcCompat="@drawable/mailicon" />
+
+            <ImageView
+                android:id="@+id/stateIcon"
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/businessState"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="311dp"
+                app:srcCompat="@drawable/stateicon" />
+
+            <ImageView
+                android:id="@+id/businessPhoneIcon"
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/businessPhone"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="310dp"
+                app:srcCompat="@drawable/phoneicon" />
+
+            <ImageView
+                android:id="@+id/businessUserIcon"
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/businessUsername"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="310dp"
+                app:srcCompat="@drawable/usericon" />
+
+            <ImageView
+                android:id="@+id/businessOwnerNameIcon"
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/businessOwnerName"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="308dp"
+                app:srcCompat="@drawable/usericon" />
+
+            <ImageView
+                android:id="@+id/businessPasswordIcon"
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/businessPassword"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="308dp"
+                app:srcCompat="@drawable/passwordicon" />
+
+            <ImageView
+                android:id="@+id/ApprovalDocumentIcon"
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/enterBusinessOwnerName"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="178dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="191dp"
+                app:srcCompat="@drawable/uploadfile" />
+
+            <ImageView
+                android:id="@+id/OwnerIdIcon"
+                android:layout_width="37dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/enterBusinessOwnerName"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="131dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="238dp"
+                app:srcCompat="@drawable/uploadfile" />
+
+        </RelativeLayout>
+    </ScrollView>
 </layout>
