@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutClientHomePage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F9FC"
+    tools:context=".ClientHomePage">
+
+    <!-- Top Rectangle -->
+    <View
+        android:id="@+id/topRectangle"
+        android:layout_width="wrap_content"
+        android:layout_height="158dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="-7dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/toprectangle" />
+
+    <TextView
+        android:id="@+id/hello_"
+        android:layout_width="91dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/aclonica"
+        android:gravity="top"
+        android:text="@string/hello_"
+        android:textAppearance="@style/hello_" />
+
+    <TextView
+        android:id="@+id/currenctUser"
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="113dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/aclonica"
+        android:gravity="top"
+        android:text="@string/username"
+        android:textAppearance="@style/hello_" />
+
+    <!-- have a nice day! -->
+    <TextView
+        android:id="@+id/have_a_nice"
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hello_"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="79dp"
+        android:layout_marginTop="-1dp"
+        android:gravity="top"
+        android:text="@string/have_a_nice"
+        android:textAppearance="@style/have_a_nice" />
+
+    <SearchView
+        android:id="@+id/searchLine"
+        android:layout_width="233dp"
+        android:layout_height="33dp"
+        android:layout_below="@+id/topRectangle"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="79dp"
+        android:background="@drawable/searchline"
+        android:baselineAligned="false"
+        android:inputType="text"/>
+
+    <!-- Home page item -->
+    <View
+        android:id="@+id/homePageItem"
+        android:layout_width="130dp"
+        android:layout_height="72dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="196dp"
+        android:background="@drawable/homePageItem"
+        />
+
+
+</RelativeLayout>

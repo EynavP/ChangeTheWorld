@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, "password invalid, please try Again",Toast.LENGTH_LONG);
                 toast.show();
             }
+            else
+                openClientHomePage();
+
         });
     }
 
@@ -47,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openCreateBusinessAccount(){
         Intent intent = new Intent(this,CreateBusinessAccount.class);
+        startActivity(intent);
+    }
+
+    public void openClientHomePage(){
+        Intent intent = new Intent(this,ClientHomePage.class);
         startActivity(intent);
     }
 
