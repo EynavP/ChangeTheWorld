@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.changetheworld.model.PrivateClient;
+
 
 public class CreateAccountPrivate extends AppCompatActivity {
     Button returnLogin;
@@ -75,37 +77,38 @@ public class CreateAccountPrivate extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, "Invalid full name", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (mail.isEmpty() || !mail.matches("^(.+)@(\\S+)$")){
+            else if (mail.isEmpty() || !mail.matches("^(.+)@(\\S+)$")){
                 Toast toast = Toast.makeText(this, "Invalid mail", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (phone.isEmpty() || !phone.matches("^[0-9]*$")){
+            else if (phone.isEmpty() || !phone.matches("^[0-9]*$")){
                 Toast toast = Toast.makeText(this, "Invalid phone number", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (currency.isEmpty() || currency.equals("Choose Currency")){
+            else if (currency.isEmpty() || currency.equals("Choose Currency")){
                 Toast toast = Toast.makeText(this, "Invalid currency", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (user_name.isEmpty() || user_name.contains(" ")){
+            else if (user_name.isEmpty() || user_name.contains(" ")){
                 Toast toast = Toast.makeText(this, "Invalid username", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (password.isEmpty() || !password.matches("^[A-Za-z0-9]*$")){
+            else if (password.isEmpty() || !password.matches("^[A-Za-z0-9]*$")){
                 Toast toast = Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (personal_chosen_photo.isEmpty()){
+            else if (personal_chosen_photo.isEmpty()){
                 Toast toast = Toast.makeText(this, "Invalid personal picture", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (passport_chosen_photo.isEmpty()){
+            else if (passport_chosen_photo.isEmpty()){
                 Toast toast = Toast.makeText(this, "Invalid passport picture", Toast.LENGTH_SHORT);
                 toast.show();
+            }else{
+                //TODO: ADD DATABASE HERE
+                PrivateClient client = new PrivateClient(user_name,full_name,mail,phone,currency,password,personal_chosen_photo,passport_chosen_photo);
             }
         });
-
-
     }
 
     public void imageChooser() {

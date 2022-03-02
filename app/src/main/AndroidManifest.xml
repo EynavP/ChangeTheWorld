@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChangeTheWorld">
         <activity
-            android:name=".ClientHomePage"
-            android:exported="false" />
-        <activity
             android:name=".CreateBusinessAccount"
             android:exported="false" />
         <activity

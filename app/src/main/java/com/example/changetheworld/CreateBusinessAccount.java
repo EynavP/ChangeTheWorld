@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.changetheworld.model.BusinessClient;
+
 public class CreateBusinessAccount extends AppCompatActivity {
     Spinner states;
     String[] state = {"Choose State","Israel","United States","Brazil","Italy"};
@@ -75,38 +77,40 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, "Invalid business name", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (mail.isEmpty() || !mail.matches("^(.+)@(\\S+)$")){
+            else if (mail.isEmpty() || !mail.matches("^(.+)@(\\S+)$")){
                 Toast toast = Toast.makeText(this, "Invalid mail", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (state.isEmpty() || state.equals("Choose State")){
+            else if (state.isEmpty() || state.equals("Choose State")){
                 Toast toast = Toast.makeText(this, "Invalid state", Toast.LENGTH_SHORT);
                 toast.show();
             }
 
-            if (phone.isEmpty() || !phone.matches("^[0-9]*$")){
+            else if (phone.isEmpty() || !phone.matches("^[0-9]*$")){
                 Toast toast = Toast.makeText(this, "Invalid phone number", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (user_name.isEmpty() || user_name.contains(" ")){
+            else if (user_name.isEmpty() || user_name.contains(" ")){
                 Toast toast = Toast.makeText(this, "Invalid username", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (password.isEmpty() || !password.matches("^[A-Za-z0-9]*$")){
+            else if (password.isEmpty() || !password.matches("^[A-Za-z0-9]*$")){
                 Toast toast = Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (business_owner_name.isEmpty() || !business_owner_name.matches("[a-zA-z\\s]*$")){
+            else if (business_owner_name.isEmpty() || !business_owner_name.matches("[a-zA-z\\s]*$")){
                 Toast toast = Toast.makeText(this, "Invalid business name", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (business_chosen_approvel.isEmpty()){
+            else if (business_chosen_approvel.isEmpty()){
                 Toast toast = Toast.makeText(this, "Invalid business approval document", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            if (business_chosen_owner_id.isEmpty()){
+            else if (business_chosen_owner_id.isEmpty()){
                 Toast toast = Toast.makeText(this, "Invalid business owner id", Toast.LENGTH_SHORT);
                 toast.show();
+            }else { //TODO: ADD DATABASE HERE
+                BusinessClient business_client = new BusinessClient(business_name,mail,state,phone,user_name,password,business_owner_name,business_chosen_approvel,business_chosen_owner_id);
             }
         });
 
@@ -118,15 +122,8 @@ public class CreateBusinessAccount extends AppCompatActivity {
         // create an instance of the
         // intent of the type image
         Intent i = new Intent();
-        String folder = "";
-        if (flag == 1){
-            folder = "document/*";
-        }
-        else {
-            folder = "image/*";
-        }
 
-        i.setType(folder);
+        i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
 
         // pass the constant to compare it
