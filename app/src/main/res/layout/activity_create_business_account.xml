@@ -256,33 +256,33 @@
                 android:text="@string/businessOwnerName"
                 android:textAppearance="@style/subtitles" />
 
-            <TextView
+
+            <Button
                 android:id="@+id/businessApprovalDoc"
-                android:layout_width="178dp"
+                android:layout_width="227dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/businessOwnerName"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="33dp"
-                android:layout_marginTop="83dp"
-                android:layout_marginEnd="182dp"
-                android:gravity="top"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="64dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingRight="50dp"
                 android:text="@string/businessApproval"
-                android:textAppearance="@style/subtitles" />
+                android:textAppearance="@style/subtitles"
+                android:textColor="@color/newGery" />
 
-            <TextView
+            <Button
                 android:id="@+id/businessOwnerId"
-                android:layout_width="138dp"
+                android:layout_width="201dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/businessApprovalDoc"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="34dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="221dp"
-                android:gravity="top"
+                android:layout_marginLeft="-11dp"
+                android:layout_marginTop="3dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:text="@string/businessOwnerId"
-                android:textAppearance="@style/subtitles" />
+                android:textAppearance="@style/subtitles"
+                android:textColor="@color/newGery" />
 
             <TextView
                 android:id="@+id/businessOpenHours"
@@ -404,9 +404,9 @@
                 android:layout_below="@+id/enterBusinessOwnerName"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="178dp"
-                android:layout_marginTop="23dp"
-                android:layout_marginEnd="191dp"
+                android:layout_marginStart="187dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginEnd="181dp"
                 app:srcCompat="@drawable/uploadfile" />
 
             <ImageView
@@ -416,9 +416,9 @@
                 android:layout_below="@+id/enterBusinessOwnerName"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="131dp"
-                android:layout_marginTop="52dp"
-                android:layout_marginEnd="238dp"
+                android:layout_marginStart="140dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="229dp"
                 app:srcCompat="@drawable/uploadfile" />
 
         </RelativeLayout>
