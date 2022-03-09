@@ -1,5 +1,9 @@
 package com.example.changetheworld.model;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import org.w3c.dom.Document;
+
 public class PrivateClient {
     private String user_name;
     private String full_name;
@@ -9,6 +13,15 @@ public class PrivateClient {
     private String password;
     private String photo;
     private String passport;
+    final String KEY_FULL_NAME = "full_name";
+    final String KEY_PHONE = "phone";
+    final String KEY_MAIL = "mail";
+    final String KEY_CURRENCY = "currency";
+    final String KEY_USER_NAME = "user_name";
+    final String KEY_PASSWORD = "password";
+    final String KEY_PERSONAL_PHOTO = "personal_photo";
+    final String KEY_PASSPORT_PHOTO = "passport_photo";
+
 
 
     public PrivateClient(String user_name, String full_name, String mail_address, String phone_number, String local_currency, String password, String photo, String passport) {
@@ -20,6 +33,17 @@ public class PrivateClient {
         this.password = password;
         this.photo = photo;
         this.passport = passport;
+    }
+
+    public PrivateClient(DocumentSnapshot documentSnapshot){
+        this.user_name = documentSnapshot.getString(KEY_USER_NAME);
+        this.full_name = documentSnapshot.getString(KEY_FULL_NAME);
+        this.mail_address = documentSnapshot.getString(KEY_MAIL);
+        this.phone_number = documentSnapshot.getString(KEY_PHONE);
+        this.local_currency = documentSnapshot.getString(KEY_CURRENCY);
+        this.password = documentSnapshot.getString(KEY_PASSWORD);
+        this.photo = documentSnapshot.getString(KEY_PERSONAL_PHOTO);
+        this.passport = documentSnapshot.getString(KEY_PASSPORT_PHOTO);
     }
 
 
@@ -86,8 +110,6 @@ public class PrivateClient {
     public void setPassport(String passport) {
         this.passport = passport;
     }
-
-
 
 
 }

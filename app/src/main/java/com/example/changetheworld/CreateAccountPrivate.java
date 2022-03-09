@@ -67,8 +67,6 @@ public class CreateAccountPrivate extends AppCompatActivity {
            }
         );
 
-
-
         Button CreateAccountPrivate = findViewById(R.id.createAccountButton);
         CreateAccountPrivate.setOnClickListener(view -> {
             String full_name = ((EditText) findViewById(R.id.enterFullName)).getText().toString();
@@ -112,7 +110,7 @@ public class CreateAccountPrivate extends AppCompatActivity {
             }else{
                 //TODO: ADD DATABASE HERE
                 PrivateClient client = new PrivateClient(user_name,full_name,mail,phone,currency,password,personal_chosen_photo,passport_chosen_photo);
-                FireStoreDB.getInstance().SavePrivateClient(this, client);
+                FireStoreDB.getInstance().VerifyAndSavePrivateClient(this, client);
             }
         });
     }

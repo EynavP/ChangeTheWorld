@@ -1,5 +1,7 @@
 package com.example.changetheworld.model;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+
 public class BusinessClient {
     private String business_name;
     private String mail_address;
@@ -10,6 +12,18 @@ public class BusinessClient {
     private String business_owner_name;
     private String business_approval_document;
     private String getBusiness_owner_id;
+
+    final String KEY_BUSINESS_NAME = "business_name";
+    final String KEY_MAIL = "mail";
+    final String KEY_STATE = "state";
+    final String KEY_PHONE = "phone";
+    final String KEY_USER_NAME = "user_name";
+    final String KEY_PASSWORD = "password";
+    final String KEY_OWNER_NAME = "owner_name";
+    final String KEY_BUSINESS_APPROVAL = "business_approval";
+    final String KEY_OWNER_ID = "owner_id";
+
+
 
 
     public BusinessClient(String business_name, String mail_address, String state, String phone, String user_name, String password, String business_owner_name, String business_approval_document, String getBusiness_owner_id) {
@@ -22,6 +36,18 @@ public class BusinessClient {
         this.business_owner_name = business_owner_name;
         this.business_approval_document = business_approval_document;
         this.getBusiness_owner_id = getBusiness_owner_id;
+    }
+
+    public BusinessClient(DocumentSnapshot documentSnapshot) {
+        this.business_name = documentSnapshot.getString(KEY_BUSINESS_NAME);
+        this.mail_address = documentSnapshot.getString(KEY_MAIL);
+        this.state = documentSnapshot.getString(KEY_STATE);
+        this.phone = documentSnapshot.getString(KEY_PHONE);
+        this.user_name = documentSnapshot.getString(KEY_USER_NAME);
+        this.password = documentSnapshot.getString(KEY_PASSWORD);
+        this.business_owner_name = documentSnapshot.getString(KEY_OWNER_NAME);
+        this.business_approval_document = documentSnapshot.getString(KEY_BUSINESS_APPROVAL);
+        this.getBusiness_owner_id = documentSnapshot.getString(KEY_OWNER_ID);
     }
 
 
