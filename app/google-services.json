@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "563240437155",
+    "project_id": "changetheworld-55cb3",
+    "storage_bucket": "changetheworld-55cb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563240437155:android:689a795a1e431edb8a4616",
+        "android_client_info": {
+          "package_name": "com.example.changetheworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563240437155-ng7f0l7hobkdd474cjmd9b6cmmofv0hl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6Mi5GEEaxPoJr_Nn6eR_JiLVuvOtBe1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563240437155-ng7f0l7hobkdd474cjmd9b6cmmofv0hl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
