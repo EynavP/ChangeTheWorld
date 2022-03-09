@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity"
+        tools:context=".BusinessLogin"
 
         >
         <!-- Logo image -->
@@ -45,6 +45,9 @@
             android:textAppearance="@style/welcome_bac"
             app:lineHeight="34sp" />
 
+
+        <!-- enter UserName -->
+
         <TextView
             android:id="@+id/login_as_client"
             android:layout_width="215dp"
@@ -53,18 +56,15 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="141dp"
-            android:layout_marginLeft="141dp"
+            android:layout_marginStart="130dp"
+            android:layout_marginLeft="130dp"
             android:layout_marginTop="3dp"
-            android:layout_marginEnd="37dp"
+            android:layout_marginEnd="48dp"
             android:fontFamily="sans-serif-black"
             android:gravity="top"
-            android:text="@string/login_client"
+            android:text="@string/login_business"
             android:textAppearance="@style/login_client"
             app:lineHeight="34sp" />
-
-
-        <!-- enter UserName -->
 
         <TextView
             android:id="@+id/username"
@@ -137,11 +137,11 @@
         <!-- username icon -->
         <Button
             android:id="@+id/forgotPass"
-            android:layout_width="152dp"
-            android:layout_height="35dp"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/editTextTextPassword"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="217dp"
+            android:layout_marginLeft="220dp"
             android:layout_marginTop="20dp"
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/forgot_pass"
@@ -165,38 +165,38 @@
         <TextView
             android:id="@+id/don_t_have_"
             android:layout_width="121dp"
-            android:layout_height="wrap_content"
+            android:layout_height="27dp"
             android:layout_below="@+id/login"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="63dp"
-            android:layout_marginTop="34dp"
+            android:layout_marginLeft="61dp"
+            android:layout_marginTop="28dp"
             android:gravity="top"
             android:text="@string/don_t_have_"
             android:textAppearance="@style/don_t_have_" />
 
         <Button
             android:id="@+id/gotoLoginBusiness"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_width="211dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/don_t_have_"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="88dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginLeft="83dp"
+            android:layout_marginTop="11dp"
             android:background="?android:attr/selectableItemBackground"
-            android:text="@string/gotoLoginBusiness"
+            android:text="@string/gotoLoginClient"
             android:textAppearance="@style/don_t_have_"
             android:textColor="@color/appBlueColor" />
 
         <Button
-            android:id="@+id/createClientAccount"
-            android:layout_width="191dp"
-            android:layout_height="33dp"
+            android:id="@+id/createBusinessAccount"
+            android:layout_width="213dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/login"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="156dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginLeft="158dp"
+            android:layout_marginTop="12dp"
             android:background="?android:attr/selectableItemBackground"
-            android:text="@string/create_new"
+            android:text="@string/create_new_business"
             android:textAppearance="@style/forgot_pass"
             android:textColor="@color/appBlueColor" />
 

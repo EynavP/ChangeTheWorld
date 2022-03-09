@@ -16,6 +16,7 @@ import com.example.changetheworld.model.BusinessClient;
 import com.example.changetheworld.model.FireStoreDB;
 
 public class CreateBusinessAccount extends AppCompatActivity {
+    Button returnLogin;
     Spinner states;
     String[] state = {"Choose State","Israel","United States","Brazil","Italy"};
     int flag = 0;
@@ -26,6 +27,8 @@ public class CreateBusinessAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_business_account);
+        returnLogin = findViewById(R.id.moveToLogin);
+        returnLogin.setOnClickListener(view ->  { returnLoginPage(); });
 
         states = (Spinner) findViewById(R.id.enterBusinessState);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
@@ -157,5 +160,9 @@ public class CreateBusinessAccount extends AppCompatActivity {
         }
     }
 
-
+//Return to login business
+    public void returnLoginPage(){
+        Intent intent = new Intent(this,BusinessLogin.class);
+        startActivity(intent);
+    }
 }

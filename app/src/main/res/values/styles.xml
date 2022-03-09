@@ -65,5 +65,10 @@
         <item name="android:textColor">#B6B0B0</item>
     </style>
 
+    <style name="login_client">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/appBlueColor</item>
+    </style>
+
 
 </resources>

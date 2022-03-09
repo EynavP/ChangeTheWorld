@@ -18,59 +18,84 @@
         android:backgroundTint="@color/cardCol">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="122dp"
             android:padding="5dp">
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
 
             <TextView
                 android:id="@+id/currency_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="228dp"
+                android:layout_height="27dp"
+                android:paddingStart="20dp"
                 android:text="@string/currency_name"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/currencyName_title"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.054" />
+                app:layout_constraintVertical_bias="0.136" />
 
             <TextView
                 android:id="@+id/value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="155dp"
+                android:layout_height="24dp"
                 android:text="@string/value"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintHorizontal_bias="0.079"
+                app:layout_constraintStart_toEndOf="@+id/value_title"
                 app:layout_constraintTop_toTopOf="@+id/currency_name"
-                app:layout_constraintVertical_bias="0.451" />
+                app:layout_constraintVertical_bias="0.444" />
 
             <TextView
                 android:id="@+id/daily_change"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="156dp"
+                android:layout_height="26dp"
+                android:layout_marginEnd="84dp"
                 android:text="@string/daily_change"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/dailyChange_title"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.949" />
+                app:layout_constraintVertical_bias="0.833" />
+
+            <TextView
+                android:id="@+id/currencyName_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/currency_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.057"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/value_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.047"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currencyName_title" />
+
+            <TextView
+                android:id="@+id/dailyChange_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/daily_change"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.055"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/value_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

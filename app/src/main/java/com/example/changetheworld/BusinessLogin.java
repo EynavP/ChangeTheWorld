@@ -1,33 +1,30 @@
 package com.example.changetheworld;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.changetheworld.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
-    private Button createAccount;
+public class BusinessLogin extends AppCompatActivity {
+
+    private Button createBusinessAccount;
     private Button login;
-    private Button gotoBusiness;
+    private Button gotoClient;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_business_login);
+        createBusinessAccount = (Button) findViewById(R.id.createBusinessAccount);
+        createBusinessAccount.setOnClickListener(view -> {openCreateBusinessAccount(); });
+        gotoClient = (Button) findViewById(R.id.gotoLoginBusiness);
+        gotoClient.setOnClickListener(view->{gotoLoginClient();});
         login = (Button) findViewById(R.id.login);
-
-        createAccount = (Button) findViewById(R.id.createClientAccount);
-        createAccount.setOnClickListener(view ->  { openCreateNewAccount(); });
-        gotoBusiness = (Button) findViewById(R.id.gotoLoginBusiness);
-        gotoBusiness.setOnClickListener(view->{gotoLoginBusiness();});
-
         login.setOnClickListener(view->{
             String userName = findViewById(R.id.editTextTextPersonName).toString();
             String password = findViewById(R.id.editTextTextPassword).toString();
@@ -46,22 +43,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void openCreateNewAccount(){
-        Intent intent = new Intent(this,CreateAccountPrivate.class);
+    public void openCreateBusinessAccount(){
+        Intent intent = new Intent(this,CreateBusinessAccount.class);
         startActivity(intent);
     }
 
-    public void gotoLoginBusiness(){
-        Intent intent = new Intent(this,BusinessLogin.class);
+    public void gotoLoginClient(){
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
-
-
-
-
-
-
-
-
-
 }

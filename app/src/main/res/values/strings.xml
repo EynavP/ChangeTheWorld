@@ -32,5 +32,9 @@
     <string name="currency_name">currency name</string>
     <string name="value">value</string>
     <string name="daily_change">daily change:</string>
+    <string name="login_client">Login as Client</string>
+    <string name="gotoLoginBusiness">Not a Client? Login as Business</string>
+    <string name="login_business">Login as Business</string>
+    <string name="gotoLoginClient">Not a Business? Login as Client</string>
 
 </resources>
