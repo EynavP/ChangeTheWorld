@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, "password invalid, please try Again",Toast.LENGTH_LONG);
                 toast.show();
             }
+            else{
+                Intent intent = new Intent(this,client_home_page.class);
+                startActivity(intent);
+            }
         });
     }
 
