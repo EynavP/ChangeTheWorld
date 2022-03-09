@@ -1,6 +1,7 @@
 package com.example.changetheworld.model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -113,7 +114,7 @@ public class FireStoreDB implements DataBaseInterface{
     }
 
     @Override
-    public void VerifyAndPrivateClientLogin(Context context, String user_name, String password) {
+    public void VerifyAndPrivateClientLogin(Context context, String user_name, String password, Intent intent) {
         db.collection("PrivateClient")
                 .document(user_name)
                 .get()
@@ -125,6 +126,7 @@ public class FireStoreDB implements DataBaseInterface{
                             if (client.getPassport() == password && client.getUser_name().equals(user_name)){
                                 Toast.makeText(context, user_name + "Connect Successfully ", Toast.LENGTH_SHORT).show();
                                 // TODO: Move to homepage with data
+                                context.startActivity(intent);
                             }
                         }else {
                             Toast.makeText(context, "UserName or password are incorrect", Toast.LENGTH_LONG).show();
