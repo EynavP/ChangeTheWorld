@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.changetheworld.model.DataBaseInterface;
+import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.PrivateClient;
 
 
@@ -26,6 +28,7 @@ public class CreateAccountPrivate extends AppCompatActivity {
     String passport_chosen_photo = "";
     int flag = 0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,8 @@ public class CreateAccountPrivate extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         adapter.addAll(currency);
         currencies.setAdapter(adapter);
+
+
 
 
         //Personal photo load
@@ -107,6 +112,7 @@ public class CreateAccountPrivate extends AppCompatActivity {
             }else{
                 //TODO: ADD DATABASE HERE
                 PrivateClient client = new PrivateClient(user_name,full_name,mail,phone,currency,password,personal_chosen_photo,passport_chosen_photo);
+                FireStoreDB.getInstance().SavePrivateClient(this, client);
             }
         });
     }
