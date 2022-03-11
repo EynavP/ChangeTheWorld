@@ -125,7 +125,8 @@ public class FireStoreDB implements DataBaseInterface{
                         if(documentSnapshot.exists()){
                             PrivateClient client = new PrivateClient(documentSnapshot);
                             if (client.getPassword().equals(password) && client.getUser_name().equals(user_name)){
-                                // TODO: Move to homepage with data
+                                intent.putExtra("userName",client.getUser_name());
+                                intent.putExtra("photo",client.getPhoto());
                                 context.startActivity(intent);
                             }
                         }else {
