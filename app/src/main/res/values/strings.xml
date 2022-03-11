@@ -30,8 +30,8 @@
     <string name="hello_">Hello,</string>
     <string name="have_a_nice">Have a nice day!</string>
     <string name="currency_name">currency name</string>
-    <string name="value">value</string>
-    <string name="daily_change">daily change:</string>
+    <string name="value">Value</string>
+    <string name="daily_change">Daily Change</string>
     <string name="login_client">Login as Client</string>
     <string name="gotoLoginBusiness">Not a Client? Login as Business</string>
     <string name="login_business">Login as Business</string>

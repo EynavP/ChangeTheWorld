@@ -1,9 +1,11 @@
 package com.example.changetheworld;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,13 +35,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
-        String currency=data.get(i).getCurrencyname();
-        viewHolder.currencyName.setText(currency);
+        int symbol=data.get(i).getSymbolId();
+        viewHolder.symbol.setImageResource(symbol);
 
         String value=data.get(i).getValue();
         viewHolder.value_name.setText(value);
 
-        String dailyCh=data.get(i).getDailychange();
+        String dailyCh=data.get(i).getDailyChange();
         viewHolder.daily_change.setText(dailyCh);
     }
 
@@ -50,11 +52,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView currencyName,value_name,daily_change;
+        TextView value_name,daily_change;
+        ImageView symbol;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            currencyName=itemView.findViewById(R.id.currency_name);
+            symbol=itemView.findViewById(R.id.symbolCurrency);
             value_name=itemView.findViewById(R.id.value);
             daily_change=itemView.findViewById(R.id.daily_change);
         }

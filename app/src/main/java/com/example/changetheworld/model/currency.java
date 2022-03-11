@@ -1,22 +1,24 @@
 package com.example.changetheworld.model;
 
+import android.widget.ImageView;
+
 public class currency {
-    private String currencyname;
+    private int symbolId;
     private String value;
-    private String dailychange;
+    private String dailyChange;
 
-    public currency(String currencyname, String value, String dailychange) {
-        this.currencyname = currencyname;
+    public currency(int symbolId, String value, String dailyChange) {
+        this.symbolId = symbolId;
         this.value = value;
-        this.dailychange = dailychange;
+        this.dailyChange = dailyChange;
     }
 
-    public String getCurrencyname() {
-        return currencyname;
+    public int getSymbolId() {
+        return symbolId;
     }
 
-    public void setCurrencyname(String currencyname) {
-        this.currencyname = currencyname;
+    public void setSymbolId(int symbolId) {
+        this.symbolId = symbolId;
     }
 
     public String getValue() {
@@ -27,11 +29,11 @@ public class currency {
         this.value = value;
     }
 
-    public String getDailychange() {
-        return dailychange;
+    public String getDailyChange() {
+        return dailyChange;
     }
 
-    public void setDailychange(String dailychange) {
-        this.dailychange = dailychange;
+    public void setDailyChange(String dailyChange) {
+        this.dailyChange = dailyChange;
     }
 }

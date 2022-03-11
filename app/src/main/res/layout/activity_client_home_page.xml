@@ -71,16 +71,56 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="661dp">
+        android:layout_height="775dp"
+        android:paddingTop="100dp">
+
+        <TextView
+            android:id="@+id/currencyName_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/recycle_view"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="-40dp"
+            android:text="@string/currency_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.057"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dailyChange_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/recycle_view"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="-40dp"
+            android:layout_toEndOf="@+id/value_title"
+            android:text="@string/daily_change"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.055"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/value_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/recycle_view"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="-40dp"
+            android:layout_toEndOf="@+id/currencyName_title"
+            android:text="@string/value"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view"
             android:layout_width="318dp"
             android:layout_height="461dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="36dp"
-            android:layout_marginTop="250dp"
-            tools:ignore="UnknownId" />
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="240dp" />
 
 
     </RelativeLayout>
