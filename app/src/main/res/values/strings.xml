@@ -36,5 +36,6 @@
     <string name="gotoLoginBusiness">Not a Client? Login as Business</string>
     <string name="login_business">Login as Business</string>
     <string name="gotoLoginClient">Not a Business? Login as Client</string>
+    <string name="orders_for_today">Your orders for today</string>
 
 </resources>

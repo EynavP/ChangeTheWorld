@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BusinessHomePage">
+
+    <ImageView
+        android:id="@+id/top_image"
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:layout_marginLeft="-1dp"
+        android:layout_marginTop="-21dp"
+        android:background="@drawable/round_background2">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/hello_homep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="66dp"
+        android:fontFamily="@font/aclonica"
+        android:gravity="top"
+        android:text="@string/hello_"
+        android:textAppearance="@style/hello_" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="112dp"
+        android:layout_marginTop="66dp"
+        android:fontFamily="@font/aclonica"
+        android:gravity="top"
+        android:text="@string/username"
+        android:textAppearance="@style/hello_" />
+
+    <TextView
+        android:id="@+id/have_a_nice"
+        android:layout_width="124dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hello_homep"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="69dp"
+        android:layout_marginTop="0dp"
+        android:gravity="top"
+        android:text="@string/orders_for_today"
+        android:textAppearance="@style/have_a_nice" />
+
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="775dp"
+    android:paddingTop="100dp">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_view"
+        android:layout_width="318dp"
+        android:layout_height="461dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="240dp" />
+
+    </RelativeLayout>
+</RelativeLayout>
