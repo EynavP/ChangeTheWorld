@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         gotoBusiness.setOnClickListener(view->{gotoLoginBusiness();});
 
         login.setOnClickListener(view->{
-            String userName = findViewById(R.id.editTextTextPersonName).toString();
-            String password = findViewById(R.id.editTextTextPassword).toString();
+            String userName = ((EditText) findViewById(R.id.editTextTextPersonName)).getText().toString();
+            String password = ((EditText) findViewById(R.id.editTextTextPassword)).getText().toString();
             if (userName.isEmpty()){
                 Toast toast = Toast.makeText(this, "username invalid, please try Again",Toast.LENGTH_LONG);
                 toast.show();

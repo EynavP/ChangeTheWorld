@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.changetheworld.databinding.ActivityMainBinding;
+import com.example.changetheworld.model.FireStoreDB;
 
 public class BusinessLogin extends AppCompatActivity {
 
@@ -26,8 +28,8 @@ public class BusinessLogin extends AppCompatActivity {
         gotoClient.setOnClickListener(view->{gotoLoginClient();});
         login = (Button) findViewById(R.id.login);
         login.setOnClickListener(view->{
-            String userName = findViewById(R.id.editTextTextPersonName).toString();
-            String password = findViewById(R.id.editTextTextPassword).toString();
+            String userName = ((EditText) findViewById(R.id.editTextTextPersonName)).getText().toString();
+            String password = ((EditText) findViewById(R.id.editTextTextPassword)).getText().toString();
             if (userName.isEmpty()){
                 Toast toast = Toast.makeText(this, "username invalid, please try Again",Toast.LENGTH_LONG);
                 toast.show();
@@ -38,7 +40,7 @@ public class BusinessLogin extends AppCompatActivity {
             }
             else{
                 Intent intent = new Intent(this,client_home_page.class);
-                startActivity(intent);
+                FireStoreDB.getInstance().VerifyAndBusinessLogin(this, userName, password, intent);
             }
         });
     }

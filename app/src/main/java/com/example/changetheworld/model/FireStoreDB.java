@@ -2,6 +2,7 @@ package com.example.changetheworld.model;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -123,8 +124,7 @@ public class FireStoreDB implements DataBaseInterface{
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if(documentSnapshot.exists()){
                             PrivateClient client = new PrivateClient(documentSnapshot);
-                            if (client.getPassport() == password && client.getUser_name().equals(user_name)){
-                                Toast.makeText(context, user_name + "Connect Successfully ", Toast.LENGTH_SHORT).show();
+                            if (client.getPassword().equals(password) && client.getUser_name().equals(user_name)){
                                 // TODO: Move to homepage with data
                                 context.startActivity(intent);
                             }
@@ -141,7 +141,7 @@ public class FireStoreDB implements DataBaseInterface{
     }
 
     @Override
-    public void VerifyAndBusinessLogin(Context context, String user_name, String password) {
+    public void VerifyAndBusinessLogin(Context context, String user_name, String password, Intent intent) {
         db.collection("BusinessClient")
                 .document(user_name)
                 .get()
@@ -150,9 +150,9 @@ public class FireStoreDB implements DataBaseInterface{
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if(documentSnapshot.exists()){
                             BusinessClient client = new BusinessClient(documentSnapshot);
-                            if (client.getPassword() == password && client.getUser_name().equals(user_name)){
-                                Toast.makeText(context, user_name + "Connect Successfully ", Toast.LENGTH_SHORT).show();
+                            if (client.getPassword().equals(password) && client.getUser_name().equals(user_name)){
                                 // TODO: Move to homepage with data
+                                context.startActivity(intent);
                             }
                         }else {
                             Toast.makeText(context, "UserName or password are incorrect", Toast.LENGTH_LONG).show();
