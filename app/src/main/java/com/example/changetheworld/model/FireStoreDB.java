@@ -44,9 +44,11 @@ public class FireStoreDB implements DataBaseInterface {
         return single_instance;
     }
 
-    private void createDefaultWallet(String userName, String type, Context context) {
+    private void createDefaultWallet(String userName, String type, Context context, Intent intent) {
 
         String[] currencies = {"USD", "EURO", "POUND", "YUAN"};
+        List<Task<Void>> tasks = new ArrayList<>();
+
         for (String c : currencies) {
             Wallet tmp = new Wallet(0, c, userName);
 
@@ -55,24 +57,32 @@ public class FireStoreDB implements DataBaseInterface {
             walletData.put("user_name", userName);
             walletData.put("balance", 0);
 
-            db.collection(type)
+            Task<Void> task_wallet = db.collection(type)
                     .document(userName)
                     .collection("Wallet")
                     .document(c)
-                    .set(walletData)
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context, "Fail create new wallet : " + e.toString(), Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    .set(walletData);
 
+            tasks.add(task_wallet);
         }
+
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
+            @Override
+            public void onSuccess(List<Object> objects) {
+                intent.putExtra("userName", userName);
+                context.startActivity(intent);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "Fail create wallets : " + e.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 
     @Override
-    public void VerifyAndSavePrivateClient(Context context, PrivateClient user) {
+    public void VerifyAndSavePrivateClient(Context context, PrivateClient user, Intent intent) {
         Task<DocumentSnapshot> task_client = db.collection("PrivateClient")
                 .document(user.getUser_name())
                 .get();
@@ -91,7 +101,7 @@ public class FireStoreDB implements DataBaseInterface {
                 DocumentSnapshot client = (DocumentSnapshot) objects.get(0);
                 DocumentSnapshot business = (DocumentSnapshot) objects.get(1);
                 if (!client.exists() && !business.exists()) {
-                    SavePrivateClient(context, user);
+                    SavePrivateClient(context, user, intent);
                 } else {
                     Toast.makeText(context, "UserName already exists", Toast.LENGTH_LONG).show();
                 }
@@ -104,7 +114,7 @@ public class FireStoreDB implements DataBaseInterface {
         });
     }
 
-    private void SavePrivateClient(Context context, PrivateClient user) {
+    private void SavePrivateClient(Context context, PrivateClient user, Intent intent) {
 
         final String KEY_FULL_NAME = "full_name";
         final String KEY_PHONE = "phone";
@@ -160,12 +170,12 @@ public class FireStoreDB implements DataBaseInterface {
                     }
                 });
 
-        createDefaultWallet(user.getUser_name(), "PrivateClient", context);
+        createDefaultWallet(user.getUser_name(), "PrivateClient", context, intent);
     }
 
 
     @Override
-    public void VerifyAndSaveBusiness(Context context, BusinessClient businessClient) {
+    public void VerifyAndSaveBusiness(Context context, BusinessClient businessClient, Intent intent) {
         Task<DocumentSnapshot> task_client = db.collection("PrivateClient")
                 .document(businessClient.getUser_name())
                 .get();
@@ -184,7 +194,7 @@ public class FireStoreDB implements DataBaseInterface {
                 DocumentSnapshot client = (DocumentSnapshot) objects.get(0);
                 DocumentSnapshot business = (DocumentSnapshot) objects.get(1);
                 if (!client.exists() && !business.exists()) {
-                    SaveBusinessClient(context, businessClient);
+                    SaveBusinessClient(context, businessClient, intent);
                 } else {
                     Toast.makeText(context, "UserName already exists", Toast.LENGTH_LONG).show();
                 }
@@ -212,7 +222,11 @@ public class FireStoreDB implements DataBaseInterface {
                                 intent.putExtra("userName", user_name);
                                 context.startActivity(intent);
                             }
-                        } else {
+                            else {
+                                Toast.makeText(context, "UserName or password are incorrect", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        else {
                             Toast.makeText(context, "UserName or password are incorrect", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -239,7 +253,7 @@ public class FireStoreDB implements DataBaseInterface {
         });
     }
 
-    private void SaveBusinessClient(Context context, BusinessClient user) {
+    private void SaveBusinessClient(Context context, BusinessClient user, Intent intent) {
         final String KEY_BUSINESS_NAME = "business_name";
         final String KEY_MAIL = "mail";
         final String KEY_STATE = "state";
@@ -299,7 +313,7 @@ public class FireStoreDB implements DataBaseInterface {
                     }
                 });
 
-        createDefaultWallet(user.getUser_name(), "BusinessClient", context);
+        createDefaultWallet(user.getUser_name(), "BusinessClient", context, intent);
 
     }
 }

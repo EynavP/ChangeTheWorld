@@ -115,7 +115,8 @@ public class CreateAccountPrivate extends AppCompatActivity {
             }else{
                 //TODO: ADD DATABASE HERE
                 PrivateClient client = new PrivateClient(user_name,full_name,mail,phone,currency,password,personal_chosen_photo,passport_chosen_photo);
-                FireStoreDB.getInstance().VerifyAndSavePrivateClient(this, client);
+                Intent intent = new Intent(this, MainActivity.class);
+                FireStoreDB.getInstance().VerifyAndSavePrivateClient(this, client, intent);
             }
         });
     }

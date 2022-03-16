@@ -120,7 +120,8 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 toast.show();
             }else { //TODO: ADD DATABASE HERE
                 BusinessClient business_client = new BusinessClient(business_name,mail,state,phone,user_name,password,business_owner_name,business_chosen_approvel,business_chosen_owner_id);
-                FireStoreDB.getInstance().VerifyAndSaveBusiness(this, business_client);
+                Intent intent = new Intent(this, BusinessLogin.class);
+                FireStoreDB.getInstance().VerifyAndSaveBusiness(this, business_client, intent);
             }
         });
 
