@@ -39,7 +39,7 @@ public class BusinessLogin extends AppCompatActivity {
                 toast.show();
             }
             else{
-                Intent intent = new Intent(this,client_home_page.class);
+                Intent intent = new Intent(this,BusinessHomePage.class);
                 FireStoreDB.getInstance().VerifyAndLogin(this, userName, password, intent, "BusinessClient");
             }
         });
