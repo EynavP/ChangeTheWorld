@@ -42,27 +42,38 @@ public class FireStoreDB implements DataBaseInterface{
         }
         return single_instance;
     }
+
     @Override
     public void VerifyAndSavePrivateClient(Context context, PrivateClient user){
-        db.collection("PrivateClient")
+        Task<DocumentSnapshot> task_client =  db.collection("PrivateClient")
                 .document(user.getUser_name())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()){
-                            Toast.makeText(context, "UserName already exists" , Toast.LENGTH_LONG).show();
-                        }else {
-                            SavePrivateClient(context, user);
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Fail to connect to databases " + e.toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                .get();
+
+        Task<DocumentSnapshot> task_business =  db.collection("BusinessClient")
+                .document(user.getUser_name())
+                .get();
+
+        List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
+        tasks.add(task_client);
+        tasks.add(task_business);
+
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
+            @Override
+            public void onSuccess(List<Object> objects) {
+                DocumentSnapshot client = (DocumentSnapshot) objects.get(0);
+                DocumentSnapshot business = (DocumentSnapshot) objects.get(1);
+                if(!client.exists() && !business.exists()) {
+                    SavePrivateClient(context, user);
+                }else{
+                    Toast.makeText(context, "UserName already exists" , Toast.LENGTH_LONG).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "Fail to connect to databases " + e.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void SavePrivateClient(Context context, PrivateClient user) {
@@ -128,25 +139,35 @@ public class FireStoreDB implements DataBaseInterface{
 
     @Override
     public void VerifyAndSaveBusiness(Context context, BusinessClient businessClient) {
-        db.collection("BusinessClient")
+        Task<DocumentSnapshot> task_client =  db.collection("PrivateClient")
                 .document(businessClient.getUser_name())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()){
-                            Toast.makeText(context, "Business UserName already exists" , Toast.LENGTH_LONG).show();
-                        }else {
-                            SaveBusinessClient(context, businessClient);
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Fail to connect to databases " + e.toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                .get();
+
+        Task<DocumentSnapshot> task_business =  db.collection("BusinessClient")
+                .document(businessClient.getUser_name())
+                .get();
+
+        List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
+        tasks.add(task_client);
+        tasks.add(task_business);
+
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
+            @Override
+            public void onSuccess(List<Object> objects) {
+                DocumentSnapshot client = (DocumentSnapshot) objects.get(0);
+                DocumentSnapshot business = (DocumentSnapshot) objects.get(1);
+                if(!client.exists() && !business.exists()) {
+                    SaveBusinessClient(context, businessClient);
+                }else{
+                    Toast.makeText(context, "UserName already exists" , Toast.LENGTH_LONG).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "Fail to connect to databases " + e.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -216,7 +237,6 @@ public class FireStoreDB implements DataBaseInterface{
 }
 
     private void SaveBusinessClient(Context context,BusinessClient user) {
-
         final String KEY_BUSINESS_NAME = "business_name";
         final String KEY_MAIL = "mail";
         final String KEY_STATE = "state";
