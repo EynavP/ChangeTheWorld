@@ -4,13 +4,11 @@ import java.util.List;
 
 class Wallet implements WalletInterface {
     float balance = 0;
-    List<Transaction> history;
     String currency;
     String user_name;
 
-    public Wallet(float balance, List<Transaction> history, String currency, String user_name) {
+    public Wallet(float balance, String currency, String user_name) {
         this.balance = balance;
-        this.history = history;
         this.currency = currency;
         this.user_name = user_name;
     }
@@ -21,14 +19,6 @@ class Wallet implements WalletInterface {
 
     public void setBalance(float balance) {
         this.balance = balance;
-    }
-
-    public List<Transaction> getHistory() {
-        return history;
-    }
-
-    public void setHistory(List<Transaction> history) {
-        this.history = history;
     }
 
     public String getCurrency() {
