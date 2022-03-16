@@ -57,7 +57,7 @@ public class AdapterCurrency extends RecyclerView.Adapter<AdapterCurrency.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             symbol=itemView.findViewById(R.id.symbolCurrency);
-            value_name=itemView.findViewById(R.id.value);
+            value_name=itemView.findViewById(R.id.currencyName);
             daily_change=itemView.findViewById(R.id.daily_change);
         }
     }

@@ -70,5 +70,17 @@
         <item name="android:textColor">@color/appBlueColor</item>
     </style>
 
+    <style name="balance">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">@color/cardCol</item>
+        <item name="fontFamily">serif-monospace</item>
+    </style>
+
+    <style name="symbol">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">serif-monospace</item>
+    </style>
+
 
 </resources>

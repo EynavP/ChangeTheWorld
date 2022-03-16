@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WalletActivity">
+
+    <ImageView
+        android:id="@+id/top_image"
+        android:layout_width="wrap_content"
+        android:layout_height="245dp"
+        android:layout_marginLeft="-1dp"
+        android:layout_marginTop="-21dp"
+        android:background="@drawable/round_background2" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profilePhotoCV"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:cardCornerRadius="250dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/profilePhoto"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_foreground" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="127dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="57dp"
+        android:layout_toEndOf="@+id/profilePhotoCV"
+        android:textColor="@color/cardCol"
+        android:text="Username"/>
+
+    <TextView
+        android:id="@+id/balance"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_name"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="143dp"
+        android:text="Balance"
+        android:textAppearance="@style/balance" />
+
+    <TextView
+        android:id="@+id/symbol"
+        android:layout_width="28dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/user_name"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="278dp"
+        android:layout_toStartOf="@+id/balance"
+        android:text="symbol"
+        android:textColor="@color/cardCol"/>
+
+
+</RelativeLayout>
