@@ -4,14 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,15 +12,11 @@ import android.widget.TextView;
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.currency;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class client_home_page extends AppCompatActivity {
     RecyclerView recyclerView;
-    Adapter adapter;
+    AdapterCurrency adapterCurrency;
     ArrayList<currency> items;
     TextView userName;
     ImageView profilPhoto;
@@ -54,7 +43,7 @@ public class client_home_page extends AppCompatActivity {
         recyclerView=findViewById(R.id.recycle_view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new Adapter(this,items);
-        recyclerView.setAdapter(adapter);
+        adapterCurrency = new AdapterCurrency(this,items);
+        recyclerView.setAdapter(adapterCurrency);
     }
 }

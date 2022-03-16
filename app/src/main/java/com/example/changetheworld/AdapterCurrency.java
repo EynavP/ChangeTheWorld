@@ -1,7 +1,6 @@
 package com.example.changetheworld;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,12 @@ import com.example.changetheworld.model.currency;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class AdapterCurrency extends RecyclerView.Adapter<AdapterCurrency.ViewHolder> {
 
     private LayoutInflater layoutInflater;
     private List<currency> data;
 
-    Adapter(Context context,List<currency> data){
+    AdapterCurrency(Context context, List<currency> data){
         this.layoutInflater =LayoutInflater.from(context);
         this.data=data;
 
