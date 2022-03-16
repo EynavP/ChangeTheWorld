@@ -116,8 +116,6 @@ public class FireStoreDB implements DataBaseInterface{
             });
 
 
-
-
         db.collection("PrivateClient")
                     .document(user.getUser_name())
                     .set(data)
@@ -134,7 +132,36 @@ public class FireStoreDB implements DataBaseInterface{
                             Toast.makeText(context, "Fail create new client : " + e.toString(), Toast.LENGTH_LONG).show();
                         }
                     });
+
+        final String KEY_BALANCE = "balance";
+
+        String[]  currencies = {"USD", "EURO", "POUND", "YUAN"};
+        for (String c : currencies) {
+            Wallet tmp = new Wallet(0, new ArrayList<>(), c, user.getUser_name());
+
+            Map<String, Object> walletData = new HashMap<>();
+            walletData.put(KEY_CURRENCY, c);
+            walletData.put(KEY_USER_NAME, user.getUser_name());
+            walletData.put(KEY_BALANCE, 0);
+
+            db.collection("PrivateClient")
+                    .document(user.getUser_name())
+                    .collection("Wallet")
+                    .document(c)
+                    .set(walletData)
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Fail create new wallet : " + e.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    });
         }
+
+
+    }
+
+
+
 
     @Override
     public void VerifyAndSaveBusiness(Context context, BusinessClient businessClient) {
