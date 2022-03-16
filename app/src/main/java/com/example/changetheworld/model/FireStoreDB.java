@@ -2,14 +2,30 @@ package com.example.changetheworld.model;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FireStoreDB implements DataBaseInterface{
@@ -66,16 +82,35 @@ public class FireStoreDB implements DataBaseInterface{
             data.put(KEY_CURRENCY, user.getLocal_currency());
             data.put(KEY_USER_NAME, user.getUser_name());
             data.put(KEY_PASSWORD, user.getPassword());
-            data.put(KEY_PERSONAL_PHOTO, user.getPhoto());
-            data.put(KEY_PASSPORT_PHOTO, user.getPassport());
             data.put(KEY_MAIL, user.getMail_address());
 
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+            StorageReference personalImageRef = storageRef.child("images/"+user.getUser_name()+"/"+KEY_PERSONAL_PHOTO+".jpg");
+            StorageReference passportImageRef = storageRef.child("images/"+user.getUser_name()+"/"+KEY_PASSPORT_PHOTO+".jpg");
+            UploadTask personal_photo_task =  personalImageRef.putBytes(user.getPhoto());
+            personal_photo_task.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+                }
+            });
 
-            db.collection("PrivateClient")
+
+            UploadTask passport_task = passportImageRef.putBytes(user.getPassport());
+            passport_task.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+
+
+
+        db.collection("PrivateClient")
                     .document(user.getUser_name())
                     .set(data)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
-
                         @Override
                         public void onSuccess(Void unused)
                         {
@@ -123,10 +158,8 @@ public class FireStoreDB implements DataBaseInterface{
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if(documentSnapshot.exists()){
-                            PrivateClient client = new PrivateClient(documentSnapshot);
-                            if (client.getPassword().equals(password) && client.getUser_name().equals(user_name)){
-                                intent.putExtra("userName",client.getUser_name());
-                                intent.putExtra("photo",client.getPhoto());
+                            if (password.equals(documentSnapshot.getString("password")) && user_name.equals(documentSnapshot.getString("user_name"))){
+                                intent.putExtra("userName",user_name);
                                 context.startActivity(intent);
                             }
                         }else {
@@ -167,6 +200,20 @@ public class FireStoreDB implements DataBaseInterface{
         });
     }
 
+    @Override
+    public void LoadProfilePhoto(ImageView profilPhoto, String user_name) {
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        String personal_photo_path = "images/" + user_name + "/" + "personal_photo.jpg";
+        StorageReference PersonalpathReference = storageRef.child(personal_photo_path);
+        Task<byte[]> personal_photo = PersonalpathReference.getBytes(2000000000);
+        personal_photo.addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap photo = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+                profilPhoto.setImageBitmap(photo);
+            }
+        });
+}
 
     private void SaveBusinessClient(Context context,BusinessClient user) {
 

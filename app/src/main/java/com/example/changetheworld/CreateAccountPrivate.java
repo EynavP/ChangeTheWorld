@@ -2,8 +2,10 @@ package com.example.changetheworld;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,14 +20,17 @@ import com.example.changetheworld.model.DataBaseInterface;
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.PrivateClient;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 
 public class CreateAccountPrivate extends AppCompatActivity {
     Button returnLogin;
     Spinner currencies;
     String[] currency = {"Choose Currency","DOLLAR","EURO"};
     int SELECT_PICTURE = 200;
-    String personal_chosen_photo = "";
-    String passport_chosen_photo = "";
+    byte[] personal_chosen_photo;
+    byte[] passport_chosen_photo;
     int flag = 0;
 
 
@@ -100,11 +105,11 @@ public class CreateAccountPrivate extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (personal_chosen_photo.isEmpty()){
+            else if (personal_chosen_photo == null){
                 Toast toast = Toast.makeText(this, "Invalid personal picture", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (passport_chosen_photo.isEmpty()){
+            else if (passport_chosen_photo == null){
                 Toast toast = Toast.makeText(this, "Invalid passport picture", Toast.LENGTH_SHORT);
                 toast.show();
             }else{
@@ -139,15 +144,28 @@ public class CreateAccountPrivate extends AppCompatActivity {
                 // Get the url of the image from data
                 Uri selectedImageUri = data.getData();
                 if (null != selectedImageUri) {
-                    if (flag == 1){
-                        personal_chosen_photo = selectedImageUri.toString();
-                        Toast.makeText(CreateAccountPrivate.this, "Photo Upload Success", Toast.LENGTH_SHORT).show();
+
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                        //personal_chosen_photo = selectedImageUri.toString();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        byte[] photo_byte = baos.toByteArray();
+
+                        if (flag == 1){
+                            personal_chosen_photo = photo_byte;
+                            Toast.makeText(CreateAccountPrivate.this, "Photo Upload Success", Toast.LENGTH_SHORT).show();
+                        }
+
+                        if (flag == 2) {
+                            passport_chosen_photo = photo_byte;
+                            Toast.makeText(CreateAccountPrivate.this, "Passport Upload Success", Toast.LENGTH_SHORT).show();
+                        }
+
+                        } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    }
-                    if (flag == 2) {
-                        passport_chosen_photo = selectedImageUri.toString();
-                        Toast.makeText(CreateAccountPrivate.this, "Passport Upload Success", Toast.LENGTH_SHORT).show();
-                    }
+                }
             }
         }
     }

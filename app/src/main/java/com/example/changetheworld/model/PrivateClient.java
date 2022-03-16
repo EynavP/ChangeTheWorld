@@ -1,5 +1,7 @@
 package com.example.changetheworld.model;
 
+import android.graphics.Bitmap;
+
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.w3c.dom.Document;
@@ -11,8 +13,8 @@ public class PrivateClient {
     private String phone_number;
     private String local_currency;
     private String password;
-    private String photo;
-    private String passport;
+    private byte[] photo;
+    private byte[] passport;
     final String KEY_FULL_NAME = "full_name";
     final String KEY_PHONE = "phone";
     final String KEY_MAIL = "mail";
@@ -24,7 +26,7 @@ public class PrivateClient {
 
 
 
-    public PrivateClient(String user_name, String full_name, String mail_address, String phone_number, String local_currency, String password, String photo, String passport) {
+    public PrivateClient(String user_name, String full_name, String mail_address, String phone_number, String local_currency, String password, byte[] photo, byte[] passport) {
         this.user_name = user_name;
         this.full_name = full_name;
         this.mail_address = mail_address;
@@ -33,17 +35,6 @@ public class PrivateClient {
         this.password = password;
         this.photo = photo;
         this.passport = passport;
-    }
-
-    public PrivateClient(DocumentSnapshot documentSnapshot){
-        this.user_name = documentSnapshot.getString(KEY_USER_NAME);
-        this.full_name = documentSnapshot.getString(KEY_FULL_NAME);
-        this.mail_address = documentSnapshot.getString(KEY_MAIL);
-        this.phone_number = documentSnapshot.getString(KEY_PHONE);
-        this.local_currency = documentSnapshot.getString(KEY_CURRENCY);
-        this.password = documentSnapshot.getString(KEY_PASSWORD);
-        this.photo = documentSnapshot.getString(KEY_PERSONAL_PHOTO);
-        this.passport = documentSnapshot.getString(KEY_PASSPORT_PHOTO);
     }
 
 
@@ -95,21 +86,19 @@ public class PrivateClient {
         this.password = password;
     }
 
-    public String getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 
-    public String getPassport() {
+    public byte[] getPassport() {
         return passport;
     }
 
-    public void setPassport(String passport) {
+    public void setPassport(byte[] passport) {
         this.passport = passport;
     }
-
-
 }
