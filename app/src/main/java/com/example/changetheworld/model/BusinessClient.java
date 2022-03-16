@@ -10,8 +10,8 @@ public class BusinessClient {
     private String user_name;
     private String password;
     private String business_owner_name;
-    private String business_approval_document;
-    private String getBusiness_owner_id;
+    private byte[] business_approval_document;
+    private byte[] getBusiness_owner_id;
 
     final String KEY_BUSINESS_NAME = "business_name";
     final String KEY_MAIL = "mail";
@@ -26,7 +26,7 @@ public class BusinessClient {
 
 
 
-    public BusinessClient(String business_name, String mail_address, String state, String phone, String user_name, String password, String business_owner_name, String business_approval_document, String getBusiness_owner_id) {
+    public BusinessClient(String business_name, String mail_address, String state, String phone, String user_name, String password, String business_owner_name, byte[] business_approval_document, byte[] getBusiness_owner_id) {
         this.business_name = business_name;
         this.mail_address = mail_address;
         this.state = state;
@@ -37,19 +37,6 @@ public class BusinessClient {
         this.business_approval_document = business_approval_document;
         this.getBusiness_owner_id = getBusiness_owner_id;
     }
-
-    public BusinessClient(DocumentSnapshot documentSnapshot) {
-        this.business_name = documentSnapshot.getString(KEY_BUSINESS_NAME);
-        this.mail_address = documentSnapshot.getString(KEY_MAIL);
-        this.state = documentSnapshot.getString(KEY_STATE);
-        this.phone = documentSnapshot.getString(KEY_PHONE);
-        this.user_name = documentSnapshot.getString(KEY_USER_NAME);
-        this.password = documentSnapshot.getString(KEY_PASSWORD);
-        this.business_owner_name = documentSnapshot.getString(KEY_OWNER_NAME);
-        this.business_approval_document = documentSnapshot.getString(KEY_BUSINESS_APPROVAL);
-        this.getBusiness_owner_id = documentSnapshot.getString(KEY_OWNER_ID);
-    }
-
 
     public String getBusiness_name() {
         return business_name;
@@ -107,19 +94,19 @@ public class BusinessClient {
         this.business_owner_name = business_owner_name;
     }
 
-    public String getBusiness_approval_document() {
+    public byte[] getBusiness_approval_document() {
         return business_approval_document;
     }
 
-    public void setBusiness_approval_document(String business_approval_document) {
+    public void setBusiness_approval_document(byte[] business_approval_document) {
         this.business_approval_document = business_approval_document;
     }
 
-    public String getGetBusiness_owner_id() {
+    public byte[] getGetBusiness_owner_id() {
         return getBusiness_owner_id;
     }
 
-    public void setGetBusiness_owner_id(String getBusiness_owner_id) {
+    public void setGetBusiness_owner_id(byte[] getBusiness_owner_id) {
         this.getBusiness_owner_id = getBusiness_owner_id;
     }
 }

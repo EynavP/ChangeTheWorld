@@ -136,7 +136,6 @@ public class FireStoreDB implements DataBaseInterface{
                     });
         }
 
-
     @Override
     public void VerifyAndSaveBusiness(Context context, BusinessClient businessClient) {
         Task<DocumentSnapshot> task_client =  db.collection("PrivateClient")
@@ -170,9 +169,10 @@ public class FireStoreDB implements DataBaseInterface{
         });
     }
 
+
     @Override
-    public void VerifyAndPrivateClientLogin(Context context, String user_name, String password, Intent intent) {
-        db.collection("PrivateClient")
+    public void VerifyAndLogin(Context context, String user_name, String password, Intent intent, String type) {
+        db.collection(type)
                 .document(user_name)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -181,32 +181,6 @@ public class FireStoreDB implements DataBaseInterface{
                         if(documentSnapshot.exists()){
                             if (password.equals(documentSnapshot.getString("password")) && user_name.equals(documentSnapshot.getString("user_name"))){
                                 intent.putExtra("userName",user_name);
-                                context.startActivity(intent);
-                            }
-                        }else {
-                            Toast.makeText(context, "UserName or password are incorrect", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, "Fail to connect to databases " + e.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    @Override
-    public void VerifyAndBusinessLogin(Context context, String user_name, String password, Intent intent) {
-        db.collection("BusinessClient")
-                .document(user_name)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if(documentSnapshot.exists()){
-                            BusinessClient client = new BusinessClient(documentSnapshot);
-                            if (client.getPassword().equals(password) && client.getUser_name().equals(user_name)){
-                                // TODO: Move to homepage with data
                                 context.startActivity(intent);
                             }
                         }else {
@@ -256,8 +230,28 @@ public class FireStoreDB implements DataBaseInterface{
         data.put(KEY_USER_NAME, user.getUser_name());
         data.put(KEY_PASSWORD, user.getPassword());
         data.put(KEY_OWNER_NAME, user.getBusiness_owner_name());
-        data.put(KEY_BUSINESS_APPROVAL, user.getBusiness_approval_document());
-        data.put(KEY_OWNER_ID, user.getGetBusiness_owner_id());
+
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference personalImageRef = storageRef.child("images/"+user.getUser_name()+"/"+KEY_BUSINESS_APPROVAL+".jpg");
+        StorageReference passportImageRef = storageRef.child("images/"+user.getUser_name()+"/"+KEY_OWNER_ID+".jpg");
+        UploadTask business_approval_task =  personalImageRef.putBytes(user.getBusiness_approval_document());
+        business_approval_task.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        UploadTask owner_id_task = passportImageRef.putBytes(user.getGetBusiness_owner_id());
+        owner_id_task.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
 
 
         db.collection("BusinessClient")

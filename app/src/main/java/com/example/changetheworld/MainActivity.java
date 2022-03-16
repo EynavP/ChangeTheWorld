@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 Intent intent = new Intent(this,client_home_page.class);
-                FireStoreDB.getInstance().VerifyAndPrivateClientLogin(this, userName, password, intent);
+                FireStoreDB.getInstance().VerifyAndLogin(this, userName, password, intent, "PrivateClient");
 
             }
         });

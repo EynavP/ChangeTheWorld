@@ -7,7 +7,6 @@ import android.widget.ImageView;
 public interface DataBaseInterface {
     void VerifyAndSavePrivateClient(Context context, PrivateClient user);
     void VerifyAndSaveBusiness(Context context, BusinessClient businessClient);
-    void VerifyAndPrivateClientLogin(Context context, String user_name, String password, Intent intent);
-    void VerifyAndBusinessLogin(Context context, String user_name, String password, Intent intent);
+    void VerifyAndLogin(Context context, String user_name, String password, Intent intent, String type);
     void LoadProfilePhoto(ImageView profilPhoto, String user_name);
 }

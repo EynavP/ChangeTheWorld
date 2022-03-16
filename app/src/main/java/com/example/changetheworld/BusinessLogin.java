@@ -40,7 +40,7 @@ public class BusinessLogin extends AppCompatActivity {
             }
             else{
                 Intent intent = new Intent(this,client_home_page.class);
-                FireStoreDB.getInstance().VerifyAndBusinessLogin(this, userName, password, intent);
+                FireStoreDB.getInstance().VerifyAndLogin(this, userName, password, intent, "BusinessClient");
             }
         });
     }

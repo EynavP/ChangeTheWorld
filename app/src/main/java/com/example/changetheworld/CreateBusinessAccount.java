@@ -3,8 +3,10 @@ package com.example.changetheworld;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,14 +17,17 @@ import android.widget.Toast;
 import com.example.changetheworld.model.BusinessClient;
 import com.example.changetheworld.model.FireStoreDB;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 public class CreateBusinessAccount extends AppCompatActivity {
     Button returnLogin;
     Spinner states;
     String[] state = {"Choose State","Israel","United States","Brazil","Italy"};
     int flag = 0;
     int SELECT_PICTURE = 200;
-    String business_chosen_approvel = "";
-    String business_chosen_owner_id = "";
+    byte[] business_chosen_approvel;
+    byte[] business_chosen_owner_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,11 +111,11 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, "Invalid business name", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (business_chosen_approvel.isEmpty()){
+            else if (business_chosen_approvel == null){
                 Toast toast = Toast.makeText(this, "Invalid business approval document", Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (business_chosen_owner_id.isEmpty()){
+            else if (business_chosen_owner_id == null){
                 Toast toast = Toast.makeText(this, "Invalid business owner id", Toast.LENGTH_SHORT);
                 toast.show();
             }else { //TODO: ADD DATABASE HERE
@@ -147,14 +152,26 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 // Get the url of the image from data
                 Uri selectedImageUri = data.getData();
                 if (null != selectedImageUri) {
-                    if (flag == 1){
-                        business_chosen_approvel = selectedImageUri.toString();
-                        Toast.makeText(CreateBusinessAccount.this, "Business Approval Document Upload Success", Toast.LENGTH_SHORT).show();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                        //personal_chosen_photo = selectedImageUri.toString();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        byte[] photo_byte = baos.toByteArray();
+
+                        if (flag == 1){
+                            business_chosen_approvel = photo_byte;
+                            Toast.makeText(CreateBusinessAccount.this, "Business Approval Upload Success", Toast.LENGTH_SHORT).show();
+                        }
+
+                        if (flag == 2) {
+                            business_chosen_owner_id = photo_byte;
+                            Toast.makeText(CreateBusinessAccount.this, "Owner ID Upload Success", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                }
-                if (flag == 2) {
-                    business_chosen_owner_id = selectedImageUri.toString();
-                    Toast.makeText(CreateBusinessAccount.this, "Business Owner ID Upload Success", Toast.LENGTH_SHORT).show();
                 }
             }
         }
