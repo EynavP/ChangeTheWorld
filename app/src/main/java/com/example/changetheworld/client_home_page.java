@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
+
+import android.widget.Button;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +19,6 @@ import com.example.changetheworld.model.CurrencyDataApi;
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.currency;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class client_home_page extends AppCompatActivity {
@@ -25,6 +28,7 @@ public class client_home_page extends AppCompatActivity {
     TextView userName;
     ImageView profilPhoto;
     CurrencyDataApi api = new CurrencyDataApi();
+    Button moveToWallet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +56,7 @@ public class client_home_page extends AppCompatActivity {
                 Toast.makeText(this,"Failed to connect currency api",Toast.LENGTH_LONG).show();
             }
 
-            recyclerView=findViewById(R.id.recycle_view);
+            recyclerView=findViewById(R.id.recycle);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             adapterCurrency = new AdapterCurrency(this,items);
             recyclerView.setAdapter(adapterCurrency);
@@ -64,5 +68,15 @@ public class client_home_page extends AppCompatActivity {
         profilPhoto = findViewById(R.id.profilePhoto);
         FireStoreDB.getInstance().LoadProfilePhoto(profilPhoto, user_name);
 
+
+
+        moveToWallet = (Button) findViewById(R.id.moveToWallet);
+        moveToWallet.setOnClickListener(view ->  { openWallet(); });
+    }
+
+    public void openWallet(){
+        Intent intent = new Intent(this,WalletActivity.class);
+        startActivity(intent);
     }
 }
+

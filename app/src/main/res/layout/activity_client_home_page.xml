@@ -104,7 +104,7 @@
             android:id="@+id/currencyName_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/recycle_view"
+            android:layout_alignTop="@+id/recycle"
             android:layout_alignParentStart="true"
             android:layout_marginStart="40dp"
             android:layout_marginTop="-40dp"
@@ -118,7 +118,7 @@
             android:id="@+id/dailyChange_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/recycle_view"
+            android:layout_alignTop="@+id/recycle"
             android:layout_marginStart="43dp"
             android:layout_marginTop="-40dp"
             android:layout_toEndOf="@+id/value_title"
@@ -131,7 +131,7 @@
             android:id="@+id/value_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/recycle_view"
+            android:layout_alignTop="@+id/recycle"
             android:layout_marginStart="40dp"
             android:layout_marginTop="-40dp"
             android:layout_toEndOf="@+id/currencyName_title"
@@ -141,12 +141,22 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_view"
+            android:id="@+id/recycle"
             android:layout_width="318dp"
             android:layout_height="461dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="34dp"
             android:layout_marginTop="240dp" />
+
+        <Button
+            android:id="@+id/moveToWallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/currencyName_title"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="323dp"
+            android:layout_marginBottom="-26dp"
+            android:text="Button" />
 
 
     </RelativeLayout>

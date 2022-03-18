@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ChangeTheWorld/ChangeTheWorld/app/src/main/res/layout/activity_business_home_page.xml" value="0.1" />
+        <entry key="..\:/ChangeTheWorld/ChangeTheWorld/app/src/main/res/layout/activity_client_home_page.xml" value="0.35989583333333336" />
+        <entry key="..\:/ChangeTheWorld/ChangeTheWorld/app/src/main/res/layout/activity_create_account_private.xml" value="0.35989583333333336" />
+        <entry key="..\:/ChangeTheWorld/ChangeTheWorld/app/src/main/res/layout/activity_main.xml" value="0.35989583333333336" />
+        <entry key="..\:/ChangeTheWorld/ChangeTheWorld/app/src/main/res/layout/activity_wallet.xml" value="0.35989583333333336" />
+        <entry key="..\:/ChangeTheWorld/ChangeTheWorld/app/src/main/res/layout/business_recycler_view.xml" value="0.36614583333333334" />
+        <entry key="..\:/ChangeTheWorld/ChangeTheWorld/app/src/main/res/layout/wallet_recycler_view.xml" value="0.35989583333333336" />
         <entry key="..\:/ChangeTheWorld/app/src/main/res/drawable/buttonlogin.xml" value="0.182" />
         <entry key="..\:/ChangeTheWorld/app/src/main/res/drawable/rectangle_2.xml" value="0.182" />
         <entry key="..\:/ChangeTheWorld/app/src/main/res/layout/activity_main.xml" value="0.264" />

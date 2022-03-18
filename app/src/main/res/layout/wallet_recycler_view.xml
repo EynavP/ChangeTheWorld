@@ -41,17 +41,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/currency_name"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="109dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/amonut"
+                android:id="@+id/balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="amount"
-                app:layout_constraintTop_toBottomOf="@+id/currency_name"
-                tools:layout_editor_absoluteX="130dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currency_name" />
 
             <TextView
                 android:id="@+id/value_amonut"
@@ -60,11 +62,11 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/value"
-                app:layout_constraintEnd_toStartOf="@+id/symbol_value"
+                app:layout_constraintEnd_toStartOf="@+id/symbolLocalCurrency"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/symbol_value"
+                android:id="@+id/symbolLocalCurrency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
