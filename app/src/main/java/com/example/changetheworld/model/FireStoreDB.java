@@ -44,18 +44,25 @@ public class FireStoreDB implements DataBaseInterface {
         return single_instance;
     }
 
-    private void createDefaultWallet(String userName, String type, Context context, Intent intent) {
+    private void createDefaultWallet(String userName, String localCurrency, String type, Context context, Intent intent) {
 
-        String[] currencies = {"USD", "EURO", "POUND", "YUAN"};
+        Map<String,String> currencies = new HashMap<>();
+        currencies.put("USD", "$");
+        currencies.put("EURO", "€");
+        currencies.put("POUND", "£");
+        currencies.put("YUAN", "¥");
         List<Task<Void>> tasks = new ArrayList<>();
 
-        for (String c : currencies) {
-            Wallet tmp = new Wallet(0, c, userName);
+        for (String c : currencies.keySet()) {
+            Wallet tmp = new Wallet (0, c, userName, currencies.get(c) ,0, currencies.get(localCurrency));
 
             Map<String, Object> walletData = new HashMap<>();
             walletData.put("currency", c);
             walletData.put("user_name", userName);
             walletData.put("balance", 0);
+            walletData.put("symbol",  currencies.get(c));
+            walletData.put("valueLocalCurrency", 0);
+            walletData.put("symbolLocalCurrency", currencies.get(localCurrency));
 
             Task<Void> task_wallet = db.collection(type)
                     .document(userName)
@@ -170,7 +177,7 @@ public class FireStoreDB implements DataBaseInterface {
                     }
                 });
 
-        createDefaultWallet(user.getUser_name(), "PrivateClient", context, intent);
+        createDefaultWallet(user.getUser_name(), user.getLocal_currency(), "PrivateClient", context, intent);
     }
 
 
@@ -313,7 +320,13 @@ public class FireStoreDB implements DataBaseInterface {
                     }
                 });
 
-        createDefaultWallet(user.getUser_name(), "BusinessClient", context, intent);
+        Map<String, String> state = new HashMap<>();
+        state.put("England", "POUND");
+        state.put("United States", "USD");
+        state.put("China", "YUAN");
+        state.put("Italy", "EURO");
+
+        createDefaultWallet(user.getUser_name(), state.get(user.getState()), "BusinessClient", context, intent);
 
     }
 }

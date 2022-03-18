@@ -23,7 +23,7 @@ import java.io.IOException;
 public class CreateBusinessAccount extends AppCompatActivity {
     Button returnLogin;
     Spinner states;
-    String[] state = {"Choose State","Israel","United States","Brazil","Italy"};
+    String[] state = {"Choose State","England","United States","China","Italy"};
     int flag = 0;
     int SELECT_PICTURE = 200;
     byte[] business_chosen_approvel;

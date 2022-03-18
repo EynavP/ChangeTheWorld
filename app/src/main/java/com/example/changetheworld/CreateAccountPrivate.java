@@ -27,7 +27,7 @@ import java.io.IOException;
 public class CreateAccountPrivate extends AppCompatActivity {
     Button returnLogin;
     Spinner currencies;
-    String[] currency = {"Choose Currency","DOLLAR","EURO"};
+    String[] currency = {"Choose Currency","USD","EURO", "POUND", "YUAN" };
     int SELECT_PICTURE = 200;
     byte[] personal_chosen_photo;
     byte[] passport_chosen_photo;
