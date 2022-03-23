@@ -45,17 +45,19 @@ public class client_home_page extends AppCompatActivity {
             Float value_euro = api.GetCurrencyValue("EUR",localCurrency);
             Float change_euro = api.GetCurrencyDailyChange("EUR", localCurrency);
 
-            items.add(new currency(R.drawable.dollar,""+value_usd,""+change_usd));
-            items.add(new currency(R.drawable.euro,""+value_euro,""+change_euro));
+            if (!localCurrency.equals("USD"))
+                items.add(new currency(R.drawable.dollar,""+value_usd,""+change_usd));
+            if (!localCurrency.equals("EUR"))
+                items.add(new currency(R.drawable.euro,""+value_euro,""+change_euro));
         });
         t.start();
         try {
             t.join();
-            String usd = items.get(0).getDailyChange();
-            String eur = items.get(1).getDailyChange();
-            if (usd.equals("0.0") || eur.equals("0.0")){
-                Toast.makeText(this,"Failed to connect currency api",Toast.LENGTH_LONG).show();
-            }
+//            String usd = items.get(0).getDailyChange();
+//            String eur = items.get(1).getDailyChange();
+//            if (usd.equals("0.0") || eur.equals("0.0")){
+//                Toast.makeText(this,"Failed to connect currency api",Toast.LENGTH_LONG).show();
+//            }
 
             recyclerView=findViewById(R.id.recycle);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
