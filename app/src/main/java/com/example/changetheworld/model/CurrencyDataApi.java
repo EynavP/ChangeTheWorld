@@ -39,7 +39,6 @@ public class CurrencyDataApi implements CurrencyDataApiInterface{
         String pair = base_currency + currency_name;
 
         String query = api_prefix + pair + api_suffix;
-        Log.d("Yuval", "getClosePrice: " + query);
         try {
             URL url = new URL(query);;
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

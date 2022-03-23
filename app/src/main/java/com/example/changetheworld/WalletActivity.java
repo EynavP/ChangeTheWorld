@@ -18,6 +18,8 @@ public class WalletActivity extends AppCompatActivity {
     ArrayList<Wallet> items;
     String userName;
     TextView user_nameTextView;
+    TextView totalBalance;
+    TextView symbol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +33,11 @@ public class WalletActivity extends AppCompatActivity {
         recyclerView= findViewById(R.id.recycleWallet);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        totalBalance = findViewById(R.id.balance);
+        symbol = findViewById(R.id.symbol);
+
         items = new ArrayList<Wallet>();
-        FireStoreDB.getInstance().LoadWallets(this, userName, "PrivateClient", items, recyclerView);
+        FireStoreDB.getInstance().LoadWallets(this, userName, "PrivateClient", items, recyclerView, totalBalance, symbol);
 
     }
 }
