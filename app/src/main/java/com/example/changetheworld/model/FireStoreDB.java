@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -372,7 +373,19 @@ public class FireStoreDB implements DataBaseInterface {
 
 
     @Override
-    public void loadWalletHistory() {
+    public void loadWalletHistory(String user_name, String user_type, String wallet_name) {
+        db.collection(user_type)
+                .document(user_name)
+                .collection("Wallet")
+                .document(wallet_name)
+                .collection("Transactions")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<DocumentSnapshot> transactions = queryDocumentSnapshots.getDocuments();
+                    }
+                });
 
     }
 
