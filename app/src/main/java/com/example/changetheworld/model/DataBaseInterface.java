@@ -15,4 +15,6 @@ public interface DataBaseInterface {
     void VerifyAndLogin(Context context, String user_name, String password, Intent intent, String type);
     void LoadProfilePhoto(ImageView profilPhoto, String user_name);
     void LoadWallets(Context context, String user_name, String user_type, ArrayList<Wallet> items, RecyclerView recyclerView, TextView totalBalance, TextView symbol);
+    void updateBalance(String user_name, String user_type, String wallet_name, float amount_in_foreign_currency, String action);
+    void loadWalletHistory();
 }

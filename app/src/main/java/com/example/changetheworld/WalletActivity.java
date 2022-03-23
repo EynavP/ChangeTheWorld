@@ -28,7 +28,7 @@ public class WalletActivity extends AppCompatActivity {
 
         userName = getIntent().getStringExtra("userName");
         user_nameTextView = findViewById(R.id.user_name);
-        user_nameTextView.setText(userName);
+        user_nameTextView.setText(userName + "'s wallet");
 
         recyclerView= findViewById(R.id.recycleWallet);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

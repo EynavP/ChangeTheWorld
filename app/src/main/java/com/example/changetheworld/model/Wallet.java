@@ -3,7 +3,7 @@ package com.example.changetheworld.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Wallet implements WalletInterface {
+public class Wallet {
 
     String balance;
     String currency;
@@ -61,24 +61,6 @@ public class Wallet implements WalletInterface {
     public String getSymbolLocalCurrency() { return symbolLocalCurrency; }
 
     public void setSymbolLocalCurrency(String symbolLocalCurrency) { this.symbolLocalCurrency = symbolLocalCurrency; }
-
-    @Override
-    public void Deposit() {
-
-    }
-
-    @Override
-    public void Withdraw() {
-
-    }
-
-    @Override
-    public void GetHistory() {
-
-    }
-
-
-
 
 
 }
