@@ -1,12 +1,14 @@
 package com.example.changetheworld;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.model.Wallet;
@@ -48,6 +50,14 @@ public class AdapterWallet extends RecyclerView.Adapter<AdapterWallet.ViewHolder
         String symbolLocalCurrency = data.get(i).getSymbolLocalCurrency();
         viewHolder.symbolLocalCurrency.setText(symbolLocalCurrency);
 
+        viewHolder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(layoutInflater.getContext(),SubWallet.class);
+               //TODO:youtube
+            }
+        });
+
     }
 
     @Override
@@ -58,6 +68,7 @@ public class AdapterWallet extends RecyclerView.Adapter<AdapterWallet.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView symbol,currencyName,balance,value,symbolLocalCurrency;
+        ConstraintLayout layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,6 +77,7 @@ public class AdapterWallet extends RecyclerView.Adapter<AdapterWallet.ViewHolder
             balance=itemView.findViewById(R.id.balance);
             value=itemView.findViewById(R.id.value_amonut);
             symbolLocalCurrency=itemView.findViewById(R.id.symbolLocalCurrency);
+            layout=itemView.findViewById(R.id.walletRecycleView);
         }
     }
 
