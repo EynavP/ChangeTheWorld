@@ -51,6 +51,7 @@ public class FireStoreDB implements DataBaseInterface {
         currencies.put("EUR", "€");
         currencies.put("GBP", "£");
         currencies.put("CNY", "¥");
+        currencies.put("ILS", "₪");
         List<Task<Void>> tasks = new ArrayList<>();
 
         for (String c : currencies.keySet()) {
