@@ -36,13 +36,14 @@ public class client_home_page extends AppCompatActivity {
 
         userName = findViewById(R.id.username);
         String user_name = getIntent().getStringExtra("userName");
+        String localCurrency = getIntent().getStringExtra("localCurrency");
         userName.setText(user_name);
 
         Thread t = new Thread(() -> {
-            Float value_usd = api.GetCurrencyValue("USD","ILS");
-            Float change_usd = api.GetCurrencyDailyChange("USD", "ILS");
-            Float value_euro = api.GetCurrencyValue("EUR","ILS");
-            Float change_euro = api.GetCurrencyDailyChange("EUR", "ILS");
+            Float value_usd = api.GetCurrencyValue("USD",localCurrency);
+            Float change_usd = api.GetCurrencyDailyChange("USD", localCurrency);
+            Float value_euro = api.GetCurrencyValue("EUR",localCurrency);
+            Float change_euro = api.GetCurrencyDailyChange("EUR", localCurrency);
 
             items.add(new currency(R.drawable.dollar,""+value_usd,""+change_usd));
             items.add(new currency(R.drawable.euro,""+value_euro,""+change_euro));

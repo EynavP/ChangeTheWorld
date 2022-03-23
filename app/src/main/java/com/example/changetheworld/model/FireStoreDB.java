@@ -48,9 +48,9 @@ public class FireStoreDB implements DataBaseInterface {
 
         Map<String,String> currencies = new HashMap<>();
         currencies.put("USD", "$");
-        currencies.put("EURO", "€");
-        currencies.put("POUND", "£");
-        currencies.put("YUAN", "¥");
+        currencies.put("EUR", "€");
+        currencies.put("GBP", "£");
+        currencies.put("CNY", "¥");
         List<Task<Void>> tasks = new ArrayList<>();
 
         for (String c : currencies.keySet()) {
@@ -227,6 +227,8 @@ public class FireStoreDB implements DataBaseInterface {
                         if (documentSnapshot.exists()) {
                             if (password.equals(documentSnapshot.getString("password")) && user_name.equals(documentSnapshot.getString("user_name"))) {
                                 intent.putExtra("userName", user_name);
+                                if (type.equals("PrivateClient"))
+                                    intent.putExtra("localCurrency", documentSnapshot.getString("currency"));
                                 context.startActivity(intent);
                             }
                             else {
@@ -321,10 +323,11 @@ public class FireStoreDB implements DataBaseInterface {
                 });
 
         Map<String, String> state = new HashMap<>();
-        state.put("England", "POUND");
+        state.put("England", "GBP");
         state.put("United States", "USD");
-        state.put("China", "YUAN");
-        state.put("Italy", "EURO");
+        state.put("China", "CNY");
+        state.put("Italy", "EUR");
+        state.put("Israel", "ILS");
 
         createDefaultWallet(user.getUser_name(), state.get(user.getState()), "BusinessClient", context, intent);
 
