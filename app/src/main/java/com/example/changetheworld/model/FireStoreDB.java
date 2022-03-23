@@ -4,13 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.changetheworld.AdapterWallet;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -21,8 +20,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,14 +52,13 @@ public class FireStoreDB implements DataBaseInterface {
         List<Task<Void>> tasks = new ArrayList<>();
 
         for (String c : currencies.keySet()) {
-            Wallet tmp = new Wallet (0, c, userName, currencies.get(c) ,0, currencies.get(localCurrency));
 
             Map<String, Object> walletData = new HashMap<>();
             walletData.put("currency", c);
             walletData.put("user_name", userName);
-            walletData.put("balance", 0);
+            walletData.put("balance", "0");
             walletData.put("symbol",  currencies.get(c));
-            walletData.put("valueLocalCurrency", 0);
+            walletData.put("valueLocalCurrency", "0");
             walletData.put("symbolLocalCurrency", currencies.get(localCurrency));
 
             Task<Void> task_wallet = db.collection(type)
@@ -261,6 +257,36 @@ public class FireStoreDB implements DataBaseInterface {
                 profilPhoto.setImageBitmap(photo);
             }
         });
+    }
+
+    @Override
+    public void LoadWallets(Context context, String user_name, String user_type, ArrayList<Wallet> items, RecyclerView recyclerView) {
+        String[] wallets = {"USD","EUR","GBP","CNY","ILS"};
+        List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
+        for (String symbol: wallets) {
+            Task<DocumentSnapshot> tmp_wallet = db.collection(user_type).document(user_name).collection("Wallet").document(symbol).get();
+            tasks.add(tmp_wallet);
+        }
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
+            @Override
+            public void onSuccess(List<Object> objects) {
+
+                List<DocumentSnapshot> walletsData = new ArrayList<>();
+                for (Object obj : objects) {
+                    DocumentSnapshot tmp_wallet = (DocumentSnapshot) obj;
+                    walletsData.add(tmp_wallet);
+                }
+
+                for (DocumentSnapshot data : walletsData) {
+                    Wallet walletData = new Wallet(data.getString("balance"), data.getString("currency"), data.getString("user_name"), data.getString("symbol"), data.getString("valueLocalCurrency"), data.getString("symbolLocalCurrency"));
+                    items.add(walletData);
+
+                    AdapterWallet adapterWallet = new AdapterWallet(context,items);
+                    recyclerView.setAdapter(adapterWallet);
+                }
+            }
+        });
+
     }
 
     private void SaveBusinessClient(Context context, BusinessClient user, Intent intent) {

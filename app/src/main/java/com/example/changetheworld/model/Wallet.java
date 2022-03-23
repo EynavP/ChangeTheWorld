@@ -5,20 +5,14 @@ import java.util.List;
 
 public class Wallet implements WalletInterface {
 
-    float balance = 0;
+    String balance;
     String currency;
     String user_name;
     String symbol;
-    float valueLocalCurrency;
+    String valueLocalCurrency;
     String symbolLocalCurrency;
 
-    public Wallet(float balance, String currency, String user_name) {
-        this.balance = balance;
-        this.currency = currency;
-        this.user_name = user_name;
-    }
-
-    public Wallet(float balance, String currency, String user_name, String symbol, float valueLocalCurrency, String symbolLocalCurrency) {
+    public Wallet(String balance, String currency, String user_name, String symbol, String valueLocalCurrency, String symbolLocalCurrency) {
         this.balance = balance;
         this.currency = currency;
         this.user_name = user_name;
@@ -27,12 +21,20 @@ public class Wallet implements WalletInterface {
         this.symbolLocalCurrency = symbolLocalCurrency;
     }
 
-    public float getBalance() {
+    public String getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(String balance) {
         this.balance = balance;
+    }
+
+    public String getValueLocalCurrency() {
+        return valueLocalCurrency;
+    }
+
+    public void setValueLocalCurrency(String valueLocalCurrency) {
+        this.valueLocalCurrency = valueLocalCurrency;
     }
 
     public String getCurrency() {
@@ -55,9 +57,6 @@ public class Wallet implements WalletInterface {
 
     public void setSymbol(String symbol) { this.symbol = symbol; }
 
-    public float getValueLocalCurrency() { return valueLocalCurrency; }
-
-    public void setValueLocalCurrency(float valueLocalCurrency) { this.valueLocalCurrency = valueLocalCurrency; }
 
     public String getSymbolLocalCurrency() { return symbolLocalCurrency; }
 

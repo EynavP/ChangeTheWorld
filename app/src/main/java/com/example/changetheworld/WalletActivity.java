@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.Wallet;
 
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 public class WalletActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    AdapterWallet adapterWallet;
     ArrayList<Wallet> items;
     String userName;
     TextView user_nameTextView;
@@ -28,15 +28,11 @@ public class WalletActivity extends AppCompatActivity {
         user_nameTextView = findViewById(R.id.user_name);
         user_nameTextView.setText(userName);
 
-        items = new ArrayList<Wallet>();
-        Wallet wallet = new Wallet(100, "DOLLAR", "niv", "$", 130, "Euro");
-
-        items.add(wallet);
-
-        recyclerView=findViewById(R.id.recycleWallet);
+        recyclerView= findViewById(R.id.recycleWallet);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapterWallet = new AdapterWallet(this,items);
-        recyclerView.setAdapter(adapterWallet);
+
+        items = new ArrayList<Wallet>();
+        FireStoreDB.getInstance().LoadWallets(this, userName, "PrivateClient", items, recyclerView);
 
     }
 }

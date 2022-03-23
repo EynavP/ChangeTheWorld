@@ -18,7 +18,7 @@ public class AdapterWallet extends RecyclerView.Adapter<AdapterWallet.ViewHolder
     private LayoutInflater layoutInflater;
     private List<Wallet> data;
 
-    AdapterWallet(Context context, List<Wallet> data){
+    public AdapterWallet(Context context, List<Wallet> data){
         this.layoutInflater =LayoutInflater.from(context);
         this.data=data;
 
@@ -39,11 +39,11 @@ public class AdapterWallet extends RecyclerView.Adapter<AdapterWallet.ViewHolder
         String currencyName = data.get(i).getCurrency();
         viewHolder.currencyName.setText(currencyName);
 
-        float amount = data.get(i).getBalance();
-        viewHolder.balance.setText(Float.toString(amount));
+        String amount = data.get(i).getBalance();
+        viewHolder.balance.setText(amount);
 
-        float value = data.get(i).getValueLocalCurrency();
-        viewHolder.value.setText(Float.toString(value));
+        String value = data.get(i).getValueLocalCurrency();
+        viewHolder.value.setText(value);
 
         String symbolLocalCurrency = data.get(i).getSymbolLocalCurrency();
         viewHolder.symbolLocalCurrency.setText(symbolLocalCurrency);
