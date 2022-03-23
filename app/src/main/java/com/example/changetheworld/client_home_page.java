@@ -29,13 +29,13 @@ public class client_home_page extends AppCompatActivity {
     ImageView profilPhoto;
     CurrencyDataApi api = new CurrencyDataApi();
     Button moveToWallet;
+    String user_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_home_page);
-
+        user_name = getIntent().getStringExtra("userName");
         userName = findViewById(R.id.username);
-        String user_name = getIntent().getStringExtra("userName");
         String localCurrency = getIntent().getStringExtra("localCurrency");
         userName.setText(user_name);
 
@@ -78,7 +78,9 @@ public class client_home_page extends AppCompatActivity {
     }
 
     public void openWallet(){
+
         Intent intent = new Intent(this,WalletActivity.class);
+        intent.putExtra("userName", user_name);
         startActivity(intent);
     }
 }
