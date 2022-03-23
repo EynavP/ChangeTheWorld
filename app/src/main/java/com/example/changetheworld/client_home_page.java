@@ -44,11 +44,23 @@ public class client_home_page extends AppCompatActivity {
             Float change_usd = api.GetCurrencyDailyChange("USD", localCurrency);
             Float value_euro = api.GetCurrencyValue("EUR",localCurrency);
             Float change_euro = api.GetCurrencyDailyChange("EUR", localCurrency);
+            Float value_cny = api.GetCurrencyValue("CNY",localCurrency);
+            Float change_cny = api.GetCurrencyDailyChange("CNY", localCurrency);
+            Float value_ils = api.GetCurrencyValue("ILS",localCurrency);
+            Float change_ils = api.GetCurrencyDailyChange("ILS", localCurrency);
+            Float value_gbp = api.GetCurrencyValue("GBP",localCurrency);
+            Float change_gbp = api.GetCurrencyDailyChange("GBP", localCurrency);
 
             if (!localCurrency.equals("USD"))
-                items.add(new currency(R.drawable.dollar,""+value_usd,""+change_usd));
+                items.add(new currency(R.drawable.usd,""+value_usd,""+change_usd));
             if (!localCurrency.equals("EUR"))
-                items.add(new currency(R.drawable.euro,""+value_euro,""+change_euro));
+                items.add(new currency(R.drawable.eur,""+value_euro,""+change_euro));
+            if (!localCurrency.equals("CNY"))
+                items.add(new currency(R.drawable.cny,""+value_cny,""+change_cny));
+            if (!localCurrency.equals("ILS"))
+                items.add(new currency(R.drawable.ils,""+value_ils,""+change_ils));
+            if (!localCurrency.equals("GBP"))
+                items.add(new currency(R.drawable.gbp,""+value_gbp,""+change_gbp));
         });
         t.start();
         try {

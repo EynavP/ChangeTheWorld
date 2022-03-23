@@ -65,9 +65,9 @@
         android:layout_height="67dp"
         android:layout_below="@+id/top_image"
         android:layout_marginStart="33dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="183dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="30dp"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="60dp"
@@ -79,17 +79,17 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/profilePhotoCV"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         app:cardCornerRadius="250dp"
         android:layout_gravity="center">
 
         <ImageView
             android:id="@+id/profilePhoto"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/ic_launcher_foreground"
-            android:scaleType="centerCrop"/>
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_foreground" />
 
     </androidx.cardview.widget.CardView>
 
@@ -106,8 +106,8 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/recycle"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="-40dp"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="-30dp"
             android:text="@string/currency_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.057"
@@ -119,8 +119,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/recycle"
-            android:layout_marginStart="43dp"
-            android:layout_marginTop="-40dp"
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="-28dp"
             android:layout_toEndOf="@+id/value_title"
             android:text="@string/daily_change"
             app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/recycle"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="-40dp"
+            android:layout_marginTop="-29dp"
             android:layout_toEndOf="@+id/currencyName_title"
             android:text="@string/value"
             app:layout_constraintEnd_toEndOf="parent"
@@ -148,15 +148,16 @@
             android:layout_marginLeft="34dp"
             android:layout_marginTop="240dp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/moveToWallet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/currencyName_title"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="323dp"
-            android:layout_marginBottom="-26dp"
-            android:text="Button" />
+            android:layout_width="117dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="243dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="-47dp"
+            android:background="@drawable/login_button"
+            android:text="Wallet" />
 
 
     </RelativeLayout>
