@@ -6,9 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".client_home_page">
 
-    <!-- top white Rectangle  -->
-
-    <!-- Hello, -->
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/top_image"
@@ -162,5 +165,7 @@
 
     </RelativeLayout>
 
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
