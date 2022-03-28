@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
+import android.view.View;
 import android.widget.Button;
 
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +23,7 @@ import com.example.changetheworld.model.currency;
 
 import java.util.ArrayList;
 
-public class client_home_page extends AppCompatActivity {
+public class client_home_page<OnResume> extends AppCompatActivity {
     RecyclerView recyclerView;
     AdapterCurrency adapterCurrency;
     ArrayList<currency> items = new ArrayList<>();
@@ -30,6 +32,7 @@ public class client_home_page extends AppCompatActivity {
     CurrencyDataApi api = new CurrencyDataApi();
     Button moveToWallet;
     String user_name;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +41,7 @@ public class client_home_page extends AppCompatActivity {
         userName = findViewById(R.id.username);
         String localCurrency = getIntent().getStringExtra(getString(R.string.localCurrency));
         userName.setText(user_name);
+        progressBar = findViewById(R.id.progressBar);
 
         Thread t = new Thread(() -> {
 
@@ -71,13 +75,25 @@ public class client_home_page extends AppCompatActivity {
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 adapterCurrency = new AdapterCurrency(this,items);
                 recyclerView.setAdapter(adapterCurrency);
+                progressBar.setVisibility(View.INVISIBLE);
             });
 
         });
         t.start();
 
+
         moveToWallet = (Button) findViewById(R.id.moveToWallet);
         moveToWallet.setOnClickListener(view ->  { openWallet(); });
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        ProgressBar progressBar;
+        progressBar = findViewById(R.id.progressBar);
+
+        if(progressBar.getVisibility() != View.INVISIBLE) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
     }
 
     public void openWallet(){
@@ -86,5 +102,7 @@ public class client_home_page extends AppCompatActivity {
         intent.putExtra(getString(R.string.userName), user_name);
         startActivity(intent);
     }
+
+
 }
 
