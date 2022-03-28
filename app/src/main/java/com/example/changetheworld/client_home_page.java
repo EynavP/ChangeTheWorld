@@ -34,56 +34,47 @@ public class client_home_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_home_page);
-        user_name = getIntent().getStringExtra("userName");
+        user_name = getIntent().getStringExtra(getString(R.string.userName));
         userName = findViewById(R.id.username);
-        String localCurrency = getIntent().getStringExtra("localCurrency");
+        String localCurrency = getIntent().getStringExtra(getString(R.string.localCurrency));
         userName.setText(user_name);
 
         Thread t = new Thread(() -> {
-            Float value_usd = api.GetCurrencyValue("USD",localCurrency);
-            Float change_usd = api.GetCurrencyDailyChange("USD", localCurrency);
-            Float value_euro = api.GetCurrencyValue("EUR",localCurrency);
-            Float change_euro = api.GetCurrencyDailyChange("EUR", localCurrency);
-            Float value_cny = api.GetCurrencyValue("CNY",localCurrency);
-            Float change_cny = api.GetCurrencyDailyChange("CNY", localCurrency);
-            Float value_ils = api.GetCurrencyValue("ILS",localCurrency);
-            Float change_ils = api.GetCurrencyDailyChange("ILS", localCurrency);
-            Float value_gbp = api.GetCurrencyValue("GBP",localCurrency);
-            Float change_gbp = api.GetCurrencyDailyChange("GBP", localCurrency);
 
-            if (!localCurrency.equals("USD"))
-                items.add(new currency(R.drawable.usd,""+value_usd,""+change_usd));
-            if (!localCurrency.equals("EUR"))
-                items.add(new currency(R.drawable.eur,""+value_euro,""+change_euro));
-            if (!localCurrency.equals("CNY"))
-                items.add(new currency(R.drawable.cny,""+value_cny,""+change_cny));
-            if (!localCurrency.equals("ILS"))
-                items.add(new currency(R.drawable.ils,""+value_ils,""+change_ils));
-            if (!localCurrency.equals("GBP"))
-                items.add(new currency(R.drawable.gbp,""+value_gbp,""+change_gbp));
+            Float value_usd = api.GetCurrencyValue(getString(R.string.USD),localCurrency);
+            Float change_usd = api.GetCurrencyDailyChange(getString(R.string.USD), localCurrency);
+            Float value_euro = api.GetCurrencyValue(getString(R.string.EUR),localCurrency);
+            Float change_euro = api.GetCurrencyDailyChange(getString(R.string.EUR), localCurrency);
+            Float value_cny = api.GetCurrencyValue(getString(R.string.CNY),localCurrency);
+            Float change_cny = api.GetCurrencyDailyChange(getString(R.string.CNY), localCurrency);
+            Float value_ils = api.GetCurrencyValue(getString(R.string.ILS),localCurrency);
+            Float change_ils = api.GetCurrencyDailyChange(getString(R.string.ILS), localCurrency);
+            Float value_gbp = api.GetCurrencyValue(getString(R.string.GBP),localCurrency);
+            Float change_gbp = api.GetCurrencyDailyChange(getString(R.string.GBP), localCurrency);
+
+            runOnUiThread(() -> {
+
+                if (!localCurrency.equals(this.getString(R.string.USD)))
+                    items.add(new currency(R.drawable.usd,""+value_usd,""+change_usd));
+                if (!localCurrency.equals(getString(R.string.EUR)))
+                    items.add(new currency(R.drawable.eur,""+value_euro,""+change_euro));
+                if (!localCurrency.equals(getString(R.string.CNY)))
+                    items.add(new currency(R.drawable.cny,""+value_cny,""+change_cny));
+                if (!localCurrency.equals(getString(R.string.ILS)))
+                    items.add(new currency(R.drawable.ils,""+value_ils,""+change_ils));
+                if (!localCurrency.equals(getString(R.string.GBP)))
+                    items.add(new currency(R.drawable.gbp,""+value_gbp,""+change_gbp));
+
+                profilPhoto = findViewById(R.id.profilePhoto);
+                FireStoreDB.getInstance().LoadProfilePhoto(profilPhoto, user_name);
+                recyclerView=findViewById(R.id.recycle);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                adapterCurrency = new AdapterCurrency(this,items);
+                recyclerView.setAdapter(adapterCurrency);
+            });
+
         });
         t.start();
-        try {
-            t.join();
-//            String usd = items.get(0).getDailyChange();
-//            String eur = items.get(1).getDailyChange();
-//            if (usd.equals("0.0") || eur.equals("0.0")){
-//                Toast.makeText(this,"Failed to connect currency api",Toast.LENGTH_LONG).show();
-//            }
-
-            recyclerView=findViewById(R.id.recycle);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            adapterCurrency = new AdapterCurrency(this,items);
-            recyclerView.setAdapter(adapterCurrency);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        profilPhoto = findViewById(R.id.profilePhoto);
-        FireStoreDB.getInstance().LoadProfilePhoto(profilPhoto, user_name);
-
-
 
         moveToWallet = (Button) findViewById(R.id.moveToWallet);
         moveToWallet.setOnClickListener(view ->  { openWallet(); });
@@ -92,7 +83,7 @@ public class client_home_page extends AppCompatActivity {
     public void openWallet(){
 
         Intent intent = new Intent(this,WalletActivity.class);
-        intent.putExtra("userName", user_name);
+        intent.putExtra(getString(R.string.userName), user_name);
         startActivity(intent);
     }
 }

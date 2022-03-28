@@ -26,7 +26,7 @@ public class WalletActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallet);
 
-        userName = getIntent().getStringExtra("userName");
+        userName = getIntent().getStringExtra(getString(R.string.userName));
         user_nameTextView = findViewById(R.id.user_name);
         user_nameTextView.setText(userName + "'s wallet");
 
@@ -37,7 +37,7 @@ public class WalletActivity extends AppCompatActivity {
         symbol = findViewById(R.id.symbol);
 
         items = new ArrayList<Wallet>();
-        FireStoreDB.getInstance().LoadWallets(this, userName, "PrivateClient", items, recyclerView, totalBalance, symbol);
+        FireStoreDB.getInstance().LoadWallets(this, userName, getString(R.string.PrivateClient), items, recyclerView, totalBalance, symbol);
 
     }
 }

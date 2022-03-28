@@ -25,11 +25,11 @@ public class BusinessHomePage extends AppCompatActivity {
         setContentView(R.layout.activity_business_home_page);
 
         userName = findViewById(R.id.username);
-        String user_name = getIntent().getStringExtra("userName");
+        String user_name = getIntent().getStringExtra(getString(R.string.userName));
         userName.setText(user_name);
 
         items = new ArrayList<>();
-        items.add(new Order(items.size()+1,"Dollar","Euro",100,new Date(),"Eynav","Koral","active",null,"Cash"));
+        items.add(new Order(items.size()+1,getString(R.string.USD),getString(R.string.EUR),100,new Date(),"Eynav","Koral","active",null,"Cash"));
         //TODO: Add orders to items array list
 
         recyclerView=findViewById(R.id.recycle_view);

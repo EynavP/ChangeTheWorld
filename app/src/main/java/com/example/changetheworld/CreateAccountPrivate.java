@@ -27,7 +27,6 @@ import java.io.IOException;
 public class CreateAccountPrivate extends AppCompatActivity {
     Button returnLogin;
     Spinner currencies;
-    String[] currency = {"Choose Currency","USD","EUR","GBP", "CNY", "ILS"};
     int SELECT_PICTURE = 200;
     byte[] personal_chosen_photo;
     byte[] passport_chosen_photo;
@@ -37,12 +36,13 @@ public class CreateAccountPrivate extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String[] currencys = {this.getString(R.string.choose_Currency),getString(R.string.USD),getString(R.string.EUR),getString(R.string.GBP), getString(R.string.CNY), getString(R.string.ILS)};
         setContentView(R.layout.activity_create_account_private);
         returnLogin = findViewById(R.id.moveToLogin);
         returnLogin.setOnClickListener(view ->  { returnLoginPage(); });
         currencies = (Spinner) findViewById(R.id.enterLocalCurrency);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-        adapter.addAll(currency);
+        adapter.addAll(currencys);
         currencies.setAdapter(adapter);
 
 
@@ -82,35 +82,35 @@ public class CreateAccountPrivate extends AppCompatActivity {
             String password = ((EditText) findViewById(R.id.enterNewPassword)).getText().toString();
 
             if (full_name.isEmpty() || !full_name.matches("[a-zA-z\\s]*$")){
-                Toast toast = Toast.makeText(this, "Invalid full name", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_full_name), Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (mail.isEmpty() || !mail.matches("^(.+)@(\\S+)$")){
-                Toast toast = Toast.makeText(this, "Invalid mail", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_mail), Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (phone.isEmpty() || !phone.matches("^[0-9]*$")){
-                Toast toast = Toast.makeText(this, "Invalid phone number", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_phone_number), Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (currency.isEmpty() || currency.equals("Choose Currency")){
-                Toast toast = Toast.makeText(this, "Invalid currency", Toast.LENGTH_SHORT);
+            else if (currency.isEmpty() || currency.equals(getString(R.string.choose_Currency))){
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_currency), Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (user_name.isEmpty() || user_name.contains(" ")){
-                Toast toast = Toast.makeText(this, "Invalid username", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.user_name_invalid), Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (password.isEmpty() || !password.matches("^[A-Za-z0-9]*$")){
-                Toast toast = Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.password_invalid), Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (personal_chosen_photo == null){
-                Toast toast = Toast.makeText(this, "Invalid personal picture", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_personal_picture), Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (passport_chosen_photo == null){
-                Toast toast = Toast.makeText(this, "Invalid passport picture", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_passport_picture), Toast.LENGTH_SHORT);
                 toast.show();
             }else{
                 //TODO: ADD DATABASE HERE
@@ -126,12 +126,12 @@ public class CreateAccountPrivate extends AppCompatActivity {
         // create an instance of the
         // intent of the type image
         Intent i = new Intent();
-        i.setType("image/*");
+        i.setType(getString(R.string.image_path));
         i.setAction(Intent.ACTION_GET_CONTENT);
 
         // pass the constant to compare it
         // with the returned requestCode
-        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+        startActivityForResult(Intent.createChooser(i, getString(R.string.Select_Picture)), SELECT_PICTURE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -155,12 +155,12 @@ public class CreateAccountPrivate extends AppCompatActivity {
 
                         if (flag == 1){
                             personal_chosen_photo = photo_byte;
-                            Toast.makeText(CreateAccountPrivate.this, "Photo Upload Success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateAccountPrivate.this, getString(R.string.photo_upload_success), Toast.LENGTH_SHORT).show();
                         }
 
                         if (flag == 2) {
                             passport_chosen_photo = photo_byte;
-                            Toast.makeText(CreateAccountPrivate.this, "Passport Upload Success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateAccountPrivate.this, getString(R.string.passport_upload_success), Toast.LENGTH_SHORT).show();
                         }
 
                         } catch (IOException e) {

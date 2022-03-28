@@ -27,8 +27,8 @@ public class CurrencyDataApi implements CurrencyDataApiInterface{
     private String api_key = "?apiKey=4CY1JucBSQeEAM5vpDZHXEBDRvEFwJsp";
 
 
-    String start_date = LocalDate.now().minusDays(2).toString().replace("/","-");
-    String end_date = LocalDate.now().minusDays(1).toString().replace("/","-");
+    String start_date = LocalDate.now().minusDays(1).toString().replace("/","-");
+    String end_date = LocalDate.now().minusDays(2).toString().replace("/","-");
     String api_suffix = api_range + start_date + "/" + end_date + api_key;
     DecimalFormat df = new DecimalFormat("0.000");
 

@@ -23,7 +23,7 @@ import java.io.IOException;
 public class CreateBusinessAccount extends AppCompatActivity {
     Button returnLogin;
     Spinner states;
-    String[] state = {"Choose State","England","United States","China","Italy, Israel"};
+    String[] state = {this.getString(R.string.choose_state),getString(R.string.england),getString(R.string.united_states),getString(R.string.china),getString(R.string.italy), getString(R.string.israel)};
     int flag = 0;
     int SELECT_PICTURE = 200;
     byte[] business_chosen_approvel;
@@ -83,40 +83,40 @@ public class CreateBusinessAccount extends AppCompatActivity {
 
 
             if (business_name.isEmpty()){
-                Toast toast = Toast.makeText(this, "Invalid business name", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.invalid_business_name), Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (mail.isEmpty() || !mail.matches("^(.+)@(\\S+)$")){
-                Toast toast = Toast.makeText(this, "Invalid mail", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_mail), Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (state.isEmpty() || state.equals("Choose State")){
-                Toast toast = Toast.makeText(this, "Invalid state", Toast.LENGTH_SHORT);
+            else if (state.isEmpty() || state.equals(getString(R.string.choose_state))){
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_state), Toast.LENGTH_SHORT);
                 toast.show();
             }
 
             else if (phone.isEmpty() || !phone.matches("^[0-9]*$")){
-                Toast toast = Toast.makeText(this, "Invalid phone number", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_phone_number), Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (user_name.isEmpty() || user_name.contains(" ")){
-                Toast toast = Toast.makeText(this, "Invalid username", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.user_name_invalid), Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (password.isEmpty() || !password.matches("^[A-Za-z0-9]*$")){
-                Toast toast = Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.password_invalid), Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (business_owner_name.isEmpty() || !business_owner_name.matches("[a-zA-z\\s]*$")){
-                Toast toast = Toast.makeText(this, "Invalid business name", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, getString(R.string.invalid_business_name), Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (business_chosen_approvel == null){
-                Toast toast = Toast.makeText(this, "Invalid business approval document", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, R.string.Invalid_business_approval_document, Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (business_chosen_owner_id == null){
-                Toast toast = Toast.makeText(this, "Invalid business owner id", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, R.string.Invalid_business_owner_id, Toast.LENGTH_SHORT);
                 toast.show();
             }else { //TODO: ADD DATABASE HERE
                 BusinessClient business_client = new BusinessClient(business_name,mail,state,phone,user_name,password,business_owner_name,business_chosen_approvel,business_chosen_owner_id);
@@ -134,12 +134,12 @@ public class CreateBusinessAccount extends AppCompatActivity {
         // intent of the type image
         Intent i = new Intent();
 
-        i.setType("image/*");
+        i.setType(getString(R.string.image_path));
         i.setAction(Intent.ACTION_GET_CONTENT);
 
         // pass the constant to compare it
         // with the returned requestCode
-        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+        startActivityForResult(Intent.createChooser(i, getString(R.string.Select_Picture)), SELECT_PICTURE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -162,12 +162,12 @@ public class CreateBusinessAccount extends AppCompatActivity {
 
                         if (flag == 1){
                             business_chosen_approvel = photo_byte;
-                            Toast.makeText(CreateBusinessAccount.this, "Business Approval Upload Success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateBusinessAccount.this, getString(R.string.Business_Approval_Upload_Success), Toast.LENGTH_SHORT).show();
                         }
 
                         if (flag == 2) {
                             business_chosen_owner_id = photo_byte;
-                            Toast.makeText(CreateBusinessAccount.this, "Owner ID Upload Success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateBusinessAccount.this, getString(R.string.Owner_ID_Upload_Success), Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (IOException e) {

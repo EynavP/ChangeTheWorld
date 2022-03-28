@@ -231,7 +231,7 @@ public class FireStoreDB implements DataBaseInterface {
                             if (password.equals(documentSnapshot.getString("password")) && user_name.equals(documentSnapshot.getString("user_name"))) {
                                 intent.putExtra("userName", user_name);
                                 if (type.equals("PrivateClient"))
-                                    intent.putExtra("localCurrency", documentSnapshot.getString("currency"));
+                                    intent.putExtra("Local Currency", documentSnapshot.getString("currency"));
                                 context.startActivity(intent);
                             }
                             else {

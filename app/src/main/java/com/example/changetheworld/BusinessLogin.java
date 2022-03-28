@@ -31,16 +31,16 @@ public class BusinessLogin extends AppCompatActivity {
             String userName = ((EditText) findViewById(R.id.editTextTextPersonName)).getText().toString();
             String password = ((EditText) findViewById(R.id.editTextTextPassword)).getText().toString();
             if (userName.isEmpty()){
-                Toast toast = Toast.makeText(this, "username invalid, please try Again",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, this.getString(R.string.user_name_invalid),Toast.LENGTH_LONG);
                 toast.show();
             }
             if (password.isEmpty()){
-                Toast toast = Toast.makeText(this, "password invalid, please try Again",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, this.getString(R.string.password_invalid),Toast.LENGTH_LONG);
                 toast.show();
             }
             else{
                 Intent intent = new Intent(this,BusinessHomePage.class);
-                FireStoreDB.getInstance().VerifyAndLogin(this, userName, password, intent, "BusinessClient");
+                FireStoreDB.getInstance().VerifyAndLogin(this, userName, password, intent, getString(R.string.BusinessClient));
             }
         });
     }

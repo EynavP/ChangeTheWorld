@@ -1,5 +1,6 @@
 package com.example.changetheworld.model;
 
+import com.example.changetheworld.R;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 public class BusinessClient {
