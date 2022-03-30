@@ -24,7 +24,7 @@ public class CurrencyDataApi implements CurrencyDataApiInterface{
     private String base_api = "https://fcsapi.com/api-v3/forex/latest?";
     private String symbol = "symbol=";
 
-    DecimalFormat df = new DecimalFormat("0.000");
+    DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
     public HashMap<String, ArrayList<Float>> getCloseAndChangePrice(ArrayList<String> pairs){
@@ -51,7 +51,11 @@ public class CurrencyDataApi implements CurrencyDataApiInterface{
             for(int i = 0; i < results.length(); i++){
                 JSONObject last_day = (JSONObject) results.get(i);
                 Float close_price = Float.parseFloat(df.format(Float.parseFloat(last_day.getString("c"))));
-                Float change_price = Float.parseFloat(df.format(Float.parseFloat(last_day.getString("cp").replace("%","").replace("+","").replace("-",""))));
+                String change = last_day.getString("cp");
+                Float change_price = Float.parseFloat(df.format(Float.parseFloat(change.replace("%","").replace("+","").replace("-",""))));
+                if(change.contains("-")){
+                    change_price *= -1;
+                }
                 ArrayList<Float> price_data = new ArrayList<>();
                 price_data.add(close_price);
                 price_data.add(change_price);

@@ -34,9 +34,16 @@ public class client_home_page<OnResume> extends AppCompatActivity {
     Button moveToWallet;
     String user_name;
     ProgressBar progressBar;
+    HashMap<String, String> currenciesToSymbol = new HashMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        currenciesToSymbol.put("USD", " $");
+        currenciesToSymbol.put("EUR", " €");
+        currenciesToSymbol.put("GBP", " £");
+        currenciesToSymbol.put("CNY", " ¥");
+        currenciesToSymbol.put("ILS", " ₪");
         setContentView(R.layout.activity_client_home_page);
         user_name = getIntent().getStringExtra(getString(R.string.userName));
         userName = findViewById(R.id.username);
@@ -60,15 +67,15 @@ public class client_home_page<OnResume> extends AppCompatActivity {
             runOnUiThread(() -> {
 
                 if (!localCurrency.equals(this.getString(R.string.USD)) && currency_data.get(getString(R.string.USD)) != null && currency_data.get(getString(R.string.USD)).size() > 0)
-                    items.add(new currency(R.drawable.usd,""+currency_data.get(getString(R.string.USD)).get(0),""+(currency_data.get(getString(R.string.USD)).get(1)) + "%"));
+                    items.add(new currency(R.drawable.usd,""+currency_data.get(getString(R.string.USD)).get(0) + currenciesToSymbol.get(localCurrency),""+(currency_data.get(getString(R.string.USD)).get(1)) + "%"));
                 if (!localCurrency.equals(getString(R.string.EUR)) && currency_data.get(getString(R.string.EUR)) != null && currency_data.get(getString(R.string.EUR)).size() > 0)
-                    items.add(new currency(R.drawable.eur,""+currency_data.get(getString(R.string.EUR)).get(0),""+(currency_data.get(getString(R.string.EUR)).get(1)) + '%'));
+                    items.add(new currency(R.drawable.eur,""+currency_data.get(getString(R.string.EUR)).get(0) + currenciesToSymbol.get(localCurrency),""+(currency_data.get(getString(R.string.EUR)).get(1)) + '%'));
                 if (!localCurrency.equals(getString(R.string.CNY)) && currency_data.get(getString(R.string.CNY)) != null && currency_data.get(getString(R.string.CNY)).size() > 0)
-                    items.add(new currency(R.drawable.cny,""+currency_data.get(getString(R.string.CNY)).get(0),""+(currency_data.get(getString(R.string.CNY)).get(1)) + '%'));
+                    items.add(new currency(R.drawable.cny,""+currency_data.get(getString(R.string.CNY)).get(0) + currenciesToSymbol.get(localCurrency),""+(currency_data.get(getString(R.string.CNY)).get(1)) + '%'));
                 if (!localCurrency.equals(getString(R.string.ILS)) && currency_data.get(getString(R.string.ILS)) != null && currency_data.get(getString(R.string.ILS)).size() > 0)
-                    items.add(new currency(R.drawable.ils,""+currency_data.get(getString(R.string.ILS)).get(0),""+(currency_data.get(getString(R.string.ILS)).get(1)) + '%'));
+                    items.add(new currency(R.drawable.ils,""+currency_data.get(getString(R.string.ILS)).get(0) + currenciesToSymbol.get(localCurrency),""+(currency_data.get(getString(R.string.ILS)).get(1)) + '%'));
                 if (!localCurrency.equals(getString(R.string.GBP)) && currency_data.get(getString(R.string.GBP)) != null && currency_data.get(getString(R.string.GBP)).size() > 0)
-                    items.add(new currency(R.drawable.gbp,""+currency_data.get(getString(R.string.GBP)).get(0),""+(currency_data.get(getString(R.string.GBP)).get(1)) + '%'));
+                    items.add(new currency(R.drawable.gbp,""+currency_data.get(getString(R.string.GBP)).get(0) + currenciesToSymbol.get(localCurrency),""+(currency_data.get(getString(R.string.GBP)).get(1)) + '%'));
 
                 profilPhoto = findViewById(R.id.profilePhoto);
                 FireStoreDB.getInstance().LoadProfilePhoto(profilPhoto, user_name);
