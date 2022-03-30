@@ -1,14 +1,15 @@
 package com.example.changetheworld.model;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.AdapterWallet;
@@ -22,8 +23,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.google.type.DateTime;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -268,6 +269,13 @@ public class FireStoreDB implements DataBaseInterface {
     @Override
     public void LoadWallets(Context context, String user_name, String user_type, ArrayList<Wallet> items, RecyclerView recyclerView, TextView totalBalance, TextView symbol) {
         String[] wallets = {"USD","EUR","GBP","CNY","ILS"};
+        DecimalFormat df = new DecimalFormat("0.00");
+        currenciesToSymbol = new HashMap<>();
+        currenciesToSymbol.put("USD", "$");
+        currenciesToSymbol.put("EUR", "€");
+        currenciesToSymbol.put("GBP", "£");
+        currenciesToSymbol.put("CNY", "¥");
+        currenciesToSymbol.put("ILS", "₪");
         List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
         for (String currency: wallets) {
             Task<DocumentSnapshot> tmp_wallet = db.collection(user_type).document(user_name).collection("Wallet").document(currency).get();
@@ -277,8 +285,7 @@ public class FireStoreDB implements DataBaseInterface {
             @Override
             public void onSuccess(List<Object> objects) {
 
-                float sum = 0;
-                String localCurrency = "";
+                AtomicReference<Float> sum = new AtomicReference<>((float) 0);
                 AtomicReference<String> local_currencey_value = new AtomicReference<>();
                 List<DocumentSnapshot> walletsData = new ArrayList<>();
                 for (Object obj : objects) {
@@ -286,42 +293,59 @@ public class FireStoreDB implements DataBaseInterface {
                     walletsData.add(tmp_wallet);
                 }
                 CurrencyDataApiInterface api = new CurrencyDataApi();
+                HashMap<String, String> doc_data = new HashMap<>();
+                ArrayList<String> symbols = new ArrayList<>();
+                String local_currency = "";
+                String user_name = "";
                 for (DocumentSnapshot data : walletsData) {
-                    Thread t = new Thread(() -> {
+                    String balance = data.getString("balance");
+                    String currency = data.getString("currency");
+                    local_currency = data.getString("localCurrency");
+                    user_name = data.getString("user_name");
+                    doc_data.put(currency, balance);
+                    symbols.add(currency + '/' + local_currency);
+                }
 
-                        ArrayList<String> symbols = new ArrayList<>();
-                        symbols.add(data.getString("currency") + '/' + data.getString("localCurrency"));
-                        HashMap<String, ArrayList<Float>> price = api.getCloseAndChangePrice(symbols);
-                        String sym = data.getString("currency");
-                        if (price.get(sym) != null) {
-                            float val = price.get(sym).get(0);
-                            local_currencey_value.set(String.valueOf(val * Float.parseFloat(data.getString("balance"))));
+                String finalUser_name = user_name;
+                String finalLocal_currency = local_currency;
+
+                Thread t = new Thread(() -> {
+
+                    HashMap<String, ArrayList<Float>> price = api.getCloseAndChangePrice(symbols);
+
+                    for (String c : price.keySet()) {
+                        if (price.get(c) != null) {
+                            float val = price.get(c).get(0);
+                            local_currencey_value.set(df.format(val * Float.parseFloat(doc_data.get(c))));
                         } else {
-                            local_currencey_value.set(String.valueOf(Float.parseFloat(data.getString("balance"))));
+                            local_currencey_value.set(String.valueOf(Float.parseFloat(doc_data.get(c))));
                         }
 
-                    });
-                    t.start();
-                    try {
-                        t.join();
-                        Wallet walletData = new Wallet(data.getString("balance"), data.getString("currency"), data.getString("user_name"), data.getString("symbol"), local_currencey_value.get(), data.getString("symbolLocalCurrency"));
-                        items.add(walletData);
+                        Wallet walletData = new Wallet(doc_data.get(c), c, finalUser_name, currenciesToSymbol.get(c), local_currencey_value.get(), currenciesToSymbol.get(finalLocal_currency));
 
-                        sum += Float.parseFloat(walletData.getValueLocalCurrency());
-                        localCurrency = walletData.getSymbolLocalCurrency();
+                        ((Activity) context).runOnUiThread(() -> {
 
-                        AdapterWallet adapterWallet = new AdapterWallet(context,items);
-                        recyclerView.setAdapter(adapterWallet);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                            items.add(walletData);
+
+                            sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(walletData.getValueLocalCurrency()))));
+
+                        });
                     }
-                }
-                totalBalance.setText(String.valueOf(sum));
-                symbol.setText(localCurrency);
+                    ((Activity) context).runOnUiThread(() -> {
+                        items.add(new Wallet(doc_data.get(finalLocal_currency),finalLocal_currency,finalUser_name,currenciesToSymbol.get(finalLocal_currency),doc_data.get(finalLocal_currency),currenciesToSymbol.get(finalLocal_currency)));
+                        sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(doc_data.get(finalLocal_currency)))));
+                        AdapterWallet adapterWallet = new AdapterWallet(context, items);
+                        recyclerView.setAdapter(adapterWallet);
+                        totalBalance.setText(String.valueOf(sum.get()));
+                        symbol.setText(currenciesToSymbol.get(finalLocal_currency));
+                    });
+                });
+                t.start();
             }
         });
-
     }
+
+
 
     @Override
     public void updateBalance(String user_name, String user_type, String wallet_name, float amount_in_foreign_currency, String action) {
@@ -471,5 +495,4 @@ public class FireStoreDB implements DataBaseInterface {
 
     }
 }
-
 
