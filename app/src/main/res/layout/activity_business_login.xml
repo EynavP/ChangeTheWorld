@@ -41,8 +41,8 @@
             android:layout_marginEnd="88dp"
             android:fontFamily="sans-serif-black"
             android:gravity="top"
-            android:text="@string/welcome_bac"
-            android:textAppearance="@style/welcome_bac"
+            android:text="@string/sign_in"
+            android:textAppearance="@style/sign_in_title"
             app:lineHeight="34sp" />
 
 
@@ -158,8 +158,8 @@
             android:layout_marginStart="96dp"
             android:layout_marginTop="79dp"
             android:layout_marginEnd="97dp"
-            android:background="@drawable/login_button"
-            android:text="@string/login"
+            android:background="@drawable/sign_in_button"
+            android:text="@string/sign_in"
             android:textColor="@color/white" />
 
         <TextView
