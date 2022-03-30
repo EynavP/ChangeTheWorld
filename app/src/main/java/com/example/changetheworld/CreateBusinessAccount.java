@@ -23,7 +23,6 @@ import java.io.IOException;
 public class CreateBusinessAccount extends AppCompatActivity {
     Button returnLogin;
     Spinner states;
-    String[] state = {this.getString(R.string.choose_state),getString(R.string.england),getString(R.string.united_states),getString(R.string.china),getString(R.string.italy), getString(R.string.israel)};
     int flag = 0;
     int SELECT_PICTURE = 200;
     byte[] business_chosen_approvel;
@@ -31,13 +30,14 @@ public class CreateBusinessAccount extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String[] state_sym = {this.getString(R.string.choose_state),getString(R.string.england),getString(R.string.united_states),getString(R.string.china),getString(R.string.italy), getString(R.string.israel)};
         setContentView(R.layout.activity_create_business_account);
         returnLogin = findViewById(R.id.moveToLogin);
         returnLogin.setOnClickListener(view ->  { returnLoginPage(); });
 
         states = (Spinner) findViewById(R.id.enterBusinessState);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-        adapter.addAll(state);
+        adapter.addAll(state_sym);
         states.setAdapter(adapter);
 
 

@@ -22,6 +22,7 @@ import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.currency;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class client_home_page<OnResume> extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -45,29 +46,29 @@ public class client_home_page<OnResume> extends AppCompatActivity {
 
         Thread t = new Thread(() -> {
 
-            Float value_usd = api.GetCurrencyValue(getString(R.string.USD),localCurrency);
-            Float change_usd = api.GetCurrencyDailyChange(getString(R.string.USD), localCurrency);
-            Float value_euro = api.GetCurrencyValue(getString(R.string.EUR),localCurrency);
-            Float change_euro = api.GetCurrencyDailyChange(getString(R.string.EUR), localCurrency);
-            Float value_cny = api.GetCurrencyValue(getString(R.string.CNY),localCurrency);
-            Float change_cny = api.GetCurrencyDailyChange(getString(R.string.CNY), localCurrency);
-            Float value_ils = api.GetCurrencyValue(getString(R.string.ILS),localCurrency);
-            Float change_ils = api.GetCurrencyDailyChange(getString(R.string.ILS), localCurrency);
-            Float value_gbp = api.GetCurrencyValue(getString(R.string.GBP),localCurrency);
-            Float change_gbp = api.GetCurrencyDailyChange(getString(R.string.GBP), localCurrency);
+            ArrayList<String> symbols = new ArrayList<>();
+            symbols.add(getString(R.string.USD) +'/'+localCurrency);
+            symbols.add(getString(R.string.EUR) +'/'+localCurrency);
+            symbols.add(getString(R.string.CNY) +'/'+localCurrency);
+            symbols.add(getString(R.string.ILS) +'/'+localCurrency);
+            symbols.add(getString(R.string.GBP) +'/'+localCurrency);
+
+            HashMap<String, ArrayList<Float>> currency_data = api.getCloseAndChangePrice(symbols);
+
+
 
             runOnUiThread(() -> {
 
-                if (!localCurrency.equals(this.getString(R.string.USD)))
-                    items.add(new currency(R.drawable.usd,""+value_usd,""+change_usd));
-                if (!localCurrency.equals(getString(R.string.EUR)))
-                    items.add(new currency(R.drawable.eur,""+value_euro,""+change_euro));
-                if (!localCurrency.equals(getString(R.string.CNY)))
-                    items.add(new currency(R.drawable.cny,""+value_cny,""+change_cny));
-                if (!localCurrency.equals(getString(R.string.ILS)))
-                    items.add(new currency(R.drawable.ils,""+value_ils,""+change_ils));
-                if (!localCurrency.equals(getString(R.string.GBP)))
-                    items.add(new currency(R.drawable.gbp,""+value_gbp,""+change_gbp));
+                if (!localCurrency.equals(this.getString(R.string.USD)) && currency_data.get(getString(R.string.USD)) != null && currency_data.get(getString(R.string.USD)).size() > 0)
+                    items.add(new currency(R.drawable.usd,""+currency_data.get(getString(R.string.USD)).get(0),""+(currency_data.get(getString(R.string.USD)).get(1)) + "%"));
+                if (!localCurrency.equals(getString(R.string.EUR)) && currency_data.get(getString(R.string.EUR)) != null && currency_data.get(getString(R.string.EUR)).size() > 0)
+                    items.add(new currency(R.drawable.eur,""+currency_data.get(getString(R.string.EUR)).get(0),""+(currency_data.get(getString(R.string.EUR)).get(1)) + '%'));
+                if (!localCurrency.equals(getString(R.string.CNY)) && currency_data.get(getString(R.string.CNY)) != null && currency_data.get(getString(R.string.CNY)).size() > 0)
+                    items.add(new currency(R.drawable.cny,""+currency_data.get(getString(R.string.CNY)).get(0),""+(currency_data.get(getString(R.string.CNY)).get(1)) + '%'));
+                if (!localCurrency.equals(getString(R.string.ILS)) && currency_data.get(getString(R.string.ILS)) != null && currency_data.get(getString(R.string.ILS)).size() > 0)
+                    items.add(new currency(R.drawable.ils,""+currency_data.get(getString(R.string.ILS)).get(0),""+(currency_data.get(getString(R.string.ILS)).get(1)) + '%'));
+                if (!localCurrency.equals(getString(R.string.GBP)) && currency_data.get(getString(R.string.GBP)) != null && currency_data.get(getString(R.string.GBP)).size() > 0)
+                    items.add(new currency(R.drawable.gbp,""+currency_data.get(getString(R.string.GBP)).get(0),""+(currency_data.get(getString(R.string.GBP)).get(1)) + '%'));
 
                 profilPhoto = findViewById(R.id.profilePhoto);
                 FireStoreDB.getInstance().LoadProfilePhoto(profilPhoto, user_name);

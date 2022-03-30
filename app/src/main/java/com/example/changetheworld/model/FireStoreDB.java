@@ -288,7 +288,15 @@ public class FireStoreDB implements DataBaseInterface {
                 CurrencyDataApiInterface api = new CurrencyDataApi();
                 for (DocumentSnapshot data : walletsData) {
                     Thread t = new Thread(() -> {
-                        local_currencey_value.set(String.valueOf(api.GetCurrencyValue(data.getString("localCurrency"), data.getString("currency"))));
+
+                        ArrayList<String> symbols = new ArrayList<>();
+                        symbols.add(data.getString("currency") + '/' + data.getString("localCurrency"));
+                        HashMap<String, ArrayList<Float>> price = api.getCloseAndChangePrice(symbols);
+                        String sym = data.getString("currency");
+                        if (price.get(sym) != null) {
+                            float val = price.get(sym).get(0);
+                            local_currencey_value.set(String.valueOf(val * Float.parseFloat(data.getString("balance"))));
+                        }
                     });
                     t.start();
                     try {

@@ -1,6 +1,8 @@
 package com.example.changetheworld.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public interface CurrencyDataApiInterface {
-    float GetCurrencyValue(String base_currency ,String currency_name);
-    float GetCurrencyDailyChange(String base_currency, String currency_name);
+    HashMap<String, ArrayList<Float>> getCloseAndChangePrice(ArrayList<String> pairs);
 }
