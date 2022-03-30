@@ -411,7 +411,7 @@ public class FireStoreDB implements DataBaseInterface {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     List<DocumentSnapshot> transactions = queryDocumentSnapshots.getDocuments();
                     for (DocumentSnapshot doc: transactions) {
-                        Transaction tmp = new Transaction(doc.getString("amount"), doc.getString("date"), doc.getString("action"));
+                        Transaction tmp = new Transaction(doc.getString("amount"), doc.getString("date").replace("T", " "), doc.getString("action"));
                         items.add(tmp);
                     }
                     AdapterTransaction adapterSubWallet = new AdapterTransaction(context, items);
