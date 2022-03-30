@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.AdapterWallet;
@@ -354,37 +353,30 @@ public class FireStoreDB implements DataBaseInterface {
                 .collection("Wallet")
                 .document(wallet_name)
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        float new_balance;
-                        if (action.equals("+"))
-                            new_balance = Float.parseFloat(documentSnapshot.getString("balance")) + amount_in_foreign_currency;
-                        else{
-                            new_balance = Float.parseFloat(documentSnapshot.getString("balance")) - amount_in_foreign_currency;
-                            if(new_balance < 0){
-                                Toast.makeText(context, "Cannot Complete Action, Balance below 0",Toast.LENGTH_LONG).show();
-                                return;
-                            }
+                .addOnSuccessListener(documentSnapshot -> {
+                    float new_balance;
+                    if (action.equals("+"))
+                        new_balance = Float.parseFloat(documentSnapshot.getString("balance")) + amount_in_foreign_currency;
+                    else{
+                        new_balance = Float.parseFloat(documentSnapshot.getString("balance")) - amount_in_foreign_currency;
+                        if(new_balance < 0){
+                            Toast.makeText(context, "Cannot Complete Action, Balance below 0",Toast.LENGTH_LONG).show();
+                            return;
                         }
-                        Map<String, Object> data = new HashMap<>();
-                        data.put("balance", String.valueOf(new_balance));
-                        db.collection(user_type)
-                                .document(user_name)
-                                .collection("Wallet")
-                                .document(wallet_name)
-                                .update(data)
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-
-                                    }
-                                }).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
+                    }
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("balance", String.valueOf(new_balance));
+                    db.collection(user_type)
+                            .document(user_name)
+                            .collection("Wallet")
+                            .document(wallet_name)
+                            .update(data)
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(context, "Cannot update balance on wallet",Toast.LENGTH_LONG).show();
+                            }).addOnSuccessListener(unused -> {
                                 Map<String, Object> transactionData = new HashMap<>();
                                 transactionData.put("date", LocalDateTime.now().toString());
-                                transactionData.put("amount", amount_in_foreign_currency);
+                                transactionData.put("amount", String.valueOf(amount_in_foreign_currency));
                                 transactionData.put("action", action.equals("+") ? "deposit" : "withdraw");
 
                                 db.collection(user_type)
@@ -394,38 +386,34 @@ public class FireStoreDB implements DataBaseInterface {
                                         .collection("Transactions")
                                         .document()
                                         .set(transactionData)
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-
-                                            }
+                                        .addOnFailureListener(e -> {
+                                            Toast.makeText(context, "Cannot add transaction",Toast.LENGTH_LONG).show();
                                         });
-                            }
-                        });
-                    }
+                            });
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
+                .addOnFailureListener(e -> {
+                    Toast.makeText(context, "Cannot load wallet",Toast.LENGTH_LONG).show();
                 });
     }
 
 
     @Override
-    public void loadWalletHistory(String user_name, String user_type, String wallet_name) {
+    public void loadWalletHistory(String user_name, String user_type, String wallet_name, RecyclerView recyclerView, Context context) {
+        ArrayList<Transaction> items = new ArrayList<>();
         db.collection(user_type)
                 .document(user_name)
                 .collection("Wallet")
                 .document(wallet_name)
                 .collection("Transactions")
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        List<DocumentSnapshot> transactions = queryDocumentSnapshots.getDocuments();
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<DocumentSnapshot> transactions = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot doc: transactions) {
+                        Transaction tmp = new Transaction(doc.getString("amount"), doc.getString("date"), doc.getString("action"));
+                        items.add(tmp);
                     }
+                    AdapterSubWallet adapterSubWallet = new AdapterWallet(context, items);
+                    recyclerView.setAdapter(adapterSubWallet);
                 });
 
     }

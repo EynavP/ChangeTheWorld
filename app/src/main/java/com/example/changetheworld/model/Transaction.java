@@ -3,47 +3,37 @@ package com.example.changetheworld.model;
 import com.google.type.DateTime;
 
 public class Transaction {
-    String sender;
-    String receiver;
-    float amount;
-    DateTime create_time;
+    String amount;
+    String create_time;
+    String action;
 
-    public Transaction(String sender, String receiver, float amount, DateTime create_time) {
-        this.sender = sender;
-        this.receiver = receiver;
+    public Transaction(String amount, String create_time, String action) {
         this.amount = amount;
         this.create_time = create_time;
+        this.action = action;
     }
 
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
-    public String getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
-    }
-
-    public float getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
-    public DateTime getCreate_time() {
+    public String getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(DateTime create_time) {
+    public void setCreate_time(String create_time) {
         this.create_time = create_time;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.changetheworld;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,12 +16,15 @@ public class SubWallet extends AppCompatActivity {
 
     private Button deposit;
     private Button withdraw;
+    RecyclerView items;
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_wallet);
         deposit=(Button) findViewById(R.id.DepositTitle);
         withdraw=(Button) findViewById(R.id.withdrawTitle);
+        items = findViewById(R.id.SubWalletRecycle);
 
         deposit.setOnClickListener(view -> {
             FireStoreDB.getInstance().updateBalance("yuval", "PrivateClient", "ILS", 20, "+", this);
@@ -28,6 +32,8 @@ public class SubWallet extends AppCompatActivity {
         withdraw.setOnClickListener(view -> {
             FireStoreDB.getInstance().updateBalance("yuval", getString(R.string.PrivateClient),getString(R.string.ILS),50,"-",this);
         });
+
+        FireStoreDB.getInstance().loadWalletHistory("yuval", "PrivateClient", "ILS", recyclerView, this);
     }
 
     public void moveToDeposite(){
@@ -38,4 +44,5 @@ public class SubWallet extends AppCompatActivity {
         Intent intent = new Intent(this,client_home_page.class);
         startActivity(intent);
     }
+
 }
