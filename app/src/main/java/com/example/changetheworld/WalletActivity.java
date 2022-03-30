@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,9 +54,10 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         startActivity(intent);
     }
 
-    @Override
-    public void onItemClick(int position) {
-        Toast.makeText(this,items.get(position).getUser_name(),Toast.LENGTH_LONG).show();
-    }
 
+
+    @Override
+    public void onItemClick(View view, int position) {
+
+    }
 }

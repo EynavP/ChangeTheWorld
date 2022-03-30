@@ -16,7 +16,6 @@ public class SubWallet extends AppCompatActivity {
 
     private Button deposit;
     private Button withdraw;
-    RecyclerView items;
     RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +23,7 @@ public class SubWallet extends AppCompatActivity {
         setContentView(R.layout.activity_sub_wallet);
         deposit=(Button) findViewById(R.id.DepositTitle);
         withdraw=(Button) findViewById(R.id.withdrawTitle);
-        items = findViewById(R.id.SubWalletRecycle);
+        recyclerView = findViewById(R.id.SubWalletRecycle);
 
         deposit.setOnClickListener(view -> {
             FireStoreDB.getInstance().updateBalance("yuval", "PrivateClient", "ILS", 20, "+", this);

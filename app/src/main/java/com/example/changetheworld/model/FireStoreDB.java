@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
 import com.example.changetheworld.RecycleSubWalletClickInterface;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -413,7 +414,7 @@ public class FireStoreDB implements DataBaseInterface {
                         Transaction tmp = new Transaction(doc.getString("amount"), doc.getString("date"), doc.getString("action"));
                         items.add(tmp);
                     }
-                    AdapterSubWallet adapterSubWallet = new AdapterWallet(context, items);
+                    AdapterTransaction adapterSubWallet = new AdapterTransaction(context, items);
                     recyclerView.setAdapter(adapterSubWallet);
                 });
 

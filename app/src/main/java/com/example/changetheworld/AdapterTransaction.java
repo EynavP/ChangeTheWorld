@@ -1,5 +1,6 @@
 package com.example.changetheworld;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,8 @@ public class AdapterTransaction extends RecyclerView.Adapter<AdapterTransaction.
     private LayoutInflater layoutInflater;
     private List<Transaction> data;
 
-    public AdapterTransaction(LayoutInflater layoutInflater, List<Transaction> data) {
-        this.layoutInflater = layoutInflater;
+    public AdapterTransaction(Context layoutInflater, List<Transaction> data) {
+        this.layoutInflater =  LayoutInflater.from(layoutInflater);
         this.data = data;
     }
 
