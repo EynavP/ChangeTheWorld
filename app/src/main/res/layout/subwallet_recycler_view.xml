@@ -23,12 +23,13 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:padding="5dp">
+
             <TextView
                 android:id="@+id/dateTransaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="4dp"
                 android:text="@string/Date"
                 android:textAppearance="@style/symbol"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,10 +39,10 @@
                 android:id="@+id/amountTransaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:text="amount"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintHorizontal_bias="0.309"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,11 +50,11 @@
                 android:id="@+id/actionTransaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:text="action"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.877"
+                app:layout_constraintHorizontal_bias="0.68"
                 app:layout_constraintStart_toEndOf="@+id/amountTransaction"
                 app:layout_constraintTop_toTopOf="parent" />
 
