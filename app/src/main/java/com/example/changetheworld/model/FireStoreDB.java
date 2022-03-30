@@ -296,7 +296,10 @@ public class FireStoreDB implements DataBaseInterface {
                         if (price.get(sym) != null) {
                             float val = price.get(sym).get(0);
                             local_currencey_value.set(String.valueOf(val * Float.parseFloat(data.getString("balance"))));
+                        } else {
+                            local_currencey_value.set(String.valueOf(Float.parseFloat(data.getString("balance"))));
                         }
+
                     });
                     t.start();
                     try {
