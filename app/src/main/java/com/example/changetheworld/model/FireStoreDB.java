@@ -339,6 +339,7 @@ public class FireStoreDB implements DataBaseInterface {
                         recyclerView.setAdapter(adapterWallet);
                         totalBalance.setText(String.valueOf(sum.get()));
                         symbol.setText(currenciesToSymbol.get(finalLocal_currency));
+                        adapterWallet.notifyDataSetChanged();
                     });
                 });
                 t.start();
@@ -411,7 +412,7 @@ public class FireStoreDB implements DataBaseInterface {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     List<DocumentSnapshot> transactions = queryDocumentSnapshots.getDocuments();
                     for (DocumentSnapshot doc: transactions) {
-                        Transaction tmp = new Transaction(doc.getString("amount"), doc.getString("date"), doc.getString("action"));
+                        Transaction tmp = new Transaction(doc.getString("amount"), doc.getString("date").replace("T", " "), doc.getString("action"));
                         items.add(tmp);
                     }
                     AdapterTransaction adapterSubWallet = new AdapterTransaction(context, items);
