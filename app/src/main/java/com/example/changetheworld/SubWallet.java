@@ -35,6 +35,11 @@ public class SubWallet extends AppCompatActivity {
             FireStoreDB.getInstance().updateBalance("yuval", getString(R.string.PrivateClient),getString(R.string.ILS),50,"-",this);
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         FireStoreDB.getInstance().loadWalletHistory("yuval", "PrivateClient", "ILS", recyclerView, this);
     }
 

@@ -339,7 +339,6 @@ public class FireStoreDB implements DataBaseInterface {
                         recyclerView.setAdapter(adapterWallet);
                         totalBalance.setText(String.valueOf(sum.get()));
                         symbol.setText(currenciesToSymbol.get(finalLocal_currency));
-                        adapterWallet.notifyDataSetChanged();
                     });
                 });
                 t.start();
