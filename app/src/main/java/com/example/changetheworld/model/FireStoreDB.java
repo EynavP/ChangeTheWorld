@@ -348,7 +348,7 @@ public class FireStoreDB implements DataBaseInterface {
 
 
     @Override
-    public void updateBalance(String user_name, String user_type, String wallet_name, float amount_in_foreign_currency, String action) {
+    public void updateBalance(String user_name, String user_type, String wallet_name, float amount_in_foreign_currency, String action, Context context) {
         db.collection(user_type)
                 .document(user_name)
                 .collection("Wallet")
@@ -360,8 +360,13 @@ public class FireStoreDB implements DataBaseInterface {
                         float new_balance;
                         if (action.equals("+"))
                             new_balance = Float.parseFloat(documentSnapshot.getString("balance")) + amount_in_foreign_currency;
-                        else
+                        else{
                             new_balance = Float.parseFloat(documentSnapshot.getString("balance")) - amount_in_foreign_currency;
+                            if(new_balance < 0){
+                                Toast.makeText(context, "Cannot Complete Action, Balance below 0",Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        }
                         Map<String, Object> data = new HashMap<>();
                         data.put("balance", String.valueOf(new_balance));
                         db.collection(user_type)
@@ -374,30 +379,31 @@ public class FireStoreDB implements DataBaseInterface {
                                     public void onFailure(@NonNull Exception e) {
 
                                     }
-                                });
+                                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Map<String, Object> transactionData = new HashMap<>();
+                                transactionData.put("date", LocalDateTime.now().toString());
+                                transactionData.put("amount", amount_in_foreign_currency);
+                                transactionData.put("action", action.equals("+") ? "deposit" : "withdraw");
 
+                                db.collection(user_type)
+                                        .document(user_name)
+                                        .collection("Wallet")
+                                        .document(wallet_name)
+                                        .collection("Transactions")
+                                        .document()
+                                        .set(transactionData)
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+
+                                            }
+                                        });
+                            }
+                        });
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
-
-
-        Map<String, Object> transactionData = new HashMap<>();
-        transactionData.put("date", LocalDateTime.now().toString());
-        transactionData.put("amount", amount_in_foreign_currency);
-        transactionData.put("action", action.equals("+") ? "deposit" : "withdraw");
-
-        db.collection(user_type)
-                .document(user_name)
-                .collection("Wallet")
-                .document(wallet_name)
-                .collection("Transactions")
-                .document()
-                .set(transactionData)
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {

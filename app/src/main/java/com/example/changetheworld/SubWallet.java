@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.changetheworld.model.FireStoreDB;
+import com.example.changetheworld.model.PrivateClient;
 
 public class SubWallet extends AppCompatActivity {
 
@@ -22,9 +23,11 @@ public class SubWallet extends AppCompatActivity {
         withdraw=(Button) findViewById(R.id.withdrawTitle);
 
         deposit.setOnClickListener(view -> {
-            FireStoreDB.getInstance().updateBalance("yuval", "PrivateClient", "ILS", 20, "+");
+            FireStoreDB.getInstance().updateBalance("yuval", "PrivateClient", "ILS", 20, "+", this);
         });
-
+        withdraw.setOnClickListener(view -> {
+            FireStoreDB.getInstance().updateBalance("yuval", getString(R.string.PrivateClient),getString(R.string.ILS),50,"-",this);
+        });
     }
 
     public void moveToDeposite(){
