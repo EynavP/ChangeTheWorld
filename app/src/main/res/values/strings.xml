@@ -14,7 +14,7 @@
     <string name="mailAddress">Mail Address</string>
     <string name="phoneNumber">Phone Number</string>
     <string name="localCurrency">Local Currency</string>
-    <string name="uploadPhoto">Photo</string>
+    <string name="uploadPhoto">Profile Photo</string>
     <string name="uploadPassport">Passport</string>
     <string name="already_hav">Already have an account?</string>
     <string name="create_business">Create Business Account</string>
@@ -47,6 +47,7 @@
     <string name="CNY">CNY</string>
     <string name="ILS">ILS</string>
     <string name="GBP">GBP</string>
+    <string name="register">Register</string>
     <string name="choose_Currency">Choose Currency</string>
     <string name="Invalid_full_name">Invalid full name</string>
     <string name="Invalid_mail">Invalid mail</string>

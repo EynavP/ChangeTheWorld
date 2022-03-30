@@ -81,7 +81,7 @@ public class AdapterWallet extends RecyclerView.Adapter<AdapterWallet.ViewHolder
             symbolLocalCurrency=itemView.findViewById(R.id.symbolLocalCurrency);
             layout=itemView.findViewById(R.id.walletRecycleView);
 
-            //itemView.setOnClickListener(view -> recycleSubWalletClickInterface.onItemClick(getAdapterPosition()));
+
 
 
         }
