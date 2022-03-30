@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.changetheworld.model.FireStoreDB;
@@ -20,6 +22,7 @@ public class WalletActivity extends AppCompatActivity {
     TextView user_nameTextView;
     TextView totalBalance;
     TextView symbol;
+    Button gotoSubWallet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,5 +42,12 @@ public class WalletActivity extends AppCompatActivity {
         items = new ArrayList<Wallet>();
         FireStoreDB.getInstance().LoadWallets(this, userName, getString(R.string.PrivateClient), items, recyclerView, totalBalance, symbol);
 
+        gotoSubWallet = (Button)findViewById(R.id.gotoSubWallet);
+        gotoSubWallet.setOnClickListener(view->{gotoSubWalletFunc();});
+    }
+
+    public void gotoSubWalletFunc(){
+        Intent intent = new Intent(this,SubWallet.class);
+        startActivity(intent);
     }
 }
