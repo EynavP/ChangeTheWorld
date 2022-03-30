@@ -107,7 +107,7 @@
                     android:id="@+id/currencyName_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/recycle"
+                    android:layout_alignTop="@+id/SubWalletRecycle"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="31dp"
                     android:layout_marginTop="-30dp"
@@ -121,7 +121,7 @@
                     android:id="@+id/dailyChange_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/recycle"
+                    android:layout_alignTop="@+id/SubWalletRecycle"
                     android:layout_marginStart="51dp"
                     android:layout_marginTop="-28dp"
                     android:layout_toEndOf="@+id/value_title"
@@ -134,7 +134,7 @@
                     android:id="@+id/value_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/recycle"
+                    android:layout_alignTop="@+id/SubWalletRecycle"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="-29dp"
                     android:layout_toEndOf="@+id/currencyName_title"
@@ -144,7 +144,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycle"
+                    android:id="@+id/SubWalletRecycle"
                     android:layout_width="318dp"
                     android:layout_height="461dp"
                     android:layout_alignParentLeft="true"

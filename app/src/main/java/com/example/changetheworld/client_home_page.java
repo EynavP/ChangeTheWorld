@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.example.changetheworld.model.CurrencyDataApi;
@@ -79,7 +78,7 @@ public class client_home_page<OnResume> extends AppCompatActivity {
 
                 profilPhoto = findViewById(R.id.profilePhoto);
                 FireStoreDB.getInstance().LoadProfilePhoto(profilPhoto, user_name);
-                recyclerView=findViewById(R.id.recycle);
+                recyclerView=findViewById(R.id.SubWalletRecycle);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 adapterCurrency = new AdapterCurrency(this,items);
                 recyclerView.setAdapter(adapterCurrency);
