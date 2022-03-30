@@ -5,31 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.changetheworld.model.FireStoreDB;
 
 public class SubWallet extends AppCompatActivity {
 
-    private ImageView deposit;
-    private ImageView withdraw;
+    private Button deposit;
+    private Button withdraw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_wallet);
-        deposit=(ImageView) findViewById(R.id.depositeClick);
-        withdraw=(ImageView) findViewById(R.id.widthdrawClick);
+        deposit=(Button) findViewById(R.id.DepositTitle);
+        withdraw=(Button) findViewById(R.id.withdrawTitle);
 
-        deposit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToDeposite();
-            }
-        });
-
-        withdraw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToWithdraw();
-            }
+        deposit.setOnClickListener(view -> {
+            FireStoreDB.getInstance().updateBalance("yuval", "PrivateClient", "ILS", 20, "+");
         });
 
     }

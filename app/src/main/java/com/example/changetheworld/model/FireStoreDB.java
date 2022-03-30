@@ -363,12 +363,12 @@ public class FireStoreDB implements DataBaseInterface {
                         else
                             new_balance = Float.parseFloat(documentSnapshot.getString("balance")) - amount_in_foreign_currency;
                         Map<String, Object> data = new HashMap<>();
-                        data.put("balance", new_balance);
+                        data.put("balance", String.valueOf(new_balance));
                         db.collection(user_type)
                                 .document(user_name)
                                 .collection("Wallet")
                                 .document(wallet_name)
-                                .set(data)
+                                .update(data)
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {

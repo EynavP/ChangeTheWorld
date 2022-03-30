@@ -27,7 +27,7 @@
         android:layout_marginBottom="503dp"
         app:srcCompat="@drawable/deposit" />
 
-    <TextView
+    <Button
         android:id="@+id/DepositTitle"
         android:layout_width="73dp"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:layout_marginEnd="242dp"
         android:text="Deposit" />
 
-    <TextView
+    <Button
         android:id="@+id/withdrawTitle"
         android:layout_width="73dp"
         android:layout_height="wrap_content"
