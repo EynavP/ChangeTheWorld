@@ -19,10 +19,12 @@ public class AdapterWallet extends RecyclerView.Adapter<AdapterWallet.ViewHolder
 
     private LayoutInflater layoutInflater;
     private List<Wallet> data;
+    private RecycleSubWalletClickInterface recycleSubWalletClickInterface;
 
     public AdapterWallet(Context context, List<Wallet> data){
         this.layoutInflater =LayoutInflater.from(context);
         this.data=data;
+        this.recycleSubWalletClickInterface = (WalletActivity)context;
 
     }
     @NonNull
@@ -78,6 +80,10 @@ public class AdapterWallet extends RecyclerView.Adapter<AdapterWallet.ViewHolder
             value=itemView.findViewById(R.id.value_amonut);
             symbolLocalCurrency=itemView.findViewById(R.id.symbolLocalCurrency);
             layout=itemView.findViewById(R.id.walletRecycleView);
+
+            itemView.setOnClickListener(view -> recycleSubWalletClickInterface.onItemClick(getAdapterPosition()));
+
+
         }
     }
 

@@ -8,13 +8,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.Wallet;
 
 import java.util.ArrayList;
 
-public class WalletActivity extends AppCompatActivity {
+public class WalletActivity extends AppCompatActivity implements RecycleSubWalletClickInterface {
 
     RecyclerView recyclerView;
     ArrayList<Wallet> items;
@@ -44,10 +45,17 @@ public class WalletActivity extends AppCompatActivity {
 
         gotoSubWallet = (Button)findViewById(R.id.gotoSubWallet);
         gotoSubWallet.setOnClickListener(view->{gotoSubWalletFunc();});
+
     }
 
     public void gotoSubWalletFunc(){
         Intent intent = new Intent(this,SubWallet.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(this,items.get(position).getUser_name(),Toast.LENGTH_LONG).show();
+    }
+
 }

@@ -72,5 +72,6 @@
     <string name="Owner_ID_Upload_Success">Owner ID Upload Success</string>
     <string name="PrivateClient">PrivateClient</string>
     <string name="gotoSubWallet">Sub Wallet</string>
+    <string name="Date">Date</string>
 
 </resources>
