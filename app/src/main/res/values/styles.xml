@@ -69,6 +69,10 @@
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/appBlueColor</item>
     </style>
+    <style name="login_business">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/businessGreen</item>
+    </style>
 
     <style name="balance">
         <item name="android:textSize">26sp</item>

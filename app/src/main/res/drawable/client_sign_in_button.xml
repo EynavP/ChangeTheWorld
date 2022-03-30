@@ -14,7 +14,7 @@
 
         <path
             android:pathData="M0 0V43H130V0"
-            android:fillColor="#7D7CDFFF" />
+            android:fillColor="@color/clientLogin" />
 
     </group>
 

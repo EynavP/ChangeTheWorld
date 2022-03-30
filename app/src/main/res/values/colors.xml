@@ -12,5 +12,8 @@
     <color name="homePage_bac">#F7F7F7</color>
     <color name="cardCol">#E9F4F9</color>
     <color name="greenIcon">#348338</color>
+    <color name="businessGreen">#1D9D53</color>
+    <color name="clientLogin">#7D7CDFFF</color>
+    <color name="businessLogin">#3300A200</color>
 
 </resources>

@@ -38,12 +38,19 @@
             android:layout_width="319dp"
             android:layout_height="374dp"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="43dp"
-            android:layout_marginTop="176dp"
-            android:layout_marginEnd="31dp"
-            android:layout_marginBottom="79dp" />
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="280dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/moveToWallet"
+            android:layout_width="117dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="243dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="-47dp"
+            android:background="@drawable/client_sign_in_button"
+            android:text="Wallet" />
 
 
     </RelativeLayout>
