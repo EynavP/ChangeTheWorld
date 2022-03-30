@@ -1,12 +1,11 @@
 <resources>
     <string name="app_name">ChangeTheWorld</string>
-    <string name="welcome_bac">Welcome Back</string>
+    <string name="sign_in">Sign in</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="forgot_pass">Forgot Password?</string>
-    <string name="login">Login</string>
     <string name="don_t_have_">Don\' t have account?</string>
-    <string name="create_new">Create a new client account</string>
+    <string name="register_now">Register now</string>
     <string name="create_new_business">Create a new business account</string>
     <string name="create_account">Create Client Account</string>
     <string name="create_account_button">Create Account</string>
@@ -32,12 +31,13 @@
     <string name="currency_name">currency name</string>
     <string name="value">Value</string>
     <string name="daily_change">Daily Change</string>
-    <string name="login_client">Login as Client</string>
-    <string name="gotoLoginBusiness">Not a Client? Login as Business</string>
+    <string name="as_client_title">as Client</string>
+    <string name="gotoLoginBusiness">Sign in here</string>
     <string name="login_business">Login as Business</string>
     <string name="gotoLoginClient">Not a Business? Login as Client</string>
     <string name="orders_for_today">Your orders for today</string>
     <string name="userName">userName</string>
+    <string name="bussiness_user_title">Business user?</string>
     <string name="USD">USD</string>
     <string name="EUR">EUR</string>
     <string name="user_name_invalid">username invalid, please try Again</string>

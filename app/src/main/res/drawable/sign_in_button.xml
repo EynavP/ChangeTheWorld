@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="130dp"
+    android:height="43dp"
+    android:viewportWidth="130"
+    android:viewportHeight="43"
+    >
+
+    <group>
+
+        <clip-path
+            android:pathData="M15 0H115C123.284 0 130 6.71573 130 15V28C130 36.2843 123.284 43 115 43H15C6.71573 43 0 36.2843 0 28V15C0 6.71573 6.71573 0 15 0Z" />
+
+        <path
+            android:pathData="M0 0V43H130V0"
+            android:fillColor="#7D7CDFFF" />
+
+    </group>
+
+</vector>
