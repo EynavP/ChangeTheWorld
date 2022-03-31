@@ -24,8 +24,6 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
     TextView user_nameTextView;
     TextView totalBalance;
     TextView symbol;
-    Button gotoSubWallet;
-    AdapterWallet adapterWallet;
 
 
     @Override
@@ -43,8 +41,6 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         totalBalance = findViewById(R.id.balance);
         symbol = findViewById(R.id.symbol);
 
-        gotoSubWallet = (Button)findViewById(R.id.gotoSubWallet);
-        gotoSubWallet.setOnClickListener(view->{gotoSubWalletFunc();});
 
     }
 
@@ -56,15 +52,12 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         FireStoreDB.getInstance().LoadWallets(this, userName, getString(R.string.PrivateClient), items, recyclerView, totalBalance, symbol);
     }
 
-    public void gotoSubWalletFunc(){
-        Intent intent = new Intent(this,SubWallet.class);
-        startActivity(intent);
-    }
 
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(this,SubWallet.class);
         intent.putExtra("subWalletName",items.get(position).getCurrency());
+        intent.putExtra(getString(R.string.userName), userName);
         startActivity(intent);
     }
 }
