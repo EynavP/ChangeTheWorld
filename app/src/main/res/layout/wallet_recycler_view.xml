@@ -9,14 +9,18 @@
     >
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="@color/newGery"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/cardCol">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cardContainer"
@@ -24,13 +28,13 @@
             android:layout_height="70dp"
             android:padding="5dp">
 
-
             <TextView
                 android:id="@+id/symbol_recycler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="symbol"
                 android:textAppearance="@style/symbol"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +44,11 @@
                 android:id="@+id/currency_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="@string/currency_name"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,18 +56,21 @@
                 android:id="@+id/balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="amount"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/currency_name" />
 
             <TextView
                 android:id="@+id/value_amonut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_width="54dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="8dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="@string/value"
                 app:layout_constraintEnd_toStartOf="@+id/symbolLocalCurrency"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -71,7 +80,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="symbol"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

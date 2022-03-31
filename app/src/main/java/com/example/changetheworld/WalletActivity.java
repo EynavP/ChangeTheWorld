@@ -16,7 +16,7 @@ import com.example.changetheworld.model.Wallet;
 
 import java.util.ArrayList;
 
-public class WalletActivity extends AppCompatActivity implements RecycleSubWalletClickInterface {
+public class WalletActivity extends AppCompatActivity implements RecycleSubWalletClickInterface{
 
     RecyclerView recyclerView;
     ArrayList<Wallet> items;
@@ -61,10 +61,10 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         startActivity(intent);
     }
 
-
-
     @Override
-    public void onItemClick(View view, int position) {
-
+    public void onItemClick(int position) {
+        Intent intent = new Intent(this,SubWallet.class);
+        intent.putExtra("subWalletName",items.get(position).getCurrency());
+        startActivity(intent);
     }
 }

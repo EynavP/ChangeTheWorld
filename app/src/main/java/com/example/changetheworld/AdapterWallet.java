@@ -25,13 +25,12 @@ public class AdapterWallet extends RecyclerView.Adapter<AdapterWallet.ViewHolder
         this.layoutInflater =LayoutInflater.from(context);
         this.data=data;
         this.recycleSubWalletClickInterface = (WalletActivity)context;
-
     }
     @NonNull
     @Override
     public AdapterWallet.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = layoutInflater.inflate(R.layout.wallet_recycler_view,viewGroup,false);
-        return new AdapterWallet.ViewHolder(view);
+        return new AdapterWallet.ViewHolder(view,recycleSubWalletClickInterface);
     }
 
     @Override
@@ -52,35 +51,44 @@ public class AdapterWallet extends RecyclerView.Adapter<AdapterWallet.ViewHolder
         String symbolLocalCurrency = data.get(i).getSymbolLocalCurrency();
         viewHolder.symbolLocalCurrency.setText(symbolLocalCurrency);
 
-        viewHolder.layout.setOnClickListener(new View.OnClickListener() {
+     /*   viewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(layoutInflater.getContext(),SubWallet.class);
                //TODO:youtube
             }
-        });
+        });*/
 
     }
 
     @Override
-    public int getItemCount() {
-        return data.size();
-    }
+    public int getItemCount() { return data.size(); }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView symbol,currencyName,balance,value,symbolLocalCurrency;
-        ConstraintLayout layout;
+     //   ConstraintLayout layout;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, RecycleSubWalletClickInterface recycleSubWalletClickInterface) {
             super(itemView);
             symbol=itemView.findViewById(R.id.symbol_recycler);
             currencyName=itemView.findViewById(R.id.currency_name);
             balance=itemView.findViewById(R.id.balance);
             value=itemView.findViewById(R.id.value_amonut);
             symbolLocalCurrency=itemView.findViewById(R.id.symbolLocalCurrency);
-            layout=itemView.findViewById(R.id.walletRecycleView);
+           // layout=itemView.findViewById(R.id.walletRecycleView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(recycleSubWalletClickInterface != null){
+                        int position = getAdapterPosition();
 
+                        if(position != RecyclerView.NO_POSITION){
+                            recycleSubWalletClickInterface.onItemClick(position);
+                        }
+                    }
+                }
+            });
 
 
 

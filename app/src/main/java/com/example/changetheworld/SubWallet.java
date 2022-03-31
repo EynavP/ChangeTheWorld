@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.PrivateClient;
@@ -18,6 +19,7 @@ public class SubWallet extends AppCompatActivity {
     private Button deposit;
     private Button withdraw;
     RecyclerView recyclerView;
+    TextView subWalletName_TV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,10 @@ public class SubWallet extends AppCompatActivity {
         withdraw.setOnClickListener(view -> {
             FireStoreDB.getInstance().updateBalance("yuval", getString(R.string.PrivateClient),getString(R.string.ILS),50,"-",this);
         });
+
+        String subWalletName = getIntent().getStringExtra("subWalletName");
+        subWalletName_TV = findViewById(R.id.subwalletName);
+        subWalletName_TV.setText(subWalletName);
 
     }
 
