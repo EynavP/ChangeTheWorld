@@ -107,6 +107,7 @@ public class client_home_page<OnResume> extends AppCompatActivity {
 
         Intent intent = new Intent(this,WalletActivity.class);
         intent.putExtra(getString(R.string.userName), user_name);
+        intent.putExtra("user_type", "PrivateClient");
         startActivity(intent);
     }
 

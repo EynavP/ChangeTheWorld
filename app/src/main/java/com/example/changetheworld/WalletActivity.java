@@ -21,11 +21,10 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
     RecyclerView recyclerView;
     ArrayList<Wallet> items;
     String userName;
+    String userType;
     TextView user_nameTextView;
     TextView totalBalance;
     TextView symbol;
-    Button gotoSubWallet;
-    AdapterWallet adapterWallet;
 
 
     @Override
@@ -34,6 +33,7 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         setContentView(R.layout.activity_wallet);
 
         userName = getIntent().getStringExtra(getString(R.string.userName));
+        userType =  getIntent().getStringExtra("user_type");
         user_nameTextView = findViewById(R.id.user_name);
         user_nameTextView.setText(userName + "'s wallet");
 
@@ -43,8 +43,6 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         totalBalance = findViewById(R.id.balance);
         symbol = findViewById(R.id.symbol);
 
-        gotoSubWallet = (Button)findViewById(R.id.gotoSubWallet);
-        gotoSubWallet.setOnClickListener(view->{gotoSubWalletFunc();});
 
     }
 
@@ -53,18 +51,16 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         super.onResume();
         items = new ArrayList<Wallet>();
 
-        FireStoreDB.getInstance().LoadWallets(this, userName, getString(R.string.PrivateClient), items, recyclerView, totalBalance, symbol);
+        FireStoreDB.getInstance().LoadWallets(this, userName, userType, items, recyclerView, totalBalance, symbol);
     }
 
-    public void gotoSubWalletFunc(){
-        Intent intent = new Intent(this,SubWallet.class);
-        startActivity(intent);
-    }
 
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(this,SubWallet.class);
         intent.putExtra("subWalletName",items.get(position).getCurrency());
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("userType", userType);
         startActivity(intent);
     }
 }
