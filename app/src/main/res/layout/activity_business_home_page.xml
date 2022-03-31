@@ -60,6 +60,17 @@
         android:text="@string/orders_for_today"
         android:textAppearance="@style/have_a_nice" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/moveToWallet"
+                android:layout_width="117dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="243dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginEnd="34dp"
+                android:layout_marginBottom="-47dp"
+                android:background="@drawable/business_sign_in_button"
+                android:text="Wallet" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"

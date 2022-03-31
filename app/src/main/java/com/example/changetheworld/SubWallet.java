@@ -21,6 +21,7 @@ public class SubWallet extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView subWalletName_TV;
     String userName;
+    String userType;
     String subWalletName;
 
     @Override
@@ -35,12 +36,13 @@ public class SubWallet extends AppCompatActivity {
         subWalletName_TV = findViewById(R.id.subwalletName);
         subWalletName_TV.setText(subWalletName);
         userName = getIntent().getStringExtra(getString(R.string.userName));
+        userType = getIntent().getStringExtra("userType");
 
         deposit.setOnClickListener(view -> {
-            FireStoreDB.getInstance().updateBalance(userName, "PrivateClient", subWalletName, 20, "+", this);
+            FireStoreDB.getInstance().updateBalance(userName, userType, subWalletName, 20, "+", this);
         });
         withdraw.setOnClickListener(view -> {
-            FireStoreDB.getInstance().updateBalance(userName, getString(R.string.PrivateClient),subWalletName,50,"-",this);
+            FireStoreDB.getInstance().updateBalance(userName, userType,subWalletName,50,"-",this);
         });
 
 
@@ -50,7 +52,7 @@ public class SubWallet extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        FireStoreDB.getInstance().loadWalletHistory(userName, "PrivateClient", subWalletName, recyclerView, this);
+        FireStoreDB.getInstance().loadWalletHistory(userName, userType, subWalletName, recyclerView, this);
     }
 
     public void moveToDeposite(){
