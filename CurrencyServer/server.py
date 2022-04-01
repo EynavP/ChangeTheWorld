@@ -10,19 +10,11 @@ import requests
 hostName = "localhost"
 serverPort = 8080
 
-
-
 class CurrencyApi:
     def __init__(self) -> None:
         api_key = "&access_key=3p6PQYrYrFwyQ3FCaSag"
         base_api = "https://fcsapi.com/api-v3/forex/latest?"
         symbols = "symbol="
-        #get_symbols_query = "https://fcsapi.com/api-v3/forex/list?type=forex" + api_key
-        #get_symbols = requests.get(get_symbols_query).json()['response']
-        
-        #for i in range(int(len(get_symbols)*0.525)):
-        #    symbols += get_symbols[i]['symbol'] + ','
-        
         symbols_list = ['USD','EUR','GBP','ILS','CNY']
         
         pairs = ''
@@ -32,8 +24,6 @@ class CurrencyApi:
                     pairs += s1 + '/' + s2 + ','
 
         pairs = pairs[:-1]
-
-
         symbols = symbols + pairs
         self.query = base_api + symbols + api_key
         self.data = {}
@@ -55,7 +45,6 @@ class CurrencyApi:
         
     def run(self):
         threading.Thread(target= self.update_data, args=()).start()
-
 
 
 class MyServer(BaseHTTPRequestHandler):
@@ -81,9 +70,6 @@ class MyServer(BaseHTTPRequestHandler):
         except Exception as e:
             self.wfile.write(bytes(json.dumps({"Error": str(e), "time": str(datetime.now())}),encoding='utf8'))
               
-
-
-
 
 
 if __name__ == "__main__":
