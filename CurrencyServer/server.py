@@ -17,13 +17,24 @@ class CurrencyApi:
         api_key = "&access_key=3p6PQYrYrFwyQ3FCaSag"
         base_api = "https://fcsapi.com/api-v3/forex/latest?"
         symbols = "symbol="
-        get_symbols_query = "https://fcsapi.com/api-v3/forex/list?type=forex" + api_key
-        get_symbols = requests.get(get_symbols_query).json()['response']
+        #get_symbols_query = "https://fcsapi.com/api-v3/forex/list?type=forex" + api_key
+        #get_symbols = requests.get(get_symbols_query).json()['response']
         
-        for i in range(int(len(get_symbols)*0.525)):
-            symbols += get_symbols[i]['symbol'] + ','
+        #for i in range(int(len(get_symbols)*0.525)):
+        #    symbols += get_symbols[i]['symbol'] + ','
         
-        symbols = symbols[:-2]
+        symbols_list = ['USD','EUR','GBP','ILS','CNY']
+        
+        pairs = ''
+        for s1 in symbols_list:
+            for s2 in symbols_list:
+                if s1 != s2:
+                    pairs += s1 + '/' + s2 + ','
+
+        pairs = pairs[:-1]
+
+
+        symbols = symbols + pairs
         self.query = base_api + symbols + api_key
         self.data = {}
         self.lock = threading.Lock()
