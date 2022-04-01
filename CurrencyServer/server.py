@@ -6,9 +6,12 @@ from urllib.parse import parse_qs, urlparse
 import threading
 from datetime import datetime
 import requests
+import urllib.request
 
+external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
 hostName = "localhost"
 serverPort = 8080
+
 
 class CurrencyApi:
     def __init__(self) -> None:
@@ -78,7 +81,7 @@ if __name__ == "__main__":
     my_server = MyServer
     my_server.set_API(my_server,api=api)
     webServer = HTTPServer((hostName, serverPort), my_server)
-    print("Server started http://%s:%s" % (hostName, serverPort))
+    print(f"Server started http://{hostName}:{serverPort} or http://{external_ip}:{serverPort}") 
 
     try:
         webServer.serve_forever()
