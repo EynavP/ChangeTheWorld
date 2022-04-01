@@ -4,6 +4,7 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="forgot_pass">Forgot Password?</string>
+    <string name="NO">no.</string>
     <string name="don_t_have_">Don\' t have account?</string>
     <string name="register_now">Register now</string>
     <string name="create_new_business">Create a new business account</string>
@@ -21,8 +22,8 @@
     <string name="businessName">Business Name</string>
     <string name="State">State</string>
     <string name="businessOwnerName">Business Owner Name</string>
-    <string name="businessApproval">Business Approval Document</string>
-    <string name="businessOwnerId">Business Owner Id</string>
+    <string name="businessApproval">Business Approval</string>
+    <string name="businessOwnerId">Owner Id</string>
     <string name="businessOpenHours">Open Hours</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
