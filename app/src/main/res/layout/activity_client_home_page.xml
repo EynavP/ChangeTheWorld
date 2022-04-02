@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".client_home_page">
+    tools:context=".client_home_page"
+    android:fitsSystemWindows="true"
+    tools:openDrawer=""
+    android:id="@+id/drawer_menu">
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/nav_view"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/open_menu"
+        android:layout_gravity="start" />
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -13,10 +24,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+
             <RelativeLayout
                 android:id="@+id/topHomePageClient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="339dp"
+                    app:navigationIcon="@drawable/humburgar_icon">
+
+                </androidx.appcompat.widget.Toolbar>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="60dp"
@@ -94,23 +121,21 @@
                     android:textAppearance="@style/have_a_nice" />
 
 
-
             </RelativeLayout>
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_bar"
-        android:layout_width="375dp"
-        android:layout_height="67dp"
-        android:layout_below="@+id/top_image"
-        android:layout_marginStart="33dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="30dp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="775dp"
                 android:paddingTop="100dp">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_bar"
+                    android:layout_width="375dp"
+                    android:layout_height="67dp"
+                    android:layout_marginStart="33dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="33dp"
+                    android:layout_marginBottom="10dp" />
 
                 <TextView
                     android:id="@+id/currencyName_title"
@@ -160,17 +185,6 @@
                     android:layout_marginLeft="34dp"
                     android:layout_marginTop="240dp" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/moveToWallet"
-                    android:layout_width="117dp"
-                    android:layout_height="37dp"
-                    android:layout_marginStart="243dp"
-                    android:layout_marginTop="21dp"
-                    android:layout_marginEnd="34dp"
-                    android:layout_marginBottom="-47dp"
-                    android:background="@drawable/client_sign_in_button"
-                    android:text="Wallet" />
-
                 <ProgressBar
                     android:id="@+id/progressBar"
                     style="?android:attr/progressBarStyle"
@@ -189,4 +203,4 @@
         </RelativeLayout>
     </ScrollView>
 
-</RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

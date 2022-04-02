@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         login = (Button) findViewById(R.id.login);
 
         createAccount = (Button) findViewById(R.id.createClientAccount);

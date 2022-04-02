@@ -75,5 +75,9 @@
     <string name="PrivateClient">PrivateClient</string>
     <string name="gotoSubWallet">Sub Wallet</string>
     <string name="Date">Date</string>
+    <string name="businessAddress">Business Address</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 </resources>

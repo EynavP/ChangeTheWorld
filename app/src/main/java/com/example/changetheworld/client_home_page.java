@@ -1,6 +1,10 @@
 package com.example.changetheworld;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,32 +12,38 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
 
 
 import com.example.changetheworld.model.CurrencyDataApi;
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.currency;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class client_home_page<OnResume> extends AppCompatActivity {
+public class client_home_page<OnResume> extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     RecyclerView recyclerView;
     AdapterCurrency adapterCurrency;
     ArrayList<currency> items = new ArrayList<>();
     TextView userName;
     ImageView profilPhoto;
     CurrencyDataApi api = new CurrencyDataApi();
-    Button moveToWallet;
     String user_name;
     ProgressBar progressBar;
     HashMap<String, String> currenciesToSymbol = new HashMap<>();
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,9 +104,24 @@ public class client_home_page<OnResume> extends AppCompatActivity {
         t.start();
 
 
-        moveToWallet = (Button) findViewById(R.id.moveToWallet);
-        moveToWallet.setOnClickListener(view ->  { openWallet(); });
+
+        drawerLayout = findViewById(R.id.drawer_menu);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar =(Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
+
     }
+
+
+
     @Override
     public void onResume(){
         super.onResume();
@@ -117,5 +142,17 @@ public class client_home_page<OnResume> extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch(menuItem.getItemId()){
+            case R.id.nav_home:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.nav_wallet:
+                openWallet();
+                break;
+        }
+        return true;
+    }
 }
 
