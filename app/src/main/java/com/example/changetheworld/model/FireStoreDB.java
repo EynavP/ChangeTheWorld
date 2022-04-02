@@ -295,7 +295,7 @@ public class FireStoreDB implements DataBaseInterface {
                 }
                 CurrencyDataApiInterface api = new CurrencyDataApi();
                 HashMap<String, String> doc_data = new HashMap<>();
-                ArrayList<String> symbols = new ArrayList<>();
+                ArrayList<String> symbols_for_api = new ArrayList<>();
                 String local_currency = "";
                 String user_name = "";
                 for (DocumentSnapshot data : walletsData) {
@@ -304,34 +304,29 @@ public class FireStoreDB implements DataBaseInterface {
                     local_currency = data.getString("localCurrency");
                     user_name = data.getString("user_name");
                     doc_data.put(currency, balance);
-                    symbols.add(currency + '/' + local_currency);
+                    if(!currency.equals(local_currency))
+                        symbols_for_api.add((currency + '/' + local_currency));
                 }
 
                 String finalUser_name = user_name;
                 String finalLocal_currency = local_currency;
 
+
+
                 Thread t = new Thread(() -> {
 
-                    HashMap<String, ArrayList<Float>> price = api.getCloseAndChangePrice(symbols);
+                    HashMap<String, ArrayList<Float>> price = api.getCloseAndChangePrice(symbols_for_api);
 
                     for (String c : price.keySet()) {
-                        if (price.get(c) != null) {
-                            float val = price.get(c).get(0);
-                            local_currencey_value.set(df.format(val * Float.parseFloat(doc_data.get(c))));
-                        } else {
-                            local_currencey_value.set(String.valueOf(Float.parseFloat(doc_data.get(c))));
-                        }
-
+                        float val = price.get(c).get(0);
+                        local_currencey_value.set(df.format(val * Float.parseFloat(doc_data.get(c))));
                         Wallet walletData = new Wallet(doc_data.get(c), c, finalUser_name, currenciesToSymbol.get(c), local_currencey_value.get(), currenciesToSymbol.get(finalLocal_currency));
-
                         ((Activity) context).runOnUiThread(() -> {
-
                             items.add(walletData);
-
                             sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(walletData.getValueLocalCurrency()))));
-
                         });
                     }
+
                     ((Activity) context).runOnUiThread(() -> {
                         items.add(new Wallet(doc_data.get(finalLocal_currency),finalLocal_currency,finalUser_name,currenciesToSymbol.get(finalLocal_currency),doc_data.get(finalLocal_currency),currenciesToSymbol.get(finalLocal_currency)));
                         sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(doc_data.get(finalLocal_currency)))));
