@@ -12,327 +12,374 @@
         tools:context=".CreateAccountPrivate"
         android:background="@color/homePage_bac">
 
-        <!-- Create Account -->
-
-        <!-- Create a new account -->
-
-        <ImageView
-            android:id="@+id/circleRegisterClient"
-            android:layout_width="match_parent"
-            android:layout_height="239dp"
-            android:layout_marginTop="-25dp"
-            app:srcCompat="@drawable/register_circles" />
-
-        <TextView
-            android:id="@+id/create_acco"
-            android:layout_width="159dp"
-            android:layout_height="77dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="137dp"
-            android:layout_marginTop="43dp"
-            android:layout_marginEnd="115dp"
-            android:fontFamily="@font/comfortaa"
-            android:gravity="top"
-            android:text="@string/register"
-            android:textAppearance="@style/sign_in_title"
-            android:textSize="35sp"
-            app:lineHeight="34sp" />
-
-        <!-- enter full name -->
-
-        <!-- Full name -->
-
-        <!-- enter mail address -->
-
-        <!-- Mail Address -->
-
-        <TextView
-            android:id="@+id/create_a_ne"
-            android:layout_width="92dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/create_acco"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="172dp"
-            android:layout_marginLeft="172dp"
-            android:layout_marginTop="-28dp"
-            android:layout_marginEnd="146dp"
-            android:fontFamily="@font/comfortaa"
-            android:gravity="top"
-            android:text="@string/as_client_title"
-            android:textAppearance="@style/login_client"
-            app:lineHeight="34sp" />
-
-        <EditText
-            android:id="@+id/enterFullName"
-            android:layout_width="295dp"
-            android:layout_height="76dp"
-            android:layout_below="@+id/full_name"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="61dp"
-            android:layout_marginTop="-7dp"
-            android:layout_marginEnd="55dp"
-            android:background="@drawable/empty_rectangle"
-            android:inputType="text"
-            android:paddingStart="50dp"
-            android:paddingBottom="20dp" />
-
-        <TextView
-            android:id="@+id/full_name"
-            android:layout_width="84dp"
-            android:layout_height="31dp"
-            android:layout_below="@+id/create_a_ne"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="72dp"
-            android:layout_marginTop="51dp"
-            android:fontFamily="@font/comfortaa"
-            android:gravity="top"
-            android:text="@string/fullName"
-            android:textAppearance="@style/username"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/enterMailAddress"
-            android:layout_width="295dp"
-            android:layout_height="76dp"
-            android:layout_below="@+id/enterFullName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="61dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="55dp"
-            android:background="@drawable/empty_rectangle"
-            android:inputType="textEmailAddress"
-            android:paddingStart="50dp"
-            android:paddingBottom="20dp" />
-
-        <TextView
-            android:id="@+id/mail_address"
-            android:layout_width="114dp"
-            android:layout_height="34dp"
-            android:layout_below="@+id/full_name"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="72dp"
-            android:layout_marginTop="57dp"
-            android:fontFamily="@font/comfortaa"
-            android:gravity="top"
-            android:text="@string/mailAddress"
-            android:textAppearance="@style/username"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/enterPhoneNumber"
-            android:layout_width="295dp"
-            android:layout_height="76dp"
-            android:layout_below="@+id/enterMailAddress"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="61dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="55dp"
-            android:background="@drawable/empty_rectangle"
-            android:inputType="phone"
-            android:paddingStart="50dp"
-            android:paddingBottom="20dp" />
-
-        <TextView
-            android:id="@+id/phone_number"
-            android:layout_width="161dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/mail_address"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="72dp"
-            android:layout_marginTop="57dp"
-            android:fontFamily="@font/comfortaa"
-            android:gravity="top"
-            android:text="@string/phoneNumber"
-            android:textAppearance="@style/username"
-            android:textSize="15sp" />
-
-        <Spinner
-            android:id="@+id/enterLocalCurrency"
-            android:layout_width="295dp"
-            android:layout_height="76dp"
-            android:layout_below="@+id/enterPhoneNumber"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="61dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="58dp"
-            android:background="@drawable/empty_rectangle"
-            android:prompt="@string/localCurrency"
-            android:spinnerMode="dropdown"
-            android:paddingStart="50dp"
-            android:paddingBottom="20dp" />
-
-        <TextView
-            android:id="@+id/local_currency"
-            android:layout_width="161dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/phone_number"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="72dp"
-            android:layout_marginTop="57dp"
-            android:fontFamily="@font/comfortaa"
-            android:gravity="top"
-            android:text="@string/localCurrency"
-            android:textAppearance="@style/username"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/enterNewUserName"
-            android:layout_width="295dp"
-            android:layout_height="76dp"
-            android:layout_below="@+id/enterLocalCurrency"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="61dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="55dp"
-            android:background="@drawable/empty_rectangle"
-            android:inputType="text"
-            android:paddingStart="50dp"
-            android:paddingBottom="20dp" />
-
-        <TextView
-            android:id="@+id/newUserName"
-            android:layout_width="161dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/local_currency"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="72dp"
-            android:layout_marginTop="64dp"
-            android:fontFamily="@font/comfortaa"
-            android:gravity="top"
-            android:text="@string/userName"
-            android:textAppearance="@style/username"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/enterNewPassword"
-            android:layout_width="295dp"
-            android:layout_height="76dp"
-            android:layout_below="@+id/enterNewUserName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="61dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="58dp"
-            android:background="@drawable/empty_rectangle"
-            android:inputType="textPassword"
-            android:paddingStart="50dp"
-            android:paddingBottom="20dp" />
-
-        <TextView
-            android:id="@+id/newPassword"
-            android:layout_width="161dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/newUserName"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="72dp"
-            android:layout_marginTop="65dp"
-            android:fontFamily="@font/comfortaa"
-            android:gravity="top"
-            android:text="@string/password"
-            android:textAppearance="@style/username"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/uploadPhoto"
-            android:layout_width="170dp"
-            android:layout_height="38dp"
-            android:layout_below="@+id/enterNewPassword"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="57dp"
-            android:layout_marginTop="9dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:fontFamily="@font/comfortaa"
-            android:paddingStart="20dp"
-            android:text="@string/uploadPhoto"
-            android:textAppearance="@style/forgot_pass"
-            android:textColor="@color/black"
-            android:textSize="13sp">
-
-        </Button>
-
-        <Button
-            android:id="@+id/uploadPassport"
-            android:layout_width="170dp"
-            android:layout_height="38dp"
-            android:layout_below="@+id/enterNewPassword"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="202dp"
-            android:layout_marginTop="11dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:fontFamily="@font/comfortaa"
-            android:paddingStart="20dp"
-            android:text="@string/uploadPassport"
-            android:textAppearance="@style/forgot_pass"
-            android:textColor="@color/black"
-            android:textSize="13sp">
-
-        </Button>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/createAccountButton"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/enterNewPassword"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="95dp"
-            android:layout_marginTop="53dp"
-            android:layout_marginEnd="98dp"
-            android:background="@drawable/client_sign_in_button"
-            android:fontFamily="@font/comfortaa"
-            android:text="@string/register"
-            android:textAllCaps="false"
-            android:textColor="@color/black" />/>
-
-        <!-- Don’t have account? -->
-
-
-        <TextView
-            android:id="@+id/don_t_have_"
+        <RelativeLayout
+            android:id="@+id/topPageClientRegister"
             android:layout_width="wrap_content"
-            android:layout_height="29dp"
-            android:layout_below="@+id/createAccountButton"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="73dp"
-            android:layout_marginTop="22dp"
-            android:fontFamily="@font/comfortaa"
-            android:gravity="top"
-            android:text="@string/already_hav"
-            android:textAppearance="@style/sign_in_title"
-            android:textSize="12sp" />
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/moveToLogin"
-            android:layout_width="167dp"
-            android:layout_height="38dp"
-            android:layout_below="@+id/createAccountButton"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="199dp"
-            android:layout_marginTop="11dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:fontFamily="@font/comfortaa"
-            android:text="@string/gotoLoginBusiness"
-            android:textAppearance="@style/don_t_have_"
-            android:textColor="@color/appBlueColor" />
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="46dp"
-            android:layout_height="41dp"
-            android:layout_below="@+id/enterNewPassword"
+            <ImageView
+                android:id="@+id/circleRegisterClient"
+                android:layout_width="match_parent"
+                android:layout_height="239dp"
+                android:layout_marginTop="-30dp"
+                app:srcCompat="@drawable/register_circles" />
+
+            <TextView
+                android:id="@+id/create_acco"
+                android:layout_width="159dp"
+                android:layout_height="77dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="120dp"
+                android:layout_marginLeft="137dp"
+                android:layout_marginTop="43dp"
+                android:layout_marginEnd="120dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/register"
+                android:textAlignment="center"
+                android:textAppearance="@style/sign_in_title"
+                android:textSize="35sp"
+                app:lineHeight="34sp" />
+
+
+            <TextView
+                android:id="@+id/create_a_ne"
+                android:layout_width="92dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/create_acco"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="126dp"
+                android:layout_marginLeft="168dp"
+                android:layout_marginTop="-28dp"
+                android:layout_marginEnd="126dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/as_client_title"
+                android:textAlignment="center"
+                android:textAppearance="@style/login_client"
+                app:lineHeight="34sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/fieldsClientRegister"
+            android:layout_width="match_parent"
+            android:layout_height="506dp"
+            android:layout_below="@id/topPageClientRegister">
+
+            <TextView
+                android:id="@+id/full_name"
+                android:layout_width="121dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="64dp"
+                android:layout_marginLeft="67dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="233dp"
+                android:fontFamily="@font/comfortaa"
+                android:gravity="top"
+                android:text="@string/fullName"
+                android:textAppearance="@style/username"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/enterFullName"
+                android:layout_width="300dp"
+                android:layout_height="55dp"
+                android:layout_below="@+id/full_name"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="56dp"
+                android:layout_marginLeft="56dp"
+                android:layout_marginTop="-2dp"
+                android:layout_marginEnd="54dp"
+                android:background="@drawable/empty_rectangle"
+                android:inputType="text"
+                android:paddingStart="20dp" />
+
+            <TextView
+                android:id="@+id/mail_address"
+                android:layout_width="139dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/full_name"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="64dp"
+                android:layout_marginLeft="64dp"
+                android:layout_marginTop="53dp"
+                android:layout_marginEnd="215dp"
+                android:fontFamily="@font/comfortaa"
+                android:gravity="top"
+                android:text="@string/mailAddress"
+                android:textAppearance="@style/username"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/enterMailAddress"
+                android:layout_width="300dp"
+                android:layout_height="55dp"
+                android:layout_below="@+id/enterFullName"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="56dp"
+                android:layout_marginLeft="56dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="54dp"
+                android:background="@drawable/empty_rectangle"
+                android:inputType="textEmailAddress"
+                android:paddingStart="20dp" />
+
+            <TextView
+                android:id="@+id/phone_number"
+                android:layout_width="161dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mail_address"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="64dp"
+                android:layout_marginLeft="64dp"
+                android:layout_marginTop="54dp"
+                android:layout_marginEnd="190dp"
+                android:fontFamily="@font/comfortaa"
+                android:gravity="top"
+                android:text="@string/phoneNumber"
+                android:textAppearance="@style/username"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/enterPhoneNumber"
+                android:layout_width="300dp"
+                android:layout_height="55dp"
+                android:layout_below="@+id/enterMailAddress"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="56dp"
+                android:layout_marginLeft="56dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="54dp"
+                android:background="@drawable/empty_rectangle"
+                android:inputType="phone"
+                android:paddingStart="20dp" />
+
+            <TextView
+                android:id="@+id/local_currency"
+                android:layout_width="161dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phone_number"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="64dp"
+                android:layout_marginLeft="64dp"
+                android:layout_marginTop="58dp"
+                android:layout_marginEnd="193dp"
+                android:fontFamily="@font/comfortaa"
+                android:gravity="top"
+                android:text="@string/localCurrency"
+                android:textAppearance="@style/username"
+                android:textSize="15sp" />
+
+            <Spinner
+                android:id="@+id/enterLocalCurrency"
+                android:layout_width="300dp"
+                android:layout_height="55dp"
+                android:layout_below="@+id/enterPhoneNumber"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="56dp"
+                android:layout_marginLeft="61dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="54dp"
+                android:background="@drawable/empty_rectangle"
+                android:paddingStart="20dp"
+                android:prompt="@string/localCurrency"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/newUserName"
+                android:layout_width="161dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/local_currency"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="64dp"
+                android:layout_marginLeft="64dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="193dp"
+                android:fontFamily="@font/comfortaa"
+                android:gravity="top"
+                android:text="@string/username"
+                android:textAppearance="@style/username"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/enterNewUserName"
+                android:layout_width="300dp"
+                android:layout_height="55dp"
+                android:layout_below="@+id/enterLocalCurrency"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="56dp"
+                android:layout_marginLeft="61dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="54dp"
+                android:background="@drawable/empty_rectangle"
+                android:inputType="text"
+                android:paddingStart="20dp" />
+
+            <TextView
+                android:id="@+id/newPassword"
+                android:layout_width="161dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/newUserName"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="64dp"
+                android:layout_marginLeft="64dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginEnd="193dp"
+                android:fontFamily="@font/comfortaa"
+                android:gravity="top"
+                android:text="@string/password"
+                android:textAppearance="@style/username"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/enterNewPassword"
+                android:layout_width="300dp"
+                android:layout_height="55dp"
+                android:layout_below="@+id/enterNewUserName"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="56dp"
+                android:layout_marginLeft="61dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="54dp"
+                android:background="@drawable/empty_rectangle"
+                android:inputType="textPassword"
+                android:paddingStart="20dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/endClientRegister"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/fieldsClientRegister"
+            android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="307dp"
-            app:srcCompat="@drawable/upload_photo" />
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp">
+
+
+            <Button
+                android:id="@+id/uploadPhoto"
+                android:layout_width="141dp"
+                android:layout_height="37dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="86dp"
+                android:layout_marginTop="9dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="@font/comfortaa"
+                android:paddingStart="20dp"
+                android:text="@string/uploadPhoto"
+                android:textAppearance="@style/forgot_pass"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/uploadPassport"
+                android:layout_width="170dp"
+                android:layout_height="38dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="225dp"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="@font/comfortaa"
+                android:paddingStart="20dp"
+                android:text="@string/uploadPassport"
+                android:textAppearance="@style/forgot_pass"
+                android:textColor="@color/black"
+                android:textSize="13sp">
+
+            </Button>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/createAccountButton"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/uploadPhoto"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="95dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="98dp"
+                android:background="@drawable/client_sign_in_button"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/register"
+                android:textAllCaps="false"
+                android:textColor="@color/black" />
+
+
+            <TextView
+                android:id="@+id/don_t_have_"
+                android:layout_width="177dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/createAccountButton"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="69dp"
+                android:layout_marginLeft="69dp"
+                android:layout_marginTop="23dp"
+                android:fontFamily="@font/comfortaa"
+                android:gravity="top"
+                android:text="@string/already_hav"
+                android:textAppearance="@style/sign_in_title"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/moveToLogin"
+                android:layout_width="167dp"
+                android:layout_height="38dp"
+                android:layout_below="@+id/createAccountButton"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="213dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="38dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/gotoLoginBusiness"
+                android:textAppearance="@style/don_t_have_"
+                android:textColor="@color/appBlueColor" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="46dp"
+                android:layout_height="41dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="54dp"
+                android:layout_marginTop="9dp"
+                app:srcCompat="@drawable/upload_photo" />
+        </RelativeLayout>
 
     </RelativeLayout>
     </ScrollView>

@@ -13,54 +13,89 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/top_image"
-        android:layout_width="match_parent"
-        android:layout_height="195dp"
-        android:layout_marginLeft="-1dp"
-        android:layout_marginTop="-21dp"
-        android:background="@drawable/round_background2">
-    </ImageView>
+            <RelativeLayout
+                android:id="@+id/topHomePageClient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/hello_homep"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="33dp"
-        android:layout_marginTop="66dp"
-        android:fontFamily="@font/aclonica"
-        android:gravity="top"
-        android:text="@string/hello_"
-        android:textAppearance="@style/hello_" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="280dp"
+                    android:layout_marginTop="50dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="250dp">
 
-    <!-- userName -->
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="112dp"
-        android:layout_marginTop="66dp"
-        android:fontFamily="@font/aclonica"
-        android:gravity="top"
-        android:text="@string/username"
-        android:textAppearance="@style/hello_" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/profilePhotoCV"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="250dp">
 
-    <!-- have a nice day! -->
-    <TextView
-        android:id="@+id/have_a_nice"
-        android:layout_width="124dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hello_homep"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="69dp"
-        android:layout_marginTop="0dp"
-        android:gravity="top"
-        android:text="@string/have_a_nice"
-        android:textAppearance="@style/have_a_nice" />
+                        <ImageView
+                            android:id="@+id/profilePhoto"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_launcher_foreground" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:id="@+id/topClientHomePage"
+                    android:layout_width="match_parent"
+                    android:layout_height="258dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="-57dp"
+                    android:background="@drawable/home_page_top_client" />
+
+                <TextView
+                    android:id="@+id/hello_homep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="33dp"
+                    android:layout_marginTop="66dp"
+                    android:fontFamily="@font/aclonica"
+                    android:gravity="top"
+                    android:text="@string/hello_"
+                    android:textAppearance="@style/hello_" />
+
+                <!-- userName -->
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="112dp"
+                    android:layout_marginTop="66dp"
+                    android:fontFamily="@font/aclonica"
+                    android:gravity="top"
+                    android:text="@string/username"
+                    android:textAppearance="@style/hello_" />
+
+                <!-- have a nice day! -->
+                <TextView
+                    android:id="@+id/have_a_nice"
+                    android:layout_width="124dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/hello_homep"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="69dp"
+                    android:layout_marginTop="0dp"
+                    android:gravity="top"
+                    android:text="@string/have_a_nice"
+                    android:textAppearance="@style/have_a_nice" />
+
+
+
+            </RelativeLayout>
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_bar"
@@ -71,32 +106,6 @@
         android:layout_marginEnd="33dp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="30dp"/>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:cardCornerRadius="250dp"
-        app:cardBackgroundColor="@color/white"
-        android:layout_marginLeft="280dp"
-        android:layout_marginTop="50dp">
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/profilePhotoCV"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:cardCornerRadius="250dp"
-        android:layout_gravity="center">
-
-        <ImageView
-            android:id="@+id/profilePhoto"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_foreground" />
-
-    </androidx.cardview.widget.CardView>
-
-</androidx.cardview.widget.CardView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
