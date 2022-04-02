@@ -15,7 +15,7 @@ serverPort = 8080
 
 class CurrencyApi:
     def __init__(self) -> None:
-        api_key = "&access_key=3p6PQYrYrFwyQ3FCaSag"
+        api_key = "&access_key=GXRmNO2sPirxNQcg3gs1DmKfo"
         base_api = "https://fcsapi.com/api-v3/forex/latest?"
         symbols = "symbol="
         symbols_list = ['USD','EUR','GBP','ILS','CNY']
@@ -40,10 +40,10 @@ class CurrencyApi:
                 for item in data_list:
                     self.data[item['s']] = (item['c'], item['cp'])
                 self.lock.release()
-                time.sleep(300)
+                time.sleep(900)
             except Exception as e:
                 print("Api Update error" + str(e))
-                time.sleep(300)
+                time.sleep(900)
                 continue
         
     def run(self):

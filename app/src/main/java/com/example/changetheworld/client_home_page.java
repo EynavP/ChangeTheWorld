@@ -53,11 +53,16 @@ public class client_home_page<OnResume> extends AppCompatActivity {
         Thread t = new Thread(() -> {
 
             ArrayList<String> symbols = new ArrayList<>();
-            symbols.add(getString(R.string.USD) +'/'+localCurrency);
-            symbols.add(getString(R.string.EUR) +'/'+localCurrency);
-            symbols.add(getString(R.string.CNY) +'/'+localCurrency);
-            symbols.add(getString(R.string.ILS) +'/'+localCurrency);
-            symbols.add(getString(R.string.GBP) +'/'+localCurrency);
+            if(!getString(R.string.USD).equals(localCurrency))
+                symbols.add(getString(R.string.USD) +'/'+localCurrency);
+            if(!getString(R.string.EUR).equals(localCurrency))
+                symbols.add(getString(R.string.EUR) +'/'+localCurrency);
+            if(!getString(R.string.CNY).equals(localCurrency))
+                symbols.add(getString(R.string.CNY) +'/'+localCurrency);
+            if(!getString(R.string.ILS).equals(localCurrency))
+                symbols.add(getString(R.string.ILS) +'/'+localCurrency);
+            if(!getString(R.string.GBP).equals(localCurrency))
+                symbols.add(getString(R.string.GBP) +'/'+localCurrency);
 
             HashMap<String, ArrayList<Float>> currency_data = api.getCloseAndChangePrice(symbols);
 

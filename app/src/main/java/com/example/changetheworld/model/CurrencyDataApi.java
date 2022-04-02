@@ -18,40 +18,32 @@ import org.json.JSONException;
 import org.json.JSONObject;
 public class CurrencyDataApi implements CurrencyDataApiInterface{
 
-
-
-    private String api_key = "&access_key=3p6PQYrYrFwyQ3FCaSag";
-    private String base_api = "https://fcsapi.com/api-v3/forex/latest?";
-    private String symbol = "symbol=";
-
+    private String base_api = "http://10.0.2.2:8080?symbol=";
     DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
     public HashMap<String, ArrayList<Float>> getCloseAndChangePrice(ArrayList<String> pairs){
-        String query = base_api + symbol;
+        String query = base_api;
         for (String pair: pairs) {
             query += pair + ',';
         }
         query = query.substring(0,  query.length() -1 );
-        query += api_key;
         HashMap<String, ArrayList<Float>> currency_data = new HashMap<>();
         try {
             URL url = new URL(query);;
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
             Scanner s = new Scanner(new BufferedReader(new InputStreamReader(in)));
-            JSONObject data = null;
             String result = "";
             while (s.hasNext()){
                 result += s.next();
             }
-            data = new JSONObject(result);
-            JSONArray results = data.getJSONArray("response");
             urlConnection.disconnect();
-            for(int i = 0; i < results.length(); i++){
-                JSONObject last_day = (JSONObject) results.get(i);
-                Float close_price = Float.parseFloat(df.format(Float.parseFloat(last_day.getString("c"))));
-                String change = last_day.getString("cp");
+            JSONArray data = new JSONArray(result);
+            for(int i = 0; i < data.length(); i++){
+                JSONObject data_field = (JSONObject) data.get(i);
+                Float close_price = Float.parseFloat(df.format(Float.parseFloat(data_field.getString("c"))));
+                String change = data_field.getString("cp");
                 Float change_price = Float.parseFloat(df.format(Float.parseFloat(change.replace("%","").replace("+","").replace("-",""))));
                 if(change.contains("-")){
                     change_price *= -1;
@@ -59,8 +51,8 @@ public class CurrencyDataApi implements CurrencyDataApiInterface{
                 ArrayList<Float> price_data = new ArrayList<>();
                 price_data.add(close_price);
                 price_data.add(change_price);
-                int index_of_end = last_day.getString("s").indexOf("/");
-                String sym = last_day.getString("s").substring(0, index_of_end);
+                int index_of_end = data_field.getString("s").indexOf("/");
+                String sym = data_field.getString("s").substring(0,index_of_end);
                 currency_data.put(sym, price_data);
             }
             return currency_data;
