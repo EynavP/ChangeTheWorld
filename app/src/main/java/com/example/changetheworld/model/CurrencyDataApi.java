@@ -18,7 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 public class CurrencyDataApi implements CurrencyDataApiInterface{
 
-    private String base_api = "http://10.0.2.2:8080?symbol=";
+    private String base_api = "http://193.106.55.105:80?symbol=";
     DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
