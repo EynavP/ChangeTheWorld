@@ -64,7 +64,7 @@
         android:layout_marginLeft="116dp"
         android:layout_marginTop="33dp"
         android:layout_marginEnd="121dp"
-        android:inputType="text"
+        android:inputType="number"
         android:paddingStart="20dp" />
 
     <TextView
@@ -229,7 +229,7 @@
         android:layout_marginTop="473dp"
         android:layout_marginEnd="218dp"
         android:background="@drawable/empty_rectangle"
-        android:inputType="text"
+        android:inputType="date"
         android:paddingStart="20dp" />
 
     <TextView
@@ -259,7 +259,7 @@
         android:layout_marginTop="473dp"
         android:layout_marginEnd="51dp"
         android:background="@drawable/empty_rectangle"
-        android:inputType="text"
+        android:inputType="number"
         android:paddingStart="20dp" />
 
     <TextView

@@ -35,4 +35,5 @@
     <string name="PrivateClient">PrivateClient</string>
     <string name="invalid_business_number">Invalid business number</string>
     <string name="invalid_business_address">Invalid business address</string>
+    <string name="invalid_deposite_amount">Invalid Deposite Amount</string>
 </resources>

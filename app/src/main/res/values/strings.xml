@@ -93,5 +93,16 @@
     <string name="swift_code">Swift Code</string>
     <string name="welcome_back">Welcome Back</string>
     <string name="currencies_rates">Currencies Rates</string>
+    <string name="from_invalid">from amount invalid, please try again</string>
+    <string name="carnNumber_invalid">card number invalid, please try again</string>
+    <string name="ownerName_invalid">owner name invalid, please try again</string>
+    <string name="ownerId_invalid">owner id invalid, please try again</string>
+    <string name="expireDate_invalid">expire date invalid, please try again</string>
+    <string name="cvv_invalid">cvv invalid, please try again</string>
+    <string name="invalid_deposite_amount">Invalid Deposite Amount</string>
+    <string name="account_number">Account Number</string>
+    <string name="bankName_invalid">bank name invalid, please try again</string>
+    <string name="swiftCode_invalid">swift code invalid, please try again</string>
+    <string name="accountNumber_invalid">account number invalid, please try again</string>
 
 </resources>

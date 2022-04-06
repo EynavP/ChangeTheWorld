@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +62,7 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         intent.putExtra("subWalletName",items.get(position).getCurrency());
         intent.putExtra(getString(R.string.userName), userName);
         intent.putExtra("userType", userType);
+        intent.putExtra("localCurrencySymbol",symbol.getText().toString());
         startActivity(intent);
     }
 }

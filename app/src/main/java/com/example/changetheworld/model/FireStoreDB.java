@@ -13,14 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
-import com.example.changetheworld.RecycleSubWalletClickInterface;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -39,7 +37,7 @@ public class FireStoreDB implements DataBaseInterface {
     private static FireStoreDB single_instance = null;
     public FirebaseFirestore db;
 
-    Map<String,String> currenciesToSymbol = new HashMap<String, String>() {{
+    public Map<String,String> currenciesToSymbol = new HashMap<String, String>() {{
         put("USD", "$");
         put("EUR", "€");
         put("GBP", "£");
@@ -47,7 +45,15 @@ public class FireStoreDB implements DataBaseInterface {
         put("ILS", "₪");
     }};
 
-    Map<String, String> stateToCurrency = new HashMap<String, String>() {{
+    public Map<String,String> symbolToCurrency = new HashMap<String, String>() {{
+        put("$", "USD");
+        put("€", "EUR");
+        put("£", "GBP");
+        put("¥", "CNY");
+        put("₪", "ILS");
+    }};
+
+    public Map<String, String> stateToCurrency = new HashMap<String, String>() {{
         put("England", "GBP");
         put("United States", "USD");
         put("China", "CNY");
@@ -299,7 +305,7 @@ public class FireStoreDB implements DataBaseInterface {
 
 
     @Override
-    public void updateBalance(String user_name, String user_type, String wallet_name, float amount_in_foreign_currency, String action, Context context) {
+    public void updateBalance(String user_name, String user_type, String wallet_name, float amount_in_foreign_currency, String action, Context context, Intent intent) {
         db.collection(user_type)
                 .document(user_name)
                 .collection("Wallet")
@@ -338,6 +344,10 @@ public class FireStoreDB implements DataBaseInterface {
                                         .collection("Transactions")
                                         .document()
                                         .set(transactionData)
+                                        .addOnSuccessListener(unused1 -> {
+                                            Toast.makeText(context, "deposit succeeded", Toast.LENGTH_LONG).show();
+                                            context.startActivity(intent);
+                                        })
                                         .addOnFailureListener(e -> {
                                             Toast.makeText(context, "Cannot add transaction",Toast.LENGTH_LONG).show();
                                         });
