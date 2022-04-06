@@ -39,7 +39,21 @@ public class FireStoreDB implements DataBaseInterface {
     private static FireStoreDB single_instance = null;
     public FirebaseFirestore db;
 
-    Map<String,String> currenciesToSymbol;
+    Map<String,String> currenciesToSymbol = new HashMap<String, String>() {{
+        put("USD", "$");
+        put("EUR", "€");
+        put("GBP", "£");
+        put("CNY", "¥");
+        put("ILS", "₪");
+    }};
+
+    Map<String, String> stateToCurrency = new HashMap<String, String>() {{
+        put("England", "GBP");
+        put("United States", "USD");
+        put("China", "CNY");
+        put("Italy", "EUR");
+        put("Israel", "ILS");
+    }};
 
     private FireStoreDB() {
         db = FirebaseFirestore.getInstance();
@@ -54,12 +68,6 @@ public class FireStoreDB implements DataBaseInterface {
 
     private void createDefaultWallet(String userName, String localCurrency, String type, Context context, Intent intent) {
 
-        currenciesToSymbol = new HashMap<>();
-        currenciesToSymbol.put("USD", "$");
-        currenciesToSymbol.put("EUR", "€");
-        currenciesToSymbol.put("GBP", "£");
-        currenciesToSymbol.put("CNY", "¥");
-        currenciesToSymbol.put("ILS", "₪");
         List<Task<Void>> tasks = new ArrayList<>();
 
         for (String c : currenciesToSymbol.keySet()) {
@@ -270,16 +278,10 @@ public class FireStoreDB implements DataBaseInterface {
 
     @Override
     public void LoadWallets(Context context, String user_name, String user_type, ArrayList<Wallet> items, RecyclerView recyclerView, TextView totalBalance, TextView symbol) {
-        String[] wallets = {"USD","EUR","GBP","CNY","ILS"};
         DecimalFormat df = new DecimalFormat("0.00");
-        currenciesToSymbol = new HashMap<>();
-        currenciesToSymbol.put("USD", "$");
-        currenciesToSymbol.put("EUR", "€");
-        currenciesToSymbol.put("GBP", "£");
-        currenciesToSymbol.put("CNY", "¥");
-        currenciesToSymbol.put("ILS", "₪");
+
         List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
-        for (String currency: wallets) {
+        for (String currency: currenciesToSymbol.keySet()) {
             Task<DocumentSnapshot> tmp_wallet = db.collection(user_type).document(user_name).collection("Wallet").document(currency).get();
             tasks.add(tmp_wallet);
         }
@@ -407,7 +409,7 @@ public class FireStoreDB implements DataBaseInterface {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     List<DocumentSnapshot> transactions = queryDocumentSnapshots.getDocuments();
                     for (DocumentSnapshot doc: transactions) {
-                        Transaction tmp = new Transaction(doc.getString("amount"), doc.getString("date").replace("T", " "), doc.getString("action"));
+                        Transaction tmp = new Transaction(doc.getString("amount"), doc.getString("date").replace("T", " ").split("\\.")[0], doc.getString("action"));
                         items.add(tmp);
                     }
                     Collections.sort(items);
@@ -477,14 +479,7 @@ public class FireStoreDB implements DataBaseInterface {
                     }
                 });
 
-        Map<String, String> state = new HashMap<>();
-        state.put("England", "GBP");
-        state.put("United States", "USD");
-        state.put("China", "CNY");
-        state.put("Italy", "EUR");
-        state.put("Israel", "ILS");
-
-        createDefaultWallet(user.getUser_name(), state.get(user.getState()), "BusinessClient", context, intent);
+        createDefaultWallet(user.getUser_name(), stateToCurrency.get(user.getState()), "BusinessClient", context, intent);
 
     }
 }
