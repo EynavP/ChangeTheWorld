@@ -50,7 +50,7 @@ public class WithdrawPage extends AppCompatActivity {
         symbols.add(local_currency + '/' + wallet_currency);
         CurrencyDataApiInterface api = new CurrencyDataApi();
 
-        fromAmount = findViewById(R.id.fromAmonut);
+        fromAmount = findViewById(R.id.fromAmount);
         fromAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -92,10 +92,10 @@ public class WithdrawPage extends AppCompatActivity {
 
         deposit = findViewById(R.id.depositBtn);
         deposit.setOnClickListener(view -> {
-            String from = ((EditText) findViewById(R.id.fromAmonut)).getText().toString();
-            String bankName = ((EditText) findViewById(R.id.cardNumber)).getText().toString();
-            String swiftCode = ((EditText) findViewById(R.id.ownerName)).getText().toString();
-            String accountNumber = ((EditText) findViewById(R.id.ownerId)).getText().toString();
+            String from = ((EditText) findViewById(R.id.fromAmount)).getText().toString();
+            String bankName = ((EditText) findViewById(R.id.bankName)).getText().toString();
+            String swiftCode = ((EditText) findViewById(R.id.swiftCode)).getText().toString();
+            String accountNumber = ((EditText) findViewById(R.id.accountNumber)).getText().toString();
             String to = toAmount.getText().toString();
 
 

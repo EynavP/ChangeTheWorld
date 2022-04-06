@@ -53,7 +53,7 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/fromAmonut"
+        android:id="@+id/fromAmount"
         android:layout_width="156dp"
         android:layout_height="54dp"
         android:layout_below="@+id/WithdrawTitle"
@@ -100,7 +100,7 @@
         android:id="@+id/toAmonut"
         android:layout_width="wrap_content"
         android:layout_height="34dp"
-        android:layout_below="@+id/fromAmonut"
+        android:layout_below="@+id/fromAmount"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
@@ -188,7 +188,7 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/cardNumber"
+        android:id="@+id/accountNumber"
         android:layout_width="286dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/accountNumberTitle"
