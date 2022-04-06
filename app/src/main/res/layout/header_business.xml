@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="270dp"
+    android:background="@drawable/business_home_page_top"
+    android:orientation="vertical"
+    android:layout_marginTop="-10dp"
+    android:padding="20dp">
+
+
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="-20dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/username_nav_header"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/username"
+        android:textSize="20sp" />
+
+
+</LinearLayout>
