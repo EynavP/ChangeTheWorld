@@ -91,5 +91,7 @@
     <string name="withdraw">Withdraw</string>
     <string name="bank_name">Bank Name</string>
     <string name="swift_code">Swift Code</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="currencies_rates">Currencies Rates</string>
 
 </resources>

@@ -8,46 +8,81 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/cardCol">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cardContainer"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:background="@drawable/empty_rectangle">
 
 
             <TextView
                 android:id="@+id/currencyName"
-                android:layout_width="74dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="10dp"
+                android:layout_width="59dp"
+                android:layout_height="29dp"
+                android:layout_marginEnd="76dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/value"
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/daily_change"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/value_title"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/daily_change"
-                android:layout_width="74dp"
-                android:layout_height="28dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="16dp"
+                android:id="@+id/value_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:letterSpacing="0.25"
+                android:text="@string/value"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/daily_title"
+                app:layout_constraintHorizontal_bias="0.054"
+                app:layout_constraintStart_toEndOf="@+id/symbolCurrency"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/daily_title"
+                android:layout_width="130dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:letterSpacing="0.25"
                 android:text="@string/daily_change"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/daily_change"
+                android:layout_width="57dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="44dp"
+                android:text="@string/daily_change"
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.825" />
 
             <ImageView
                 android:id="@+id/symbolCurrency"
@@ -58,7 +93,7 @@
                 android:layout_marginBottom="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/currencyName"
-                app:layout_constraintHorizontal_bias="0.174"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_launcher_background" />
