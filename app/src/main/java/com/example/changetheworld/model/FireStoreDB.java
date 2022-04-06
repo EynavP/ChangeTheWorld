@@ -89,12 +89,9 @@ public class FireStoreDB implements DataBaseInterface {
             tasks.add(task_wallet);
         }
 
-        Tasks.whenAllSuccess(tasks).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
-            @Override
-            public void onSuccess(List<Object> objects) {
-                intent.putExtra("userName", userName);
-                context.startActivity(intent);
-            }
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
+            intent.putExtra("userName", userName);
+            context.startActivity(intent);
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -118,16 +115,13 @@ public class FireStoreDB implements DataBaseInterface {
         tasks.add(task_client);
         tasks.add(task_business);
 
-        Tasks.whenAllSuccess(tasks).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
-            @Override
-            public void onSuccess(List<Object> objects) {
-                DocumentSnapshot client = (DocumentSnapshot) objects.get(0);
-                DocumentSnapshot business = (DocumentSnapshot) objects.get(1);
-                if (!client.exists() && !business.exists()) {
-                    SavePrivateClient(context, user, intent);
-                } else {
-                    Toast.makeText(context, "UserName already exists", Toast.LENGTH_LONG).show();
-                }
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
+            DocumentSnapshot client = (DocumentSnapshot) objects.get(0);
+            DocumentSnapshot business = (DocumentSnapshot) objects.get(1);
+            if (!client.exists() && !business.exists()) {
+                SavePrivateClient(context, user, intent);
+            } else {
+                Toast.makeText(context, "UserName already exists", Toast.LENGTH_LONG).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -160,37 +154,17 @@ public class FireStoreDB implements DataBaseInterface {
         StorageReference personalImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_PERSONAL_PHOTO + ".jpg");
         StorageReference passportImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_PASSPORT_PHOTO + ".jpg");
         UploadTask personal_photo_task = personalImageRef.putBytes(user.getPhoto());
-        personal_photo_task.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
+        personal_photo_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
 
 
         UploadTask passport_task = passportImageRef.putBytes(user.getPassport());
-        passport_task.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
+        passport_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
 
         db.collection("PrivateClient")
                 .document(user.getUser_name())
                 .set(data)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(context, "Client created successfully", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Fail create new client : " + e.toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                .addOnSuccessListener(unused -> Toast.makeText(context, "Client created successfully", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(context, "Fail create new client : " + e.toString(), Toast.LENGTH_LONG).show());
 
         createDefaultWallet(user.getUser_name(), user.getLocal_currency(), "PrivateClient", context, intent);
     }
@@ -209,23 +183,15 @@ public class FireStoreDB implements DataBaseInterface {
         tasks.add(task_client);
         tasks.add(task_business);
 
-        Tasks.whenAllSuccess(tasks).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
-            @Override
-            public void onSuccess(List<Object> objects) {
-                DocumentSnapshot client = (DocumentSnapshot) objects.get(0);
-                DocumentSnapshot business = (DocumentSnapshot) objects.get(1);
-                if (!client.exists() && !business.exists()) {
-                    SaveBusinessClient(context, businessClient, intent);
-                } else {
-                    Toast.makeText(context, "UserName already exists", Toast.LENGTH_LONG).show();
-                }
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
+            DocumentSnapshot client = (DocumentSnapshot) objects.get(0);
+            DocumentSnapshot business = (DocumentSnapshot) objects.get(1);
+            if (!client.exists() && !business.exists()) {
+                SaveBusinessClient(context, businessClient, intent);
+            } else {
+                Toast.makeText(context, "UserName already exists", Toast.LENGTH_LONG).show();
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, "Fail to connect to databases " + e.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
+        }).addOnFailureListener(e -> Toast.makeText(context, "Fail to connect to databases " + e.toString(), Toast.LENGTH_LONG).show());
 
     }
 
@@ -235,30 +201,22 @@ public class FireStoreDB implements DataBaseInterface {
         db.collection(type)
                 .document(user_name)
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            if (password.equals(documentSnapshot.getString("password")) && user_name.equals(documentSnapshot.getString("user_name"))) {
-                                intent.putExtra("userName", user_name);
-                                if (type.equals("PrivateClient"))
-                                    intent.putExtra("Local Currency", documentSnapshot.getString("currency"));
-                                context.startActivity(intent);
-                            }
-                            else {
-                                Toast.makeText(context, "UserName or password are incorrect", Toast.LENGTH_LONG).show();
-                            }
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        if (password.equals(documentSnapshot.getString("password")) && user_name.equals(documentSnapshot.getString("user_name"))) {
+                            intent.putExtra("userName", user_name);
+                            if (type.equals("PrivateClient"))
+                                intent.putExtra("Local Currency", documentSnapshot.getString("currency"));
+                            context.startActivity(intent);
                         }
                         else {
                             Toast.makeText(context, "UserName or password are incorrect", Toast.LENGTH_LONG).show();
                         }
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, "Fail to connect to databases " + e.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
+                    else {
+                        Toast.makeText(context, "UserName or password are incorrect", Toast.LENGTH_LONG).show();
+                    }
+                }).addOnFailureListener(e -> Toast.makeText(context, "Fail to connect to databases " + e.toString(), Toast.LENGTH_LONG).show());
     }
 
     @Override
@@ -267,12 +225,9 @@ public class FireStoreDB implements DataBaseInterface {
         String personal_photo_path = "images/" + user_name + "/" + "personal_photo.jpg";
         StorageReference PersonalpathReference = storageRef.child(personal_photo_path);
         Task<byte[]> personal_photo = PersonalpathReference.getBytes(2000000000);
-        personal_photo.addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                Bitmap photo = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                profilPhoto.setImageBitmap(photo);
-            }
+        personal_photo.addOnSuccessListener(bytes -> {
+            Bitmap photo = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            profilPhoto.setImageBitmap(photo);
         });
     }
 
@@ -285,62 +240,59 @@ public class FireStoreDB implements DataBaseInterface {
             Task<DocumentSnapshot> tmp_wallet = db.collection(user_type).document(user_name).collection("Wallet").document(currency).get();
             tasks.add(tmp_wallet);
         }
-        Tasks.whenAllSuccess(tasks).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
-            @Override
-            public void onSuccess(List<Object> objects) {
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
 
-                AtomicReference<Float> sum = new AtomicReference<>((float) 0);
-                AtomicReference<String> local_currencey_value = new AtomicReference<>();
-                List<DocumentSnapshot> walletsData = new ArrayList<>();
-                for (Object obj : objects) {
-                    DocumentSnapshot tmp_wallet = (DocumentSnapshot) obj;
-                    walletsData.add(tmp_wallet);
-                }
-                CurrencyDataApiInterface api = new CurrencyDataApi();
-                HashMap<String, String> doc_data = new HashMap<>();
-                ArrayList<String> symbols_for_api = new ArrayList<>();
-                String local_currency = "";
-                String user_name = "";
-                for (DocumentSnapshot data : walletsData) {
-                    String balance = data.getString("balance");
-                    String currency = data.getString("currency");
-                    local_currency = data.getString("localCurrency");
-                    user_name = data.getString("user_name");
-                    doc_data.put(currency, balance);
-                    if(!currency.equals(local_currency))
-                        symbols_for_api.add((currency + '/' + local_currency));
-                }
-
-                String finalUser_name = user_name;
-                String finalLocal_currency = local_currency;
-
-
-
-                Thread t = new Thread(() -> {
-
-                    HashMap<String, ArrayList<Float>> price = api.getCloseAndChangePrice(symbols_for_api);
-
-                    for (String c : price.keySet()) {
-                        float val = price.get(c).get(0);
-                        local_currencey_value.set(df.format(val * Float.parseFloat(doc_data.get(c))));
-                        Wallet walletData = new Wallet(doc_data.get(c), c, finalUser_name, currenciesToSymbol.get(c), local_currencey_value.get(), currenciesToSymbol.get(finalLocal_currency));
-                        ((Activity) context).runOnUiThread(() -> {
-                            items.add(walletData);
-                            sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(walletData.getValueLocalCurrency()))));
-                        });
-                    }
-
-                    ((Activity) context).runOnUiThread(() -> {
-                        items.add(new Wallet(doc_data.get(finalLocal_currency),finalLocal_currency,finalUser_name,currenciesToSymbol.get(finalLocal_currency),doc_data.get(finalLocal_currency),currenciesToSymbol.get(finalLocal_currency)));
-                        sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(doc_data.get(finalLocal_currency)))));
-                        AdapterWallet adapterWallet = new AdapterWallet(context, items);
-                        recyclerView.setAdapter(adapterWallet);
-                        totalBalance.setText(String.valueOf(df.format(sum.get())));
-                        symbol.setText(currenciesToSymbol.get(finalLocal_currency));
-                    });
-                });
-                t.start();
+            AtomicReference<Float> sum = new AtomicReference<>((float) 0);
+            AtomicReference<String> local_currencey_value = new AtomicReference<>();
+            List<DocumentSnapshot> walletsData = new ArrayList<>();
+            for (Object obj : objects) {
+                DocumentSnapshot tmp_wallet = (DocumentSnapshot) obj;
+                walletsData.add(tmp_wallet);
             }
+            CurrencyDataApiInterface api = new CurrencyDataApi();
+            HashMap<String, String> doc_data = new HashMap<>();
+            ArrayList<String> symbols_for_api = new ArrayList<>();
+            String local_currency = "";
+            String user_name1 = "";
+            for (DocumentSnapshot data : walletsData) {
+                String balance = data.getString("balance");
+                String currency = data.getString("currency");
+                local_currency = data.getString("localCurrency");
+                user_name1 = data.getString("user_name");
+                doc_data.put(currency, balance);
+                if(!currency.equals(local_currency))
+                    symbols_for_api.add((currency + '/' + local_currency));
+            }
+
+            String finalUser_name = user_name1;
+            String finalLocal_currency = local_currency;
+
+
+
+            Thread t = new Thread(() -> {
+
+                HashMap<String, ArrayList<Float>> price = api.getCloseAndChangePrice(symbols_for_api);
+
+                for (String c : price.keySet()) {
+                    float val = price.get(c).get(0);
+                    local_currencey_value.set(df.format(val * Float.parseFloat(doc_data.get(c))));
+                    Wallet walletData = new Wallet(doc_data.get(c), c, finalUser_name, currenciesToSymbol.get(c), local_currencey_value.get(), currenciesToSymbol.get(finalLocal_currency));
+                    ((Activity) context).runOnUiThread(() -> {
+                        items.add(walletData);
+                        sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(walletData.getValueLocalCurrency()))));
+                    });
+                }
+
+                ((Activity) context).runOnUiThread(() -> {
+                    items.add(new Wallet(doc_data.get(finalLocal_currency),finalLocal_currency,finalUser_name,currenciesToSymbol.get(finalLocal_currency),doc_data.get(finalLocal_currency),currenciesToSymbol.get(finalLocal_currency)));
+                    sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(doc_data.get(finalLocal_currency)))));
+                    AdapterWallet adapterWallet = new AdapterWallet(context, items);
+                    recyclerView.setAdapter(adapterWallet);
+                    totalBalance.setText(String.valueOf(df.format(sum.get())));
+                    symbol.setText(currenciesToSymbol.get(finalLocal_currency));
+                });
+            });
+            t.start();
         });
     }
 
@@ -449,39 +401,18 @@ public class FireStoreDB implements DataBaseInterface {
         StorageReference personalImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_BUSINESS_APPROVAL + ".jpg");
         StorageReference passportImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_OWNER_ID + ".jpg");
         UploadTask business_approval_task = personalImageRef.putBytes(user.getBusiness_approval_document());
-        business_approval_task.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
+        business_approval_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
 
 
         UploadTask owner_id_task = passportImageRef.putBytes(user.getGetBusiness_owner_id());
-        owner_id_task.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
+        owner_id_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
 
 
         db.collection("BusinessClient")
                 .document(user.getUser_name())
                 .set(data)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(context, "Business created successfully", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Fail create new business : " + e.toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                .addOnSuccessListener(unused -> Toast.makeText(context, "Business created successfully", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(context, "Fail create new business : " + e.toString(), Toast.LENGTH_LONG).show());
 
         createDefaultWallet(user.getUser_name(), stateToCurrency.get(user.getState()), "BusinessClient", context, intent);
 
