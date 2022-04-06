@@ -28,6 +28,7 @@ import com.google.firebase.storage.UploadTask;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -409,6 +410,7 @@ public class FireStoreDB implements DataBaseInterface {
                         Transaction tmp = new Transaction(doc.getString("amount"), doc.getString("date").replace("T", " "), doc.getString("action"));
                         items.add(tmp);
                     }
+                    Collections.sort(items);
                     AdapterTransaction adapterSubWallet = new AdapterTransaction(context, items);
                     recyclerView.setAdapter(adapterSubWallet);
                 });

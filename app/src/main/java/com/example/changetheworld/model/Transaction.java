@@ -1,8 +1,13 @@
 package com.example.changetheworld.model;
 
-import com.google.type.DateTime;
 
-public class Transaction {
+import android.annotation.SuppressLint;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Transaction implements Comparable<Transaction>{
     String amount;
     String create_time;
     String action;
@@ -35,5 +40,19 @@ public class Transaction {
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+
+    @Override
+    public int compareTo(Transaction transaction) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date x = formatter.parse(this.create_time.replace("T"," "));
+            Date y = formatter.parse(transaction.create_time.replace("T"," "));
+            return y.compareTo(x);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
