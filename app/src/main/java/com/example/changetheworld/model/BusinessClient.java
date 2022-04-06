@@ -13,6 +13,8 @@ public class BusinessClient {
     private String business_owner_name;
     private byte[] business_approval_document;
     private byte[] getBusiness_owner_id;
+    private String business_address;
+    private String business_no;
 
     final String KEY_BUSINESS_NAME = "business_name";
     final String KEY_MAIL = "mail";
@@ -27,7 +29,7 @@ public class BusinessClient {
 
 
 
-    public BusinessClient(String business_name, String mail_address, String state, String phone, String user_name, String password, String business_owner_name, byte[] business_approval_document, byte[] getBusiness_owner_id) {
+    public BusinessClient(String business_name, String mail_address, String state, String phone, String user_name, String password, String business_owner_name, byte[] business_approval_document, byte[] getBusiness_owner_id, String business_no, String business_address) {
         this.business_name = business_name;
         this.mail_address = mail_address;
         this.state = state;
@@ -37,6 +39,25 @@ public class BusinessClient {
         this.business_owner_name = business_owner_name;
         this.business_approval_document = business_approval_document;
         this.getBusiness_owner_id = getBusiness_owner_id;
+        this.business_address = business_address;
+        this.business_no = business_no;
+
+    }
+
+    public String getBusiness_address() {
+        return business_address;
+    }
+
+    public void setBusiness_address(String business_address) {
+        this.business_address = business_address;
+    }
+
+    public String getBusiness_no() {
+        return business_no;
+    }
+
+    public void setBusiness_no(String business_no) {
+        this.business_no = business_no;
     }
 
     public String getBusiness_name() {

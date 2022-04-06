@@ -429,6 +429,8 @@ public class FireStoreDB implements DataBaseInterface {
         final String KEY_OWNER_NAME = "owner_name";
         final String KEY_BUSINESS_APPROVAL = "business_approval";
         final String KEY_OWNER_ID = "owner_id";
+        final String KEY_BUSINESS_ADDRESS = "business_address";
+        final String KEY_BUSINESS_NO = "business_no";
 
 
         Map<String, Object> data = new HashMap<>();
@@ -439,6 +441,8 @@ public class FireStoreDB implements DataBaseInterface {
         data.put(KEY_USER_NAME, user.getUser_name());
         data.put(KEY_PASSWORD, user.getPassword());
         data.put(KEY_OWNER_NAME, user.getBusiness_owner_name());
+        data.put(KEY_BUSINESS_ADDRESS, user.getBusiness_address());
+        data.put(KEY_BUSINESS_NO, user.getBusiness_no());
 
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();

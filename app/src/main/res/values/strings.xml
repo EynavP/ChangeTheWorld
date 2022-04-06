@@ -79,5 +79,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="invalid_business_number">Invalid business number</string>
+    <string name="invalid_business_address">Invalid business address</string>
 
 </resources>
