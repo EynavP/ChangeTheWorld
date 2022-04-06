@@ -154,7 +154,7 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="58dp"
                     android:background="@drawable/empty_rectangle"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:paddingStart="20dp" />
 
                 <TextView

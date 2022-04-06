@@ -80,6 +80,8 @@ public class CreateBusinessAccount extends AppCompatActivity {
             String user_name = ((EditText) findViewById(R.id.enterBusinessUsername)).getText().toString();
             String password = ((EditText) findViewById(R.id.enterBusinessPassword)).getText().toString();
             String business_owner_name = ((EditText) findViewById(R.id.enterBusinessOwnerName)).getText().toString();
+            String business_address = ((EditText)findViewById(R.id.enterAddressBusiness)).getText().toString();
+            String business_no = ((EditText)findViewById(R.id.enternoBusiness)).getText().toString();
 
 
             if (business_name.isEmpty()){
@@ -115,18 +117,24 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, R.string.Invalid_business_approval_document, Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (business_chosen_owner_id == null){
+            else if (business_chosen_owner_id == null) {
                 Toast toast = Toast.makeText(this, R.string.Invalid_business_owner_id, Toast.LENGTH_SHORT);
                 toast.show();
+            }
+            else if (business_no == null) {
+                Toast toast = Toast.makeText(this, R.string.invalid_business_number, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else if (business_address == null){
+                    Toast toast = Toast.makeText(this, R.string.invalid_business_address, Toast.LENGTH_SHORT);
+                    toast.show();
             }else { //TODO: ADD DATABASE HERE
-                BusinessClient business_client = new BusinessClient(business_name,mail,state,phone,user_name,password,business_owner_name,business_chosen_approvel,business_chosen_owner_id);
+                BusinessClient business_client = new BusinessClient(business_name,mail,state,phone,user_name,password,business_owner_name,business_chosen_approvel,business_chosen_owner_id,business_no,business_address);
                 Intent intent = new Intent(this, BusinessLogin.class);
                 FireStoreDB.getInstance().VerifyAndSaveBusiness(this, business_client, intent);
             }
         });
-
     }
-
 
     public void imageChooser() {
 
