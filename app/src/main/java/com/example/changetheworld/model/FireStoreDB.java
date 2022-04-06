@@ -345,7 +345,7 @@ public class FireStoreDB implements DataBaseInterface {
                                         .document()
                                         .set(transactionData)
                                         .addOnSuccessListener(unused1 -> {
-                                            Toast.makeText(context, "deposit succeeded", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(context, action.equals("+") ? "deposit" : "withdraw" + " succeeded", Toast.LENGTH_LONG).show();
                                             context.startActivity(intent);
                                         })
                                         .addOnFailureListener(e -> {

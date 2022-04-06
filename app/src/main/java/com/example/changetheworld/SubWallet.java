@@ -44,7 +44,6 @@ public class SubWallet extends AppCompatActivity {
             moveToDeposite();
         });
         withdraw.setOnClickListener(view -> {
-            //FireStoreDB.getInstance().updateBalance(userName, userType,subWalletName,50,"-",this);
             moveToWithdraw();
         });
 

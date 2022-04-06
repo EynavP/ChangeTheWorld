@@ -84,7 +84,7 @@ public class DepositPage extends AppCompatActivity {
                         HashMap<String, ArrayList<Float>> rate = api.getCloseAndChangePrice(symbols);
                         result = String.valueOf(rate.get(local_currency).get(0) * value);
                     }
-                    toAmount.setText(result);
+                    runOnUiThread(() -> toAmount.setText(result));
                 });
                 t.start();
             }

@@ -43,7 +43,7 @@ public class WithdrawPage extends AppCompatActivity {
         userName = getIntent().getStringExtra(getString(R.string.userName));
         userType = getIntent().getStringExtra("userType");
         localCurrencySymbol = getIntent().getStringExtra("localCurrencySymbol");
-        toAmount = findViewById(R.id.toAmonut);
+        toAmount = findViewById(R.id.toAmount);
         String local_currency = FireStoreDB.getInstance().symbolToCurrency.get(localCurrencySymbol);
         String wallet_currency = subWalletName;
         ArrayList<String> symbols = new ArrayList<>();
@@ -78,7 +78,7 @@ public class WithdrawPage extends AppCompatActivity {
                         HashMap<String, ArrayList<Float>> rate = api.getCloseAndChangePrice(symbols);
                         result = String.valueOf(rate.get(local_currency).get(0) * value);
                     }
-                    toAmount.setText(result);
+                    runOnUiThread(() -> toAmount.setText(result));
                 });
                 t.start();
             }
