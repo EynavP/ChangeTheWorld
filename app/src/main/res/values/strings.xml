@@ -88,5 +88,8 @@
     <string name="owner_id">Owner Id</string>
     <string name="expire_date">Expire date</string>
     <string name="cvv">CVV</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="swift_code">Swift Code</string>
 
 </resources>
