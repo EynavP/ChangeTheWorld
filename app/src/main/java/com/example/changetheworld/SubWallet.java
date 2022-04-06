@@ -39,11 +39,13 @@ public class SubWallet extends AppCompatActivity {
         userType = getIntent().getStringExtra("userType");
 
         deposit.setOnClickListener(view -> {
-            FireStoreDB.getInstance().updateBalance(userName, userType, subWalletName, 20, "+", this);
+            //FireStoreDB.getInstance().updateBalance(userName, userType, subWalletName, 20, "+", this);
+            moveToDeposite();
         });
         withdraw.setOnClickListener(view -> {
             FireStoreDB.getInstance().updateBalance(userName, userType,subWalletName,50,"-",this);
         });
+
 
 
 
@@ -56,7 +58,7 @@ public class SubWallet extends AppCompatActivity {
     }
 
     public void moveToDeposite(){
-        Intent intent = new Intent(this,client_home_page.class);
+        Intent intent = new Intent(this,DepositPage.class);
         startActivity(intent);
     }
     public void moveToWithdraw(){

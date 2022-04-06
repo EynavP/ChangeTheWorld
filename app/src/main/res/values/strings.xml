@@ -76,10 +76,17 @@
     <string name="gotoSubWallet">Sub Wallet</string>
     <string name="Date">Date</string>
     <string name="businessAddress">Business Address</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="invalid_business_number">Invalid business number</string>
     <string name="invalid_business_address">Invalid business address</string>
+    <string name="deposit">Deposit</string>
+    <string name="from">from</string>
+    <string name="to">to</string>
+    <string name="card_number">Card Number</string>
+    <string name="owner_name">Owner Name</string>
+    <string name="owner_id">Owner Id</string>
+    <string name="expire_date">Expire date</string>
+    <string name="cvv">CVV</string>
 
 </resources>
