@@ -63,6 +63,7 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         intent.putExtra(getString(R.string.userName), userName);
         intent.putExtra("userType", userType);
         intent.putExtra("localCurrencySymbol",symbol.getText().toString());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 }

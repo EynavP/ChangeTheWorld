@@ -86,5 +86,11 @@
         <item name="fontFamily">serif-monospace</item>
     </style>
 
+    <style name="littleTitle">
+        <item name = "android:textSize">15sp</item>
+        <item name = "android:textStyle">bold</item>
+        <item name = "android:letterSpacing">0.25</item>
+    </style>
+
 
 </resources>
