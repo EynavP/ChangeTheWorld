@@ -4,88 +4,152 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WalletActivity">
+    tools:context=".WalletActivity"
+    android:background="@drawable/wallet_back">
 
-    <ImageView
-        android:id="@+id/top_image"
-        android:layout_width="wrap_content"
-        android:layout_height="245dp"
-        android:layout_marginLeft="-1dp"
-        android:layout_marginTop="-21dp"
-        android:background="@drawable/round_background2" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/profilePhotoCV"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        app:cardCornerRadius="250dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center">
-
-        <ImageView
-            android:id="@+id/profilePhoto"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_foreground" />
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/user_name"
-        android:layout_width="127dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="57dp"
-        android:layout_toEndOf="@+id/profilePhotoCV"
-        android:textColor="@color/cardCol"
-        android:text="Username"/>
-
-    <TextView
-        android:id="@+id/balance"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/user_name"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="121dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="143dp"
-        android:text="Balance"
-        android:textAppearance="@style/balance" />
-
-    <TextView
-        android:id="@+id/symbol"
-        android:layout_width="28dp"
-        android:layout_height="24dp"
-        android:layout_below="@+id/user_name"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="87dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="278dp"
-        android:text="symbol"
-        android:textColor="@color/cardCol"/>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="775dp"
-        android:paddingTop="100dp">
+        android:id="@+id/top_wallet"
+        android:layout_width="wrap_content"
+        android:layout_height="230dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleWallet"
-            android:layout_width="318dp"
-            android:layout_height="461dp"
-            android:layout_alignParentLeft="true"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginLeft="37dp"
-            android:layout_marginTop="240dp"
-            android:layout_marginEnd="56dp" />
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="339dp"
+            app:navigationIcon="@drawable/wallet_hum_icon">
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/my_wallet"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="129dp"
+            android:layout_marginTop="59dp"
+            android:layout_marginEnd="133dp"
+            android:layout_marginBottom="233dp"
+            android:fontFamily="@font/comfortaa"
+            android:letterSpacing="0.25"
+            android:text="@string/my_wallet"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/balance"
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="108dp"
+            android:layout_marginTop="91dp"
+            android:layout_marginEnd="133dp"
+            android:fontFamily="@font/comfortaa"
+            android:letterSpacing="0.25"
+            android:text="Balance"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/symbol"
+            android:layout_width="28dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="275dp"
+            android:layout_marginTop="107dp"
+            android:layout_marginEnd="90dp"
+            android:fontFamily="@font/comfortaa"
+            android:letterSpacing="0.25"
+            android:text="symbol"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/total_balan"
+            android:layout_width="162dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="114dp"
+            android:layout_marginLeft="114dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="117dp"
+            android:fontFamily="@font/comfortaa"
+            android:letterSpacing="0.25"
+            android:text="@string/total_balance"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_wallet">
+
+        <View
+            android:id="@+id/rectangle_6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginLeft="21dp"
+            android:layout_marginEnd="21dp"
+            android:layout_marginBottom="-30dp"
+            android:background="@drawable/wallet_rec_items" />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rv_wallet_items"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:layout_marginTop="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleWallet"
+                android:layout_width="wrap_content"
+                android:layout_height="534dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
+                android:layout_marginEnd="38dp" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+    </RelativeLayout>
 
 </RelativeLayout>

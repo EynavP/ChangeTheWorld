@@ -104,5 +104,7 @@
     <string name="bankName_invalid">bank name invalid, please try again</string>
     <string name="swiftCode_invalid">swift code invalid, please try again</string>
     <string name="accountNumber_invalid">account number invalid, please try again</string>
+    <string name="my_wallet">My Wallet</string>
+    <string name="total_balance">Total Balance</string>
 
 </resources>

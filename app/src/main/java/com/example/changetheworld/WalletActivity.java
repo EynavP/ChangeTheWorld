@@ -35,8 +35,8 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
 
         userName = getIntent().getStringExtra(getString(R.string.userName));
         userType =  getIntent().getStringExtra("user_type");
-        user_nameTextView = findViewById(R.id.user_name);
-        user_nameTextView.setText(userName + "'s wallet");
+      //  user_nameTextView = findViewById(R.id.user_name);
+     //   user_nameTextView.setText(userName + "'s wallet");
 
         recyclerView= findViewById(R.id.recycleWallet);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:id="@+id/walletRecycleView"
-    >
+    android:id="@+id/walletRecycleView">
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +26,8 @@
             android:id="@+id/cardContainer"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:background="@drawable/empty_rectangle">
 
             <TextView
                 android:id="@+id/symbol_recycler"
