@@ -41,6 +41,7 @@
             android:layout_marginStart="115dp"
             android:layout_marginTop="75dp"
             android:layout_marginEnd="115dp"
+
             android:fontFamily="@font/comfortaa"
             android:letterSpacing="0.25"
             android:textAlignment="center"

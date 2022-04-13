@@ -427,5 +427,30 @@ public class FireStoreDB implements DataBaseInterface {
         createDefaultWallet(user.getUser_name(), stateToCurrency.get(user.getState()), "BusinessClient", context, intent);
 
     }
+
+//    public void searchChange(String state, String city, String street, RecyclerView recyclerView, Context context) {
+//        db.collection("BusinessClient")
+//                .get()
+//                .addOnSuccessListener(queryDocumentSnapshots -> {
+//                    List<DocumentSnapshot> business = queryDocumentSnapshots.getDocuments();
+//                    ArrayList<BusinessClient> businessClients = new ArrayList<>();
+//                    for (DocumentSnapshot b: business) {
+//                        BusinessClient tmp = new BusinessClient(b.getString("business_name"), b.getString("state"), b.getString("business_address"), b.getString("business_no"));
+//                        businessClients.add(tmp);
+//                    }
+//                    String chosenAddress = state + ", " + city + ", " + street;
+//                    businessClients.sort((businessClient1, businessClient2) -> {
+//                        String business_address1 = "";
+//                        //search business_address1 distance from chosenAddress;
+//                        String business_address2 = "";
+//                        //search business_address1 distance from chosenAddress
+//                        //return closest
+//                        return 0;
+//                    });
+//                    AdapterSearchBusiness adapterSearchBusiness = new AdapterSearchBusiness(context, businessClients);
+//                    recyclerView.setAdapter(adapterSearchBusiness);
+//                });
+//
+//    }
 }
 

@@ -44,6 +44,21 @@ public class BusinessClient {
 
     }
 
+    public BusinessClient(String business_name, String state, String business_address, String business_no) {
+        this.business_name = business_name;
+        this.mail_address = "";
+        this.state = state;
+        this.phone = "";
+        this.user_name = "";
+        this.password = "";
+        this.business_owner_name = "";
+        this.business_approval_document = null;
+        this.getBusiness_owner_id = null;
+        this.business_address = business_address;
+        this.business_no = business_no;
+
+    }
+
     public String getBusiness_address() {
         return business_address;
     }
