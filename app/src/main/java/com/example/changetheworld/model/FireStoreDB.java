@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -282,7 +283,7 @@ public class FireStoreDB implements DataBaseInterface {
                 for (String c : price.keySet()) {
                     float val = price.get(c).get(0);
                     local_currencey_value.set(df.format(val * Float.parseFloat(doc_data.get(c))));
-                    Wallet walletData = new Wallet(doc_data.get(c), c, finalUser_name, currenciesToSymbol.get(c), local_currencey_value.get(), currenciesToSymbol.get(finalLocal_currency));
+                    Wallet walletData = new Wallet(df.format(Float.parseFloat(doc_data.get(c))), c, finalUser_name, currenciesToSymbol.get(c), local_currencey_value.get(), currenciesToSymbol.get(finalLocal_currency));
                     ((Activity) context).runOnUiThread(() -> {
                         items.add(walletData);
                         sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(walletData.getValueLocalCurrency()))));
