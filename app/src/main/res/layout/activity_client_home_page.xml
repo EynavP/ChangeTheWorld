@@ -119,32 +119,81 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <View
-                    android:id="@+id/searchLine"
-                    android:layout_width="270dp"
-                    android:layout_height="38dp"
+                <EditText
+                    android:id="@+id/state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/welcome_back"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="62dp"
-                    android:layout_marginLeft="62dp"
-                    android:layout_marginTop="133dp"
-                    android:layout_marginEnd="62dp"
-                    android:background="@drawable/searchline" />
+                    android:layout_marginStart="31dp"
+                    android:layout_marginLeft="31dp"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginEnd="287dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:gravity="top"
+                    android:letterSpacing="0.25"
+                    android:hint="@string/State"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/search_bar"
-                    android:layout_width="270dp"
-                    android:layout_height="38dp"
-                    android:layout_below="@+id/username"
+                <EditText
+                    android:id="@+id/city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/welcome_back"
                     android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="61dp"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginEnd="63dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginStart="125dp"
+                    android:layout_marginLeft="125dp"
+                    android:layout_marginTop="71dp"
+                    android:layout_marginEnd="193dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:gravity="top"
+                    android:letterSpacing="0.25"
+                    android:hint="@string/city"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
+                <EditText
+                    android:id="@+id/no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/welcome_back"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="210dp"
+                    android:layout_marginLeft="210dp"
+                    android:layout_marginTop="69dp"
+                    android:layout_marginEnd="108dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:gravity="top"
+                    android:letterSpacing="0.25"
+                    android:hint="@string/NO"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/street"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/welcome_back"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="306dp"
+                    android:layout_marginLeft="306dp"
+                    android:layout_marginTop="69dp"
+                    android:layout_marginEnd="12dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:gravity="top"
+                    android:letterSpacing="0.25"
+                    android:hint="@string/street"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
             </RelativeLayout>
 
@@ -191,6 +240,18 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/search_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/currenciesRates"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="280dp"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="search" />
 
 
             </RelativeLayout>
