@@ -32,7 +32,7 @@ public class LocationDataApi implements LocationDataApiInterface{
             }
             urlConnection.disconnect();
             JSONArray data = new JSONArray(result);
-            return Float.parseFloat((String) data.get(0));
+            return Float.parseFloat(String.valueOf(data.get(0)));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (JSONException e) {

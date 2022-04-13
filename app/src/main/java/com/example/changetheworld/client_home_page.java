@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -45,6 +46,8 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
     NavigationView navigationView;
     Toolbar toolbar;
 
+    Button search;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,15 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         String localCurrency = getIntent().getStringExtra(getString(R.string.localCurrency));
         userName.setText(user_name);
         progressBar = findViewById(R.id.progressBar);
+
+        search = findViewById(R.id.search_button);
+        search.setOnClickListener(view -> {
+            String state = ((EditText) findViewById(R.id.state)).getText().toString();
+            String city = ((EditText) findViewById(R.id.city)).getText().toString();
+            String street = ((EditText) findViewById(R.id.street)).getText().toString();
+            String number = ((EditText) findViewById(R.id.no)).getText().toString();
+            FireStoreDB.getInstance().searchChange(state, city, street, number);
+        });
 
         Thread t = new Thread(() -> {
 
