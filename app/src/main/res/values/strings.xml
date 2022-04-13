@@ -106,5 +106,12 @@
     <string name="accountNumber_invalid">account number invalid, please try again</string>
     <string name="my_wallet">My Wallet</string>
     <string name="total_balance">Total Balance</string>
+    <string name="sunday">Sunday</string>
+    <string name="your_e_rate">Your\'e rate</string>
+    <string name="local_currency">Local currency</string>
+    <string name="rate">rate</string>
+    <string name="orders">Orders</string>
+    <string name="orders_ft">Orders for today</string>
+
 
 </resources>
