@@ -112,6 +112,13 @@
     <string name="rate">rate</string>
     <string name="orders">Orders</string>
     <string name="orders_ft">Orders for today</string>
+    <string name="new_orders">new orders</string>
+    <string name="cash_orders">cash orders</string>
+    <string name="new_rates">new rates</string>
+    <string name="you_got">You got</string>
+    <string name="new_rates_from_customers">new rates from customers</string>
+    <string name="city">City</string>
+    <string name="street">Street</string>
 
 
 </resources>

@@ -17,6 +17,7 @@ import com.example.changetheworld.model.CurrencyDataApiInterface;
 import com.example.changetheworld.model.FireStoreDB;
 import com.google.type.DateTime;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -39,6 +40,7 @@ public class DepositPage extends AppCompatActivity {
     TextView fromCurrency;
     EditText fromAmount;
     TextView toAmount;
+    DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +86,7 @@ public class DepositPage extends AppCompatActivity {
                         HashMap<String, ArrayList<Float>> rate = api.getCloseAndChangePrice(symbols);
                         result = String.valueOf(rate.get(local_currency).get(0) * value);
                     }
-                    runOnUiThread(() -> toAmount.setText(result));
+                    runOnUiThread(() -> toAmount.setText(df.format(Float.parseFloat(result))));
                 });
                 t.start();
             }

@@ -24,6 +24,8 @@ public class SubWallet extends AppCompatActivity {
     String userType;
     String subWalletName;
     String localCurrencySymbol;
+    TextView totalBalance;
+    TextView totalBalanceSymbol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,11 @@ public class SubWallet extends AppCompatActivity {
         userName = getIntent().getStringExtra(getString(R.string.userName));
         userType = getIntent().getStringExtra("userType");
         localCurrencySymbol = getIntent().getStringExtra("localCurrencySymbol");
+        totalBalance = findViewById(R.id.totalBalance);
+        totalBalanceSymbol = findViewById(R.id.totalBalanceSymbol);
+        String total_balance = getIntent().getStringExtra("subWalletBalance");
+        totalBalance.setText(total_balance);
+        totalBalanceSymbol.setText(FireStoreDB.getInstance().currenciesToSymbol.get(subWalletName));
 
         deposit.setOnClickListener(view -> {
             moveToDeposite();
