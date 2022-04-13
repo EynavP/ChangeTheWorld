@@ -15,6 +15,7 @@ import com.example.changetheworld.model.CurrencyDataApi;
 import com.example.changetheworld.model.CurrencyDataApiInterface;
 import com.example.changetheworld.model.FireStoreDB;
 
+import java.text.DecimalFormat;
 import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -33,6 +34,7 @@ public class WithdrawPage extends AppCompatActivity {
     TextView fromCurrency;
     EditText fromAmount;
     TextView toAmount;
+    DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,7 @@ public class WithdrawPage extends AppCompatActivity {
                         HashMap<String, ArrayList<Float>> rate = api.getCloseAndChangePrice(symbols);
                         result = String.valueOf(rate.get(local_currency).get(0) * value);
                     }
-                    runOnUiThread(() -> toAmount.setText(result));
+                    runOnUiThread(() -> toAmount.setText(df.format(Float.parseFloat(result))));
                 });
                 t.start();
             }
