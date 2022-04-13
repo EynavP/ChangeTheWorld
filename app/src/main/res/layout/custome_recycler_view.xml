@@ -40,7 +40,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/daily_change"
                 app:layout_constraintTop_toBottomOf="@+id/value_title"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:fontFamily="@font/comfortaa"/>
 
             <TextView
                 android:id="@+id/value_title"
@@ -56,33 +57,37 @@
                 app:layout_constraintEnd_toStartOf="@+id/daily_title"
                 app:layout_constraintHorizontal_bias="0.054"
                 app:layout_constraintStart_toEndOf="@+id/symbolCurrency"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/comfortaa"/>
 
             <TextView
                 android:id="@+id/daily_title"
                 android:layout_width="130dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
                 android:letterSpacing="0.25"
                 android:text="@string/daily_change"
                 android:textColor="@color/black"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/comfortaa"/>
 
             <TextView
                 android:id="@+id/daily_change"
-                android:layout_width="57dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="44dp"
+                android:layout_width="87dp"
+                android:layout_height="31dp"
+                android:layout_marginEnd="15dp"
                 android:text="@string/daily_change"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.825" />
+                app:layout_constraintVertical_bias="0.825"
+                android:fontFamily="@font/comfortaa"/>
 
             <ImageView
                 android:id="@+id/symbolCurrency"
