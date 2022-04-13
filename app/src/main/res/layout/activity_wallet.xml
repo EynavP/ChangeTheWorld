@@ -53,14 +53,14 @@
 
         <TextView
             android:id="@+id/balance"
-            android:layout_width="152dp"
+            android:layout_width="184dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="108dp"
+            android:layout_marginStart="88dp"
             android:layout_marginTop="91dp"
-            android:layout_marginEnd="133dp"
+            android:layout_marginEnd="121dp"
             android:fontFamily="@font/comfortaa"
             android:letterSpacing="0.25"
             android:text="Balance"
@@ -112,19 +112,6 @@
         android:layout_height="match_parent"
         android:layout_below="@id/top_wallet">
 
-        <View
-            android:id="@+id/rectangle_6"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="21dp"
-            android:layout_marginLeft="21dp"
-            android:layout_marginEnd="21dp"
-            android:layout_marginBottom="-30dp"
-            android:background="@drawable/wallet_rec_items" />
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -137,14 +124,15 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleWallet"
-                android:layout_width="wrap_content"
-                android:layout_height="534dp"
+                android:layout_width="354dp"
+                android:layout_height="587dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="38dp"
-                android:layout_marginLeft="38dp"
-                android:layout_marginEnd="38dp" />
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                />
 
 
         </RelativeLayout>
