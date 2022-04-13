@@ -385,27 +385,29 @@ public class FireStoreDB implements DataBaseInterface {
     private void SaveBusinessClient(Context context, BusinessClient user, Intent intent) {
         final String KEY_BUSINESS_NAME = "business_name";
         final String KEY_MAIL = "mail";
-        final String KEY_STATE = "state";
         final String KEY_PHONE = "phone";
         final String KEY_USER_NAME = "user_name";
         final String KEY_PASSWORD = "password";
         final String KEY_OWNER_NAME = "owner_name";
         final String KEY_BUSINESS_APPROVAL = "business_approval";
         final String KEY_OWNER_ID = "owner_id";
-        final String KEY_BUSINESS_ADDRESS = "business_address";
-        final String KEY_BUSINESS_NO = "business_no";
+        final String KEY_STATE = "state";
+        final String KEY_CITY = "city";
+        final String KEY_STREET = "street";
+        final String KEY_NUMBER = "number";
 
 
         Map<String, Object> data = new HashMap<>();
         data.put(KEY_BUSINESS_NAME, user.getBusiness_name());
         data.put(KEY_MAIL, user.getMail_address());
-        data.put(KEY_STATE, user.getState());
         data.put(KEY_PHONE, user.getPhone());
         data.put(KEY_USER_NAME, user.getUser_name());
         data.put(KEY_PASSWORD, user.getPassword());
         data.put(KEY_OWNER_NAME, user.getBusiness_owner_name());
-        data.put(KEY_BUSINESS_ADDRESS, user.getBusiness_address());
-        data.put(KEY_BUSINESS_NO, user.getBusiness_no());
+        data.put(KEY_STATE, user.getBusiness_state());
+        data.put(KEY_CITY, user.getBusiness_city());
+        data.put(KEY_STREET, user.getBusiness_street());
+        data.put(KEY_NUMBER, user.getBusiness_no());
 
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
@@ -425,7 +427,7 @@ public class FireStoreDB implements DataBaseInterface {
                 .addOnSuccessListener(unused -> Toast.makeText(context, "Business created successfully", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(context, "Fail create new business : " + e.toString(), Toast.LENGTH_LONG).show());
 
-        createDefaultWallet(user.getUser_name(), stateToCurrency.get(user.getState()), "BusinessClient", context, intent);
+        createDefaultWallet(user.getUser_name(), stateToCurrency.get(user.getBusiness_state()), "BusinessClient", context, intent);
 
     }
 

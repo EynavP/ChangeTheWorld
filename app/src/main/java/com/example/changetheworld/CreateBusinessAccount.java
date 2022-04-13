@@ -75,12 +75,13 @@ public class CreateBusinessAccount extends AppCompatActivity {
         CreateBusinessAccount.setOnClickListener(view -> {
             String business_name = ((EditText) findViewById(R.id.enterBusinessName)).getText().toString();
             String mail = ((EditText) findViewById(R.id.enterMailAddressBusiness)).getText().toString();
-            String state = ((Spinner) findViewById(R.id.enterBusinessState)).getSelectedItem().toString();
             String phone = ((EditText) findViewById(R.id.enterBusinessPhone)).getText().toString();
             String user_name = ((EditText) findViewById(R.id.enterBusinessUsername)).getText().toString();
             String password = ((EditText) findViewById(R.id.enterBusinessPassword)).getText().toString();
             String business_owner_name = ((EditText) findViewById(R.id.enterBusinessOwnerName)).getText().toString();
-          //  String business_address = ((EditText)findViewById(R.id.enterAddressBusiness)).getText().toString();
+            String business_state = ((Spinner) findViewById(R.id.enterBusinessState)).getSelectedItem().toString();
+            String business_city = ((EditText)findViewById(R.id.entercityBusiness)).getText().toString();
+            String business_street = ((EditText)findViewById(R.id.enterstreetBusiness)).getText().toString();
             String business_no = ((EditText)findViewById(R.id.enternoBusiness)).getText().toString();
 
 
@@ -92,11 +93,22 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, getString(R.string.Invalid_mail), Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (state.isEmpty() || state.equals(getString(R.string.choose_state))){
+            else if (business_state.isEmpty() || business_state.equals(getString(R.string.choose_state))){
                 Toast toast = Toast.makeText(this, getString(R.string.Invalid_state), Toast.LENGTH_SHORT);
                 toast.show();
             }
-
+            else if (business_city.isEmpty()){
+                Toast toast = Toast.makeText(this, R.string.invalid_business_city, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else if (business_street == null){
+                Toast toast = Toast.makeText(this, R.string.invalid_business_street, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else if (business_no == null) {
+                Toast toast = Toast.makeText(this, R.string.invalid_business_number, Toast.LENGTH_SHORT);
+                toast.show();
+            }
             else if (phone.isEmpty() || !phone.matches("^[0-9]*$")){
                 Toast toast = Toast.makeText(this, getString(R.string.Invalid_phone_number), Toast.LENGTH_SHORT);
                 toast.show();
@@ -121,18 +133,11 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, R.string.Invalid_business_owner_id, Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (business_no == null) {
-                Toast toast = Toast.makeText(this, R.string.invalid_business_number, Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            /*else if (business_address == null){
-                    Toast toast = Toast.makeText(this, R.string.invalid_business_address, Toast.LENGTH_SHORT);
-                    toast.show();
-            }else { //TODO: ADD DATABASE HERE
-                BusinessClient business_client = new BusinessClient(business_name,mail,state,phone,user_name,password,business_owner_name,business_chosen_approvel,business_chosen_owner_id,business_no,business_address);
+            else {
+                BusinessClient business_client = new BusinessClient(business_name,mail,phone,user_name,password,business_owner_name,business_chosen_approvel,business_chosen_owner_id,business_state,business_city, business_street, business_no);
                 Intent intent = new Intent(this, BusinessLogin.class);
                 FireStoreDB.getInstance().VerifyAndSaveBusiness(this, business_client, intent);
-            }*/
+            }
         });
     }
 

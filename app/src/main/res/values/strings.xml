@@ -119,6 +119,8 @@
     <string name="new_rates_from_customers">new rates from customers</string>
     <string name="city">City</string>
     <string name="street">Street</string>
+    <string name="invalid_business_city">Invalid business city</string>
+    <string name="invalid_business_street">Invalid business street</string>
 
 
 </resources>
