@@ -34,18 +34,15 @@
             android:text="@string/deposit"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
 
 
     </RelativeLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/top_deposit">
     <RelativeLayout
         android:id="@+id/deposit_continue"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_deposit">
 
         <View
             android:id="@+id/rectangle_7"
@@ -160,8 +157,8 @@
 
         <TextView
             android:id="@+id/cardNumberTitle"
-            android:layout_width="173dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/toAmonut"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
@@ -170,7 +167,8 @@
             android:layout_marginEnd="168dp"
             android:fontFamily="@font/comfortaa"
             android:text="@string/card_number"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
+
 
         <EditText
             android:id="@+id/cardNumber"
@@ -182,12 +180,11 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="50dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="-18dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="51dp"
             android:background="@drawable/dep_with_rec"
             android:inputType="number"
             android:paddingStart="20dp" />
-
 
         <EditText
             android:id="@+id/ownerName"
@@ -198,26 +195,26 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="50dp"
-            android:layout_marginLeft="55dp"
-            android:layout_marginTop="-18dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="51dp"
             android:background="@drawable/dep_with_rec"
             android:inputType="text"
             android:paddingStart="20dp" />
 
         <TextView
             android:id="@+id/ownerNameTitle"
-            android:layout_width="173dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/cardNumberTitle"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="38dp"
-            android:layout_marginEnd="171dp"
+            android:layout_marginTop="47dp"
+            android:layout_marginEnd="174dp"
             android:fontFamily="@font/comfortaa"
             android:text="@string/owner_name"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/ownerId"
@@ -228,26 +225,26 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="50dp"
-            android:layout_marginLeft="55dp"
-            android:layout_marginTop="-18dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="51dp"
             android:background="@drawable/dep_with_rec"
             android:inputType="number"
             android:paddingStart="20dp" />
 
         <TextView
             android:id="@+id/ownerIdTitle"
-            android:layout_width="173dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/ownerNameTitle"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="38dp"
-            android:layout_marginEnd="169dp"
+            android:layout_marginTop="46dp"
+            android:layout_marginEnd="170dp"
             android:fontFamily="@font/comfortaa"
             android:text="@string/owner_id"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/expireDate"
@@ -258,26 +255,26 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="50dp"
-            android:layout_marginLeft="52dp"
-            android:layout_marginTop="49dp"
-            android:layout_marginEnd="218dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="219dp"
             android:background="@drawable/dep_with_rec"
             android:inputType="date"
             android:paddingStart="20dp" />
 
         <TextView
             android:id="@+id/expireDateTitle"
-            android:layout_width="155dp"
-            android:layout_height="45dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/ownerId"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="188dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="242dp"
             android:fontFamily="@font/comfortaa"
             android:text="@string/expire_date"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/CVV"
@@ -287,10 +284,10 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="214dp"
-            android:layout_marginLeft="214dp"
-            android:layout_marginTop="49dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginStart="213dp"
+            android:layout_marginLeft="213dp"
+            android:layout_marginTop="39dp"
+            android:layout_marginEnd="52dp"
             android:background="@drawable/dep_with_rec"
             android:inputType="number"
             android:paddingStart="20dp" />
@@ -303,11 +300,11 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="217dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="9dp"
             android:layout_marginEnd="77dp"
             android:fontFamily="@font/comfortaa"
             android:text="@string/cvv"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/depositBtn"
@@ -320,9 +317,10 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="114dp"
             android:background="@drawable/empty_rectangle"
-            android:text="@string/deposit" />
+            android:fontFamily="@font/comfortaa"
+            android:text="@string/deposit"
+            android:textAllCaps="false" />
     </RelativeLayout>
-    </ScrollView>
 
 
 </RelativeLayout>

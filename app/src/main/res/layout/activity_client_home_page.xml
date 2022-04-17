@@ -133,8 +133,8 @@
                     android:layout_marginEnd="287dp"
                     android:fontFamily="@font/comfortaa"
                     android:gravity="top"
-                    android:letterSpacing="0.25"
                     android:hint="@string/State"
+                    android:letterSpacing="0.25"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -198,6 +198,15 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </ScrollView>
+            </RelativeLayout>
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="775dp"
                 android:paddingTop="100dp">
@@ -205,12 +214,12 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/SubWalletRecycle"
-                    android:layout_width="375dp"
-                    android:layout_height="435dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="479dp"
                     android:layout_below="@+id/currenciesRates"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="37dp" />
 
                 <ProgressBar
                     android:id="@+id/progressBar"
