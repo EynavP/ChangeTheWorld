@@ -10,79 +10,118 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/homePage_bac">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cardContainer"
             android:layout_width="match_parent"
-            android:layout_height="64dp">
+            android:layout_height="60dp"
+            android:background="@color/homePage_bac"
+            tools:layout_editor_absoluteX="224dp"
+            tools:layout_editor_absoluteY="2dp">
 
             <TextView
                 android:id="@+id/symbol_recycler"
-                android:layout_width="36dp"
-                android:layout_height="22dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="14dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="$"
+                android:textAlignment="center"
                 android:textAppearance="@style/symbol"
                 android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/symbol_recycler2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="~"
+                android:textAlignment="center"
+                android:textAppearance="@style/symbol"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/value_amonut"
+                app:layout_constraintHorizontal_bias="0.54"
+                app:layout_constraintStart_toEndOf="@+id/balance"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/currency_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="15dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/currency_name"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.197"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toStartOf="@+id/balance"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/symbol_recycler"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/balance"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="22dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="amount"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.537"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/value_amonut"
+                app:layout_constraintHorizontal_bias="0.333"
+                app:layout_constraintStart_toEndOf="@+id/symbol_recycler"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/value_amonut"
-                android:layout_width="54dp"
-                android:layout_height="26dp"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="15dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/value"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/symbolLocalCurrency"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="225dp" />
+
 
             <TextView
                 android:id="@+id/symbolLocalCurrency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="28dp"
                 android:fontFamily="@font/comfortaa"
-                android:text="symbol"
+                android:text="$"
                 android:textColor="@color/black"
+                android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/topLine"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.488"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/line_design" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

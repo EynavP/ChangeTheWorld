@@ -1,12 +1,14 @@
 package com.example.changetheworld;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.model.Order;
@@ -35,6 +37,7 @@ public class AdapterTransaction extends RecyclerView.Adapter<AdapterTransaction.
     public void onBindViewHolder(@NonNull AdapterTransaction.ViewHolder viewHolder, int i) {
 
         String date = data.get(i).getCreate_time().toString();
+        date = date.substring(0,10);
         viewHolder.date.setText(date);
 
         String amount = data.get(i).getAmount();
@@ -42,6 +45,10 @@ public class AdapterTransaction extends RecyclerView.Adapter<AdapterTransaction.
 
         String action = data.get(i).getAction();
         viewHolder.action.setText(action);
+        if(action.equals("deposit"))
+            viewHolder.action.setTextColor(Color.parseColor("#1D9D53"));
+        else
+            viewHolder.action.setTextColor(Color.RED);
 
     }
 

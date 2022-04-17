@@ -4,34 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
     android:id="@+id/subWalletRecycleView">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/cardCol">
+        android:background="@color/homePage_bac">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cardContainer"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:padding="5dp">
+            android:background="@color/homePage_bac">
 
             <TextView
                 android:id="@+id/dateTransaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="@string/Date"
                 android:textAppearance="@style/symbol"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.093"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,10 +39,13 @@
                 android:id="@+id/amountTransaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="amount"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.309"
+                app:layout_constraintHorizontal_bias="0.365"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,13 +53,26 @@
                 android:id="@+id/actionTransaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="28dp"
                 android:layout_marginEnd="16dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="action"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.68"
+                app:layout_constraintHorizontal_bias="0.679"
                 app:layout_constraintStart_toEndOf="@+id/amountTransaction"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/topLine"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.488"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/line_design" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

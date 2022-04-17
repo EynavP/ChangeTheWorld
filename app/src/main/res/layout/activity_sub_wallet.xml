@@ -78,7 +78,8 @@
             android:letterSpacing="0.25"
             android:text="Total Balance"
             android:textAlignment="center"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            android:textColor="@color/black"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/DepositTitle"
@@ -119,7 +120,8 @@
             android:letterSpacing="0.25"
             android:text="@string/withdraw"
             android:textAlignment="center"
-            android:textSize="9sp" />
+            android:textSize="9sp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/depositTitleIcon"
@@ -136,7 +138,8 @@
             android:letterSpacing="0.25"
             android:text="@string/deposit"
             android:textAlignment="center"
-            android:textSize="9sp" />
+            android:textSize="9sp"
+            android:textColor="@color/black"/>
 
     </RelativeLayout>
 
@@ -145,18 +148,30 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/top_currency_page">
 
+        <View
+            android:id="@+id/rectangle_6"
+            android:layout_width="match_parent"
+            android:layout_height="613dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="-20dp"
+            android:background="@drawable/rec_items_design" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/SubWalletRecycle"
-            android:layout_width="wrap_content"
-            android:layout_height="563dp"
+            android:layout_width="match_parent"
+            android:layout_height="555dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginEnd="34dp" />
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="0dp" />
 
 
     </RelativeLayout>
