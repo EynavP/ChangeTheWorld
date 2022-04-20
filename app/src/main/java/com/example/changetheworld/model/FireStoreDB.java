@@ -595,42 +595,55 @@ public class FireStoreDB implements DataBaseInterface {
                 });
     }
 
-//    @Override
-//    public void updateBusinessProfile(Context context, PrivateClient client, Intent intent) {
-//        final String KEY_FULL_NAME = "full_name";
-//        final String KEY_PHONE = "phone";
-//        final String KEY_MAIL = "mail";
-//        final String KEY_CURRENCY = "currency";
-//        final String KEY_PASSWORD = "password";
-//        final String KEY_PERSONAL_PHOTO = "personal_photo";
-//        final String KEY_PASSPORT_PHOTO = "passport_photo";
-//
+    @Override
+    public void updateBusinessProfile(Context context, BusinessClient business, Intent intent) {
+        final String KEY_BUSINESS_NAME = "business_name";
+        final String KEY_MAIL = "mail";
+        final String KEY_PHONE = "phone";
+        final String KEY_PASSWORD = "password";
+        final String KEY_OWNER_NAME = "owner_name";
+//        final String KEY_BUSINESS_APPROVAL = "business_approval";
+//        final String KEY_OWNER_ID = "owner_id";
+        final String KEY_STATE = "state";
+        final String KEY_CITY = "city";
+        final String KEY_STREET = "street";
+        final String KEY_NUMBER = "number";
+
+
+        Map<String, Object> data = new HashMap<>();
+        data.put(KEY_BUSINESS_NAME, business.getBusiness_name());
+        data.put(KEY_MAIL, business.getMail_address());
+        data.put(KEY_PHONE, business.getPhone());
+        data.put(KEY_PASSWORD, business.getPassword());
+        data.put(KEY_OWNER_NAME, business.getBusiness_owner_name());
+        data.put(KEY_STATE, business.getBusiness_state());
+        data.put(KEY_CITY, business.getBusiness_city());
+        data.put(KEY_STREET, business.getBusiness_street());
+        data.put(KEY_NUMBER, business.getBusiness_no());
+
+
 //        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-//        StorageReference personalImageRef = storageRef.child("images/" + client.getUser_name() + "/" + KEY_PERSONAL_PHOTO + ".jpg");
-//        StorageReference passportImageRef = storageRef.child("images/" + client.getUser_name() + "/" + KEY_PASSPORT_PHOTO + ".jpg");
-//        UploadTask personal_photo_task = personalImageRef.putBytes(client.getPhoto());
-//        personal_photo_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
-//        UploadTask passport_task = passportImageRef.putBytes(client.getPassport());
-//        passport_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+//        StorageReference personalImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_BUSINESS_APPROVAL + ".jpg");
+//        StorageReference passportImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_OWNER_ID + ".jpg");
+//        UploadTask business_approval_task = personalImageRef.putBytes(user.getBusiness_approval_document());
+//        business_approval_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
 //
-//        Map<String, Object> data = new HashMap<>();
-//        data.put(KEY_FULL_NAME, client.getFull_name());
-//        data.put(KEY_PHONE, client.getPhone_number());
-//        data.put(KEY_CURRENCY, client.getLocal_currency());
-//        data.put(KEY_PASSWORD, client.getPassword());
-//        data.put(KEY_MAIL, client.getMail_address());
 //
-//        db.collection("PrivateClient")
-//                .document(client.getUser_name())
-//                .update(data)
-//                .addOnSuccessListener(unused -> {
-//                    Toast.makeText(context, "Client updated successfully", Toast.LENGTH_SHORT).show();
-//                    intent.putExtra("userName", client.getUser_name());
-//                    context.startActivity(intent);
-//                })
-//                .addOnFailureListener(e -> Toast.makeText(context, "Fail update new client : " + e.toString(), Toast.LENGTH_LONG).show());
-//
-//    }
+//        UploadTask owner_id_task = passportImageRef.putBytes(user.getGetBusiness_owner_id());
+//        owner_id_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+
+
+        db.collection("BusinessClient")
+                .document(business.getUser_name())
+                .update(data)
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(context, "business updated successfully", Toast.LENGTH_SHORT).show();
+                    intent.putExtra("userName", business.getUser_name());
+                    context.startActivity(intent);
+                })
+                .addOnFailureListener(e -> Toast.makeText(context, "Fail create new business : " + e.toString(), Toast.LENGTH_LONG).show());
+
+    }
 
 }
 

@@ -47,6 +47,7 @@ public class BusinessProfileActivity extends AppCompatActivity {
 
     private void OpenEditProfileBusiness() {
         Intent intent = new Intent(this,EditBusinessProfileActivity.class);
+        intent.putExtra("user_name", userName);
         startActivity(intent);
     }
 }
