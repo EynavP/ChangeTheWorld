@@ -30,14 +30,13 @@ public class CreateBusinessAccount extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String[] state_sym = {this.getString(R.string.choose_state),getString(R.string.england),getString(R.string.united_states),getString(R.string.china),getString(R.string.italy), getString(R.string.israel)};
         setContentView(R.layout.activity_create_business_account);
         returnLogin = findViewById(R.id.moveToLogin);
         returnLogin.setOnClickListener(view ->  { returnLoginPage(); });
 
         states = (Spinner) findViewById(R.id.enterBusinessState);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-        adapter.addAll(state_sym);
+        adapter.addAll(FireStoreDB.getInstance().stateToCurrency.keySet());
         states.setAdapter(adapter);
 
 
@@ -93,7 +92,7 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, getString(R.string.Invalid_mail), Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (business_state.isEmpty() || business_state.equals(getString(R.string.choose_state))){
+            else if (business_state.isEmpty()){
                 Toast toast = Toast.makeText(this, getString(R.string.Invalid_state), Toast.LENGTH_SHORT);
                 toast.show();
             }

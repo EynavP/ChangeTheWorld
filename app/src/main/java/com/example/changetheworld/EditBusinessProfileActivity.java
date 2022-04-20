@@ -74,7 +74,7 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, getString(R.string.Invalid_mail), Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (new_state.isEmpty() || new_state.equals(getString(R.string.choose_state))){
+            else if (new_state.isEmpty()){
                 Toast toast = Toast.makeText(this, getString(R.string.Invalid_state), Toast.LENGTH_SHORT);
                 toast.show();
             }
