@@ -528,6 +528,16 @@ public class FireStoreDB implements DataBaseInterface {
         final String KEY_MAIL = "mail";
         final String KEY_CURRENCY = "currency";
         final String KEY_PASSWORD = "password";
+        final String KEY_PERSONAL_PHOTO = "personal_photo";
+        final String KEY_PASSPORT_PHOTO = "passport_photo";
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference personalImageRef = storageRef.child("images/" + client.getUser_name() + "/" + KEY_PERSONAL_PHOTO + ".jpg");
+        UploadTask personal_photo_task = personalImageRef.putBytes(client.getPhoto());
+        personal_photo_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+//        StorageReference passportImageRef = storageRef.child("images/" + client.getUser_name() + "/" + KEY_PASSPORT_PHOTO + ".jpg");
+//        UploadTask passport_task = passportImageRef.putBytes(client.getPassport());
+//        passport_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
 
         Map<String, Object> data = new HashMap<>();
         data.put(KEY_FULL_NAME, client.getFull_name());
@@ -547,5 +557,80 @@ public class FireStoreDB implements DataBaseInterface {
                 .addOnFailureListener(e -> Toast.makeText(context, "Fail update new client : " + e.toString(), Toast.LENGTH_LONG).show());
 
     }
+
+    @Override
+    public void loadBusinessData(String user_name, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, TextView state, TextView city, TextView street, TextView number) {
+        db.collection("BusinessClient")
+                .document(user_name)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    business_name.setText(documentSnapshot.getString("business_name"));
+                    mail_address.setText(documentSnapshot.getString("mail"));
+                    phone_number.setText(documentSnapshot.getString("phone"));
+                    owner_name.setText(documentSnapshot.getString("owner_name"));
+                    state.setText(documentSnapshot.getString("state"));
+                    city.setText(documentSnapshot.getString("city"));
+                    street.setText(documentSnapshot.getString("street"));
+                    number.setText(documentSnapshot.getString("number"));
+                });
+    }
+
+    @Override
+    public void loadBusinessDataForEdit(String user_name, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, Spinner state, TextView city, TextView street, TextView number, EditText password)  {
+        db.collection("PrivateClient")
+                .document(user_name)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    business_name.setText(documentSnapshot.getString("business_name"));
+                    mail_address.setText(documentSnapshot.getString("mail"));
+                    phone_number.setText(documentSnapshot.getString("phone"));
+                    owner_name.setText(documentSnapshot.getString("owner_name"));
+                    city.setText(documentSnapshot.getString("city"));
+                    street.setText(documentSnapshot.getString("street"));
+                    number.setText(documentSnapshot.getString("number"));
+                    password.setText(documentSnapshot.getString("password"));
+                    ArrayList<String> states = new ArrayList<>();
+                    states.addAll(FireStoreDB.getInstance().stateToCurrency.keySet());
+                    state.setSelection(states.indexOf(documentSnapshot.getString("state")));
+                });
+    }
+
+//    @Override
+//    public void updateBusinessProfile(Context context, PrivateClient client, Intent intent) {
+//        final String KEY_FULL_NAME = "full_name";
+//        final String KEY_PHONE = "phone";
+//        final String KEY_MAIL = "mail";
+//        final String KEY_CURRENCY = "currency";
+//        final String KEY_PASSWORD = "password";
+//        final String KEY_PERSONAL_PHOTO = "personal_photo";
+//        final String KEY_PASSPORT_PHOTO = "passport_photo";
+//
+//        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+//        StorageReference personalImageRef = storageRef.child("images/" + client.getUser_name() + "/" + KEY_PERSONAL_PHOTO + ".jpg");
+//        StorageReference passportImageRef = storageRef.child("images/" + client.getUser_name() + "/" + KEY_PASSPORT_PHOTO + ".jpg");
+//        UploadTask personal_photo_task = personalImageRef.putBytes(client.getPhoto());
+//        personal_photo_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+//        UploadTask passport_task = passportImageRef.putBytes(client.getPassport());
+//        passport_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+//
+//        Map<String, Object> data = new HashMap<>();
+//        data.put(KEY_FULL_NAME, client.getFull_name());
+//        data.put(KEY_PHONE, client.getPhone_number());
+//        data.put(KEY_CURRENCY, client.getLocal_currency());
+//        data.put(KEY_PASSWORD, client.getPassword());
+//        data.put(KEY_MAIL, client.getMail_address());
+//
+//        db.collection("PrivateClient")
+//                .document(client.getUser_name())
+//                .update(data)
+//                .addOnSuccessListener(unused -> {
+//                    Toast.makeText(context, "Client updated successfully", Toast.LENGTH_SHORT).show();
+//                    intent.putExtra("userName", client.getUser_name());
+//                    context.startActivity(intent);
+//                })
+//                .addOnFailureListener(e -> Toast.makeText(context, "Fail update new client : " + e.toString(), Toast.LENGTH_LONG).show());
+//
+//    }
+
 }
 
