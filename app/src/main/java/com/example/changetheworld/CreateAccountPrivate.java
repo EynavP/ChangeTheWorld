@@ -45,30 +45,20 @@ public class CreateAccountPrivate extends AppCompatActivity {
         currencies.setAdapter(adapter);
 
 
-
-
         //Personal photo load
         Button personal_photo = ((Button) findViewById(R.id.uploadPhoto));
-        personal_photo.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v) {
-                    flag = 1;
-                    imageChooser();
-                }
-            }
+        personal_photo.setOnClickListener(v -> {
+            flag = 1;
+            imageChooser();
+        }
         );
 
         //Passport photo load
         Button passport_photo = ((Button) findViewById(R.id.uploadPassport));
-        passport_photo.setOnClickListener(new View.OnClickListener()
-           {
-               @Override
-               public void onClick(View v) {
-                   flag = 2;
-                   imageChooser();
-               }
-           }
+        passport_photo.setOnClickListener(v -> {
+            flag = 2;
+            imageChooser();
+        }
         );
 
         Button CreateAccountPrivate = findViewById(R.id.createAccountButton);
