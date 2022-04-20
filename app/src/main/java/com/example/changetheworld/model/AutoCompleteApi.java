@@ -28,12 +28,12 @@ public class AutoCompleteApi implements AutoCompleteInterface{
             Scanner s = new Scanner(new BufferedReader(new InputStreamReader(in)));
             String result = "";
             while (s.hasNext()){
-                result += s.next();
+                result += s.next() + " ";
             }
             urlConnection.disconnect();
             JSONArray data = new JSONArray(result);
             ArrayList<String> res = new ArrayList<>();
-            for (int i = 0;i<data.length();i++){
+            for (int i = 0; i<data.length(); i++){
                 res.add(data.getString(i));
             }
             return res;

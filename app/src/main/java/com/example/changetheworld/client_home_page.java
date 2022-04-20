@@ -12,7 +12,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
+import android.text.Editable;
 import android.text.Layout;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +29,8 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
 
+import com.example.changetheworld.model.AutoCompleteApi;
+import com.example.changetheworld.model.AutoCompleteInterface;
 import com.example.changetheworld.model.CurrencyDataApi;
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.currency;
@@ -48,6 +53,8 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
     NavigationView navigationView;
     Toolbar toolbar;
     Button search;
+    EditText state;
+    AutoCompleteInterface aci = new AutoCompleteApi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +133,24 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         t.start();
 
 
-
+        state = findViewById(R.id.state);
+        state.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String query = editable.toString();
+                if (query != null && !query.isEmpty()){
+                    Thread t = new Thread(() -> {
+                        ArrayList<String> result = aci.getComplete(query);
+                        result.forEach(r -> Log.d("Yuval", "afterTextChanged: " + r));
+                    });
+                    t.start();
+                }
+            }
+        });
 
         drawerLayout = findViewById(R.id.drawer_menu);
         navigationView = findViewById(R.id.nav_view);
