@@ -20,6 +20,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 
 
@@ -68,13 +70,17 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
             String city = ((EditText) findViewById(R.id.city)).getText().toString();
             String street = ((EditText) findViewById(R.id.street)).getText().toString();
             String number = ((EditText) findViewById(R.id.no)).getText().toString();
-            Intent intent = new Intent(this, search_result_page.class);
-            intent.putExtra("state", state);
-            intent.putExtra("city", city);
-            intent.putExtra("street", street);
-            intent.putExtra("number", number);
-            startActivity(intent);
-        });
+            if (state.isEmpty() || city.isEmpty()){
+                Toast.makeText(this, R.string.invalid_state_or_city, Toast.LENGTH_SHORT).show();
+            }else {
+                Intent intent = new Intent(this, search_result_page.class);
+                intent.putExtra("state", state);
+                intent.putExtra("city", city);
+                intent.putExtra("street", street);
+                intent.putExtra("number", number);
+                startActivity(intent);
+            }
+            });
 
         Thread t = new Thread(() -> {
 
