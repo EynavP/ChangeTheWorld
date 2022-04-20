@@ -457,10 +457,8 @@ public class FireStoreDB implements DataBaseInterface {
                         searchBusinessClients.sort((businessClient1, businessClient2) -> {
                             String business_address1 = businessClient1.getBusiness_state() + " " + businessClient1.getBusiness_city() + " " + businessClient1.getBusiness_street() + " " + businessClient1.getBusiness_no();
                             Float dis1 = locationDataApi.GetDistance(chosenAddress, business_address1);
-                            businessClient1.setDistance(String.valueOf(df.format(dis1)));
                             String business_address2 = businessClient2.getBusiness_state() + " " + businessClient2.getBusiness_city() + " " + businessClient2.getBusiness_street() + " " + businessClient2.getBusiness_no();
                             Float dis2 = locationDataApi.GetDistance(chosenAddress, business_address2);
-                            businessClient2.setDistance(String.valueOf(df.format(dis2)));
                             if (dis1 == null || dis2 == null){
                                 flag.set(1);
                                 ((Activity) context).runOnUiThread(() -> {
@@ -469,8 +467,17 @@ public class FireStoreDB implements DataBaseInterface {
                                     progressBar.setVisibility(View.INVISIBLE);
                                 });
                             }
-                            else if (dis1 > dis2) return 1;
-                            return -1;
+                            else if (dis1 > dis2){
+                                businessClient1.setDistance(String.valueOf(df.format(dis1)));
+                                businessClient2.setDistance(String.valueOf(df.format(dis2)));
+                                return 1;
+                            }
+                            else{
+                                businessClient1.setDistance(String.valueOf(df.format(dis1)));
+                                businessClient2.setDistance(String.valueOf(df.format(dis2)));
+                                return -1;
+                            }
+                            return 0;
                         });
                         if (flag.get() == 1)
                             return;
