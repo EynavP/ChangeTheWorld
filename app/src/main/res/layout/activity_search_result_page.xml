@@ -26,7 +26,7 @@
 
 
         <TextView
-            android:id="@+id/totalBalance"
+            android:id="@+id/search_results_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -44,22 +44,6 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/totalBalanceSymbol"
-            android:layout_width="38dp"
-            android:layout_height="45dp"
-            android:layout_below="@+id/subwalletName"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="251dp"
-            android:layout_marginTop="58dp"
-            android:layout_marginEnd="106dp"
-            android:fontFamily="@font/comfortaa"
-            android:letterSpacing="0.25"
-            android:textAlignment="center"
-            android:textSize="20sp" />
 
 
     </RelativeLayout>
@@ -83,7 +67,7 @@
             android:background="@drawable/rec_items_design" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/SubWalletRecycle"
+            android:id="@+id/SearchRecycle"
             android:layout_width="match_parent"
             android:layout_height="663dp"
             android:layout_alignParentStart="true"
