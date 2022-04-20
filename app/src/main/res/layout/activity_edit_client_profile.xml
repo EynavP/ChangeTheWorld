@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClientProfileActivity">
+    tools:context=".EditClientProfileActivity">
+
 
     <RelativeLayout
         android:layout_width="397dp"
@@ -27,8 +28,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
                 android:layout_marginTop="-20dp"
                 android:layout_marginEnd="0dp"
                 android:background="@drawable/home_page_top_client" />
@@ -63,18 +64,6 @@
                 </androidx.cardview.widget.CardView>
 
             </androidx.cardview.widget.CardView>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/editBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="337dp"
-                android:layout_marginTop="77dp"
-                android:layout_marginEnd="28dp"
-                android:background="@drawable/edit_icon" />
 
             <TextView
                 android:id="@+id/username_profile_name"
@@ -125,7 +114,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="13dp"
-                android:layout_marginTop="49dp"
+                android:layout_marginTop="29dp"
                 android:layout_marginEnd="285dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/fullName"
@@ -133,17 +122,18 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fullname_value"
-                android:layout_width="wrap_content"
+                android:layout_width="149dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fullname_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="284dp"
+                android:layout_marginEnd="235dp"
                 android:fontFamily="@font/comfortaa"
+                android:hint="@string/fullName"
                 android:textSize="14sp" />
 
             <TextView
@@ -154,7 +144,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="13dp"
-                android:layout_marginTop="108dp"
+                android:layout_marginTop="100dp"
                 android:layout_marginEnd="282dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/mailAddress"
@@ -162,17 +152,18 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/maillAddress_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="172dp"
+                android:layout_height="37dp"
                 android:layout_below="@+id/mailAddress_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="284dp"
+                android:layout_marginEnd="212dp"
                 android:fontFamily="@font/comfortaa"
+                android:hint="@string/mailAddress"
                 android:textSize="14sp" />
 
 
@@ -192,17 +183,18 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phoneNumber_value"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/phoneNumber_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="284dp"
+                android:layout_marginEnd="234dp"
                 android:fontFamily="@font/comfortaa"
+                android:hint="@string/phoneNumber"
                 android:textSize="14sp" />
 
 
@@ -213,28 +205,60 @@
                 android:layout_below="@+id/account_info_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="218dp"
-                android:layout_marginEnd="281dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="234dp"
+                android:layout_marginEnd="279dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/local_currency"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <Spinner
                 android:id="@+id/localCurrency_value"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
                 android:layout_below="@+id/localCurrency_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="284dp"
+                android:layout_marginEnd="243dp"
                 android:fontFamily="@font/comfortaa"
+                android:prompt="@string/local_currency"
+                android:spinnerMode="dropdown"
                 android:textSize="14sp" />
 
+
+            <TextView
+                android:id="@+id/password_title"
+                android:layout_width="99dp"
+                android:layout_height="22dp"
+                android:layout_below="@+id/account_info_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="292dp"
+                android:layout_marginEnd="285dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/password"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_value"
+                android:layout_width="122dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/password_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="262dp"
+                android:fontFamily="@font/comfortaa"
+                android:hint="@string/password"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/passport_title"
@@ -243,9 +267,9 @@
                 android:layout_below="@+id/account_info_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="276dp"
-                android:layout_marginEnd="282dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="374dp"
+                android:layout_marginEnd="279dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/uploadPassport"
                 android:textColor="@color/black"
@@ -259,18 +283,32 @@
                 android:layout_below="@+id/account_info_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="127dp"
-                android:layout_marginTop="277dp"
-                android:layout_marginEnd="170dp"
+                android:layout_marginStart="124dp"
+                android:layout_marginTop="374dp"
+                android:layout_marginEnd="173dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/exist"
                 android:textSize="14sp" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/updateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="147dp"
+                android:layout_marginTop="470dp"
+                android:layout_marginEnd="162dp"
+                android:text="@string/update" />
 
 
         </RelativeLayout>
 
 
     </RelativeLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

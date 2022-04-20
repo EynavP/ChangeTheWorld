@@ -127,6 +127,7 @@
     <string name="search_results">Search Results</string>
     <string name="account_info">Account Info</string>
     <string name="exist">Exist</string>
+    <string name="update">Update</string>
 
 
 </resources>

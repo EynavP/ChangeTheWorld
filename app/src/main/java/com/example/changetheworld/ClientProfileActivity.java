@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +19,8 @@ public class ClientProfileActivity extends AppCompatActivity {
     TextView phone_number;
     TextView local_currency;
     ImageView profile;
+    Button editButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,5 +43,13 @@ public class ClientProfileActivity extends AppCompatActivity {
         FireStoreDB.getInstance().loadClientData(userName, full_name, mail_address, phone_number , local_currency);
         profile = findViewById(R.id.profilePhoto);
         FireStoreDB.getInstance().LoadProfilePhoto(profile, userName);
+
+        editButton = findViewById(R.id.editBtn);
+        editButton.setOnClickListener(view -> openEdit());
+    }
+
+    private void openEdit() {
+        Intent intent = new Intent(this,EditClientProfileActivity.class);
+        startActivity(intent);
     }
 }
