@@ -15,9 +15,9 @@
             android:title="Wallet"
             android:icon="@drawable/wallet_icon" />
         <item
-            android:id="@+id/nav_search_history"
-            android:title="Search History"
-            android:icon="@drawable/search_history_icon" />
+            android:id="@+id/nav_orders"
+            android:title="Orders"
+            android:icon="@drawable/order_icon" />
         <item
             android:id="@+id/nav_about"
             android:title="About"

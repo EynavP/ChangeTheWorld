@@ -33,30 +33,42 @@
                 android:layout_marginEnd="0dp"
                 android:background="@drawable/home_page_top_client" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="15dp"
+                android:layout_height="23dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="147dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="330dp"
+                app:navigationIcon="@drawable/humburger_icon"></androidx.appcompat.widget.Toolbar>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="40dp"
                 android:layout_marginLeft="280dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginEnd="147dp"
+                android:layout_marginTop="115dp"
+                android:layout_marginEnd="280dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="250dp">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/profilePhotoCV"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
                     android:layout_gravity="center"
                     app:cardCornerRadius="250dp">
 
                     <ImageView
                         android:id="@+id/profilePhoto"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_launcher_foreground" />
 
@@ -66,14 +78,14 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/editBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
+                android:layout_width="20dp"
+                android:layout_height="25dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="337dp"
-                android:layout_marginTop="77dp"
-                android:layout_marginEnd="28dp"
+                android:layout_marginStart="341dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/edit_icon" />
 
             <TextView
@@ -83,13 +95,12 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="171dp"
-                android:layout_marginEnd="100dp"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="142dp"
+                android:layout_marginEnd="80dp"
                 android:fontFamily="@font/comfortaa"
                 android:letterSpacing="0.25"
                 android:text="@string/username"
-                android:textAlignment="center"
                 android:textSize="20sp" />
 
 
@@ -108,9 +119,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="46dp"
                 android:layout_marginTop="28dp"
-                android:layout_marginEnd="158dp"
+                android:layout_marginEnd="115dp"
                 android:fontFamily="@font/comfortaa"
                 android:letterSpacing="0.25"
                 android:text="@string/account_info"
@@ -124,9 +135,9 @@
                 android:layout_below="@+id/account_info_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="49dp"
-                android:layout_marginEnd="285dp"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="54dp"
+                android:layout_marginEnd="215dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/fullName"
                 android:textColor="@color/black"
@@ -140,82 +151,83 @@
                 android:layout_below="@+id/fullname_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="284dp"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="165dp"
                 android:fontFamily="@font/comfortaa"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/mailAddress_title"
-                android:layout_width="99dp"
-                android:layout_height="22dp"
-                android:layout_below="@+id/account_info_title"
+                android:layout_width="131dp"
+                android:layout_height="21dp"
+                android:layout_below="@+id/fullname_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="108dp"
-                android:layout_marginEnd="282dp"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginEnd="122dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/mailAddress"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
+
             <TextView
                 android:id="@+id/maillAddress_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/mailAddress_title"
+                android:layout_below="@+id/fullname_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="284dp"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="57dp"
+                android:layout_marginEnd="168dp"
                 android:fontFamily="@font/comfortaa"
                 android:textSize="14sp" />
 
-
             <TextView
                 android:id="@+id/phoneNumber_title"
-                android:layout_width="99dp"
-                android:layout_height="22dp"
-                android:layout_below="@+id/account_info_title"
+                android:layout_width="141dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mailAddress_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="163dp"
-                android:layout_marginEnd="281dp"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginEnd="151dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/phoneNumber"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
+
             <TextView
                 android:id="@+id/phoneNumber_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/phoneNumber_title"
+                android:layout_below="@+id/maillAddress_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="284dp"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="53dp"
+                android:layout_marginEnd="158dp"
                 android:fontFamily="@font/comfortaa"
                 android:textSize="14sp" />
 
 
             <TextView
                 android:id="@+id/localCurrency_title"
-                android:layout_width="99dp"
-                android:layout_height="22dp"
-                android:layout_below="@+id/account_info_title"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phoneNumber_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="218dp"
-                android:layout_marginEnd="281dp"
+                android:layout_marginStart="103dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="168dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/local_currency"
                 android:textColor="@color/black"
@@ -226,26 +238,25 @@
                 android:id="@+id/localCurrency_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/localCurrency_title"
+                android:layout_below="@+id/phoneNumber_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="284dp"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="58dp"
+                android:layout_marginEnd="160dp"
                 android:fontFamily="@font/comfortaa"
                 android:textSize="14sp" />
 
-
             <TextView
                 android:id="@+id/passport_title"
-                android:layout_width="99dp"
-                android:layout_height="22dp"
-                android:layout_below="@+id/account_info_title"
+                android:layout_width="101dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/localCurrency_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="276dp"
-                android:layout_marginEnd="282dp"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginEnd="191dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/uploadPassport"
                 android:textColor="@color/black"
@@ -254,17 +265,79 @@
 
             <TextView
                 android:id="@+id/passport_value"
-                android:layout_width="wrap_content"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/account_info_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="127dp"
-                android:layout_marginTop="277dp"
-                android:layout_marginEnd="170dp"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="393dp"
+                android:layout_marginEnd="157dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/exist"
                 android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/full_name_icon"
+                android:layout_width="53dp"
+                android:layout_height="39dp"
+                android:layout_below="@+id/account_info_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="43dp"
+                android:layout_marginEnd="298dp"
+                app:srcCompat="@drawable/full_name_icon" />
+
+            <ImageView
+                android:id="@+id/mail_icon"
+                android:layout_width="43dp"
+                android:layout_height="34dp"
+                android:layout_below="@+id/full_name_icon"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="46dp"
+                android:layout_marginEnd="300dp"
+                app:srcCompat="@drawable/mail_icon" />
+
+            <ImageView
+                android:id="@+id/phone_icon"
+                android:layout_width="46dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/mail_icon"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="41dp"
+                android:layout_marginEnd="297dp"
+                app:srcCompat="@drawable/phone_icon" />
+
+            <ImageView
+                android:id="@+id/currency_icon"
+                android:layout_width="53dp"
+                android:layout_height="38dp"
+                android:layout_below="@+id/phone_icon"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="41dp"
+                android:layout_marginEnd="298dp"
+                android:layout_marginBottom="210dp"
+                app:srcCompat="@drawable/currency_icon" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="55dp"
+                android:layout_height="39dp"
+                android:layout_below="@+id/localCurrency_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="45dp"
+                android:layout_marginEnd="296dp"
+                app:srcCompat="@drawable/passport_icon" />
 
 
         </RelativeLayout>
