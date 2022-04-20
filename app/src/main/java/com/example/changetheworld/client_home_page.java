@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
+import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +44,6 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
     String user_name;
     ProgressBar progressBar;
     HashMap<String, String> currenciesToSymbol = new HashMap<>();
-
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -127,9 +127,11 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
 
 
 
+
         drawerLayout = findViewById(R.id.drawer_menu);
         navigationView = findViewById(R.id.nav_view);
         toolbar =(Toolbar) findViewById(R.id.toolbar);
+
 
         setSupportActionBar(toolbar);
 

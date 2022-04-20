@@ -15,5 +15,5 @@
     <color name="businessGreen">#1D9D53</color>
     <color name="clientLogin">#7D7CDFFF</color>
     <color name="businessLogin">#3300A200</color>
-
+    <color name="searchColor">#BAFFFFFF</color>
 </resources>
