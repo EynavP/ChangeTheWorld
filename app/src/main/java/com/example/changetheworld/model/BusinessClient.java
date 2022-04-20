@@ -32,21 +32,6 @@ public class BusinessClient {
         this.business_no = business_no;
     }
 
-    public BusinessClient(String business_name, String business_state, String business_city, String business_street, String business_no) {
-        this.business_name = business_name;
-        this.mail_address = "";
-        this.phone = "";
-        this.user_name = "";
-        this.password = "";
-        this.business_owner_name = "";
-        this.business_approval_document = null;
-        this.getBusiness_owner_id = null;
-        this.business_state = business_state;
-        this.business_city = business_city;
-        this.business_street = business_street;
-        this.business_no = business_no;
-    }
-
     public String getBusiness_name() {
         return business_name;
     }

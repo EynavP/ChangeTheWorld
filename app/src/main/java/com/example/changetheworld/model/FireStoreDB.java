@@ -439,25 +439,26 @@ public class FireStoreDB implements DataBaseInterface {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     List<DocumentSnapshot> business = queryDocumentSnapshots.getDocuments();
-                    ArrayList<BusinessClient> businessClients = new ArrayList<>();
+                    ArrayList<Search> searchBusinessClients = new ArrayList<>();
                     for (DocumentSnapshot b: business) {
-                        BusinessClient tmp = new BusinessClient(b.getString("business_name"), b.getString("state"), b.getString("city"), b.getString("street"),  b.getString("number"));
-                        businessClients.add(tmp);
+                        Search tmp = new Search(b.getString("business_name"), "5", "open", b.getString("state"), b.getString("city"), b.getString("street"),  b.getString("number"));
+                        searchBusinessClients.add(tmp);
                     }
                     String chosenAddress = state + " " + city + " " + street + " " + number;
                     Thread t = new Thread(() -> {
-                        businessClients.sort((businessClient1, businessClient2) -> {
+                        searchBusinessClients.sort((businessClient1, businessClient2) -> {
                             String business_address1 = businessClient1.getBusiness_state() + " " + businessClient1.getBusiness_city() + " " + businessClient1.getBusiness_street() + " " + businessClient1.getBusiness_no();
                             Float dis1 = locationDataApi.GetDistance(chosenAddress, business_address1);
+                            businessClient1.setDistance(String.valueOf(dis1));
                             String business_address2 = businessClient2.getBusiness_state() + " " + businessClient2.getBusiness_city() + " " + businessClient2.getBusiness_street() + " " + businessClient2.getBusiness_no();
                             Float dis2 = locationDataApi.GetDistance(chosenAddress, business_address2);
+                            businessClient2.setDistance(String.valueOf(dis2));
                             if (dis1 > dis2) return 1;
                             else return -1;
                         });
-                        ArrayList<BusinessClient> test = businessClients;
                     });
                     t.start();
-//                    AdapterSearchBusiness adapterSearchBusiness = new AdapterSearchBusiness(context, businessClients);
+//                    AdapterSearchBusiness adapterSearchBusiness = new AdapterSearchBusiness(context, searchBusinessClients);
 //                    recyclerView.setAdapter(adapterSearchBusiness);
                 });
 
