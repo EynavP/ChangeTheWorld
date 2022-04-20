@@ -36,13 +36,12 @@ public class CreateAccountPrivate extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String[] currencys = {this.getString(R.string.choose_Currency),getString(R.string.USD),getString(R.string.EUR),getString(R.string.GBP), getString(R.string.CNY), getString(R.string.ILS)};
         setContentView(R.layout.activity_create_account_private);
         returnLogin = findViewById(R.id.moveToLogin);
         returnLogin.setOnClickListener(view ->  { returnLoginPage(); });
         currencies = (Spinner) findViewById(R.id.enterLocalCurrency);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-        adapter.addAll(currencys);
+        adapter.addAll(FireStoreDB.getInstance().currenciesToSymbol.keySet());
         currencies.setAdapter(adapter);
 
 
