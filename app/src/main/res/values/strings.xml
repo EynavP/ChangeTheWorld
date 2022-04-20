@@ -122,6 +122,8 @@
     <string name="invalid_business_city">Invalid business city</string>
     <string name="invalid_business_street">Invalid business street</string>
     <string name="country">Country</string>
+    <string name="distance">distance</string>
+    <string name="open_close">open/close</string>
 
 
 </resources>
