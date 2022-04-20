@@ -458,12 +458,13 @@ public class FireStoreDB implements DataBaseInterface {
                             if (dis1 > dis2) return 1;
                             else return -1;
                         });
+                        ((Activity) context).runOnUiThread(() -> {
+                            AdapterSearch adapterSearch = new AdapterSearch(context, searchBusinessClients);
+                            recyclerView.setAdapter(adapterSearch);
+                        });
                     });
                     t.start();
-                    AdapterSearch adapterSearch = new AdapterSearch(context, searchBusinessClients);
-                    recyclerView.setAdapter(adapterSearch);
                 });
-
     }
 }
 
