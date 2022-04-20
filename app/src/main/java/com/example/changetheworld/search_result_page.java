@@ -25,11 +25,9 @@ public class search_result_page extends AppCompatActivity {
         if(progressBar.getVisibility() != View.INVISIBLE) {
             progressBar.setVisibility(View.VISIBLE);
         }
-        String state = getIntent().getStringExtra("state");
-        String city = getIntent().getStringExtra("city");
-        String street = getIntent().getStringExtra("street");
-        String number = getIntent().getStringExtra("number");
-        FireStoreDB.getInstance().searchChange(state, city, street, number, recyclerView, this, progressBar);
+        String searchQuery = getIntent().getStringExtra("searchQuery");
+
+        FireStoreDB.getInstance().searchChange(searchQuery, recyclerView, this, progressBar);
     }
 
     @Override

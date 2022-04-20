@@ -441,7 +441,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void searchChange(String state, String city, String street, String number, RecyclerView recyclerView, Context context, ProgressBar progressBar) {
+    public void searchChange(String searchQuery, RecyclerView recyclerView, Context context, ProgressBar progressBar) {
         db.collection("BusinessClient")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -451,14 +451,13 @@ public class FireStoreDB implements DataBaseInterface {
                         Search tmp = new Search(b.getString("user_name"), b.getString("business_name"), "5", "open", b.getString("state"), b.getString("city"), b.getString("street"),  b.getString("number"));
                         searchBusinessClients.add(tmp);
                     }
-                    String chosenAddress = state + " " + city + " " + street + " " + number;
                     Thread t = new Thread(() -> {
                         AtomicInteger flag = new AtomicInteger();
                         searchBusinessClients.sort((businessClient1, businessClient2) -> {
                             String business_address1 = businessClient1.getBusiness_state() + " " + businessClient1.getBusiness_city() + " " + businessClient1.getBusiness_street() + " " + businessClient1.getBusiness_no();
-                            Float dis1 = locationDataApi.GetDistance(chosenAddress, business_address1);
+                            Float dis1 = locationDataApi.GetDistance(searchQuery, business_address1);
                             String business_address2 = businessClient2.getBusiness_state() + " " + businessClient2.getBusiness_city() + " " + businessClient2.getBusiness_street() + " " + businessClient2.getBusiness_no();
-                            Float dis2 = locationDataApi.GetDistance(chosenAddress, business_address2);
+                            Float dis2 = locationDataApi.GetDistance(searchQuery, business_address2);
                             if (dis1 == null || dis2 == null){
                                 flag.set(1);
                             }

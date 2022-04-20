@@ -20,7 +20,7 @@ public interface DataBaseInterface {
     void LoadWallets(Context context, String user_name, String user_type, ArrayList<Wallet> items, RecyclerView recyclerView, TextView totalBalance, TextView symbol);
     void updateBalance(String user_name, String user_type, String wallet_name, float amount_in_foreign_currency, String action, Context context, Intent intent);
     void loadWalletHistory(String user_name, String user_type, String wallet_name, RecyclerView recyclerView, Context context);
-    void searchChange(String state, String city, String street, String number, RecyclerView recyclerView, Context context, ProgressBar progressBar);
+    void searchChange(String searchQuery, RecyclerView recyclerView, Context context, ProgressBar progressBar);
     void loadClientData(String user_name, TextView full_name, TextView mail_address, TextView phone_number, TextView local_currency);
     void loadClientDataForEdit(String user_name, EditText full_name, EditText mail_address, EditText phone_number, Spinner local_currency, EditText password);
     void updateClientProfile(Context context, PrivateClient client, Intent intent);

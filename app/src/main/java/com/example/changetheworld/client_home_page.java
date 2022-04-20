@@ -77,18 +77,13 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
 
         search = findViewById(R.id.search_button);
         search.setOnClickListener(view -> {
-            String state = ((EditText) findViewById(R.id.state)).getText().toString();
-            String city = ((EditText) findViewById(R.id.city)).getText().toString();
-            String street = ((EditText) findViewById(R.id.street)).getText().toString();
-            String number = ((EditText) findViewById(R.id.no)).getText().toString();
-            if (state.isEmpty() || city.isEmpty()){
-                Toast.makeText(this, R.string.invalid_state_or_city, Toast.LENGTH_SHORT).show();
+            String searchQuery = autoCompleteTextView.getText().toString();
+
+            if (searchQuery == null && searchQuery.isEmpty()){
+                Toast.makeText(this, R.string.Invalid_location, Toast.LENGTH_SHORT).show();
             }else {
                 Intent intent = new Intent(this, search_result_page.class);
-                intent.putExtra("state", state);
-                intent.putExtra("city", city);
-                intent.putExtra("street", street);
-                intent.putExtra("number", number);
+                intent.putExtra("searchQuery", searchQuery);
                 startActivity(intent);
             }
             });
