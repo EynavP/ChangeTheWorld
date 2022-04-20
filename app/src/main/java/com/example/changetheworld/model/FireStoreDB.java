@@ -461,11 +461,6 @@ public class FireStoreDB implements DataBaseInterface {
                             Float dis2 = locationDataApi.GetDistance(chosenAddress, business_address2);
                             if (dis1 == null || dis2 == null){
                                 flag.set(1);
-                                ((Activity) context).runOnUiThread(() -> {
-                                    TextView errorLabel = ((Activity) context).findViewById(R.id.errorLabel);
-                                    errorLabel.setText("invalid address");
-                                    progressBar.setVisibility(View.INVISIBLE);
-                                });
                             }
                             else if (dis1 > dis2){
                                 businessClient1.setDistance(String.valueOf(df.format(dis1)));
@@ -477,10 +472,16 @@ public class FireStoreDB implements DataBaseInterface {
                                 businessClient2.setDistance(String.valueOf(df.format(dis2)));
                                 return -1;
                             }
-                            return 0;
+                            return -1;
                         });
-                        if (flag.get() == 1)
+                        if (flag.get() == 1) {
+                            ((Activity) context).runOnUiThread(() -> {
+                                TextView errorLabel = ((Activity) context).findViewById(R.id.errorLabel);
+                                errorLabel.setText("invalid address");
+                                progressBar.setVisibility(View.INVISIBLE);
+                            });
                             return;
+                        }
                         ((Activity) context).runOnUiThread(() -> {
                             AdapterSearch adapterSearch = new AdapterSearch(context, searchBusinessClients);
                             recyclerView.setAdapter(adapterSearch);
