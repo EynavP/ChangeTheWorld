@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -437,7 +439,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void searchChange(String state, String city, String street, String number, RecyclerView recyclerView, Context context) {
+    public void searchChange(String state, String city, String street, String number, RecyclerView recyclerView, Context context, ProgressBar progressBar) {
         db.collection("BusinessClient")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -462,6 +464,7 @@ public class FireStoreDB implements DataBaseInterface {
                         ((Activity) context).runOnUiThread(() -> {
                             AdapterSearch adapterSearch = new AdapterSearch(context, searchBusinessClients);
                             recyclerView.setAdapter(adapterSearch);
+                            progressBar.setVisibility(View.INVISIBLE);
                         });
                     });
                     t.start();

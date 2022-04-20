@@ -29,7 +29,7 @@ public class search_result_page extends AppCompatActivity {
         String city = getIntent().getStringExtra("city");
         String street = getIntent().getStringExtra("street");
         String number = getIntent().getStringExtra("number");
-        FireStoreDB.getInstance().searchChange(state, city, street, number, recyclerView, this);
+        FireStoreDB.getInstance().searchChange(state, city, street, number, recyclerView, this, progressBar);
     }
 
     @Override
