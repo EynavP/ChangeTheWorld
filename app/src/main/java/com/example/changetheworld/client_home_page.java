@@ -157,6 +157,12 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         startActivity(intent);
     }
 
+    public void openProfile(){
+
+        Intent intent = new Intent(this,ClientProfileActivity.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -166,6 +172,9 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
                 break;
             case R.id.nav_wallet:
                 openWallet();
+                break;
+            case R.id.nav_profile:
+                openProfile();
                 break;
         }
         return true;

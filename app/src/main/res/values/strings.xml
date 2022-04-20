@@ -125,6 +125,8 @@
     <string name="distance">distance</string>
     <string name="open_close">open/close</string>
     <string name="search_results">Search Results</string>
+    <string name="account_info">Account Info</string>
+    <string name="exist">Exist</string>
 
 
 </resources>
