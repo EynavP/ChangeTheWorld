@@ -131,100 +131,17 @@
                     android:layout_marginEnd="-5dp"
                     app:srcCompat="@drawable/searchline" />
 
-                <EditText
-                    android:id="@+id/state"
-                    android:layout_width="147dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/imageView6"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="23dp"
-                    android:layout_marginLeft="23dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="241dp"
-                    android:fontFamily="@font/comfortaa"
-                    android:gravity="top"
-                    android:hint="@string/State"
-                    android:letterSpacing="0.25"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/city"
-                    android:layout_width="148dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/state"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="99dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginEnd="239dp"
-                    android:fontFamily="@font/comfortaa"
-                    android:gravity="top"
-                    android:hint="@string/city"
-                    android:letterSpacing="0.25"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/street"
-                    android:layout_width="134dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/imageView6"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="185dp"
-                    android:layout_marginLeft="239dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="92dp"
-                    android:fontFamily="@font/comfortaa"
-                    android:gravity="top"
-                    android:hint="@string/street"
-                    android:letterSpacing="0.25"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/no"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/street"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="186dp"
-                    android:layout_marginLeft="184dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginEnd="155dp"
-                    android:fontFamily="@font/comfortaa"
-                    android:gravity="top"
-                    android:hint="@string/NO"
-                    android:letterSpacing="0.25"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/search_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/street"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="334dp"
-                    android:layout_marginTop="-17dp"
-                    android:layout_marginEnd="18dp"
-                    android:background="@null" />
 
                 <ImageView
-                    android:id="@+id/imageView8"
+                    android:id="@+id/search_button"
                     android:layout_width="49dp"
                     android:layout_height="42dp"
                     android:layout_alignTop="@+id/imageView6"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="337dp"
-                    android:layout_marginTop="35dp"
-                    android:layout_marginEnd="25dp"
+                    android:layout_marginStart="327dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginEnd="35dp"
                     app:srcCompat="@android:drawable/ic_menu_search" />
 
                 <View
@@ -235,10 +152,10 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="120dp"
-                    android:layout_marginEnd="50dp"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginLeft="36dp"
+                    android:layout_marginTop="152dp"
+                    android:layout_marginEnd="74dp"
                     android:background="@drawable/empty_rectangle" />
 
                 <AutoCompleteTextView
@@ -249,10 +166,10 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="76dp"
-                    android:layout_marginLeft="76dp"
-                    android:layout_marginTop="120dp"
-                    android:layout_marginEnd="64dp"
+                    android:layout_marginStart="51dp"
+                    android:layout_marginLeft="51dp"
+                    android:layout_marginTop="151dp"
+                    android:layout_marginEnd="89dp"
                     android:fontFamily="@font/comfortaa"
                     android:textColor="@color/black"
                     android:textSize="10sp">
