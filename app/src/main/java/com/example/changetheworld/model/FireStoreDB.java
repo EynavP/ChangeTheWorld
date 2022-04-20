@@ -5,14 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.AdapterSearch;
@@ -20,7 +18,6 @@ import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
 import com.example.changetheworld.R;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -36,6 +33,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class FireStoreDB implements DataBaseInterface {
@@ -452,6 +450,7 @@ public class FireStoreDB implements DataBaseInterface {
                     }
                     String chosenAddress = state + " " + city + " " + street + " " + number;
                     Thread t = new Thread(() -> {
+                        AtomicInteger flag = new AtomicInteger();
                         searchBusinessClients.sort((businessClient1, businessClient2) -> {
                             String business_address1 = businessClient1.getBusiness_state() + " " + businessClient1.getBusiness_city() + " " + businessClient1.getBusiness_street() + " " + businessClient1.getBusiness_no();
                             Float dis1 = locationDataApi.GetDistance(chosenAddress, business_address1);
@@ -460,14 +459,18 @@ public class FireStoreDB implements DataBaseInterface {
                             Float dis2 = locationDataApi.GetDistance(chosenAddress, business_address2);
                             businessClient2.setDistance(String.valueOf(dis2));
                             if (dis1 == null || dis2 == null){
+                                flag.set(1);
                                 ((Activity) context).runOnUiThread(() -> {
                                     TextView errorLabel = ((Activity) context).findViewById(R.id.errorLabel);
-                                    errorLabel.setText("wrong address");
+                                    errorLabel.setText("invalid address");
+                                    progressBar.setVisibility(View.INVISIBLE);
                                 });
                             }
-                            if (dis1 > dis2) return 1;
-                            else return -1;
+                            else if (dis1 > dis2) return 1;
+                            return -1;
                         });
+                        if (flag.get() == 1)
+                            return;
                         ((Activity) context).runOnUiThread(() -> {
                             AdapterSearch adapterSearch = new AdapterSearch(context, searchBusinessClients);
                             recyclerView.setAdapter(adapterSearch);
