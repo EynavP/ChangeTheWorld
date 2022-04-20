@@ -2,8 +2,10 @@ package com.example.changetheworld.model;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,4 +22,5 @@ public interface DataBaseInterface {
     void loadWalletHistory(String user_name, String user_type, String wallet_name, RecyclerView recyclerView, Context context);
     void searchChange(String state, String city, String street, String number, RecyclerView recyclerView, Context context, ProgressBar progressBar);
     void loadClientData(String user_name, TextView full_name, TextView mail_address, TextView phone_number, TextView local_currency);
+    void loadClientDataForEdit(String user_name, EditText full_name, EditText mail_address, EditText phone_number, Spinner local_currency, EditText password);
 }

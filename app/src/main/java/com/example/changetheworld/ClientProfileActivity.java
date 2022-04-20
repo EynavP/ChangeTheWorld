@@ -50,6 +50,7 @@ public class ClientProfileActivity extends AppCompatActivity {
 
     private void openEdit() {
         Intent intent = new Intent(this,EditClientProfileActivity.class);
+        intent.putExtra("user_name", userName);
         startActivity(intent);
     }
 }

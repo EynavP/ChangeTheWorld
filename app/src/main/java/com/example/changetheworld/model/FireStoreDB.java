@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -491,6 +493,22 @@ public class FireStoreDB implements DataBaseInterface {
             phone_number.setText(documentSnapshot.getString("phone"));
             local_currency.setText(documentSnapshot.getString("currency"));
         });
+    }
+
+    @Override
+    public void loadClientDataForEdit(String user_name, EditText full_name, EditText mail_address, EditText phone_number, Spinner local_currency, EditText password)  {
+        db.collection("PrivateClient")
+                .document(user_name)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    full_name.setText(documentSnapshot.getString("full_name"));
+                    mail_address.setText(documentSnapshot.getString("mail"));
+                    phone_number.setText(documentSnapshot.getString("phone"));
+                    password.setText(documentSnapshot.getString("password"));
+                    ArrayList<String> currencies = new ArrayList<>();
+                    currencies.addAll(FireStoreDB.getInstance().currenciesToSymbol.keySet());
+                    local_currency.setSelection(currencies.indexOf(documentSnapshot.getString("currency")));
+                });
     }
 }
 
