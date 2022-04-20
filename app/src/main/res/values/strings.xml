@@ -124,6 +124,7 @@
     <string name="country">Country</string>
     <string name="distance">distance</string>
     <string name="open_close">open/close</string>
+    <string name="search_results">Search Results</string>
 
 
 </resources>

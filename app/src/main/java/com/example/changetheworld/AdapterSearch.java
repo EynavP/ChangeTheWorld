@@ -39,7 +39,14 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
         String businessName = data.get(i).getBusinessName();
         viewHolder.businessName.setText(businessName);
 
+        String rate = data.get(i).getRate();
+        viewHolder.rate.setText(rate);
 
+        String distance = data.get(i).getDistance();
+        viewHolder.distance.setText(distance);
+
+        String openClose = data.get(i).getOpenClose();
+        viewHolder.openClose.setText(openClose);
     }
 
     @Override
