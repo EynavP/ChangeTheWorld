@@ -68,14 +68,12 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
             String city = ((EditText) findViewById(R.id.city)).getText().toString();
             String street = ((EditText) findViewById(R.id.street)).getText().toString();
             String number = ((EditText) findViewById(R.id.no)).getText().toString();
-            Intent intent = new Intent(this, WalletActivity.class); //TODO: CHANGE TO SEARCH RESULTS PAGE
+            Intent intent = new Intent(this, search_result_page.class);
             intent.putExtra("state", state);
             intent.putExtra("city", city);
             intent.putExtra("street", street);
             intent.putExtra("number", number);
             startActivity(intent);
-
-//            FireStoreDB.getInstance().searchChange(state, city, street, number, recyclerView, this);
         });
 
         Thread t = new Thread(() -> {
