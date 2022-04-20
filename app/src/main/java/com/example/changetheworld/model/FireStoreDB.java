@@ -18,8 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.changetheworld.AdapterSearch;
 import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
+import com.example.changetheworld.EditClientProfileActivity;
 import com.example.changetheworld.R;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -509,6 +511,33 @@ public class FireStoreDB implements DataBaseInterface {
                     currencies.addAll(FireStoreDB.getInstance().currenciesToSymbol.keySet());
                     local_currency.setSelection(currencies.indexOf(documentSnapshot.getString("currency")));
                 });
+    }
+
+    @Override
+    public void updateClientProfile(Context context, PrivateClient client, Intent intent) {
+        final String KEY_FULL_NAME = "full_name";
+        final String KEY_PHONE = "phone";
+        final String KEY_MAIL = "mail";
+        final String KEY_CURRENCY = "currency";
+        final String KEY_PASSWORD = "password";
+
+        Map<String, Object> data = new HashMap<>();
+        data.put(KEY_FULL_NAME, client.getFull_name());
+        data.put(KEY_PHONE, client.getPhone_number());
+        data.put(KEY_CURRENCY, client.getLocal_currency());
+        data.put(KEY_PASSWORD, client.getPassword());
+        data.put(KEY_MAIL, client.getMail_address());
+
+        db.collection("PrivateClient")
+                .document(client.getUser_name())
+                .update(data)
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(context, "Client updated successfully", Toast.LENGTH_SHORT).show();
+                    intent.putExtra("userName", client.getUser_name());
+                    context.startActivity(intent);
+                })
+                .addOnFailureListener(e -> Toast.makeText(context, "Fail update new client : " + e.toString(), Toast.LENGTH_LONG).show());
+
     }
 }
 

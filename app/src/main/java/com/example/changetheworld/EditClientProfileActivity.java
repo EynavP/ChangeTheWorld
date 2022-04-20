@@ -2,14 +2,19 @@ package com.example.changetheworld;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.changetheworld.model.FireStoreDB;
+import com.example.changetheworld.model.PrivateClient;
 
 public class EditClientProfileActivity extends AppCompatActivity {
 
@@ -20,6 +25,7 @@ public class EditClientProfileActivity extends AppCompatActivity {
     EditText password;
     Spinner local_currency;
     ImageView profile;
+    Button updateButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,40 @@ public class EditClientProfileActivity extends AppCompatActivity {
         FireStoreDB.getInstance().loadClientDataForEdit(userName, full_name, mail_address, phone_number , local_currency, password);
         profile = findViewById(R.id.profilePhoto);
         FireStoreDB.getInstance().LoadProfilePhoto(profile, userName);
+
+        updateButton = findViewById(R.id.updateBtn);
+        updateButton.setOnClickListener(view -> {
+            String new_full_name = full_name.getText().toString();
+            String new_mail_address = mail_address.getText().toString();
+            String new_phone_number = phone_number.getText().toString();
+            String new_local_currency = local_currency.getSelectedItem().toString();
+            String new_password = password.getText().toString();
+
+            if (new_full_name.isEmpty() || !new_full_name.matches("[a-zA-z\\s]*$")){
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_full_name), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else if (new_mail_address.isEmpty() || !new_mail_address.matches("^(.+)@(\\S+)$")){
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_mail), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else if (new_phone_number.isEmpty() || !new_phone_number.matches("^[0-9]*$")){
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_phone_number), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else if (new_local_currency.isEmpty() || new_local_currency.equals(getString(R.string.choose_Currency))){
+                Toast toast = Toast.makeText(this, getString(R.string.Invalid_currency), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else if (new_password.isEmpty() || !new_password.matches("^[A-Za-z0-9]*$")){
+                Toast toast = Toast.makeText(this, getString(R.string.password_invalid), Toast.LENGTH_SHORT);
+                toast.show();
+            }else{
+                PrivateClient client = new PrivateClient(userName,new_full_name,new_mail_address,new_phone_number, new_local_currency, new_password,null,null);
+                Intent intent = new Intent(this, ClientProfileActivity.class);
+                FireStoreDB.getInstance().updateClientProfile(this, client, intent);
+            }
+        });
     }
 
     protected void onResume() {
