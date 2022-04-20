@@ -41,6 +41,7 @@ public class FireStoreDB implements DataBaseInterface {
     private static FireStoreDB single_instance = null;
     public FirebaseFirestore db;
 
+    DecimalFormat df = new DecimalFormat("0.00");
     public LocationDataApiInterface locationDataApi = new LocationDataApi();
 
 
@@ -246,8 +247,6 @@ public class FireStoreDB implements DataBaseInterface {
 
     @Override
     public void LoadWallets(Context context, String user_name, String user_type, ArrayList<Wallet> items, RecyclerView recyclerView, TextView totalBalance, TextView symbol) {
-        DecimalFormat df = new DecimalFormat("0.00");
-
         List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
         for (String currency: currenciesToSymbol.keySet()) {
             Task<DocumentSnapshot> tmp_wallet = db.collection(user_type).document(user_name).collection("Wallet").document(currency).get();
@@ -454,10 +453,10 @@ public class FireStoreDB implements DataBaseInterface {
                         searchBusinessClients.sort((businessClient1, businessClient2) -> {
                             String business_address1 = businessClient1.getBusiness_state() + " " + businessClient1.getBusiness_city() + " " + businessClient1.getBusiness_street() + " " + businessClient1.getBusiness_no();
                             Float dis1 = locationDataApi.GetDistance(chosenAddress, business_address1);
-                            businessClient1.setDistance(String.valueOf(dis1));
+                            businessClient1.setDistance(String.valueOf(df.format(dis1)));
                             String business_address2 = businessClient2.getBusiness_state() + " " + businessClient2.getBusiness_city() + " " + businessClient2.getBusiness_street() + " " + businessClient2.getBusiness_no();
                             Float dis2 = locationDataApi.GetDistance(chosenAddress, business_address2);
-                            businessClient2.setDistance(String.valueOf(dis2));
+                            businessClient2.setDistance(String.valueOf(df.format(dis2)));
                             if (dis1 == null || dis2 == null){
                                 flag.set(1);
                                 ((Activity) context).runOnUiThread(() -> {
