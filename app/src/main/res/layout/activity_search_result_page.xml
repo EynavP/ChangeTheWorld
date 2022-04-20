@@ -91,6 +91,13 @@
             android:layout_marginTop="115dp"
             android:layout_marginEnd="185dp" />
 
+        <TextView
+            android:id="@+id/errorLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="#455A64" />
+
 
     </RelativeLayout>
 </RelativeLayout>

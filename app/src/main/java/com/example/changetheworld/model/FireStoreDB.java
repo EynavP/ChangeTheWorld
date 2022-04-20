@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.changetheworld.AdapterSearch;
 import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
+import com.example.changetheworld.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -458,6 +459,12 @@ public class FireStoreDB implements DataBaseInterface {
                             String business_address2 = businessClient2.getBusiness_state() + " " + businessClient2.getBusiness_city() + " " + businessClient2.getBusiness_street() + " " + businessClient2.getBusiness_no();
                             Float dis2 = locationDataApi.GetDistance(chosenAddress, business_address2);
                             businessClient2.setDistance(String.valueOf(dis2));
+                            if (dis1 == null || dis2 == null){
+                                ((Activity) context).runOnUiThread(() -> {
+                                    TextView errorLabel = ((Activity) context).findViewById(R.id.errorLabel);
+                                    errorLabel.setText("wrong address");
+                                });
+                            }
                             if (dis1 > dis2) return 1;
                             else return -1;
                         });
