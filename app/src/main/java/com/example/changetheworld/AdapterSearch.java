@@ -1,6 +1,7 @@
 package com.example.changetheworld;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,13 +29,13 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
     @NonNull
     @Override
-    public AdapterSearch.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = layoutInflater.inflate(R.layout.search_item_recycler_view,viewGroup,false);
-        return new AdapterSearch.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterSearch.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
         String businessName = data.get(i).getBusinessName();
         viewHolder.businessName.setText(businessName);
@@ -51,6 +52,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
     @Override
     public int getItemCount() {
+        Log.d("Yuval", "getItemCount: " + data.size());
         return data.size();
     }
 
