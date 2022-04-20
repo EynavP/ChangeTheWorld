@@ -79,6 +79,18 @@
             android:layout_marginTop="75dp"
             android:layout_marginEnd="0dp" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/currenciesRates"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="178dp"
+            android:layout_marginTop="115dp"
+            android:layout_marginEnd="185dp" />
+
 
     </RelativeLayout>
 </RelativeLayout>
