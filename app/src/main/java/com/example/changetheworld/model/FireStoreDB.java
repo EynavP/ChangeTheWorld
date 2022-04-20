@@ -577,7 +577,7 @@ public class FireStoreDB implements DataBaseInterface {
 
     @Override
     public void loadBusinessDataForEdit(String user_name, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, Spinner state, TextView city, TextView street, TextView number, EditText password)  {
-        db.collection("PrivateClient")
+        db.collection("BusinessClient")
                 .document(user_name)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {

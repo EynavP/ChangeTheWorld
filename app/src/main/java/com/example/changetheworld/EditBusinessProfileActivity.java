@@ -48,7 +48,7 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
         city = findViewById(R.id.city_value);
         street = findViewById(R.id.street_value);
         number = findViewById(R.id.number_value);
-        password = findViewById(R.id.password_value);
+        password = findViewById(R.id.business_password_value);
 
         userName = getIntent().getStringExtra("user_name");
         ((TextView)findViewById(R.id.business_username_profile_name)).setText(userName);
