@@ -30,6 +30,26 @@ class LocationApi:
         return hs.haversine(loc1,loc2)
 
 
+
+
+class AutoCompleteApi:
+    def __init__(self) -> None:
+        self.base_api = "https://api.peopledatalabs.com/v5/autocomplete?api_key=8ba1ec1ff087a1628acbb08cb5d01da63bda8fe00ab1c8f4a907d6bd7102e173&field=location&text="
+        self.memmory = {}
+        
+    def GetComplition(self, query: str) -> list:
+        if query not in self.memmory.keys():
+            data = requests.get(self.base_api + query).json()
+            data_list = data['data'][:5]
+            tmp = []
+            for d in data_list:
+                tmp.append(d["name"].replace(",",""))
+            self.memmory[query] = tmp
+        
+        return self.memmory[query]
+
+
+
 class CurrencyApi:
     def __init__(self) -> None:
         api_key = "&access_key=GXRmNO2sPirxNQcg3gs1DmKfo"
@@ -69,9 +89,10 @@ class CurrencyApi:
 
 class MyServer(BaseHTTPRequestHandler):
 
-    def set_API(self, api_currency: CurrencyApi, api_location: LocationApi):
+    def set_API(self, api_currency: CurrencyApi, api_location: LocationApi, api_autocomplete: AutoCompleteApi):
         self.api_currency = api_currency
         self.api_location = api_location
+        self.api_autocomplete = api_autocomplete
 
 
     def do_GET(self):
@@ -85,6 +106,9 @@ class MyServer(BaseHTTPRequestHandler):
             
             if 'location' in query_components.keys():
                 response = self.get_location(query_components)
+            
+            if 'autocomplete' in query_components.keys():
+                response = self.api_autocomplete.GetComplition(query_components['autocomplete'][0])
 
             self.wfile.write(bytes(json.dumps(response),encoding='utf8'))
         except Exception as e:
@@ -112,9 +136,10 @@ class MyServer(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     api_currency = CurrencyApi()
     api_location = LocationApi()
+    api_autocomplete = AutoCompleteApi()
     api_currency.run()
     my_server = MyServer
-    my_server.set_API(my_server,api_currency=api_currency, api_location=api_location)
+    my_server.set_API(my_server,api_currency=api_currency, api_location=api_location, api_autocomplete=api_autocomplete)
     webServer = HTTPServer((hostName, serverPort), my_server)
     print(f"Server started http://{hostName}:{serverPort} or http://{external_ip}:{serverPort}") 
 
