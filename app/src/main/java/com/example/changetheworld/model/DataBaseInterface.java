@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.changetheworld.EditClientProfileActivity;
-
 import java.util.ArrayList;
 
 public interface DataBaseInterface {
@@ -28,5 +26,5 @@ public interface DataBaseInterface {
     void updateClientProfile(Context context, PrivateClient client, Intent intent);
     void loadBusinessData(String user_name, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, TextView state, TextView city, TextView street, TextView number);
     void loadBusinessDataForEdit(String user_name, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, Spinner state, TextView city, TextView street, TextView number, EditText password);
-    void updateBusinessProfile(Context context, PrivateClient client, Intent intent);
+//    void updateBusinessProfile(Context context, PrivateClient client, Intent intent);
 }

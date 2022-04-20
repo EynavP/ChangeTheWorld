@@ -62,20 +62,20 @@ public class EditClientProfileActivity extends AppCompatActivity {
         FireStoreDB.getInstance().LoadProfilePhoto(profile, userName);
 
         //Personal photo load
-        Button personal_photo = ((Button) findViewById(R.id.uploadPhoto));
+        ImageView personal_photo = ((ImageView) findViewById(R.id.update_profile_photo));
         personal_photo.setOnClickListener(v -> {
                     flag = 1;
                     imageChooser();
                 }
         );
 
-        //Passport photo load
-        Button passport_photo = ((Button) findViewById(R.id.uploadPassport));
-        passport_photo.setOnClickListener(v -> {
-                    flag = 2;
-                    imageChooser();
-                }
-        );
+//        //Passport photo load
+//        Button passport_photo = ((Button) findViewById(R.id.uploadPassport));
+//        passport_photo.setOnClickListener(v -> {
+//                    flag = 2;
+//                    imageChooser();
+//                }
+//        );
 
         updateButton = findViewById(R.id.updateBtn);
         updateButton.setOnClickListener(view -> {
@@ -109,11 +109,12 @@ public class EditClientProfileActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, getString(R.string.Invalid_personal_picture), Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (passport_chosen_photo == null){
-                Toast toast = Toast.makeText(this, getString(R.string.Invalid_passport_picture), Toast.LENGTH_SHORT);
-                toast.show();
-            }else{
-                PrivateClient client = new PrivateClient(userName,new_full_name,new_mail_address,new_phone_number, new_local_currency, new_password,personal_chosen_photo,passport_chosen_photo);
+//            else if (passport_chosen_photo == null){
+//                Toast toast = Toast.makeText(this, getString(R.string.Invalid_passport_picture), Toast.LENGTH_SHORT);
+//                toast.show();
+//            }
+            else{
+                PrivateClient client = new PrivateClient(userName,new_full_name,new_mail_address,new_phone_number, new_local_currency, new_password,personal_chosen_photo,null);
                 Intent intent = new Intent(this, ClientProfileActivity.class);
                 FireStoreDB.getInstance().updateClientProfile(this, client, intent);
             }
