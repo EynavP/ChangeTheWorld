@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".EditBusinessProfileActivity">
 
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="397dp"
         android:layout_height="831dp"
@@ -87,7 +90,7 @@
 
         <RelativeLayout
             android:layout_width="395dp"
-            android:layout_height="609dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/profileBTop">
 
 
@@ -272,12 +275,42 @@
                 android:hint="@string/phoneNumber"
                 android:textSize="14sp" />
 
+            <TextView
+                android:id="@+id/business_password_title"
+                android:layout_width="99dp"
+                android:layout_height="22dp"
+                android:layout_below="@+id/phoneNumber_value"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="281dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/phoneNumber"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/business_password_value"
+                android:layout_width="142dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/business_password_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="242dp"
+                android:fontFamily="@font/comfortaa"
+                android:hint="@string/phoneNumber"
+                android:textSize="14sp" />
+
 
             <TextView
                 android:id="@+id/business_owner_name_title"
                 android:layout_width="99dp"
                 android:layout_height="22dp"
-                android:layout_below="@+id/phoneNumber_value"
+                android:layout_below="@+id/business_password_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="14dp"
@@ -351,5 +384,6 @@
 
 
     </RelativeLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
