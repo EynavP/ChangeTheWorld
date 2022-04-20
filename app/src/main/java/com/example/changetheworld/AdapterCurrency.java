@@ -42,6 +42,9 @@ public class AdapterCurrency extends RecyclerView.Adapter<AdapterCurrency.ViewHo
 
         String dailyCh=data.get(i).getDailyChange();
         viewHolder.daily_change.setText(dailyCh);
+
+        String currencyName=data.get(i).getCurrencyName();
+        viewHolder.currency_name.setText(currencyName);
     }
 
     @Override
@@ -51,13 +54,14 @@ public class AdapterCurrency extends RecyclerView.Adapter<AdapterCurrency.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView value_name,daily_change;
+        TextView value_name,daily_change, currency_name;
         ImageView symbol;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             symbol=itemView.findViewById(R.id.symbolCurrency);
             value_name=itemView.findViewById(R.id.currencyName);
+            currency_name = itemView.findViewById(R.id.currency_name);
             daily_change=itemView.findViewById(R.id.daily_change);
         }
     }
