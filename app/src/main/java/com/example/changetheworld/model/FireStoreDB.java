@@ -480,5 +480,18 @@ public class FireStoreDB implements DataBaseInterface {
                     t.start();
                 });
     }
+
+    @Override
+    public void loadClientData(String user_name, TextView full_name, TextView mail_address, TextView phone_number, TextView local_currency) {
+        db.collection("PrivateClient")
+        .document(user_name)
+        .get()
+        .addOnSuccessListener(documentSnapshot -> {
+            full_name.setText(documentSnapshot.getString("full_name"));
+            mail_address.setText(documentSnapshot.getString("mail"));
+            phone_number.setText(documentSnapshot.getString("phone"));
+            local_currency.setText(documentSnapshot.getString("currency"));
+        });
+    }
 }
 

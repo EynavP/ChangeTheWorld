@@ -160,6 +160,7 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
     public void openProfile(){
 
         Intent intent = new Intent(this,ClientProfileActivity.class);
+        intent.putExtra(getString(R.string.userName), user_name);
         startActivity(intent);
     }
 
