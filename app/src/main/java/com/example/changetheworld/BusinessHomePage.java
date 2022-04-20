@@ -68,6 +68,7 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
     public void openBusinessProfile(){
 
         Intent intent = new Intent(this,BusinessProfileActivity.class);
+        intent.putExtra(getString(R.string.userName), user_name);
         startActivity(intent);
     }
 
