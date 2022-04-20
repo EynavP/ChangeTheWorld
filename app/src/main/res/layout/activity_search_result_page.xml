@@ -53,16 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/top_search_result_page">
 
-        <TextView
-            android:id="@+id/errorLabel"
-            android:layout_width="196dp"
-            android:layout_height="54dp"
-            android:layout_below="@+id/progressBar"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="107dp"
-            android:textColor="#455A64" />
-
         <View
             android:id="@+id/rectangle_6"
             android:layout_width="match_parent"
@@ -75,6 +65,16 @@
             android:layout_marginEnd="-3dp"
             android:layout_marginBottom="-30dp"
             android:background="@drawable/rec_items_design" />
+
+        <TextView
+            android:id="@+id/errorLabel"
+            android:layout_width="196dp"
+            android:layout_height="54dp"
+            android:layout_below="@+id/progressBar"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="107dp"
+            android:textColor="#455A64" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/SearchRecycle"
