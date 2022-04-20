@@ -65,6 +65,12 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         startActivity(intent);
     }
 
+    public void openBusinessProfile(){
+
+        Intent intent = new Intent(this,BusinessProfileActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){
@@ -73,6 +79,9 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.nav_wallet:
                 openWallet();
+                break;
+            case R.id.nav_profile:
+                openBusinessProfile();
                 break;
         }
         return true;

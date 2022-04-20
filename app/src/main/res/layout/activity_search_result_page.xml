@@ -55,8 +55,12 @@
 
         <TextView
             android:id="@+id/errorLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="196dp"
+            android:layout_height="54dp"
+            android:layout_below="@+id/progressBar"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="107dp"
             android:textColor="#455A64" />
 
         <View

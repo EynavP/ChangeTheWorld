@@ -129,6 +129,7 @@
     <string name="exist">Exist</string>
     <string name="update">Update</string>
     <string name="invalid_state_or_city">invalid state or city</string>
+    <string name="open_hours">Open Hours</string>
 
 
 </resources>
