@@ -25,27 +25,27 @@
                 android:id="@+id/open_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/open_close"
                 android:textAppearance="@style/symbol"
-                android:textSize="12sp"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.047"
+                app:layout_constraintHorizontal_bias="0.823"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rateRec" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/businessNameRec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/businessName"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.064"
+                app:layout_constraintHorizontal_bias="0.192"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,22 +57,35 @@
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/distance"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.748"
+                app:layout_constraintHorizontal_bias="0.675"
                 app:layout_constraintStart_toEndOf="@+id/businessNameRec"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/AddressRec"
+                android:layout_width="238dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/businessAddress"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.398"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rateRec" />
 
             <TextView
                 android:id="@+id/rateRec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/rate"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.042"
+                app:layout_constraintHorizontal_bias="0.182"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/businessNameRec" />
 
@@ -91,9 +104,9 @@
                 android:id="@+id/imageView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/distanceRec"
-                app:layout_constraintHorizontal_bias="0.042"
+                app:layout_constraintHorizontal_bias="0.115"
                 app:layout_constraintStart_toEndOf="@+id/rateRec"
                 app:layout_constraintTop_toBottomOf="@+id/businessNameRec"
                 app:srcCompat="@drawable/rate_star" />

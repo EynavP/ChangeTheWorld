@@ -14,7 +14,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/top_currency_page"
+        android:id="@+id/top_search_result_page"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
@@ -51,7 +51,25 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/top_currency_page">
+        android:layout_below="@+id/top_search_result_page">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/rectangle_6"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="178dp"
+            android:layout_marginTop="115dp"
+            android:layout_marginEnd="185dp" />
+
+        <TextView
+            android:id="@+id/errorLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#455A64" />
 
         <View
             android:id="@+id/rectangle_6"
@@ -78,24 +96,6 @@
             android:layout_marginLeft="0dp"
             android:layout_marginTop="75dp"
             android:layout_marginEnd="0dp" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/rectangle_6"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="178dp"
-            android:layout_marginTop="115dp"
-            android:layout_marginEnd="185dp" />
-
-        <TextView
-            android:id="@+id/errorLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#455A64" />
 
 
     </RelativeLayout>

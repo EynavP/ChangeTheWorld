@@ -21,15 +21,16 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
     private LayoutInflater layoutInflater;
     private List<Search> data;
 
-    public AdapterSearch(Context layoutInflater, List<Search> data) {
-        this.layoutInflater =  LayoutInflater.from(layoutInflater);
+    public AdapterSearch(Context context, List<Search> data) {
+        this.layoutInflater =  LayoutInflater.from(context);
         this.data = data;
     }
 
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+
+    public AdapterSearch.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = layoutInflater.inflate(R.layout.search_item_recycler_view,viewGroup,false);
         return new ViewHolder(view);
     }
@@ -43,11 +44,14 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
         String rate = data.get(i).getRate();
         viewHolder.rate.setText(rate);
 
-        String distance = data.get(i).getDistance();
+        String distance = data.get(i).getDistance()+"K";
         viewHolder.distance.setText(distance);
 
         String openClose = data.get(i).getOpenClose();
         viewHolder.openClose.setText(openClose);
+
+        String businessAddress = data.get(i).getBusiness_street()+" "+data.get(i).getBusiness_no()+","+data.get(i).getBusiness_city();
+        viewHolder.businessAddress.setText(businessAddress);
     }
 
     @Override
@@ -58,7 +62,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView businessName,rate,distance,openClose;
+        TextView businessName,rate,distance,openClose,businessAddress;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,6 +70,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
             rate=itemView.findViewById(R.id.rateRec);
             distance=itemView.findViewById(R.id.distanceRec);
             openClose=itemView.findViewById(R.id.open_close);
+            businessAddress=itemView.findViewById(R.id.AddressRec);
         }
     }
 }
