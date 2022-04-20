@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,6 +19,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import android.widget.EditText;
@@ -55,6 +58,7 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
     Button search;
     EditText state;
     AutoCompleteInterface aci = new AutoCompleteApi();
+    AutoCompleteTextView autoCompleteTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,9 +136,9 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         });
         t.start();
 
+        autoCompleteTextView = findViewById(R.id.autoCompleteSearch);
 
-        state = findViewById(R.id.state);
-        state.addTextChangedListener(new TextWatcher() {
+        autoCompleteTextView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
             @Override
@@ -144,8 +148,11 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
                 String query = editable.toString();
                 if (query != null && !query.isEmpty()){
                     Thread t = new Thread(() -> {
-                        ArrayList<String> result = aci.getComplete(query);
-                        result.forEach(r -> Log.d("Yuval", "afterTextChanged: " + r));
+                        ArrayList<String> result =  aci.getComplete(query);
+                        runOnUiThread(() -> {
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(client_home_page.this, android.R.layout.simple_dropdown_item_1line, result);
+                            autoCompleteTextView.setAdapter(adapter);
+                        });
                     });
                     t.start();
                 }
