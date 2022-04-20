@@ -44,7 +44,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
         String rate = data.get(i).getRate();
         viewHolder.rate.setText(rate);
 
-        String distance = data.get(i).getDistance()+"K";
+        String distance = data.get(i).getDistance()+"KM";
         viewHolder.distance.setText(distance);
 
         String openClose = data.get(i).getOpenClose();
