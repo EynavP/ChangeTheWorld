@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BusinessProfileActivity">
+
+
+    <RelativeLayout
+        android:layout_width="397dp"
+        android:layout_height="831dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/profileBTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/business_profile_top"
+                android:layout_width="395dp"
+                android:layout_height="240dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="0dp"
+                android:background="@drawable/business_home_page_top" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="147dp"
+                android:layout_marginLeft="280dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="147dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="250dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/profilePhotoCV"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="250dp">
+
+                    <ImageView
+                        android:id="@+id/profilePhoto"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_launcher_foreground" />
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/editBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="337dp"
+                android:layout_marginTop="77dp"
+                android:layout_marginEnd="28dp"
+                android:background="@drawable/edit_icon" />
+
+            <TextView
+                android:id="@+id/business_username_profile_name"
+                android:layout_width="174dp"
+                android:layout_height="34dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="171dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/comfortaa"
+                android:letterSpacing="0.25"
+                android:text="@string/businessName"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="587dp"
+            android:layout_below="@+id/profileBTop">
+
+            <TextView
+                android:id="@+id/account_info_title"
+                android:layout_width="227dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="158dp"
+                android:fontFamily="@font/comfortaa"
+                android:letterSpacing="0.25"
+                android:text="@string/account_info"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/business_fullname_title"
+                android:layout_width="99dp"
+                android:layout_height="22dp"
+                android:layout_below="@+id/account_info_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="49dp"
+                android:layout_marginEnd="285dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/businessName"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/business_name_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/business_fullname_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="284dp"
+                android:fontFamily="@font/comfortaa"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/mailAddress_title"
+                android:layout_width="99dp"
+                android:layout_height="22dp"
+                android:layout_below="@+id/business_name_value"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="282dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/mailAddress"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/maillAddress_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mailAddress_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="284dp"
+                android:fontFamily="@font/comfortaa"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/Address_title"
+                android:layout_width="140dp"
+                android:layout_height="19dp"
+                android:layout_below="@+id/maillAddress_value"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="244dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/businessAddress"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/street_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Address_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="284dp"
+                android:fontFamily="@font/comfortaa"
+                android:hint="@string/street"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/number_value"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Address_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="125dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="217dp"
+                android:fontFamily="@font/comfortaa"
+                android:hint="@string/NO"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/state_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Address_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="197dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="103dp"
+                android:fontFamily="@font/comfortaa"
+                android:hint="@string/State"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/phoneNumber_title"
+                android:layout_width="99dp"
+                android:layout_height="22dp"
+                android:layout_below="@+id/street_value"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="281dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/phoneNumber"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/phoneNumber_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phoneNumber_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="284dp"
+                android:fontFamily="@font/comfortaa"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/business_owner_name_title"
+                android:layout_width="99dp"
+                android:layout_height="22dp"
+                android:layout_below="@+id/phoneNumber_value"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="281dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/owner_name"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/business_owner_name_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/business_owner_name_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="284dp"
+                android:fontFamily="@font/comfortaa"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/open_hours_title"
+                android:layout_width="99dp"
+                android:layout_height="22dp"
+                android:layout_below="@+id/business_owner_name_value"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="281dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/open_hours"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/open_hours_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/open_hours_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="284dp"
+                android:fontFamily="@font/comfortaa"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
