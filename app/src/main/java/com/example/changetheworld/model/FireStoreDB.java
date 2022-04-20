@@ -443,7 +443,7 @@ public class FireStoreDB implements DataBaseInterface {
                     List<DocumentSnapshot> business = queryDocumentSnapshots.getDocuments();
                     ArrayList<Search> searchBusinessClients = new ArrayList<>();
                     for (DocumentSnapshot b: business) {
-                        Search tmp = new Search(b.getString("business_name"), "5", "open", b.getString("state"), b.getString("city"), b.getString("street"),  b.getString("number"));
+                        Search tmp = new Search(b.getString("user_name"), b.getString("business_name"), "5", "open", b.getString("state"), b.getString("city"), b.getString("street"),  b.getString("number"));
                         searchBusinessClients.add(tmp);
                     }
                     String chosenAddress = state + " " + city + " " + street + " " + number;

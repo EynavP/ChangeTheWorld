@@ -2,6 +2,7 @@ package com.example.changetheworld.model;
 
 public class Search {
 
+    String userName;
     String BusinessName;
     String rate;
     String OpenClose;
@@ -12,7 +13,8 @@ public class Search {
     String business_street;
     String business_no;
 
-    public Search(String businessName, String rate, String openClose, String business_state, String business_city, String business_street, String business_no) {
+    public Search(String userName, String businessName, String rate, String openClose, String business_state, String business_city, String business_street, String business_no) {
+        this.userName = userName;
         this.BusinessName = businessName;
         this.rate = rate;
         this.OpenClose = openClose;
@@ -21,6 +23,14 @@ public class Search {
         this.business_city = business_city;
         this.business_street = business_street;
         this.business_no = business_no;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getBusinessName() { return BusinessName; }
