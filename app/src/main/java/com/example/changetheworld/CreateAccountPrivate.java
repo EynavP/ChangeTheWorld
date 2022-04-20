@@ -113,7 +113,6 @@ public class CreateAccountPrivate extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, getString(R.string.Invalid_passport_picture), Toast.LENGTH_SHORT);
                 toast.show();
             }else{
-                //TODO: ADD DATABASE HERE
                 PrivateClient client = new PrivateClient(user_name,full_name,mail,phone,currency,password,personal_chosen_photo,passport_chosen_photo);
                 Intent intent = new Intent(this, MainActivity.class);
                 FireStoreDB.getInstance().VerifyAndSavePrivateClient(this, client, intent);

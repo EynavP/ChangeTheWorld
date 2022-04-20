@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.changetheworld.AdapterSearch;
 import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -434,7 +435,8 @@ public class FireStoreDB implements DataBaseInterface {
 
     }
 
-    public void searchChange(String state, String city, String street, String number) {
+    @Override
+    public void searchChange(String state, String city, String street, String number, RecyclerView recyclerView, Context context) {
         db.collection("BusinessClient")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -458,8 +460,8 @@ public class FireStoreDB implements DataBaseInterface {
                         });
                     });
                     t.start();
-//                    AdapterSearchBusiness adapterSearchBusiness = new AdapterSearchBusiness(context, searchBusinessClients);
-//                    recyclerView.setAdapter(adapterSearchBusiness);
+                    AdapterSearch adapterSearch = new AdapterSearch(context, searchBusinessClients);
+                    recyclerView.setAdapter(adapterSearch);
                 });
 
     }

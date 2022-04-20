@@ -75,7 +75,7 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
             intent.putExtra("number", number);
             startActivity(intent);
 
-//            FireStoreDB.getInstance().searchChange(state, city, street, number);
+//            FireStoreDB.getInstance().searchChange(state, city, street, number, recyclerView, this);
         });
 
         Thread t = new Thread(() -> {
