@@ -31,9 +31,14 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.DecimalFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -441,60 +446,113 @@ public class FireStoreDB implements DataBaseInterface {
 
     @Override
     public void searchChange(String searchQuery, String radius, RecyclerView recyclerView, Context context, ProgressBar progressBar) {
+
+        Format f = new SimpleDateFormat("HH:mm");
+        String nowTime = f.format(new Date());
+        f = new SimpleDateFormat("EEEE");
+        String nowDay = f.format(new Date());
+
+        if (nowDay.equals("Monday") || nowDay.equals("Tuesday") || nowDay.equals("Wednesday"));
+            nowDay = "MonThu";
+
+        ArrayList<String> open_close_business = new ArrayList<>();
+
+        String finalNowDay = nowDay;
         db.collection("BusinessClient")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    List<DocumentSnapshot> business = queryDocumentSnapshots.getDocuments();
-                    ArrayList<Search> searchBusinessClients = new ArrayList<>();
-                    for (DocumentSnapshot b: business) {
-                        Search tmp = new Search(b.getString("user_name"), b.getString("business_name"), "5", "open", b.getString("state"), b.getString("city"), b.getString("street"),  b.getString("number"));
-                        searchBusinessClients.add(tmp);
-                    }
-                    Thread t = new Thread(() -> {
-                        AtomicInteger flag = new AtomicInteger();
-                        searchBusinessClients.sort((businessClient1, businessClient2) -> {
-                            String business_address1 = businessClient1.getBusiness_state() + " " + businessClient1.getBusiness_city() + " " + businessClient1.getBusiness_street() + " " + businessClient1.getBusiness_no();
-                            Float dis1 = locationDataApi.GetDistance(searchQuery, business_address1);
-                            String business_address2 = businessClient2.getBusiness_state() + " " + businessClient2.getBusiness_city() + " " + businessClient2.getBusiness_street() + " " + businessClient2.getBusiness_no();
-                            Float dis2 = locationDataApi.GetDistance(searchQuery, business_address2);
-                            if (dis1 == null || dis2 == null){
-                                flag.set(1);
-                            }
-                            else if (dis1 > dis2){
-                                businessClient1.setDistance(String.valueOf(df.format(dis1)));
-                                businessClient2.setDistance(String.valueOf(df.format(dis2)));
-                                return 1;
-                            }
-                            else{
-                                businessClient1.setDistance(String.valueOf(df.format(dis1)));
-                                businessClient2.setDistance(String.valueOf(df.format(dis2)));
-                                return -1;
-                            }
-                            return -1;
-                        });
-                        if (flag.get() == 1) {
-                            ((Activity) context).runOnUiThread(() -> {
-                                TextView errorLabel = ((Activity) context).findViewById(R.id.errorLabel);
-                                errorLabel.setText("invalid address");
-                                progressBar.setVisibility(View.INVISIBLE);
-                            });
-                            return;
-                        }
-                        ((Activity) context).runOnUiThread(() -> {
+                            List<DocumentSnapshot> business = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot b : business) {
+                                db.collection("BusinessClient")
+                                        .document(b.getString("user_name"))
+                                        .collection("OpenHours")
+                                        .document(finalNowDay)
+                                        .get()
+                                        .addOnSuccessListener(documentSnapshot -> {
+                                            String string1 = documentSnapshot.getString("open");
+                                            Date time1 = null;
+                                            try {
+                                                time1 = new SimpleDateFormat("HH:mm").parse(string1);
+                                                Calendar open = Calendar.getInstance();
+                                                open.setTime(time1);
+                                                open.add(Calendar.DATE, 1);
 
-                            List<Search> filter_list = searchBusinessClients.stream().filter(search -> {
-                                if (Float.valueOf(search.distance) <= Float.valueOf(radius)){
-                                    return true;
-                                }
-                                return false;
-                            }).collect(Collectors.toList());
-                            AdapterSearch adapterSearch = new AdapterSearch(context, filter_list);
-                            recyclerView.setAdapter(adapterSearch);
-                            progressBar.setVisibility(View.INVISIBLE);
+                                                String string2 = documentSnapshot.getString("close");
+                                                Date time2 = new SimpleDateFormat("HH:mm").parse(string2);
+                                                Calendar close = Calendar.getInstance();
+                                                close.setTime(time2);
+                                                close.add(Calendar.DATE, 1);
+
+                                                Date now=new SimpleDateFormat("HH:mm").parse(nowTime);
+
+
+                                                if (now.after(open.getTime()) && now.before(close.getTime()))
+                                                    open_close_business.add("open");
+                                                else
+                                                    open_close_business.add("close");
+
+                                                db.collection("BusinessClient")
+                                                        .get()
+                                                        .addOnSuccessListener(queryDocumentSnapshots1 -> {
+                                                            List<DocumentSnapshot> business1 = queryDocumentSnapshots1.getDocuments();
+                                                            ArrayList<Search> searchBusinessClients = new ArrayList<>();
+                                                            for (int i = 0; i < business1.size(); i++) {
+                                                                Search tmp = new Search(business1.get(i).getString("user_name"), business1.get(i).getString("business_name"), "5", open_close_business.get(i), business1.get(i).getString("state"), business1.get(i).getString("city"), business1.get(i).getString("street"),  business1.get(i).getString("number"));
+                                                                searchBusinessClients.add(tmp);
+                                                            }
+                                                            Thread t = new Thread(() -> {
+                                                                AtomicInteger flag = new AtomicInteger();
+                                                                searchBusinessClients.sort((businessClient1, businessClient2) -> {
+                                                                    String business_address1 = businessClient1.getBusiness_state() + " " + businessClient1.getBusiness_city() + " " + businessClient1.getBusiness_street() + " " + businessClient1.getBusiness_no();
+                                                                    Float dis1 = locationDataApi.GetDistance(searchQuery, business_address1);
+                                                                    String business_address2 = businessClient2.getBusiness_state() + " " + businessClient2.getBusiness_city() + " " + businessClient2.getBusiness_street() + " " + businessClient2.getBusiness_no();
+                                                                    Float dis2 = locationDataApi.GetDistance(searchQuery, business_address2);
+                                                                    if (dis1 == null || dis2 == null){
+                                                                        flag.set(1);
+                                                                    }
+                                                                    else if (dis1 > dis2){
+                                                                        businessClient1.setDistance(String.valueOf(df.format(dis1)));
+                                                                        businessClient2.setDistance(String.valueOf(df.format(dis2)));
+                                                                        return 1;
+                                                                    }
+                                                                    else{
+                                                                        businessClient1.setDistance(String.valueOf(df.format(dis1)));
+                                                                        businessClient2.setDistance(String.valueOf(df.format(dis2)));
+                                                                        return -1;
+                                                                    }
+                                                                    return -1;
+                                                                });
+                                                                if (flag.get() == 1) {
+                                                                    ((Activity) context).runOnUiThread(() -> {
+                                                                        TextView errorLabel = ((Activity) context).findViewById(R.id.errorLabel);
+                                                                        errorLabel.setText("invalid address");
+                                                                        progressBar.setVisibility(View.INVISIBLE);
+                                                                    });
+                                                                    return;
+                                                                }
+                                                                ((Activity) context).runOnUiThread(() -> {
+
+                                                                    List<Search> filter_list = searchBusinessClients.stream().filter(search -> {
+                                                                        if (Float.valueOf(search.distance) <= Float.valueOf(radius)){
+                                                                            return true;
+                                                                        }
+                                                                        return false;
+                                                                    }).collect(Collectors.toList());
+                                                                    AdapterSearch adapterSearch = new AdapterSearch(context, filter_list);
+                                                                    recyclerView.setAdapter(adapterSearch);
+                                                                    progressBar.setVisibility(View.INVISIBLE);
+                                                                });
+                                                            });
+                                                            t.start();
+                                                        });
+                                            } catch (ParseException e) {
+                                                e.printStackTrace();
+                                            }
+                                        });
+                            }
                         });
-                    });
-                    t.start();
-                });
+
+
     }
 
     @Override
