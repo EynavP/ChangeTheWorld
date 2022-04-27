@@ -57,7 +57,6 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
     NavigationView navigationView;
     Toolbar toolbar;
     ImageView search;
-    EditText state;
     AutoCompleteInterface aci = new AutoCompleteApi();
     AutoCompleteTextView autoCompleteTextView;
     SeekBar bar;
