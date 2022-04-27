@@ -474,13 +474,18 @@ public class FireStoreDB implements DataBaseInterface {
                                                 Date open = new SimpleDateFormat("HH:mm").parse(string1);
                                                 String string2 = documentSnapshot.getString("close");
                                                 Date close = new SimpleDateFormat("HH:mm").parse(string2);
-                                                Date now=new SimpleDateFormat("HH:mm").parse(nowTime);
+                                                Date now = new SimpleDateFormat("HH:mm").parse(nowTime);
                                                 int open_st = open.compareTo(now);
                                                 int close_st = close.compareTo(now);
                                                 if (open_st < 0 && close_st > 0)
                                                     open_close_business.add("open");
                                                 else
                                                     open_close_business.add("close");
+                                                }catch (ParseException e) {
+                                                    open_close_business.add("opening hours unknown");
+                                                }
+                                            finally {
+
 
                                                 db.collection("BusinessClient")
                                                         .get()
@@ -488,7 +493,7 @@ public class FireStoreDB implements DataBaseInterface {
                                                             List<DocumentSnapshot> business1 = queryDocumentSnapshots1.getDocuments();
                                                             ArrayList<Search> searchBusinessClients = new ArrayList<>();
                                                             for (int i = 0; i < business1.size(); i++) {
-                                                                Search tmp = new Search(business1.get(i).getString("user_name"), business1.get(i).getString("business_name"), "5", open_close_business.get(i), business1.get(i).getString("state"), business1.get(i).getString("city"), business1.get(i).getString("street"),  business1.get(i).getString("number"));
+                                                                Search tmp = new Search(business1.get(i).getString("user_name"), business1.get(i).getString("business_name"), "5", open_close_business.get(i), business1.get(i).getString("state"), business1.get(i).getString("city"), business1.get(i).getString("street"), business1.get(i).getString("number"));
                                                                 searchBusinessClients.add(tmp);
                                                             }
                                                             Thread t = new Thread(() -> {
@@ -498,15 +503,13 @@ public class FireStoreDB implements DataBaseInterface {
                                                                     Float dis1 = locationDataApi.GetDistance(searchQuery, business_address1);
                                                                     String business_address2 = businessClient2.getBusiness_state() + " " + businessClient2.getBusiness_city() + " " + businessClient2.getBusiness_street() + " " + businessClient2.getBusiness_no();
                                                                     Float dis2 = locationDataApi.GetDistance(searchQuery, business_address2);
-                                                                    if (dis1 == null || dis2 == null){
+                                                                    if (dis1 == null || dis2 == null) {
                                                                         flag.set(1);
-                                                                    }
-                                                                    else if (dis1 > dis2){
+                                                                    } else if (dis1 > dis2) {
                                                                         businessClient1.setDistance(String.valueOf(df.format(dis1)));
                                                                         businessClient2.setDistance(String.valueOf(df.format(dis2)));
                                                                         return 1;
-                                                                    }
-                                                                    else{
+                                                                    } else {
                                                                         businessClient1.setDistance(String.valueOf(df.format(dis1)));
                                                                         businessClient2.setDistance(String.valueOf(df.format(dis2)));
                                                                         return -1;
@@ -524,7 +527,7 @@ public class FireStoreDB implements DataBaseInterface {
                                                                 ((Activity) context).runOnUiThread(() -> {
 
                                                                     List<Search> filter_list = searchBusinessClients.stream().filter(search -> {
-                                                                        if (Float.valueOf(search.distance) <= Float.valueOf(radius)){
+                                                                        if (Float.valueOf(search.distance) <= Float.valueOf(radius)) {
                                                                             return true;
                                                                         }
                                                                         return false;
@@ -536,8 +539,6 @@ public class FireStoreDB implements DataBaseInterface {
                                                             });
                                                             t.start();
                                                         });
-                                            } catch (ParseException e) {
-                                                e.printStackTrace();
                                             }
                                         });
                             }

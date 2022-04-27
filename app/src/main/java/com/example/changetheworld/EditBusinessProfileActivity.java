@@ -16,7 +16,10 @@ import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.OpenHours;
 import com.example.changetheworld.model.PrivateClient;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class EditBusinessProfileActivity extends AppCompatActivity {
 
@@ -85,6 +88,17 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
             openHours.add(new OpenHours(new_monThuOpen, new_monThuClose));
             openHours.add(new OpenHours(new_fridayOpen, new_fridayClose));
             openHours.add(new OpenHours(new_saturdayOpen, new_saturdayClose));
+
+            for (OpenHours openHour: openHours) {
+                try {
+                    Date open = new SimpleDateFormat("HH:mm").parse(openHour.getOpen());
+                    Date close = new SimpleDateFormat("HH:mm").parse(openHour.getClose());
+                    if (open.compareTo(close) > 0)
+                        Toast.makeText(this, "Opening hour cannot be later than closing hour", Toast.LENGTH_SHORT).show();
+                } catch (ParseException e) {
+                    Toast.makeText(this, "Invalid open hour", Toast.LENGTH_SHORT).show();
+                }
+            }
 
             String new_business_name = business_name.getText().toString();
             String new_mail_address = mail_address.getText().toString();
