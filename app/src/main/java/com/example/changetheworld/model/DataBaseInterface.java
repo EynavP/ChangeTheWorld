@@ -24,7 +24,7 @@ public interface DataBaseInterface {
     void loadClientData(String user_name, TextView full_name, TextView mail_address, TextView phone_number, TextView local_currency);
     void loadClientDataForEdit(String user_name, EditText full_name, EditText mail_address, EditText phone_number, Spinner local_currency, EditText password);
     void updateClientProfile(Context context, PrivateClient client, Intent intent);
-    void loadBusinessData(String user_name, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, TextView state, TextView city, TextView street, TextView number);
-    void loadBusinessDataForEdit(String user_name, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, Spinner state, TextView city, TextView street, TextView number, EditText password);
-    void updateBusinessProfile(Context context, BusinessClient business, Intent intent);
+    void loadBusinessData(String user_name, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, TextView state, TextView city, TextView street, TextView number, TextView sundayHours, TextView monThuHours, TextView fridayHours, TextView saturdayHours);
+    void loadBusinessDataForEdit(String user_name, EditText business_name,EditText mail_address, EditText phone_number, EditText owner_name, Spinner state, EditText city, EditText street, EditText number, EditText password, EditText sundayOpen, EditText sundayClose, EditText monThuOpen, EditText monThuClose,EditText fridayOpen, EditText fridayClose, EditText saturdayOpen, EditText saturdayClose);
+    void updateBusinessProfile(Context context, BusinessClient business,ArrayList<OpenHours> openHours, Intent intent);
 }

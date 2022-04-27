@@ -13,20 +13,25 @@ import android.widget.Toast;
 
 import com.example.changetheworld.model.BusinessClient;
 import com.example.changetheworld.model.FireStoreDB;
+import com.example.changetheworld.model.OpenHours;
 import com.example.changetheworld.model.PrivateClient;
+
+import java.util.ArrayList;
 
 public class EditBusinessProfileActivity extends AppCompatActivity {
 
     String userName;
-    TextView business_name;
-    TextView mail_address;
-    TextView phone_number;
-    TextView owner_name;
+    EditText business_name;
+    EditText mail_address;
+    EditText phone_number;
+    EditText owner_name;
     Spinner state;
-    TextView city;
-    TextView street;
-    TextView number;
+    EditText city;
+    EditText street;
+    EditText number;
     EditText password;
+
+    EditText sundayOpen, sundayClose, monThuOpen, monThuClose, fridayOpen, fridayClose, saturdayOpen, saturdayClose;
 
     Button updateButton;
 
@@ -50,12 +55,37 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
         number = findViewById(R.id.number_value);
         password = findViewById(R.id.business_password_value);
 
+        sundayOpen = findViewById(R.id.sundayOpen);
+        sundayClose = findViewById(R.id.sundayClose);
+        monThuOpen = findViewById(R.id.monThuOpen);
+        monThuClose = findViewById(R.id.monThuClose);
+        fridayOpen = findViewById(R.id.fridayOpen);
+        fridayClose = findViewById(R.id.fridayClose);
+        saturdayOpen = findViewById(R.id.saturdayOpen);
+        saturdayClose = findViewById(R.id.saturdayClose);
+
         userName = getIntent().getStringExtra("user_name");
         ((TextView)findViewById(R.id.business_username_profile_name)).setText(userName);
-        FireStoreDB.getInstance().loadBusinessDataForEdit(userName, business_name, mail_address, phone_number , owner_name, state, city, street, number, password);
+        FireStoreDB.getInstance().loadBusinessDataForEdit(userName, business_name, mail_address, phone_number , owner_name, state, city, street, number, password, sundayOpen, sundayClose, monThuOpen, monThuClose, fridayOpen, fridayClose, saturdayOpen, saturdayClose);
 
         updateButton = findViewById(R.id.updateBtn);
         updateButton.setOnClickListener(view -> {
+
+            String new_sundayOpen = sundayOpen.getText().toString();
+            String new_sundayClose = sundayClose.getText().toString();
+            String new_monThuOpen = monThuOpen.getText().toString();
+            String new_monThuClose = monThuClose.getText().toString();
+            String new_fridayOpen = fridayOpen.getText().toString();
+            String new_fridayClose = fridayClose.getText().toString();
+            String new_saturdayOpen = sundayOpen.getText().toString();
+            String new_saturdayClose = sundayClose.getText().toString();
+
+            ArrayList<OpenHours> openHours = new ArrayList<>();
+            openHours.add(new OpenHours(new_sundayOpen, new_sundayClose));
+            openHours.add(new OpenHours(new_monThuOpen, new_monThuClose));
+            openHours.add(new OpenHours(new_fridayOpen, new_fridayClose));
+            openHours.add(new OpenHours(new_saturdayOpen, new_saturdayClose));
+
             String new_business_name = business_name.getText().toString();
             String new_mail_address = mail_address.getText().toString();
             String new_phone_number = phone_number.getText().toString();
@@ -113,7 +143,7 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
             else {
                 BusinessClient business_client = new BusinessClient(new_business_name,new_mail_address,new_phone_number,userName,new_password,new_owner_name,null, null,new_state,new_city, new_street, new_number);
                 Intent intent = new Intent(this, BusinessProfileActivity.class);
-                FireStoreDB.getInstance().updateBusinessProfile(this, business_client, intent);
+                FireStoreDB.getInstance().updateBusinessProfile(this, business_client, openHours, intent);
             }
         });
     }

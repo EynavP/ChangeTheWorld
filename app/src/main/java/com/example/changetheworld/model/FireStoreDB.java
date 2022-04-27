@@ -20,10 +20,12 @@ import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
 import com.example.changetheworld.R;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -73,6 +75,13 @@ public class FireStoreDB implements DataBaseInterface {
         put("Israel", "ILS");
     }};
 
+    public Map<Integer,String> indexToDay = new HashMap<Integer, String>() {{
+        put(0, "Sunday");
+        put(1, "MonThu");
+        put(2, "Friday");
+        put(3, "Saturday");
+    }};
+
     private FireStoreDB() {
         db = FirebaseFirestore.getInstance();
     }
@@ -110,12 +119,7 @@ public class FireStoreDB implements DataBaseInterface {
         Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
             intent.putExtra("userName", userName);
             context.startActivity(intent);
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, "Fail create wallets : " + e.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
+        }).addOnFailureListener(e -> Toast.makeText(context, "Fail create wallets : " + e.toString(), Toast.LENGTH_LONG).show());
     }
 
 
@@ -141,12 +145,7 @@ public class FireStoreDB implements DataBaseInterface {
             } else {
                 Toast.makeText(context, "UserName already exists", Toast.LENGTH_LONG).show();
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, "Fail to connect to databases " + e.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
+        }).addOnFailureListener(e -> Toast.makeText(context, "Fail to connect to databases " + e.toString(), Toast.LENGTH_LONG).show());
     }
 
     private void SavePrivateClient(Context context, PrivateClient user, Intent intent) {
@@ -565,7 +564,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadBusinessData(String user_name, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, TextView state, TextView city, TextView street, TextView number) {
+    public void loadBusinessData(String user_name, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, TextView state, TextView city, TextView street, TextView number, TextView sundayHours, TextView monThuHours, TextView fridayHours, TextView saturdayHours) {
         db.collection("BusinessClient")
                 .document(user_name)
                 .get()
@@ -578,11 +577,43 @@ public class FireStoreDB implements DataBaseInterface {
                     city.setText(documentSnapshot.getString("city"));
                     street.setText(documentSnapshot.getString("street"));
                     number.setText(documentSnapshot.getString("number"));
+                    loadBusinessOpenHours(user_name, sundayHours, monThuHours, fridayHours, saturdayHours);
                 });
     }
 
+    public void loadBusinessOpenHours(String user_name, TextView sundayHours, TextView monThuHours, TextView fridayHours, TextView saturdayHours) {
+
+        for (int i = 0; i < 4; i++) {
+            int finalI = i;
+            db.collection("BusinessClient")
+                    .document(user_name)
+                    .collection("OpenHours")
+                    .document(indexToDay.get(i))
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        String open = documentSnapshot.getString("open");
+                        String close = documentSnapshot.getString("close");
+                        switch(finalI) {
+                            case 0:
+                                sundayHours.setText(open + " - " + close);
+                                break;
+                            case 1:
+                                monThuHours.setText(open + " - " + close);
+                                break;
+                            case 2:
+                                fridayHours.setText(open + " - " + close);
+                                break;
+                            case 3:
+                                saturdayHours.setText(open + " - " + close);
+                                break;
+                            default:
+                        }
+                    });
+        };
+    }
+
     @Override
-    public void loadBusinessDataForEdit(String user_name, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, Spinner state, TextView city, TextView street, TextView number, EditText password)  {
+    public void loadBusinessDataForEdit(String user_name, EditText business_name, EditText mail_address, EditText phone_number, EditText owner_name, Spinner state, EditText city,EditText street, EditText number, EditText password, EditText sundayOpen, EditText sundayClose, EditText monThuOpen, EditText monThuClose, EditText fridayOpen, EditText fridayClose, EditText saturdayOpen, EditText saturdayClose )  {
         db.collection("BusinessClient")
                 .document(user_name)
                 .get()
@@ -598,11 +629,47 @@ public class FireStoreDB implements DataBaseInterface {
                     ArrayList<String> states = new ArrayList<>();
                     states.addAll(FireStoreDB.getInstance().stateToCurrency.keySet());
                     state.setSelection(states.indexOf(documentSnapshot.getString("state")));
+                    loadBusinessOpenHoursForEdit(user_name, sundayOpen, sundayClose, monThuOpen, monThuClose,fridayOpen, fridayClose, saturdayOpen, saturdayClose);
                 });
     }
 
+    public void loadBusinessOpenHoursForEdit(String user_name, EditText sundayOpen, EditText sundayClose, EditText monThuOpen, EditText monThuClose,EditText fridayOpen, EditText fridayClose, EditText saturdayOpen, EditText saturdayClose) {
+
+        for (int i = 0; i < 4; i++) {
+            int finalI = i;
+            db.collection("BusinessClient")
+                    .document(user_name)
+                    .collection("OpenHours")
+                    .document(indexToDay.get(i))
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        String open = documentSnapshot.getString("open");
+                        String close = documentSnapshot.getString("close");
+                        switch(finalI) {
+                            case 0:
+                                sundayOpen.setText(open);
+                                sundayClose.setText(close);
+                                break;
+                            case 1:
+                                monThuOpen.setText(open);
+                                monThuClose.setText(close);
+                                break;
+                            case 2:
+                                fridayOpen.setText(open);
+                                fridayClose.setText(close);
+                                break;
+                            case 3:
+                                saturdayOpen.setText(open);
+                                saturdayClose.setText(close);
+                                break;
+                            default:
+                        }
+                    });
+        };
+    }
+
     @Override
-    public void updateBusinessProfile(Context context, BusinessClient business, Intent intent) {
+    public void updateBusinessProfile(Context context, BusinessClient business, ArrayList<OpenHours> openHours, Intent intent) {
         final String KEY_BUSINESS_NAME = "business_name";
         final String KEY_MAIL = "mail";
         final String KEY_PHONE = "phone";
@@ -643,13 +710,37 @@ public class FireStoreDB implements DataBaseInterface {
                 .document(business.getUser_name())
                 .update(data)
                 .addOnSuccessListener(unused -> {
-                    Toast.makeText(context, "business updated successfully", Toast.LENGTH_SHORT).show();
-                    intent.putExtra("userName", business.getUser_name());
-                    context.startActivity(intent);
+                    saveOpenHours(context, business.getUser_name(), openHours, intent);
                 })
-                .addOnFailureListener(e -> Toast.makeText(context, "Fail create new business : " + e.toString(), Toast.LENGTH_LONG).show());
+                .addOnFailureListener(e -> Toast.makeText(context, "Fail update business : " + e.toString(), Toast.LENGTH_LONG).show());
+
 
     }
 
+    public void saveOpenHours(Context context,String user_name, ArrayList<OpenHours> openHours, Intent intent) {
+
+        List<Task<Void>> tasks = new ArrayList<>();
+
+
+        for (int i = 0; i < openHours.size(); i++) {
+            Map<String, Object> data = new HashMap<>();
+            data.put("open", openHours.get(i).getOpen());
+            data.put("close", openHours.get(i).getClose());
+
+            tasks.add(db.collection("BusinessClient")
+                    .document(user_name)
+                    .collection("OpenHours")
+                    .document(indexToDay.get(i))
+                    .set(data));
+        };
+
+        Tasks
+                .whenAllSuccess(tasks).addOnSuccessListener(objects -> {
+            Toast.makeText(context, "business updated successfully", Toast.LENGTH_SHORT).show();
+            intent.putExtra("userName", user_name);
+            context.startActivity(intent);
+        })
+                .addOnFailureListener(e -> Toast.makeText(context, "Fail update business : " + e.toString(), Toast.LENGTH_LONG).show());
+    }
 }
 
