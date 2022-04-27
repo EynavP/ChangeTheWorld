@@ -101,9 +101,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="158dp"
+                android:layout_marginStart="85dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="85dp"
                 android:fontFamily="@font/comfortaa"
                 android:letterSpacing="0.25"
                 android:text="@string/account_info"
@@ -112,44 +112,56 @@
 
             <TextView
                 android:id="@+id/business_fullname_title"
-                android:layout_width="99dp"
-                android:layout_height="22dp"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/account_info_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginEnd="285dp"
+                android:layout_marginEnd="189dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/businessName"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
+            <ImageView
+                android:id="@+id/full_name_icon"
+                android:layout_width="53dp"
+                android:layout_height="39dp"
+                android:layout_below="@+id/account_info_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="318dp"
+                app:srcCompat="@drawable/full_name_icon" />
+
             <EditText
                 android:id="@+id/business_name_value"
-                android:layout_width="144dp"
-                android:layout_height="35dp"
+                android:layout_width="215dp"
+                android:layout_height="42dp"
                 android:layout_below="@+id/business_fullname_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="240dp"
+                android:layout_marginEnd="102dp"
                 android:fontFamily="@font/comfortaa"
                 android:hint="@string/businessName"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/mailAddress_title"
-                android:layout_width="99dp"
-                android:layout_height="22dp"
+                android:layout_width="102dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/business_name_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginEnd="282dp"
+                android:layout_marginEnd="215dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/mailAddress"
                 android:textColor="@color/black"
@@ -158,34 +170,58 @@
 
             <EditText
                 android:id="@+id/maillAddress_value"
-                android:layout_width="145dp"
+                android:layout_width="215dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/mailAddress_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="239dp"
+                android:layout_marginEnd="102dp"
                 android:fontFamily="@font/comfortaa"
                 android:hint="@string/mailAddress"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/Address_title"
-                android:layout_width="140dp"
-                android:layout_height="19dp"
+                android:layout_width="161dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/maillAddress_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="244dp"
+                android:layout_marginEnd="156dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/businessAddress"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
+
+            <ImageView
+                android:id="@+id/mail_icon"
+                android:layout_width="43dp"
+                android:layout_height="34dp"
+                android:layout_below="@+id/full_name_icon"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="321dp"
+                app:srcCompat="@drawable/mail_icon" />
+
+            <ImageView
+                android:id="@+id/address_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="41dp"
+                android:layout_below="@+id/full_name_icon"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="87dp"
+                android:layout_marginEnd="316dp"
+                app:srcCompat="@drawable/address_icon" />
 
             <EditText
                 android:id="@+id/street_value"
@@ -247,14 +283,14 @@
 
             <TextView
                 android:id="@+id/phoneNumber_title"
-                android:layout_width="99dp"
-                android:layout_height="22dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/street_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="281dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="188dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/phoneNumber"
                 android:textColor="@color/black"
@@ -263,59 +299,85 @@
 
             <EditText
                 android:id="@+id/phoneNumber_value"
-                android:layout_width="142dp"
-                android:layout_height="wrap_content"
+                android:layout_width="213dp"
+                android:layout_height="39dp"
                 android:layout_below="@+id/phoneNumber_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="242dp"
+                android:layout_marginEnd="104dp"
                 android:fontFamily="@font/comfortaa"
                 android:hint="@string/phoneNumber"
                 android:textSize="14sp" />
 
+            <ImageView
+                android:id="@+id/phone_icon"
+                android:layout_width="46dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/mail_icon"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="127dp"
+                android:layout_marginEnd="317dp"
+                app:srcCompat="@drawable/phone_icon" />
+
             <TextView
                 android:id="@+id/business_password_title"
-                android:layout_width="99dp"
-                android:layout_height="22dp"
+                android:layout_width="150dp"
+                android:layout_height="29dp"
                 android:layout_below="@+id/phoneNumber_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="281dp"
+                android:layout_marginEnd="167dp"
                 android:fontFamily="@font/comfortaa"
-                android:text="@string/phoneNumber"
+                android:text="@string/password"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/business_password_value"
-                android:layout_width="142dp"
+                android:layout_width="210dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/business_password_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="242dp"
+                android:layout_marginEnd="107dp"
                 android:fontFamily="@font/comfortaa"
-                android:hint="@string/phoneNumber"
+                android:hint="@string/password"
                 android:textSize="14sp" />
 
 
+            <ImageView
+                android:id="@+id/password_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="39dp"
+                android:layout_below="@+id/phone_icon"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="29dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="315dp"
+                android:layout_marginBottom="369dp"
+                app:srcCompat="@drawable/password_icon" />
+
             <TextView
                 android:id="@+id/business_owner_name_title"
-                android:layout_width="99dp"
-                android:layout_height="22dp"
+                android:layout_width="113dp"
+                android:layout_height="21dp"
                 android:layout_below="@+id/business_password_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="281dp"
+                android:layout_marginEnd="204dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/owner_name"
                 android:textColor="@color/black"
@@ -324,33 +386,61 @@
 
             <EditText
                 android:id="@+id/business_owner_name_value"
-                android:layout_width="138dp"
-                android:layout_height="wrap_content"
+                android:layout_width="210dp"
+                android:layout_height="44dp"
                 android:layout_below="@+id/business_owner_name_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="246dp"
+                android:layout_marginEnd="107dp"
                 android:fontFamily="@font/comfortaa"
                 android:hint="@string/owner_name"
                 android:textSize="14sp" />
 
+            <ImageView
+                android:id="@+id/owner_name_icon"
+                android:layout_width="38dp"
+                android:layout_height="44dp"
+                android:layout_below="@+id/phone_icon"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="97dp"
+                android:layout_marginEnd="322dp"
+                android:layout_marginBottom="290dp"
+                app:srcCompat="@drawable/owner_name" />
+
             <TextView
                 android:id="@+id/open_hours_title"
-                android:layout_width="99dp"
-                android:layout_height="22dp"
+                android:layout_width="132dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/business_owner_name_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="281dp"
+                android:layout_marginStart="78dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="187dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/open_hours"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/open_hour_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/phone_icon"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="179dp"
+                android:layout_marginEnd="325dp"
+                android:layout_marginBottom="213dp"
+                app:srcCompat="@drawable/open_hour_icon" />
 
             <TextView
                 android:id="@+id/open_hours_value_1"
@@ -359,12 +449,13 @@
                 android:layout_below="@+id/open_hours_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="7dp"
-                android:layout_marginEnd="284dp"
+                android:layout_marginEnd="240dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/Sunday"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/open_hours_value_2"
@@ -373,12 +464,13 @@
                 android:layout_below="@+id/open_hours_value_1"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="257dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="195dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/monday_thursday"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/open_hours_value_3"
@@ -387,9 +479,9 @@
                 android:layout_below="@+id/open_hours_value_2"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="284dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="240dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/friday"
                 android:textSize="12sp" />
@@ -401,12 +493,13 @@
                 android:layout_below="@+id/open_hours_value_3"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="284dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="240dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/saturday"
                 android:textSize="12sp" />
+
 
             <EditText
                 android:id="@+id/sundayOpen"
@@ -415,9 +508,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="129dp"
-                android:layout_marginTop="544dp"
-                android:layout_marginEnd="194dp"
+                android:layout_marginStart="213dp"
+                android:layout_marginTop="588dp"
+                android:layout_marginEnd="117dp"
                 android:inputType="time" />
 
             <EditText
@@ -428,9 +521,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="150dp"
-                android:layout_marginTop="566dp"
-                android:layout_marginEnd="184dp"
+                android:layout_marginStart="214dp"
+                android:layout_marginTop="613dp"
+                android:layout_marginEnd="120dp"
                 android:inputType="time" />
 
             <EditText
@@ -441,22 +534,22 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="120dp"
-                android:layout_marginTop="592dp"
-                android:layout_marginEnd="213dp"
+                android:layout_marginStart="213dp"
+                android:layout_marginTop="643dp"
+                android:layout_marginEnd="120dp"
                 android:inputType="time" />
 
             <EditText
                 android:id="@+id/saturdayOpen"
-                android:layout_width="74dp"
-                android:layout_height="25dp"
+                android:layout_width="73dp"
+                android:layout_height="19dp"
                 android:layout_below="@id/fridayOpen"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="121dp"
-                android:layout_marginTop="617dp"
-                android:layout_marginEnd="202dp"
+                android:layout_marginStart="211dp"
+                android:layout_marginTop="673dp"
+                android:layout_marginEnd="113dp"
                 android:inputType="time" />
 
             <EditText
@@ -466,9 +559,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="211dp"
-                android:layout_marginTop="544dp"
-                android:layout_marginEnd="108dp"
+                android:layout_marginStart="303dp"
+                android:layout_marginTop="589dp"
+                android:layout_marginEnd="9dp"
                 android:inputType="time" />
 
             <EditText
@@ -479,9 +572,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="224dp"
-                android:layout_marginTop="566dp"
-                android:layout_marginEnd="92dp"
+                android:layout_marginStart="303dp"
+                android:layout_marginTop="618dp"
+                android:layout_marginEnd="13dp"
                 android:inputType="time" />
 
 
@@ -493,9 +586,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="189dp"
-                android:layout_marginTop="592dp"
-                android:layout_marginEnd="118dp"
+                android:layout_marginStart="302dp"
+                android:layout_marginTop="639dp"
+                android:layout_marginEnd="5dp"
                 android:inputType="time" />
 
             <EditText
@@ -506,9 +599,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="200dp"
-                android:layout_marginTop="618dp"
-                android:layout_marginEnd="115dp"
+                android:layout_marginStart="303dp"
+                android:layout_marginTop="670dp"
+                android:layout_marginEnd="12dp"
                 android:inputType="time" />
 
             <androidx.appcompat.widget.AppCompatButton

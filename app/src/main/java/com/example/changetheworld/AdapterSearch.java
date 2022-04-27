@@ -20,10 +20,12 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
     private LayoutInflater layoutInflater;
     private List<Search> data;
+    private RecycleSubWalletClickInterface recycleSubWalletClickInterface;
 
     public AdapterSearch(Context context, List<Search> data) {
         this.layoutInflater =  LayoutInflater.from(context);
         this.data = data;
+        this.recycleSubWalletClickInterface =(search_result_page)context;
     }
 
 
@@ -32,7 +34,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
     public AdapterSearch.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = layoutInflater.inflate(R.layout.search_item_recycler_view,viewGroup,false);
-        return new ViewHolder(view);
+        return new AdapterSearch.ViewHolder(view,recycleSubWalletClickInterface);
     }
 
     @Override
@@ -64,13 +66,25 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
         TextView businessName,rate,distance,openClose,businessAddress;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, RecycleSubWalletClickInterface recycleSubWalletClickInterface) {
             super(itemView);
             businessName=itemView.findViewById(R.id.businessNameRec);
             rate=itemView.findViewById(R.id.rateRec);
             distance=itemView.findViewById(R.id.distanceRec);
             openClose=itemView.findViewById(R.id.open_close);
             businessAddress=itemView.findViewById(R.id.AddressRec);
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View view) {
+                    if(recycleSubWalletClickInterface!=null){
+                        int position=getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION){
+                            recycleSubWalletClickInterface.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

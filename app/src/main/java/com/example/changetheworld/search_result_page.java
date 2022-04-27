@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.changetheworld.model.FireStoreDB;
 
-public class search_result_page extends AppCompatActivity {
+public class search_result_page extends AppCompatActivity implements RecycleSubWalletClickInterface{
 
     RecyclerView recyclerView;
     ProgressBar progressBar;
@@ -39,5 +40,17 @@ public class search_result_page extends AppCompatActivity {
         if(progressBar.getVisibility() != View.INVISIBLE) {
             progressBar.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        /*Intent intent = new Intent(this,SubWallet.class);
+        intent.putExtra("subWalletName",items.get(position).getCurrency());
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("userType", userType);
+        intent.putExtra("localCurrencySymbol",symbol.getText().toString());
+        intent.putExtra("subWalletBalance",items.get(position).getBalance());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);*/
     }
 }
