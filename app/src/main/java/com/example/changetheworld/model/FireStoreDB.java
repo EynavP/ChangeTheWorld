@@ -640,7 +640,8 @@ public class FireStoreDB implements DataBaseInterface {
                     business_name.setText(documentSnapshot.getString("business_name"));
                     mail_address.setText(documentSnapshot.getString("mail"));
                     phone_number.setText(documentSnapshot.getString("phone"));
-                    owner_name.setText(documentSnapshot.getString("owner_name"));
+                    if (owner_name != null)
+                        owner_name.setText(documentSnapshot.getString("owner_name"));
                     state.setText(documentSnapshot.getString("state"));
                     city.setText(documentSnapshot.getString("city"));
                     street.setText(documentSnapshot.getString("street"));
