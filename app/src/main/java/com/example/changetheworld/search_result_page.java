@@ -10,11 +10,16 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.changetheworld.model.FireStoreDB;
+import com.example.changetheworld.model.Search;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class search_result_page extends AppCompatActivity implements RecycleSubWalletClickInterface{
 
     RecyclerView recyclerView;
     ProgressBar progressBar;
+    ArrayList<Search> filter_list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +27,7 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
         recyclerView = findViewById(R.id.SearchRecycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         progressBar = findViewById(R.id.progressBar);
+        filter_list = new ArrayList<>();
 
         if(progressBar.getVisibility() != View.INVISIBLE) {
             progressBar.setVisibility(View.VISIBLE);
@@ -29,7 +35,7 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
         String searchQuery = getIntent().getStringExtra("searchQuery");
         String radius = getIntent().getStringExtra("radius");
         radius = radius.substring(3);
-        FireStoreDB.getInstance().searchChange(searchQuery, radius, recyclerView, this, progressBar);
+        FireStoreDB.getInstance().searchChange(searchQuery, radius, recyclerView, this, progressBar, filter_list);
     }
 
     @Override
@@ -45,6 +51,7 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(this,BusinessPage.class);
+        intent.putExtra("user_name", filter_list.get(position).getUserName());
         startActivity(intent);
     }
 }

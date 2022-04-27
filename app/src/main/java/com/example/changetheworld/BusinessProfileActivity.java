@@ -21,6 +21,7 @@ public class BusinessProfileActivity extends AppCompatActivity {
     TextView city;
     TextView street;
     TextView number;
+    TextView header;
 
     TextView sundayHours, monThuHours, fridayHours, saturdayHours;
 
@@ -47,7 +48,7 @@ public class BusinessProfileActivity extends AppCompatActivity {
 
         userName = getIntent().getStringExtra(getString(R.string.userName));
         ((TextView)findViewById(R.id.business_username_profile_name)).setText(userName);
-        FireStoreDB.getInstance().loadBusinessData(userName, business_name, mail_address, phone_number, owner_name, state, city, street, number, sundayHours, monThuHours, fridayHours, saturdayHours);
+        FireStoreDB.getInstance().loadBusinessData(userName, header, business_name, mail_address, phone_number, owner_name, state, city, street, number, sundayHours, monThuHours, fridayHours, saturdayHours);
 
         editBtn = findViewById(R.id.editBtn);
         editBtn.setOnClickListener(view -> {OpenEditProfileBusiness();});

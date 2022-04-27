@@ -448,7 +448,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void searchChange(String searchQuery, String radius, RecyclerView recyclerView, Context context, ProgressBar progressBar) {
+    public void searchChange(String searchQuery, String radius, RecyclerView recyclerView, Context context, ProgressBar progressBar, ArrayList<Search> filter_list) {
 
         Format f = new SimpleDateFormat("HH:mm");
         String nowTime = f.format(new Date());
@@ -546,12 +546,12 @@ public class FireStoreDB implements DataBaseInterface {
                             }
                             ((Activity) context).runOnUiThread(() -> {
 
-                                List<Search> filter_list = searchBusinessClients.stream().filter(search -> {
+                                filter_list.addAll(searchBusinessClients.stream().filter(search -> {
                                     if (Float.valueOf(search.distance) <= Float.valueOf(radius)) {
                                         return true;
                                     }
                                     return false;
-                                }).collect(Collectors.toList());
+                                }).collect(Collectors.toList()));
                                 AdapterSearch adapterSearch = new AdapterSearch(context, filter_list);
                                 recyclerView.setAdapter(adapterSearch);
                                 progressBar.setVisibility(View.INVISIBLE);
@@ -635,7 +635,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadBusinessData(String user_name, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, TextView state, TextView city, TextView street, TextView number, TextView sundayHours, TextView monThuHours, TextView fridayHours, TextView saturdayHours) {
+    public void loadBusinessData(String user_name, TextView header, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, TextView state, TextView city, TextView street, TextView number, TextView sundayHours, TextView monThuHours, TextView fridayHours, TextView saturdayHours) {
         db.collection("BusinessClient")
                 .document(user_name)
                 .get()
@@ -643,6 +643,8 @@ public class FireStoreDB implements DataBaseInterface {
                     business_name.setText(documentSnapshot.getString("business_name"));
                     mail_address.setText(documentSnapshot.getString("mail"));
                     phone_number.setText(documentSnapshot.getString("phone"));
+                    if (header != null)
+                        header.setText(documentSnapshot.getString("business_name"));
                     if (owner_name != null)
                         owner_name.setText(documentSnapshot.getString("owner_name"));
                     state.setText(documentSnapshot.getString("state"));
