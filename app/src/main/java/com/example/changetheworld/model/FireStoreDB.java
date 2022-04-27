@@ -471,20 +471,19 @@ public class FireStoreDB implements DataBaseInterface {
                                         .addOnSuccessListener(documentSnapshot -> {
                                             try {
                                                 String string1 = documentSnapshot.getString("open");
-                                                Date open = new SimpleDateFormat("HH:mm").parse(string1);
                                                 String string2 = documentSnapshot.getString("close");
-                                                Date close = new SimpleDateFormat("HH:mm").parse(string2);
-                                                Date now = new SimpleDateFormat("HH:mm").parse(nowTime);
-                                                int open_st = open.compareTo(now);
-                                                int close_st = close.compareTo(now);
-                                                if (open_st < 0 && close_st > 0)
-                                                    open_close_business.add("open");
-                                                else
-                                                    open_close_business.add("close");
-                                                }catch (ParseException e) {
+                                                if (string1 != null && string2 != null) {
+                                                    Date open = new SimpleDateFormat("HH:mm").parse(string1);
+                                                    Date close = new SimpleDateFormat("HH:mm").parse(string2);
+                                                    Date now = new SimpleDateFormat("HH:mm").parse(nowTime);
+                                                    int open_st = open.compareTo(now);
+                                                    int close_st = close.compareTo(now);
+                                                    if (open_st < 0 && close_st > 0)
+                                                        open_close_business.add("open");
+                                                    else
+                                                        open_close_business.add("close");
+                                                } else
                                                     open_close_business.add("opening hours unknown");
-                                                }
-                                            finally {
 
 
                                                 db.collection("BusinessClient")
@@ -539,6 +538,8 @@ public class FireStoreDB implements DataBaseInterface {
                                                             });
                                                             t.start();
                                                         });
+                                            }catch (ParseException e) {
+                                                e.printStackTrace();
                                             }
                                         });
                             }
