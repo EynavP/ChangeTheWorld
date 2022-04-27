@@ -20,6 +20,7 @@ public class ClientProfileActivity extends AppCompatActivity {
     TextView local_currency;
     ImageView profile;
     Button editButton;
+    TextView passportValue;
 
 
     @Override
@@ -35,6 +36,8 @@ public class ClientProfileActivity extends AppCompatActivity {
         FireStoreDB.getInstance().loadClientData(userName, full_name, mail_address, phone_number , local_currency);
         profile = findViewById(R.id.profilePhoto);
         FireStoreDB.getInstance().LoadProfilePhoto(profile, userName);
+        passportValue = findViewById(R.id.passport_value);
+        FireStoreDB.getInstance().checkPassportPhoto(passportValue, userName);
     }
 
     @Override
@@ -43,6 +46,7 @@ public class ClientProfileActivity extends AppCompatActivity {
         FireStoreDB.getInstance().loadClientData(userName, full_name, mail_address, phone_number , local_currency);
         profile = findViewById(R.id.profilePhoto);
         FireStoreDB.getInstance().LoadProfilePhoto(profile, userName);
+        FireStoreDB.getInstance().checkPassportPhoto(passportValue, userName);
 
         editButton = findViewById(R.id.editBtn);
         editButton.setOnClickListener(view -> openEdit());

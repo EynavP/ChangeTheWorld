@@ -595,12 +595,18 @@ public class FireStoreDB implements DataBaseInterface {
         final String KEY_PASSPORT_PHOTO = "passport_photo";
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference personalImageRef = storageRef.child("images/" + client.getUser_name() + "/" + KEY_PERSONAL_PHOTO + ".jpg");
-        UploadTask personal_photo_task = personalImageRef.putBytes(client.getPhoto());
-        personal_photo_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
-//        StorageReference passportImageRef = storageRef.child("images/" + client.getUser_name() + "/" + KEY_PASSPORT_PHOTO + ".jpg");
-//        UploadTask passport_task = passportImageRef.putBytes(client.getPassport());
-//        passport_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+
+        if (client.getPhoto() != null) {
+            StorageReference personalImageRef = storageRef.child("images/" + client.getUser_name() + "/" + KEY_PERSONAL_PHOTO + ".jpg");
+            UploadTask personal_photo_task = personalImageRef.putBytes(client.getPhoto());
+            personal_photo_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+        }
+
+        if (client.getPassport() != null) {
+            StorageReference passportImageRef = storageRef.child("images/" + client.getUser_name() + "/" + KEY_PASSPORT_PHOTO + ".jpg");
+            UploadTask passport_task = passportImageRef.putBytes(client.getPassport());
+            passport_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+        }
 
         Map<String, Object> data = new HashMap<>();
         data.put(KEY_FULL_NAME, client.getFull_name());
@@ -733,8 +739,8 @@ public class FireStoreDB implements DataBaseInterface {
         final String KEY_PHONE = "phone";
         final String KEY_PASSWORD = "password";
         final String KEY_OWNER_NAME = "owner_name";
-//        final String KEY_BUSINESS_APPROVAL = "business_approval";
-//        final String KEY_OWNER_ID = "owner_id";
+        final String KEY_BUSINESS_APPROVAL = "business_approval";
+        final String KEY_OWNER_ID = "owner_id";
         final String KEY_STATE = "state";
         final String KEY_CITY = "city";
         final String KEY_STREET = "street";
@@ -752,17 +758,19 @@ public class FireStoreDB implements DataBaseInterface {
         data.put(KEY_STREET, business.getBusiness_street());
         data.put(KEY_NUMBER, business.getBusiness_no());
 
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
-//        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-//        StorageReference personalImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_BUSINESS_APPROVAL + ".jpg");
-//        StorageReference passportImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_OWNER_ID + ".jpg");
-//        UploadTask business_approval_task = personalImageRef.putBytes(user.getBusiness_approval_document());
-//        business_approval_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
-//
-//
-//        UploadTask owner_id_task = passportImageRef.putBytes(user.getGetBusiness_owner_id());
-//        owner_id_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+        if (business.getBusiness_approval_document() != null) {
+            StorageReference Business_approvalRef = storageRef.child("images/" + business.getUser_name() + "/" + KEY_BUSINESS_APPROVAL + ".jpg");
+            UploadTask Business_approval_task = Business_approvalRef.putBytes(business.getBusiness_approval_document());
+            Business_approval_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+        }
 
+        if (business.getGetBusiness_owner_id() != null) {
+            StorageReference owner_idRef = storageRef.child("images/" + business.getUser_name() + "/" + KEY_OWNER_ID + ".jpg");
+            UploadTask owner_idTask = owner_idRef.putBytes(business.getGetBusiness_owner_id());
+            owner_idTask.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+        }
 
         db.collection("BusinessClient")
                 .document(business.getUser_name())
@@ -799,6 +807,20 @@ public class FireStoreDB implements DataBaseInterface {
             context.startActivity(intent);
         })
                 .addOnFailureListener(e -> Toast.makeText(context, "Fail update business : " + e.toString(), Toast.LENGTH_LONG).show());
+    }
+
+    @Override
+    public void checkPassportPhoto(TextView passportValue, String user_name) {
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        String passport_path = "images/" + user_name + "/" + "passport_photo.jpg";
+        StorageReference PassportpathReference = storageRef.child(passport_path);
+        Task<byte[]> personal_photo = PassportpathReference.getBytes(2000000000);
+        personal_photo.addOnSuccessListener(bytes -> {
+            passportValue.setText("Exist");
+        })
+        .addOnFailureListener(e -> {
+            passportValue.setText("Non Exist");
+        });
     }
 }
 

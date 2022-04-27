@@ -31,6 +31,7 @@ public class EditClientProfileActivity extends AppCompatActivity {
     EditText password;
     Spinner local_currency;
     ImageView profile;
+    TextView passportValue;
 
     int SELECT_PICTURE = 200;
     byte[] personal_chosen_photo;
@@ -60,22 +61,24 @@ public class EditClientProfileActivity extends AppCompatActivity {
 
         profile = findViewById(R.id.profilePhoto);
         FireStoreDB.getInstance().LoadProfilePhoto(profile, userName);
+        passportValue = findViewById(R.id.passport_value);
+        FireStoreDB.getInstance().checkPassportPhoto(passportValue, userName);
 
         //Personal photo load
-        ImageView personal_photo = ((ImageView) findViewById(R.id.update_profile_photo));
+        ImageView personal_photo = findViewById(R.id.update_profile_photo);
         personal_photo.setOnClickListener(v -> {
                     flag = 1;
                     imageChooser();
                 }
         );
 
-//        //Passport photo load
-//        Button passport_photo = ((Button) findViewById(R.id.uploadPassport));
-//        passport_photo.setOnClickListener(v -> {
-//                    flag = 2;
-//                    imageChooser();
-//                }
-//        );
+        //Passport photo load
+        ImageView passport_photo = (findViewById(R.id.uploadPassport));
+        passport_photo.setOnClickListener(v -> {
+                    flag = 2;
+                    imageChooser();
+                }
+        );
 
         updateButton = findViewById(R.id.updateBtn);
         updateButton.setOnClickListener(view -> {
@@ -105,16 +108,8 @@ public class EditClientProfileActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, getString(R.string.password_invalid), Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (personal_chosen_photo == null){
-                Toast toast = Toast.makeText(this, getString(R.string.Invalid_personal_picture), Toast.LENGTH_SHORT);
-                toast.show();
-            }
-//            else if (passport_chosen_photo == null){
-//                Toast toast = Toast.makeText(this, getString(R.string.Invalid_passport_picture), Toast.LENGTH_SHORT);
-//                toast.show();
-//            }
             else{
-                PrivateClient client = new PrivateClient(userName,new_full_name,new_mail_address,new_phone_number, new_local_currency, new_password,personal_chosen_photo,null);
+                PrivateClient client = new PrivateClient(userName,new_full_name,new_mail_address,new_phone_number, new_local_currency, new_password,personal_chosen_photo,passport_chosen_photo);
                 Intent intent = new Intent(this, ClientProfileActivity.class);
                 FireStoreDB.getInstance().updateClientProfile(this, client, intent);
             }
@@ -126,6 +121,8 @@ public class EditClientProfileActivity extends AppCompatActivity {
         FireStoreDB.getInstance().loadClientDataForEdit(userName, full_name, mail_address, phone_number , local_currency, password);
         profile = findViewById(R.id.profilePhoto);
         FireStoreDB.getInstance().LoadProfilePhoto(profile, userName);
+        FireStoreDB.getInstance().checkPassportPhoto(passportValue, userName);
+
     }
 
     public void imageChooser() {
@@ -155,7 +152,6 @@ public class EditClientProfileActivity extends AppCompatActivity {
 
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-                        //personal_chosen_photo = selectedImageUri.toString();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] photo_byte = baos.toByteArray();

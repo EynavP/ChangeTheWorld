@@ -328,7 +328,7 @@
                 app:srcCompat="@drawable/currency_icon" />
 
             <ImageView
-                android:id="@+id/imageView12"
+                android:id="@+id/uploadPassport"
                 android:layout_width="55dp"
                 android:layout_height="39dp"
                 android:layout_below="@+id/localCurrency_title"
