@@ -18,10 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.changetheworld.AdapterSearch;
 import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
-import com.example.changetheworld.EditClientProfileActivity;
 import com.example.changetheworld.R;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -39,6 +37,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class FireStoreDB implements DataBaseInterface {
 
@@ -441,7 +441,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void searchChange(String searchQuery, RecyclerView recyclerView, Context context, ProgressBar progressBar) {
+    public void searchChange(String searchQuery, String radius, RecyclerView recyclerView, Context context, ProgressBar progressBar) {
         db.collection("BusinessClient")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -482,7 +482,14 @@ public class FireStoreDB implements DataBaseInterface {
                             return;
                         }
                         ((Activity) context).runOnUiThread(() -> {
-                            AdapterSearch adapterSearch = new AdapterSearch(context, searchBusinessClients);
+
+                            List<Search> filter_list = searchBusinessClients.stream().filter(search -> {
+                                if (Float.valueOf(search.distance) <= Float.valueOf(radius)){
+                                    return true;
+                                }
+                                return false;
+                            }).collect(Collectors.toList());
+                            AdapterSearch adapterSearch = new AdapterSearch(context, filter_list);
                             recyclerView.setAdapter(adapterSearch);
                             progressBar.setVisibility(View.INVISIBLE);
                         });

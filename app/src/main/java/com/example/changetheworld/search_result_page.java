@@ -26,8 +26,9 @@ public class search_result_page extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
         }
         String searchQuery = getIntent().getStringExtra("searchQuery");
-
-        FireStoreDB.getInstance().searchChange(searchQuery, recyclerView, this, progressBar);
+        String radius = getIntent().getStringExtra("radius");
+        radius = radius.substring(3);
+        FireStoreDB.getInstance().searchChange(searchQuery, radius, recyclerView, this, progressBar);
     }
 
     @Override

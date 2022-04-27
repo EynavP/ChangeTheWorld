@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +60,8 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
     EditText state;
     AutoCompleteInterface aci = new AutoCompleteApi();
     AutoCompleteTextView autoCompleteTextView;
+    SeekBar bar;
+    TextView bar_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,21 +78,9 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         userName.setText(user_name);
         progressBar = findViewById(R.id.progressBar);
 
-        search = findViewById(R.id.search_button);
-        search.setOnClickListener(view -> {
-            String searchQuery = autoCompleteTextView.getText().toString();
 
-            if (searchQuery == null && searchQuery.isEmpty()){
-                Toast.makeText(this, R.string.Invalid_location, Toast.LENGTH_SHORT).show();
-            }else {
-                Intent intent = new Intent(this, search_result_page.class);
-                intent.putExtra("searchQuery", searchQuery);
-                startActivity(intent);
-            }
-            });
 
         Thread t = new Thread(() -> {
-
             ArrayList<String> symbols = new ArrayList<>();
             if(!getString(R.string.USD).equals(localCurrency))
                 symbols.add(getString(R.string.USD) +'/'+localCurrency);
@@ -104,10 +95,7 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
 
             HashMap<String, ArrayList<Float>> currency_data = api.getCloseAndChangePrice(symbols);
 
-
-
             runOnUiThread(() -> {
-
                 if (!localCurrency.equals(this.getString(R.string.USD)) && currency_data.get(getString(R.string.USD)) != null && currency_data.get(getString(R.string.USD)).size() > 0)
                     items.add(new currency(R.drawable.usd,""+currency_data.get(getString(R.string.USD)).get(0) + currenciesToSymbol.get(localCurrency),""+(currency_data.get(getString(R.string.USD)).get(1)) + "%", this.getString(R.string.USD)));
                 if (!localCurrency.equals(getString(R.string.EUR)) && currency_data.get(getString(R.string.EUR)) != null && currency_data.get(getString(R.string.EUR)).size() > 0)
@@ -130,9 +118,7 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
 
         });
         t.start();
-
         autoCompleteTextView = findViewById(R.id.autoCompleteSearch);
-
         autoCompleteTextView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -153,24 +139,42 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
                 }
             }
         });
-
         drawerLayout = findViewById(R.id.drawer_menu);
         navigationView = findViewById(R.id.nav_view);
         toolbar =(Toolbar) findViewById(R.id.toolbar);
-
-
         setSupportActionBar(toolbar);
-
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
         navigationView.setNavigationItemSelectedListener(this);
+        bar = findViewById(R.id.seekBar);
+        bar_text = findViewById(R.id.seekBarText);
+        bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                bar_text.setText("KM "+ i) ;
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) { }
+        });
 
+        search = findViewById(R.id.search_button);
+        search.setOnClickListener(view -> {
+            String searchQuery = autoCompleteTextView.getText().toString();
+
+            if ((searchQuery == null && searchQuery.isEmpty())|| bar_text.getText().length() <= 2){
+                Toast.makeText(this, R.string.Invalid_location, Toast.LENGTH_SHORT).show();
+            }else {
+                Intent intent = new Intent(this, search_result_page.class);
+                intent.putExtra("searchQuery", searchQuery);
+                intent.putExtra("radius", bar_text.getText().toString());
+                startActivity(intent);
+            }
+        });
     }
-
-
 
     @Override
     public void onResume(){

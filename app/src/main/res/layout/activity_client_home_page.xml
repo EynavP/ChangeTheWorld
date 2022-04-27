@@ -176,7 +176,31 @@
 
                 </AutoCompleteTextView>
 
->        </RelativeLayout>
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="284dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/search_bar"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="77dp"
+                    android:layout_marginTop="13dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:layout_marginEnd="49dp" />
+
+                <TextView
+                    android:id="@+id/seekBarText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/autoCompleteSearch"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="337dp"
+                    android:text="KM" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -190,7 +214,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="775dp"
+                android:layout_height="match_parent"
                 android:paddingTop="100dp">
 
 
