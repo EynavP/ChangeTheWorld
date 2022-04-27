@@ -464,8 +464,10 @@ public class FireStoreDB implements DataBaseInterface {
         Task getOpenHours = db.collection("BusinessClient")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                            List<DocumentSnapshot> business = queryDocumentSnapshots.getDocuments();
+                    List<DocumentSnapshot> business = queryDocumentSnapshots.getDocuments();
                             for (DocumentSnapshot b : business) {
+                                String user_name = b.getString("user_name");
+
                                 db.collection("BusinessClient")
                                         .document(b.getString("user_name"))
                                         .collection("OpenHours")
@@ -473,7 +475,6 @@ public class FireStoreDB implements DataBaseInterface {
                                         .get()
                                         .addOnSuccessListener(documentSnapshot -> {
                                             try {
-                                                String user_name = documentSnapshot.getString("user_name");
                                                 String string1 = documentSnapshot.getString("open");
                                                 String string2 = documentSnapshot.getString("close");
                                                 if (string1 != null && string2 != null) {
@@ -487,7 +488,7 @@ public class FireStoreDB implements DataBaseInterface {
                                                     else
                                                         open_close_business.put(user_name, "close");
                                                 } else
-                                                    open_close_business.put(user_name, "opening hours unknown");
+                                                    open_close_business.put(user_name, "");
                                             } catch (ParseException e) {
                                                 e.printStackTrace();
                                             }
