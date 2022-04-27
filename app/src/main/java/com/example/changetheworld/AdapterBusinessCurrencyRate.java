@@ -35,8 +35,8 @@ public class AdapterBusinessCurrencyRate extends RecyclerView.Adapter<AdapterBus
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
 
-        int symbol=data.get(i).getSymbolId();
-        holder.symbolId.setImageResource(symbol);
+        String symbol=data.get(i).getSymbolId();
+        holder.symbolId.setText(symbol);
 
         String Exchangevalue=data.get(i).getExchangevalue();
         holder.Exchangevalue.setText(Exchangevalue);
@@ -58,8 +58,8 @@ public class AdapterBusinessCurrencyRate extends RecyclerView.Adapter<AdapterBus
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView symbolId;
-        TextView Exchangevalue, currencyName,Sales_value;
+
+        TextView Exchangevalue, currencyName,Sales_value,symbolId;
         EditText update_sales_rate;
 
         public ViewHolder(@NonNull View viewItem){

@@ -2,13 +2,13 @@ package com.example.changetheworld.model;
 
 public class business_currency_rate {
 
-    private int symbolId;
+    private String symbolId;
     private String Exchangevalue;
     private String currencyName;
     private String Sales_value;
     private String update_sales_rate;
 
-    public business_currency_rate(int symbolId, String exchangevalue, String currencyName, String sales_value, String update_sales_rate) {
+    public business_currency_rate(String symbolId, String exchangevalue, String currencyName, String sales_value, String update_sales_rate) {
         this.symbolId = symbolId;
         Exchangevalue = exchangevalue;
         this.currencyName = currencyName;
@@ -16,9 +16,9 @@ public class business_currency_rate {
         this.update_sales_rate = update_sales_rate;
     }
 
-    public int getSymbolId() { return symbolId; }
+    public String getSymbolId() { return symbolId; }
 
-    public void setSymbolId(int symbolId) { this.symbolId = symbolId; }
+    public void setSymbolId(String symbolId) { this.symbolId = symbolId; }
 
     public String getExchangevalue() { return Exchangevalue; }
 
