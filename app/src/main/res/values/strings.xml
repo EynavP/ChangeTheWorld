@@ -131,6 +131,10 @@
     <string name="invalid_state_or_city">invalid state or city</string>
     <string name="open_hours">Open Hours</string>
     <string name="Invalid_location">Invalid location</string>
+    <string name="Sunday">Sunday:</string>
+    <string name="monday_thursday">Monday-Thursday:</string>
+    <string name="friday">Friday:</string>
+    <string name="saturday">Saturday:</string>
 
 
 </resources>
