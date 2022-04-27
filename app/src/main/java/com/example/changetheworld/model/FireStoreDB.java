@@ -511,6 +511,10 @@ public class FireStoreDB implements DataBaseInterface {
                         }
                         Thread t = new Thread(() -> {
                             AtomicInteger flag = new AtomicInteger();
+                            if (searchBusinessClients.size() == 1){
+                                Float dis = locationDataApi.GetDistance(searchQuery, searchBusinessClients.get(0).getBusiness_state() + " " + searchBusinessClients.get(0).getBusiness_city() + " " + searchBusinessClients.get(0).getBusiness_street() + " " + searchBusinessClients.get(0).business_no);
+                                searchBusinessClients.get(0).setDistance(String.valueOf(df.format(dis)));
+                            }
                             searchBusinessClients.sort((businessClient1, businessClient2) -> {
                                 String business_address1 = businessClient1.getBusiness_state() + " " + businessClient1.getBusiness_city() + " " + businessClient1.getBusiness_street() + " " + businessClient1.getBusiness_no();
                                 Float dis1 = locationDataApi.GetDistance(searchQuery, business_address1);

@@ -44,13 +44,7 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
 
     @Override
     public void onItemClick(int position) {
-        /*Intent intent = new Intent(this,SubWallet.class);
-        intent.putExtra("subWalletName",items.get(position).getCurrency());
-        intent.putExtra(getString(R.string.userName), userName);
-        intent.putExtra("userType", userType);
-        intent.putExtra("localCurrencySymbol",symbol.getText().toString());
-        intent.putExtra("subWalletBalance",items.get(position).getBalance());
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        startActivity(intent);*/
+        Intent intent = new Intent(this,BusinessPage.class);
+        startActivity(intent);
     }
 }

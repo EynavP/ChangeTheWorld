@@ -26,7 +26,7 @@
             <View
                 android:id="@+id/business_profile_top"
                 android:layout_width="395dp"
-                android:layout_height="240dp"
+                android:layout_height="200dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
@@ -37,36 +37,6 @@
                 android:layout_marginEnd="0dp"
                 android:background="@drawable/business_home_page_top" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="147dp"
-                android:layout_marginLeft="280dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginEnd="147dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="250dp">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/profilePhotoCV"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="250dp">
-
-                    <ImageView
-                        android:id="@+id/profilePhoto"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_launcher_foreground" />
-
-                </androidx.cardview.widget.CardView>
-
-            </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/editBtn"
@@ -75,9 +45,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="337dp"
-                android:layout_marginTop="77dp"
-                android:layout_marginEnd="28dp"
+                android:layout_marginStart="333dp"
+                android:layout_marginTop="130dp"
+                android:layout_marginEnd="32dp"
                 android:background="@drawable/edit_icon" />
 
             <TextView
@@ -87,9 +57,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="171dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="92dp"
+                android:layout_marginEnd="31dp"
                 android:fontFamily="@font/comfortaa"
                 android:letterSpacing="0.25"
                 android:text="@string/businessName"
