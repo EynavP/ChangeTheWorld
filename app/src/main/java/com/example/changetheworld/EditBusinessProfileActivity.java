@@ -95,9 +95,10 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
                 try {
                     Date open = new SimpleDateFormat("HH:mm").parse(openHour.getOpen());
                     Date close = new SimpleDateFormat("HH:mm").parse(openHour.getClose());
-                    if (open.compareTo(close) > 0)
+                    if (open.compareTo(close) > 0) {
                         Toast.makeText(this, "Opening hour cannot be later than closing hour", Toast.LENGTH_SHORT).show();
                         invalidOpenHours = 1;
+                    }
                 } catch (ParseException e) {
                     Toast.makeText(this, "Invalid open hour", Toast.LENGTH_SHORT).show();
                     invalidOpenHours = 1;
