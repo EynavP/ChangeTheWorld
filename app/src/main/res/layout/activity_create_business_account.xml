@@ -537,7 +537,7 @@
                     android:layout_marginStart="48dp"
                     android:layout_marginTop="27dp"
                     android:layout_marginEnd="317dp"
-                    app:srcCompat="@drawable/upload_photo" />
+                    app:srcCompat="@drawable/owner_name" />
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -559,7 +559,7 @@
                     android:layout_marginStart="22dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="122dp"
-                    app:srcCompat="@drawable/calender" />
+                    app:srcCompat="@drawable/open_hour_icon" />
             </RelativeLayout>
 
 
