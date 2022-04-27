@@ -455,10 +455,13 @@ public class FireStoreDB implements DataBaseInterface {
         if (nowDay.equals("Monday") || nowDay.equals("Tuesday") || nowDay.equals("Wednesday"));
             nowDay = "MonThu";
 
-        ArrayList<String> open_close_business = new ArrayList<>();
+        HashMap <String, String> open_close_business = new HashMap<>();
 
         String finalNowDay = nowDay;
-        db.collection("BusinessClient")
+
+        List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
+
+        Task getOpenHours = db.collection("BusinessClient")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                             List<DocumentSnapshot> business = queryDocumentSnapshots.getDocuments();
@@ -470,6 +473,7 @@ public class FireStoreDB implements DataBaseInterface {
                                         .get()
                                         .addOnSuccessListener(documentSnapshot -> {
                                             try {
+                                                String user_name = documentSnapshot.getString("user_name");
                                                 String string1 = documentSnapshot.getString("open");
                                                 String string2 = documentSnapshot.getString("close");
                                                 if (string1 != null && string2 != null) {
@@ -479,73 +483,75 @@ public class FireStoreDB implements DataBaseInterface {
                                                     int open_st = open.compareTo(now);
                                                     int close_st = close.compareTo(now);
                                                     if (open_st < 0 && close_st > 0)
-                                                        open_close_business.add("open");
+                                                        open_close_business.put(user_name, "open");
                                                     else
-                                                        open_close_business.add("close");
+                                                        open_close_business.put(user_name, "close");
                                                 } else
-                                                    open_close_business.add("opening hours unknown");
-
-
-                                                db.collection("BusinessClient")
-                                                        .get()
-                                                        .addOnSuccessListener(queryDocumentSnapshots1 -> {
-                                                            List<DocumentSnapshot> business1 = queryDocumentSnapshots1.getDocuments();
-                                                            ArrayList<Search> searchBusinessClients = new ArrayList<>();
-                                                            for (int i = 0; i < business1.size(); i++) {
-                                                                Search tmp = new Search(business1.get(i).getString("user_name"), business1.get(i).getString("business_name"), "5", open_close_business.get(i), business1.get(i).getString("state"), business1.get(i).getString("city"), business1.get(i).getString("street"), business1.get(i).getString("number"));
-                                                                searchBusinessClients.add(tmp);
-                                                            }
-                                                            Thread t = new Thread(() -> {
-                                                                AtomicInteger flag = new AtomicInteger();
-                                                                searchBusinessClients.sort((businessClient1, businessClient2) -> {
-                                                                    String business_address1 = businessClient1.getBusiness_state() + " " + businessClient1.getBusiness_city() + " " + businessClient1.getBusiness_street() + " " + businessClient1.getBusiness_no();
-                                                                    Float dis1 = locationDataApi.GetDistance(searchQuery, business_address1);
-                                                                    String business_address2 = businessClient2.getBusiness_state() + " " + businessClient2.getBusiness_city() + " " + businessClient2.getBusiness_street() + " " + businessClient2.getBusiness_no();
-                                                                    Float dis2 = locationDataApi.GetDistance(searchQuery, business_address2);
-                                                                    if (dis1 == null || dis2 == null) {
-                                                                        flag.set(1);
-                                                                    } else if (dis1 > dis2) {
-                                                                        businessClient1.setDistance(String.valueOf(df.format(dis1)));
-                                                                        businessClient2.setDistance(String.valueOf(df.format(dis2)));
-                                                                        return 1;
-                                                                    } else {
-                                                                        businessClient1.setDistance(String.valueOf(df.format(dis1)));
-                                                                        businessClient2.setDistance(String.valueOf(df.format(dis2)));
-                                                                        return -1;
-                                                                    }
-                                                                    return -1;
-                                                                });
-                                                                if (flag.get() == 1) {
-                                                                    ((Activity) context).runOnUiThread(() -> {
-                                                                        TextView errorLabel = ((Activity) context).findViewById(R.id.errorLabel);
-                                                                        errorLabel.setText("invalid address");
-                                                                        progressBar.setVisibility(View.INVISIBLE);
-                                                                    });
-                                                                    return;
-                                                                }
-                                                                ((Activity) context).runOnUiThread(() -> {
-
-                                                                    List<Search> filter_list = searchBusinessClients.stream().filter(search -> {
-                                                                        if (Float.valueOf(search.distance) <= Float.valueOf(radius)) {
-                                                                            return true;
-                                                                        }
-                                                                        return false;
-                                                                    }).collect(Collectors.toList());
-                                                                    AdapterSearch adapterSearch = new AdapterSearch(context, filter_list);
-                                                                    recyclerView.setAdapter(adapterSearch);
-                                                                    progressBar.setVisibility(View.INVISIBLE);
-                                                                });
-                                                            });
-                                                            t.start();
-                                                        });
-                                            }catch (ParseException e) {
+                                                    open_close_business.put(user_name, "opening hours unknown");
+                                            } catch (ParseException e) {
                                                 e.printStackTrace();
                                             }
+
                                         });
                             }
                         });
 
+        tasks.add(getOpenHours);
 
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
+            db.collection("BusinessClient")
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots1 -> {
+                        List<DocumentSnapshot> business1 = queryDocumentSnapshots1.getDocuments();
+                        ArrayList<Search> searchBusinessClients = new ArrayList<>();
+                        for (int i = 0; i < business1.size(); i++) {
+                            Search tmp = new Search(business1.get(i).getString("user_name"), business1.get(i).getString("business_name"), "5", open_close_business.get(business1.get(i).getString("user_name")), business1.get(i).getString("state"), business1.get(i).getString("city"), business1.get(i).getString("street"), business1.get(i).getString("number"));
+                            searchBusinessClients.add(tmp);
+                        }
+                        Thread t = new Thread(() -> {
+                            AtomicInteger flag = new AtomicInteger();
+                            searchBusinessClients.sort((businessClient1, businessClient2) -> {
+                                String business_address1 = businessClient1.getBusiness_state() + " " + businessClient1.getBusiness_city() + " " + businessClient1.getBusiness_street() + " " + businessClient1.getBusiness_no();
+                                Float dis1 = locationDataApi.GetDistance(searchQuery, business_address1);
+                                String business_address2 = businessClient2.getBusiness_state() + " " + businessClient2.getBusiness_city() + " " + businessClient2.getBusiness_street() + " " + businessClient2.getBusiness_no();
+                                Float dis2 = locationDataApi.GetDistance(searchQuery, business_address2);
+                                if (dis1 == null || dis2 == null) {
+                                    flag.set(1);
+                                } else if (dis1 > dis2) {
+                                    businessClient1.setDistance(String.valueOf(df.format(dis1)));
+                                    businessClient2.setDistance(String.valueOf(df.format(dis2)));
+                                    return 1;
+                                } else {
+                                    businessClient1.setDistance(String.valueOf(df.format(dis1)));
+                                    businessClient2.setDistance(String.valueOf(df.format(dis2)));
+                                    return -1;
+                                }
+                                return -1;
+                            });
+                            if (flag.get() == 1) {
+                                ((Activity) context).runOnUiThread(() -> {
+                                    TextView errorLabel = ((Activity) context).findViewById(R.id.errorLabel);
+                                    errorLabel.setText("invalid address");
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                });
+                                return;
+                            }
+                            ((Activity) context).runOnUiThread(() -> {
+
+                                List<Search> filter_list = searchBusinessClients.stream().filter(search -> {
+                                    if (Float.valueOf(search.distance) <= Float.valueOf(radius)) {
+                                        return true;
+                                    }
+                                    return false;
+                                }).collect(Collectors.toList());
+                                AdapterSearch adapterSearch = new AdapterSearch(context, filter_list);
+                                recyclerView.setAdapter(adapterSearch);
+                                progressBar.setVisibility(View.INVISIBLE);
+                            });
+                        });
+                        t.start();
+                    });
+        });
     }
 
     @Override
