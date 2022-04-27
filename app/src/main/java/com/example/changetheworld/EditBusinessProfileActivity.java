@@ -89,14 +89,18 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
             openHours.add(new OpenHours(new_fridayOpen, new_fridayClose));
             openHours.add(new OpenHours(new_saturdayOpen, new_saturdayClose));
 
+            int invalidOpenHours = 0;
+
             for (OpenHours openHour: openHours) {
                 try {
                     Date open = new SimpleDateFormat("HH:mm").parse(openHour.getOpen());
                     Date close = new SimpleDateFormat("HH:mm").parse(openHour.getClose());
                     if (open.compareTo(close) > 0)
                         Toast.makeText(this, "Opening hour cannot be later than closing hour", Toast.LENGTH_SHORT).show();
+                        invalidOpenHours = 1;
                 } catch (ParseException e) {
                     Toast.makeText(this, "Invalid open hour", Toast.LENGTH_SHORT).show();
+                    invalidOpenHours = 1;
                 }
             }
 
@@ -154,6 +158,7 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
 //                Toast toast = Toast.makeText(this, R.string.Invalid_business_owner_id, Toast.LENGTH_SHORT);
 //                toast.show();
 //            }
+            else if (invalidOpenHours == 1){}
             else {
                 BusinessClient business_client = new BusinessClient(new_business_name,new_mail_address,new_phone_number,userName,new_password,new_owner_name,null, null,new_state,new_city, new_street, new_number);
                 Intent intent = new Intent(this, BusinessProfileActivity.class);
