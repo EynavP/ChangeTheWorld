@@ -68,14 +68,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/businessRatesRecycle"
             android:layout_width="match_parent"
-            android:layout_height="663dp"
+            android:layout_height="432dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="63dp"
             android:layout_marginEnd="0dp" />
 
         <ProgressBar
@@ -89,6 +89,18 @@
             android:layout_marginStart="178dp"
             android:layout_marginTop="115dp"
             android:layout_marginEnd="185dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/updateBtn"
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/businessRatesRecycle"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="134dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="134dp"
+            android:text="@string/update" />
 
     </RelativeLayout>
     </RelativeLayout>
