@@ -442,6 +442,7 @@
                 android:layout_marginBottom="248dp"
                 app:srcCompat="@drawable/open_hour_icon" />
 
+
             <TextView
                 android:id="@+id/open_hours_value_1"
                 android:layout_width="wrap_content"
@@ -449,9 +450,9 @@
                 android:layout_below="@+id/open_hours_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="80dp"
+                android:layout_marginStart="68dp"
                 android:layout_marginTop="7dp"
-                android:layout_marginEnd="240dp"
+                android:layout_marginEnd="252dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/Sunday"
                 android:textSize="12sp"
@@ -464,9 +465,9 @@
                 android:layout_below="@+id/open_hours_value_1"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="195dp"
+                android:layout_marginStart="68dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="207dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/monday_thursday"
                 android:textSize="12sp"
@@ -479,9 +480,9 @@
                 android:layout_below="@+id/open_hours_value_2"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginEnd="240dp"
+                android:layout_marginStart="68dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="252dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/friday"
                 android:textSize="12sp" />
@@ -493,116 +494,123 @@
                 android:layout_below="@+id/open_hours_value_3"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="240dp"
+                android:layout_marginStart="61dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="259dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/saturday"
                 android:textSize="12sp" />
 
-
             <EditText
                 android:id="@+id/sundayOpen"
-                android:layout_width="74dp"
-                android:layout_height="21dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="213dp"
-                android:layout_marginTop="588dp"
-                android:layout_marginEnd="117dp"
-                android:inputType="time" />
+                android:layout_marginStart="198dp"
+                android:layout_marginTop="581dp"
+                android:layout_marginEnd="108dp"
+                android:inputType="time"
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/monThuOpen"
                 android:layout_width="wrap_content"
-                android:layout_height="21dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/sundayOpen"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="214dp"
-                android:layout_marginTop="613dp"
-                android:layout_marginEnd="120dp"
-                android:inputType="time" />
+                android:layout_marginStart="196dp"
+                android:layout_marginTop="617dp"
+                android:layout_marginEnd="108dp"
+                android:inputType="time"
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/fridayOpen"
                 android:layout_width="wrap_content"
-                android:layout_height="22dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/monThuOpen"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="213dp"
-                android:layout_marginTop="643dp"
-                android:layout_marginEnd="120dp"
-                android:inputType="time" />
+                android:layout_marginStart="194dp"
+                android:layout_marginTop="654dp"
+                android:layout_marginEnd="111dp"
+                android:inputType="time"
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/saturdayOpen"
-                android:layout_width="73dp"
-                android:layout_height="19dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/fridayOpen"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="211dp"
-                android:layout_marginTop="673dp"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="693dp"
                 android:layout_marginEnd="113dp"
-                android:inputType="time" />
+                android:inputType="time"
+                android:textSize="12sp" />
+
 
             <EditText
                 android:id="@+id/sundayClose"
-                android:layout_width="78dp"
-                android:layout_height="21dp"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="303dp"
-                android:layout_marginTop="589dp"
-                android:layout_marginEnd="9dp"
-                android:inputType="time" />
+                android:layout_marginStart="289dp"
+                android:layout_marginTop="580dp"
+                android:layout_marginEnd="3dp"
+                android:inputType="time"
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/monThuClose"
-                android:layout_width="81dp"
-                android:layout_height="21dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/sundayOpen"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="303dp"
-                android:layout_marginTop="618dp"
-                android:layout_marginEnd="13dp"
-                android:inputType="time" />
-
+                android:layout_marginStart="288dp"
+                android:layout_marginTop="617dp"
+                android:layout_marginEnd="10dp"
+                android:inputType="time"
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/fridayClose"
-                android:layout_width="90dp"
-                android:layout_height="23dp"
+                android:layout_width="91dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/monThuOpen"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="302dp"
-                android:layout_marginTop="639dp"
-                android:layout_marginEnd="5dp"
-                android:inputType="time" />
+                android:layout_marginStart="288dp"
+                android:layout_marginTop="655dp"
+                android:layout_marginEnd="18dp"
+                android:inputType="time"
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/saturdayClose"
-                android:layout_width="82dp"
-                android:layout_height="22dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/fridayOpen"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="303dp"
-                android:layout_marginTop="670dp"
-                android:layout_marginEnd="12dp"
-                android:inputType="time" />
+                android:layout_marginStart="287dp"
+                android:layout_marginTop="692dp"
+                android:layout_marginEnd="16dp"
+                android:inputType="time"
+                android:textSize="12sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/updateBtn"
@@ -611,9 +619,9 @@
                 android:layout_below="@+id/open_hours_value_4"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="154dp"
-                android:layout_marginTop="84dp"
-                android:layout_marginEnd="153dp"
+                android:layout_marginStart="145dp"
+                android:layout_marginTop="83dp"
+                android:layout_marginEnd="162dp"
                 android:text="@string/update" />
 
             <Button
@@ -622,9 +630,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="48dp"
+                android:layout_marginStart="43dp"
                 android:layout_marginLeft="78dp"
-                android:layout_marginTop="708dp"
+                android:layout_marginTop="755dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:fontFamily="@font/comfortaa"
                 android:paddingStart="35dp"
@@ -639,8 +647,8 @@
                 android:layout_height="34dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="717dp"
+                android:layout_marginStart="49dp"
+                android:layout_marginTop="767dp"
                 android:layout_marginEnd="123dp"
                 app:srcCompat="@drawable/uploadfile" />
 
@@ -650,9 +658,9 @@
                 android:layout_height="58dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="209dp"
+                android:layout_marginStart="212dp"
                 android:layout_marginLeft="71dp"
-                android:layout_marginTop="707dp"
+                android:layout_marginTop="756dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:fontFamily="@font/comfortaa"
                 android:paddingStart="35dp"
