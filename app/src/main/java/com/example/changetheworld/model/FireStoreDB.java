@@ -12,21 +12,20 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.AdapterBusinessCurrencyRate;
 import com.example.changetheworld.AdapterSearch;
 import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
+import com.example.changetheworld.BusinessProfileActivity;
 import com.example.changetheworld.R;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -37,7 +36,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -45,7 +43,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class FireStoreDB implements DataBaseInterface {
@@ -794,7 +791,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadCurrencyRates(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar) {
+    public void loadCurrencyRates(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<business_currency_rate> bcrs) {
         ArrayList<String> pairs = new ArrayList<>();
         ArrayList<String> pair_symbols = new ArrayList<>();
         for (String s1: currenciesToSymbol.keySet()) {
@@ -807,7 +804,6 @@ public class FireStoreDB implements DataBaseInterface {
         }
         Thread t = new Thread(() -> {
             HashMap<String, Float> prices = api.getAllPairPrices(pairs);
-            ArrayList<business_currency_rate> bcrs = new ArrayList<>();
             for(int i = 0; i < pairs.size(); i++){
                 bcrs.add(new business_currency_rate(pair_symbols.get(i), String.valueOf(prices.get(pairs.get(i))), pairs.get(i), String.valueOf(prices.get(pairs.get(i))), "0"));
             }
@@ -820,6 +816,25 @@ public class FireStoreDB implements DataBaseInterface {
             });
         });
         t.start();
+    }
+
+    @Override
+    public void saveChangeComissionRate(Context context,HashMap<String, String> comission_data, String business_user_name) {
+        for (String pair: comission_data.keySet()) {
+            HashMap<String, String> data = new HashMap<>();
+            data.put(pair, comission_data.get(pair));
+            db.collection("BusinessClient")
+                    .document(business_user_name)
+                    .collection("currencyComission")
+                    .document(pair.replace("/","*"))
+                    .set(data)
+                    .addOnSuccessListener(unused -> {
+                        Toast.makeText(context, "Update Rates", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, BusinessProfileActivity.class);
+                        intent.putExtra("userName", business_user_name);
+                        context.startActivity(intent);
+                    });
+        }
     }
 
     public void saveOpenHours(Context context,String user_name, ArrayList<OpenHours> openHours, Intent intent) {

@@ -85,8 +85,14 @@ public class AdapterBusinessCurrencyRate extends RecyclerView.Adapter<AdapterBus
                     else{
                         Sales_value.setText(Exchangevalue.getText().toString());
                     }
+                    for (business_currency_rate bcr: data) {
+                        if(bcr.getCurrencyName().equals(currencyName.getText().toString())){
+                            bcr.setUpdate_sales_rate(update_sales_rate.getText().toString());
+                        }
+                    }
                 }
             });
+
         }
 
     }

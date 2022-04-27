@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface DataBaseInterface {
     void VerifyAndSavePrivateClient(Context context, PrivateClient user, Intent intent);
@@ -28,5 +29,6 @@ public interface DataBaseInterface {
     void loadBusinessDataForEdit(String user_name, EditText business_name,EditText mail_address, EditText phone_number, EditText owner_name, Spinner state, EditText city, EditText street, EditText number, EditText password, EditText sundayOpen, EditText sundayClose, EditText monThuOpen, EditText monThuClose,EditText fridayOpen, EditText fridayClose, EditText saturdayOpen, EditText saturdayClose);
     void updateBusinessProfile(Context context, BusinessClient business,ArrayList<OpenHours> openHours, Intent intent);
     void checkPassportPhoto(TextView passportValue, String user_name);
-    void loadCurrencyRates(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar);
+    void loadCurrencyRates(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<business_currency_rate> bcrs);
+    void saveChangeComissionRate(Context context,HashMap<String, String> comission_data, String business_user_name);
 }
