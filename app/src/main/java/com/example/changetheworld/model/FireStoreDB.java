@@ -469,24 +469,15 @@ public class FireStoreDB implements DataBaseInterface {
                                         .document(finalNowDay)
                                         .get()
                                         .addOnSuccessListener(documentSnapshot -> {
-                                            String string1 = documentSnapshot.getString("open");
-                                            Date time1 = null;
                                             try {
-                                                time1 = new SimpleDateFormat("HH:mm").parse(string1);
-                                                Calendar open = Calendar.getInstance();
-                                                open.setTime(time1);
-                                                open.add(Calendar.DATE, 1);
-
+                                                String string1 = documentSnapshot.getString("open");
+                                                Date open = new SimpleDateFormat("HH:mm").parse(string1);
                                                 String string2 = documentSnapshot.getString("close");
-                                                Date time2 = new SimpleDateFormat("HH:mm").parse(string2);
-                                                Calendar close = Calendar.getInstance();
-                                                close.setTime(time2);
-                                                close.add(Calendar.DATE, 1);
-
+                                                Date close = new SimpleDateFormat("HH:mm").parse(string2);
                                                 Date now=new SimpleDateFormat("HH:mm").parse(nowTime);
-
-
-                                                if (now.after(open.getTime()) && now.before(close.getTime()))
+                                                int open_st = open.compareTo(now);
+                                                int close_st = close.compareTo(now);
+                                                if (open_st < 0 && close_st > 0)
                                                     open_close_business.add("open");
                                                 else
                                                     open_close_business.add("close");
