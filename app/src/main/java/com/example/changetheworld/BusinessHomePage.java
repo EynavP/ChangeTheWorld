@@ -135,6 +135,12 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         startActivity(intent);
     }
 
+    private void openBusinessRates() {
+        Intent intent = new Intent(this,Bussiness_rates.class);
+        intent.putExtra(getString(R.string.userName), user_name);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){
@@ -147,7 +153,13 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
             case R.id.nav_profile:
                 openBusinessProfile();
                 break;
+            case R.id.nav_update_rates:
+                openBusinessRates();
+                break;
+
         }
         return true;
     }
+
+
 }

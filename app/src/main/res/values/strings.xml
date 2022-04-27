@@ -135,6 +135,9 @@
     <string name="monday_thursday">Monday-Thursday:</string>
     <string name="friday">Friday:</string>
     <string name="saturday">Saturday:</string>
+    <string name="exchange_rate">exchange rate</string>
+    <string name="sales_rate">Sales rate</string>
+    <string name="update_sales_rate">update sales rate</string>
 
 
 </resources>

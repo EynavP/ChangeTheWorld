@@ -24,10 +24,19 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/ChangeTheWorld/app/src/main/res/layout/subwallet_recycler_view.xml" value="0.21403508771929824" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ChangeTheWorld/app/src/main/res/layout/wallet_recycler_view.xml" value="0.1675438596491228" />
         <entry key="..\:/Users/User/AndroidStudioProjects/ChangeTheWorld/app/src/main/res/menu/open_menu.xml" value="0.1675438596491228" />
+        <entry key="..\:/Users/koral/Desktop/CTW/ChangeTheWorld/app/src/main/res/layout/activity_business_home_page.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/koral/Desktop/CTW/ChangeTheWorld/app/src/main/res/layout/activity_bussiness_rates.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/koral/Desktop/CTW/ChangeTheWorld/app/src/main/res/layout/activity_client_home_page.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/koral/Desktop/CTW/ChangeTheWorld/app/src/main/res/layout/activity_client_profile.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/koral/Desktop/CTW/ChangeTheWorld/app/src/main/res/layout/activity_search_result_page.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/koral/Desktop/CTW/ChangeTheWorld/app/src/main/res/layout/bussiness_rate_item_recycler_view.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/koral/Desktop/CTW/ChangeTheWorld/app/src/main/res/layout/custome_recycler_view.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/koral/Desktop/CTW/ChangeTheWorld/app/src/main/res/layout/search_item_recycler_view.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/koral/Desktop/CTW/ChangeTheWorld/app/src/main/res/menu/open_menu_businees.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/yuval/Desktop/ChangeTheWorld/app/src/main/res/layout/activity_business_profile.xml" value="0.17552083333333332" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

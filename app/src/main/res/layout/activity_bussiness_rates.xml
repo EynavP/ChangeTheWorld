@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".search_result_page"
+    tools:context=".Bussiness_rates"
     android:fitsSystemWindows="true"
     tools:openDrawer="end"
-    android:id="@+id/search_result"
+    android:id="@+id/bussiness_rates"
     android:background="@drawable/currency_page_back">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/top_search_result_page"
+        android:id="@+id/top_bussiness_rates_page"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
@@ -26,33 +26,31 @@
         android:layout_marginEnd="0dp">
 
 
-        <TextView
-            android:id="@+id/search_results_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="43dp"
-            android:layout_marginTop="59dp"
-            android:layout_marginEnd="60dp"
-            android:fontFamily="@font/comfortaa"
-            android:letterSpacing="0.25"
-            android:text="@string/search_results"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-
+    <TextView
+        android:id="@+id/search_results_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="@font/comfortaa"
+        android:letterSpacing="0.25"
+        android:text="@string/currencies_rates"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/top_search_result_page">
+        android:layout_below="@+id/top_bussiness_rates_page">
 
         <View
             android:id="@+id/rectangle_6"
@@ -67,18 +65,8 @@
             android:layout_marginBottom="-30dp"
             android:background="@drawable/rec_items_design" />
 
-        <TextView
-            android:id="@+id/errorLabel"
-            android:layout_width="196dp"
-            android:layout_height="54dp"
-            android:layout_below="@+id/progressBar"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="107dp"
-            android:textColor="#455A64" />
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/SearchRecycle"
+            android:id="@+id/businessRatesRecycle"
             android:layout_width="match_parent"
             android:layout_height="663dp"
             android:layout_alignParentStart="true"
@@ -102,8 +90,7 @@
             android:layout_marginTop="115dp"
             android:layout_marginEnd="185dp" />
 
-
     </RelativeLayout>
-</RelativeLayout>
+    </RelativeLayout>
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
