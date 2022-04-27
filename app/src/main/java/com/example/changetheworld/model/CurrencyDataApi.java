@@ -65,6 +65,43 @@ public class CurrencyDataApi implements CurrencyDataApiInterface{
         }
         return currency_data;
     }
+
+    @Override
+    public HashMap<String, Float> getAllPairPrices(ArrayList<String> pairs) {
+        String query = base_api;
+        for (String pair: pairs) {
+            query += pair + ',';
+        }
+        query = query.substring(0,  query.length() -1 );
+        HashMap<String, Float> currency_data = new HashMap<>();
+        try {
+            URL url = new URL(query);;
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            Scanner s = new Scanner(new BufferedReader(new InputStreamReader(in)));
+            String result = "";
+            while (s.hasNext()){
+                result += s.next();
+            }
+            urlConnection.disconnect();
+            JSONArray data = new JSONArray(result);
+            for(int i = 0; i < data.length(); i++){
+                JSONObject data_field = (JSONObject) data.get(i);
+                Float close_price = Float.parseFloat(df.format(Float.parseFloat(data_field.getString("c"))));
+                String sym = data_field.getString("s");
+                currency_data.put(sym, close_price);
+            }
+            return currency_data;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return currency_data;
+    }
+
 }
 
 

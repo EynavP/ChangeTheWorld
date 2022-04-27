@@ -5,4 +5,5 @@ import java.util.HashMap;
 
 public interface CurrencyDataApiInterface {
     HashMap<String, ArrayList<Float>> getCloseAndChangePrice(ArrayList<String> pairs);
+    HashMap<String, Float> getAllPairPrices(ArrayList<String> pairs);
 }

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.changetheworld.AdapterBusinessCurrencyRate;
 import com.example.changetheworld.AdapterSearch;
 import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
@@ -54,6 +55,8 @@ public class FireStoreDB implements DataBaseInterface {
 
     DecimalFormat df = new DecimalFormat("0.00");
     public LocationDataApiInterface locationDataApi = new LocationDataApi();
+    public CurrencyDataApiInterface api = new CurrencyDataApi();
+
 
 
     public Map<String,String> currenciesToSymbol = new HashMap<String, String>() {{
@@ -269,7 +272,7 @@ public class FireStoreDB implements DataBaseInterface {
                 DocumentSnapshot tmp_wallet = (DocumentSnapshot) obj;
                 walletsData.add(tmp_wallet);
             }
-            CurrencyDataApiInterface api = new CurrencyDataApi();
+
             HashMap<String, String> doc_data = new HashMap<>();
             ArrayList<String> symbols_for_api = new ArrayList<>();
             String local_currency = "";
@@ -786,6 +789,35 @@ public class FireStoreDB implements DataBaseInterface {
                 .addOnFailureListener(e -> Toast.makeText(context, "Fail update business : " + e.toString(), Toast.LENGTH_LONG).show());
 
 
+    }
+
+    @Override
+    public void loadCurrencyRates(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar) {
+        ArrayList<String> pairs = new ArrayList<>();
+        ArrayList<String> pair_symbols = new ArrayList<>();
+        for (String s1: currenciesToSymbol.keySet()) {
+            for (String s2: currenciesToSymbol.keySet()) {
+                if (!s1.equals(s2)){
+                    pairs.add(s1 + "/" + s2);
+                    pair_symbols.add(currenciesToSymbol.get(s1) + "/" + currenciesToSymbol.get(s2));
+                }
+            }
+        }
+        Thread t = new Thread(() -> {
+            HashMap<String, Float> prices = api.getAllPairPrices(pairs);
+            ArrayList<business_currency_rate> bcrs = new ArrayList<>();
+            for(int i = 0; i < pairs.size(); i++){
+                bcrs.add(new business_currency_rate(pair_symbols.get(i), String.valueOf(prices.get(pairs.get(i))), pairs.get(i), String.valueOf(prices.get(pairs.get(i))), "0"));
+            }
+            ((Activity) context).runOnUiThread(() -> {
+                AdapterBusinessCurrencyRate abcr = new AdapterBusinessCurrencyRate(context, bcrs);
+                recyclerView.setAdapter(abcr);
+                progressBar.setVisibility(View.INVISIBLE);
+
+
+            });
+        });
+        t.start();
     }
 
     public void saveOpenHours(Context context,String user_name, ArrayList<OpenHours> openHours, Intent intent) {

@@ -1,6 +1,8 @@
 package com.example.changetheworld;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.model.business_currency_rate;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class AdapterBusinessCurrencyRate extends RecyclerView.Adapter<AdapterBusinessCurrencyRate.ViewHolder>{
 
     private LayoutInflater layoutInflater;
     private List<business_currency_rate> data;
-
+    DecimalFormat df = new DecimalFormat("0.000");
     public AdapterBusinessCurrencyRate(Context context, List<business_currency_rate> data) {
         this.layoutInflater = LayoutInflater.from(context);
         this.data = data;
@@ -69,7 +72,21 @@ public class AdapterBusinessCurrencyRate extends RecyclerView.Adapter<AdapterBus
             currencyName=viewItem.findViewById(R.id.currency_name);
             Sales_value=viewItem.findViewById(R.id.Sales_rate_value);
             update_sales_rate=viewItem.findViewById(R.id.update_value);
-
+            update_sales_rate.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    String current_update_sales = editable.toString();
+                    if (current_update_sales != null && !current_update_sales.isEmpty())
+                        Sales_value.setText(df.format(Float.valueOf(Sales_value.getText().toString()) + Float.valueOf(current_update_sales)));
+                    else{
+                        Sales_value.setText(Exchangevalue.getText().toString());
+                    }
+                }
+            });
         }
 
     }

@@ -3,14 +3,10 @@ package com.example.changetheworld;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,8 +16,6 @@ import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.OpenHours;
 import com.example.changetheworld.model.PrivateClient;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,12 +33,6 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
     EditText street;
     EditText number;
     EditText password;
-
-    int SELECT_PICTURE = 200;
-    byte[] Business_approval_document;
-    byte[] Business_owner_id;
-    int flag = 0;
-
 
     EditText sundayOpen, sundayClose, monThuOpen, monThuClose, fridayOpen, fridayClose, saturdayOpen, saturdayClose;
 
@@ -83,22 +71,6 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.business_username_profile_name)).setText(userName);
         FireStoreDB.getInstance().loadBusinessDataForEdit(userName, business_name, mail_address, phone_number , owner_name, state, city, street, number, password, sundayOpen, sundayClose, monThuOpen, monThuClose, fridayOpen, fridayClose, saturdayOpen, saturdayClose);
 
-        //Business approval document load
-        ImageView Business_approval_documentIcon = findViewById(R.id.uploadapprovalicon);
-        Business_approval_documentIcon.setOnClickListener(v -> {
-                    flag = 1;
-                    imageChooser();
-                }
-        );
-
-        //owner_id load
-        ImageView owner_idIcon = (findViewById(R.id.ApprovalDocumentIcon));
-        owner_idIcon.setOnClickListener(v -> {
-                    flag = 2;
-                    imageChooser();
-                }
-        );
-
         updateButton = findViewById(R.id.updateBtn);
         updateButton.setOnClickListener(view -> {
 
@@ -123,10 +95,9 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
                 try {
                     Date open = new SimpleDateFormat("HH:mm").parse(openHour.getOpen());
                     Date close = new SimpleDateFormat("HH:mm").parse(openHour.getClose());
-                    if (open.compareTo(close) > 0) {
+                    if (open.compareTo(close) > 0)
                         Toast.makeText(this, "Opening hour cannot be later than closing hour", Toast.LENGTH_SHORT).show();
                         invalidOpenHours = 1;
-                    }
                 } catch (ParseException e) {
                     Toast.makeText(this, "Invalid open hour", Toast.LENGTH_SHORT).show();
                     invalidOpenHours = 1;
@@ -179,62 +150,20 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, getString(R.string.invalid_business_name), Toast.LENGTH_SHORT);
                 toast.show();
             }
+//            else if (business_chosen_approvel == null){
+//                Toast toast = Toast.makeText(this, R.string.Invalid_business_approval_document, Toast.LENGTH_SHORT);
+//                toast.show();
+//            }
+//            else if (business_chosen_owner_id == null) {
+//                Toast toast = Toast.makeText(this, R.string.Invalid_business_owner_id, Toast.LENGTH_SHORT);
+//                toast.show();
+//            }
             else if (invalidOpenHours == 1){}
             else {
-                BusinessClient business_client = new BusinessClient(new_business_name,new_mail_address,new_phone_number,userName,new_password,new_owner_name,Business_approval_document, Business_owner_id,new_state,new_city, new_street, new_number);
+                BusinessClient business_client = new BusinessClient(new_business_name,new_mail_address,new_phone_number,userName,new_password,new_owner_name,null, null,new_state,new_city, new_street, new_number);
                 Intent intent = new Intent(this, BusinessProfileActivity.class);
                 FireStoreDB.getInstance().updateBusinessProfile(this, business_client, openHours, intent);
             }
         });
     }
-
-    public void imageChooser() {
-
-        // create an instance of the
-        // intent of the type image
-        Intent i = new Intent();
-        i.setType(getString(R.string.image_path));
-        i.setAction(Intent.ACTION_GET_CONTENT);
-
-        // pass the constant to compare it
-        // with the returned requestCode
-        startActivityForResult(Intent.createChooser(i, getString(R.string.Select_Picture)), SELECT_PICTURE);
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-
-            // compare the resultCode with the
-            // SELECT_PICTURE constant
-            if (requestCode == SELECT_PICTURE) {
-                // Get the url of the image from data
-                Uri selectedImageUri = data.getData();
-                if (null != selectedImageUri) {
-
-                    try {
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                        byte[] photo_byte = baos.toByteArray();
-
-                        if (flag == 1){
-                            Business_approval_document = photo_byte;
-                            Toast.makeText(this, "Business approval document Upload Success", Toast.LENGTH_SHORT).show();
-                        }
-
-                        if (flag == 2) {
-                            Business_owner_id = photo_byte;
-                            Toast.makeText(this, "Business owner id Upload Success", Toast.LENGTH_SHORT).show();
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-    }
-
 }
