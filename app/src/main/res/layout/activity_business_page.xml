@@ -21,19 +21,19 @@
             <RelativeLayout
                 android:id="@+id/profileBTop"
                 android:layout_width="match_parent"
-                android:layout_height="187dp">
+                android:layout_height="226dp">
 
 
                 <View
                     android:id="@+id/ellipse_8"
-                    android:layout_width="357dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="198dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="19dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginEnd="21dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="26dp"
                     android:background="@drawable/business_circles" />
 
                 <TextView
@@ -51,6 +51,28 @@
                     android:text="@string/businessName"
                     android:textAlignment="center"
                     android:textSize="20sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/new_order_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="165dp"
+                    android:layout_marginEnd="62dp"
+                    android:layout_toStartOf="@+id/currencies_rates_btn"
+                    android:background="@drawable/order_icon_2"
+                    android:tooltipText="@string/new_order" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/currencies_rates_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="168dp"
+                    android:layout_marginEnd="123dp"
+                    android:background="@drawable/currency_rate_icon"
+                    android:tooltipText="@string/currencies_rates" />
 
 
             </RelativeLayout>

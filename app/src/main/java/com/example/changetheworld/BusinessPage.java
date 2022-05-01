@@ -2,7 +2,9 @@ package com.example.changetheworld;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.changetheworld.model.FireStoreDB;
@@ -22,6 +24,7 @@ public class BusinessPage extends AppCompatActivity {
 
     TextView sundayHours, monThuHours, fridayHours, saturdayHours;
 
+    Button newOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +50,10 @@ public class BusinessPage extends AppCompatActivity {
         FireStoreDB.getInstance().loadBusinessData(userName,header, business_name, mail_address, phone_number, owner_name, state, city, street, number, sundayHours, monThuHours, fridayHours, saturdayHours);
 
 
+        newOrder = findViewById(R.id.new_order_btn);
+        newOrder.setOnClickListener(view -> {
+            Intent intent = new Intent(this,OrderPage.class);
+            startActivity(intent);
+        });
     }
 }

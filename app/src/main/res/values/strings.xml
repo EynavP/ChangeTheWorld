@@ -138,6 +138,15 @@
     <string name="exchange_rate">exchange rate</string>
     <string name="sales_rate">Sales rate</string>
     <string name="update_sales_rate">update sales rate</string>
+    <string name="new_order">New Order</string>
+    <string name="payment_method">Payment method</string>
+    <string name="cash">cash</string>
+    <string name="wallet">wallet</string>
+    <string name="amount">Amount</string>
+    <string name="receive">Receive</string>
+    <string name="pickup_from">Pickup from</string>
+    <string name="pickup_date">Pickup date</string>
+    <string name="submit">Submit</string>
 
 
 </resources>
