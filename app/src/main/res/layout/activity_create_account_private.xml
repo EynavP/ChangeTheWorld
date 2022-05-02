@@ -299,8 +299,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="70dp"
-                android:layout_marginLeft="70dp"
+                android:layout_marginStart="74dp"
+                android:layout_marginLeft="74dp"
                 android:layout_marginTop="1dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:fontFamily="@font/comfortaa"
@@ -310,6 +310,7 @@
                 android:textColor="@color/black"
                 android:textSize="13sp" />
 
+
             <Button
                 android:id="@+id/uploadPassport"
                 android:layout_width="107dp"
@@ -317,9 +318,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="253dp"
+                android:layout_marginLeft="242dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="33dp"
+                android:layout_marginEnd="44dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:fontFamily="@font/comfortaa"
                 android:paddingStart="20dp"
@@ -329,7 +330,6 @@
                 android:textSize="13sp">
 
             </Button>
-
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/createAccountButton"

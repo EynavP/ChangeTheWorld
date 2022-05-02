@@ -74,7 +74,7 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         user_name = getIntent().getStringExtra(getString(R.string.userName));
         userName = findViewById(R.id.username);
         String localCurrency = getIntent().getStringExtra(getString(R.string.localCurrency));
-        userName.setText(user_name);
+        userName.setText(user_name+",");
         progressBar = findViewById(R.id.progressBar);
 
 

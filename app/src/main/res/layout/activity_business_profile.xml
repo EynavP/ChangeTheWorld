@@ -11,8 +11,8 @@
         android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_width="397dp"
-        android:layout_height="831dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +99,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="80dp"
-                android:layout_marginTop="49dp"
+                android:layout_marginTop="42dp"
                 android:layout_marginEnd="195dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/businessName"
@@ -109,14 +109,14 @@
 
             <TextView
                 android:id="@+id/business_name_value"
-                android:layout_width="211dp"
-                android:layout_height="34dp"
+                android:layout_width="278dp"
+                android:layout_height="33dp"
                 android:layout_below="@+id/business_fullname_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="106dp"
+                android:layout_marginEnd="35dp"
                 android:fontFamily="@font/comfortaa"
                 android:textSize="14sp" />
 
@@ -150,14 +150,14 @@
 
             <TextView
                 android:id="@+id/maillAddress_value"
-                android:layout_width="209dp"
-                android:layout_height="34dp"
+                android:layout_width="278dp"
+                android:layout_height="36dp"
                 android:layout_below="@+id/mailAddress_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="108dp"
+                android:layout_marginEnd="35dp"
                 android:fontFamily="@font/comfortaa"
                 android:textSize="14sp" />
 
@@ -173,6 +173,7 @@
                 android:layout_marginEnd="321dp"
                 app:srcCompat="@drawable/mail_icon" />
 
+
             <TextView
                 android:id="@+id/Address_title"
                 android:layout_width="140dp"
@@ -181,7 +182,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="80dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="195dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/businessAddress"
@@ -196,78 +197,34 @@
                 android:layout_below="@+id/full_name_icon"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="87dp"
-                android:layout_marginEnd="316dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="98dp"
+                android:layout_marginEnd="313dp"
                 app:srcCompat="@drawable/address_icon" />
-
-
-            <TextView
-                android:id="@+id/street_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Address_title"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="279dp"
-                android:fontFamily="@font/comfortaa"
-                android:hint="@string/street"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/number_value"
-                android:layout_width="59dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Address_title"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="129dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="209dp"
-                android:fontFamily="@font/comfortaa"
-                android:hint="@string/NO"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/city_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Address_title"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="200dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="128dp"
-                android:fontFamily="@font/comfortaa"
-                android:hint="@string/city"
-                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/state_value"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_below="@+id/Address_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="274dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="26dp"
+                android:layout_marginStart="78dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
                 android:fontFamily="@font/comfortaa"
-                android:hint="@string/State"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/phoneNumber_title"
                 android:layout_width="99dp"
                 android:layout_height="22dp"
-                android:layout_below="@+id/street_value"
+                android:layout_below="@+id/state_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="21dp"
-                android:layout_marginEnd="195dp"
+                android:layout_marginStart="84dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="192dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/phoneNumber"
                 android:textColor="@color/black"
@@ -276,14 +233,14 @@
 
             <TextView
                 android:id="@+id/phoneNumber_value"
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
+                android:layout_width="278dp"
+                android:layout_height="34dp"
                 android:layout_below="@+id/phoneNumber_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="123dp"
+                android:layout_marginEnd="35dp"
                 android:fontFamily="@font/comfortaa"
                 android:textSize="14sp" />
 
@@ -318,14 +275,14 @@
 
             <TextView
                 android:id="@+id/business_owner_name_value"
-                android:layout_width="195dp"
-                android:layout_height="34dp"
+                android:layout_width="273dp"
+                android:layout_height="35dp"
                 android:layout_below="@+id/business_owner_name_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="122dp"
+                android:layout_marginEnd="40dp"
                 android:fontFamily="@font/comfortaa"
                 android:textSize="14sp" />
 

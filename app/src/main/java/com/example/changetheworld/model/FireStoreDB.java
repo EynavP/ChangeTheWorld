@@ -644,10 +644,14 @@ public class FireStoreDB implements DataBaseInterface {
                         header.setText(documentSnapshot.getString("business_name"));
                     if (owner_name != null)
                         owner_name.setText(documentSnapshot.getString("owner_name"));
-                    state.setText(documentSnapshot.getString("state"));
-                    city.setText(documentSnapshot.getString("city"));
+                    String address = documentSnapshot.getString("street") + " " +
+                            documentSnapshot.getString("number") + "," +
+                            documentSnapshot.getString("city") + "," +
+                            documentSnapshot.getString("state");
+                    state.setText(address);
+                  /*  city.setText(documentSnapshot.getString("city"));
                     street.setText(documentSnapshot.getString("street"));
-                    number.setText(documentSnapshot.getString("number"));
+                    number.setText(documentSnapshot.getString("number"));*/
                     loadBusinessOpenHours(user_name, sundayHours, monThuHours, fridayHours, saturdayHours);
                 });
     }
