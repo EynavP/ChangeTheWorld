@@ -63,11 +63,16 @@
                 android:textAppearance="@style/login_client"
                 app:lineHeight="34sp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/fieldsClientRegister"
             android:layout_width="match_parent"
-            android:layout_height="506dp"
-            android:layout_below="@id/topPageClientRegister">
+            android:layout_height="489dp"
+            android:layout_below="@id/topPageClientRegister"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp">
 
             <TextView
                 android:id="@+id/full_name"
@@ -289,12 +294,14 @@
 
             <Button
                 android:id="@+id/uploadPhoto"
-                android:layout_width="141dp"
-                android:layout_height="37dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="86dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="1dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:fontFamily="@font/comfortaa"
                 android:paddingStart="20dp"
@@ -305,12 +312,14 @@
 
             <Button
                 android:id="@+id/uploadPassport"
-                android:layout_width="170dp"
-                android:layout_height="38dp"
+                android:layout_width="107dp"
+                android:layout_height="41dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="225dp"
-                android:layout_marginTop="8dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="253dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="33dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:fontFamily="@font/comfortaa"
                 android:paddingStart="20dp"
@@ -321,6 +330,7 @@
 
             </Button>
 
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/createAccountButton"
                 android:layout_width="200dp"
@@ -328,15 +338,14 @@
                 android:layout_below="@+id/uploadPhoto"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="95dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginEnd="98dp"
+                android:layout_marginStart="97dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="96dp"
                 android:background="@drawable/client_sign_in_button"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/register"
                 android:textAllCaps="false"
                 android:textColor="@color/black" />
-
 
             <TextView
                 android:id="@+id/don_t_have_"
@@ -372,13 +381,23 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="46dp"
-                android:layout_height="41dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="54dp"
-                android:layout_marginTop="9dp"
-                app:srcCompat="@drawable/upload_photo" />
+                android:layout_marginTop="5dp"
+                app:srcCompat="@drawable/profile_icon" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="240dp"
+                android:layout_marginTop="1dp"
+                app:srcCompat="@drawable/passport_icon" />
         </RelativeLayout>
 
     </RelativeLayout>
