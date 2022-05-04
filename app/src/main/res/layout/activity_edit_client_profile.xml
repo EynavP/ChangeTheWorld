@@ -11,8 +11,8 @@
         android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_width="397dp"
-        android:layout_height="831dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,12 +52,10 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/client_profile_top"
                 android:layout_marginStart="147dp"
                 android:layout_marginLeft="280dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="80dp"
                 android:layout_marginEnd="147dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="250dp">
@@ -89,13 +87,26 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="100dp"
-                android:layout_marginTop="171dp"
+                android:layout_marginTop="168dp"
                 android:layout_marginEnd="100dp"
                 android:fontFamily="@font/comfortaa"
                 android:letterSpacing="0.25"
                 android:text="@string/username"
                 android:textAlignment="center"
+                android:textAllCaps="false"
                 android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/backBtn"
+                android:layout_width="31dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="359dp"
+                android:background="@drawable/back_icon" />
 
 
         </RelativeLayout>
@@ -104,7 +115,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="587dp"
-            android:layout_below="@+id/profileCTop">
+            android:layout_below="@+id/profileCTop"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp">
 
             <TextView
                 android:id="@+id/account_info_title"
@@ -145,9 +162,9 @@
                 android:layout_below="@+id/account_info_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="26dp"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="318dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginEnd="317dp"
                 app:srcCompat="@drawable/full_name_icon" />
 
             <com.google.android.material.textfield.TextInputEditText
@@ -202,9 +219,9 @@
                 android:layout_below="@+id/full_name_icon"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="29dp"
-                android:layout_marginTop="46dp"
-                android:layout_marginEnd="317dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="320dp"
                 app:srcCompat="@drawable/mail_icon" />
 
             <TextView
@@ -245,9 +262,9 @@
                 android:layout_below="@+id/mail_icon"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="315dp"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="46dp"
+                android:layout_marginEnd="317dp"
                 app:srcCompat="@drawable/phone_icon" />
 
             <TextView
@@ -284,16 +301,16 @@
 
             <ImageView
                 android:id="@+id/currency_icon"
-                android:layout_width="42dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
                 android:layout_below="@+id/phone_icon"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="34dp"
-                android:layout_marginTop="42dp"
-                android:layout_marginEnd="321dp"
-                android:layout_marginBottom="224dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginTop="39dp"
+                android:layout_marginEnd="331dp"
+                android:layout_marginBottom="260dp"
                 app:srcCompat="@drawable/currency_icon" />
 
             <TextView
@@ -345,16 +362,16 @@
 
             <ImageView
                 android:id="@+id/password_icon"
-                android:layout_width="39dp"
-                android:layout_height="39dp"
+                android:layout_width="27dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/phone_icon"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="34dp"
-                android:layout_marginTop="120dp"
-                android:layout_marginEnd="324dp"
-                android:layout_marginBottom="147dp"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="124dp"
+                android:layout_marginEnd="329dp"
+                android:layout_marginBottom="181dp"
                 app:srcCompat="@drawable/password_icon" />
 
             <TextView
@@ -373,14 +390,14 @@
 
             <ImageView
                 android:id="@+id/uploadPassport"
-                android:layout_width="51dp"
-                android:layout_height="40dp"
+                android:layout_width="36dp"
+                android:layout_height="31dp"
                 android:layout_below="@+id/localCurrency_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="139dp"
-                android:layout_marginEnd="318dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="142dp"
+                android:layout_marginEnd="325dp"
                 app:srcCompat="@drawable/passport_icon" />
 
             <androidx.appcompat.widget.AppCompatButton

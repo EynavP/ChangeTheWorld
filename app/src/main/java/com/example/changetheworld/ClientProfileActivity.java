@@ -1,17 +1,24 @@
 package com.example.changetheworld;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.changetheworld.model.FireStoreDB;
+import com.google.android.material.navigation.NavigationView;
 
-public class ClientProfileActivity extends AppCompatActivity {
+public class ClientProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     String userName;
     TextView full_name;
@@ -21,6 +28,10 @@ public class ClientProfileActivity extends AppCompatActivity {
     ImageView profile;
     Button editButton;
     TextView passportValue;
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
 
 
     @Override
@@ -38,6 +49,17 @@ public class ClientProfileActivity extends AppCompatActivity {
         FireStoreDB.getInstance().LoadProfilePhoto(profile, userName);
         passportValue = findViewById(R.id.passport_value);
         FireStoreDB.getInstance().checkPassportPhoto(passportValue, userName);
+
+
+        drawerLayout = findViewById(R.id.drawer_menu);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar =(Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -56,5 +78,27 @@ public class ClientProfileActivity extends AppCompatActivity {
         Intent intent = new Intent(this,EditClientProfileActivity.class);
         intent.putExtra("user_name", userName);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.nav_home:
+                Intent intent = new Intent(this,client_home_page.class);
+                intent.putExtra(getString(R.string.userName), userName);
+                intent.putExtra(getString(R.string.localCurrency), local_currency.getText().toString());
+                startActivity(intent);
+                break;
+            case R.id.nav_wallet:
+                Intent intent2 = new Intent(this,WalletActivity.class);
+                intent2.putExtra(getString(R.string.userName), userName);
+                intent2.putExtra("user_type", "PrivateClient");
+                startActivity(intent2);
+                break;
+            case R.id.nav_profile:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+        }
+        return true;
     }
 }

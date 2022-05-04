@@ -39,6 +39,7 @@ public class EditClientProfileActivity extends AppCompatActivity {
     int flag = 0;
 
     Button updateButton;
+    Button backButton;
 
 
     @Override
@@ -112,8 +113,12 @@ public class EditClientProfileActivity extends AppCompatActivity {
                 PrivateClient client = new PrivateClient(userName,new_full_name,new_mail_address,new_phone_number, new_local_currency, new_password,personal_chosen_photo,passport_chosen_photo);
                 Intent intent = new Intent(this, ClientProfileActivity.class);
                 FireStoreDB.getInstance().updateClientProfile(this, client, intent);
+                finish();
             }
+
         });
+        backButton = findViewById(R.id.backBtn);
+        backButton.setOnClickListener(view -> finish());
     }
 
     protected void onResume() {

@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.changetheworld.databinding.ActivityMainBinding;
 import com.example.changetheworld.model.FireStoreDB;
 
 public class MainActivity extends AppCompatActivity {

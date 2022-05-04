@@ -27,6 +27,8 @@ public class SubWallet extends AppCompatActivity {
     TextView totalBalance;
     TextView totalBalanceSymbol;
 
+    Button backBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,8 @@ public class SubWallet extends AppCompatActivity {
             moveToWithdraw();
         });
 
-
+        backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(view -> {finish();});
 
 
     }
