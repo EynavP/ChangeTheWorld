@@ -182,7 +182,7 @@
                     app:srcCompat="@drawable/mail_icon" />
 
                 <TextView
-                    android:id="@+id/Address_title"
+                    android:id="@+id/address_title"
                     android:layout_width="140dp"
                     android:layout_height="19dp"
                     android:layout_below="@+id/maillAddress_value"
@@ -193,6 +193,22 @@
                     android:layout_marginEnd="195dp"
                     android:fontFamily="@font/comfortaa"
                     android:text="@string/businessAddress"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/local_currency_title"
+                    android:layout_width="140dp"
+                    android:layout_height="19dp"
+                    android:layout_below="@+id/maillAddress_value"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="76dp"
+                    android:layout_marginTop="64dp"
+                    android:layout_marginEnd="199dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="@string/local_currency"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -211,66 +227,38 @@
 
 
                 <TextView
-                    android:id="@+id/street_value"
-                    android:layout_width="116dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/Address_title"
+                    android:id="@+id/address_value"
+                    android:layout_width="274dp"
+                    android:layout_height="32dp"
+                    android:layout_below="@+id/address_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="11dp"
-                    android:layout_marginEnd="256dp"
+                    android:layout_marginStart="78dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginEnd="45dp"
                     android:fontFamily="@font/comfortaa"
                     android:hint="@string/street"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/number_value"
-                    android:layout_width="59dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/Address_title"
+                    android:id="@+id/local_currency_value"
+                    android:layout_width="274dp"
+                    android:layout_height="32dp"
+                    android:layout_below="@+id/local_currency_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="144dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="194dp"
+                    android:layout_marginStart="79dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="44dp"
                     android:fontFamily="@font/comfortaa"
-                    android:hint="@string/NO"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/city_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/Address_title"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="209dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="119dp"
-                    android:fontFamily="@font/comfortaa"
-                    android:hint="@string/city"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/state_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/Address_title"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="283dp"
-                    android:layout_marginTop="11dp"
-                    android:layout_marginEnd="17dp"
-                    android:fontFamily="@font/comfortaa"
-                    android:hint="@string/State"
+                    android:hint="@string/local_currency"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/phoneNumber_title"
                     android:layout_width="99dp"
                     android:layout_height="22dp"
-                    android:layout_below="@+id/street_value"
+                    android:layout_below="@+id/local_currency_value"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="80dp"
@@ -303,11 +291,10 @@
                     android:layout_below="@+id/mail_icon"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="22dp"
-                    android:layout_marginTop="111dp"
-                    android:layout_marginEnd="321dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="175dp"
+                    android:layout_marginEnd="319dp"
                     app:srcCompat="@drawable/phone_icon" />
-
 
                 <TextView
                     android:id="@+id/open_hours_title"
@@ -332,11 +319,9 @@
                     android:layout_below="@+id/phone_icon"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="19dp"
                     android:layout_marginEnd="318dp"
-                    android:layout_marginBottom="176dp"
                     app:srcCompat="@drawable/open_hour_icon" />
 
                 <TextView
