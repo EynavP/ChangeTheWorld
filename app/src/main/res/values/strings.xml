@@ -150,6 +150,10 @@
     <string name="address">Address</string>
     <string name="Invalid_address">Invalid address</string>
     <string name="Invalid_Address">Invalid Address</string>
+    <string name="order_confirm">Order Confirm</string>
+    <string name="order_details">Order Details</string>
+    <string name="don_t_forget_to_bring_your_id">Don\'t forget to bring your ID !</string>
+    <string name="you_can_always">You can always see the order’s details on your orders page!</string>
 
 
 </resources>
