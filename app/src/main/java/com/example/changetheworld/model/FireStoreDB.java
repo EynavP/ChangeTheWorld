@@ -172,16 +172,20 @@ public class FireStoreDB implements DataBaseInterface {
         data.put(KEY_PASSWORD, user.getPassword());
         data.put(KEY_MAIL, user.getMail_address());
 
+
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference personalImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_PERSONAL_PHOTO + ".jpg");
-        StorageReference passportImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_PASSPORT_PHOTO + ".jpg");
-        UploadTask personal_photo_task = personalImageRef.putBytes(user.getPhoto());
-        personal_photo_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
 
+        if (user.getPhoto() != null) {
+            StorageReference personalImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_PERSONAL_PHOTO + ".jpg");
+            UploadTask personal_photo_task = personalImageRef.putBytes(user.getPhoto());
+            personal_photo_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+        }
 
-        UploadTask passport_task = passportImageRef.putBytes(user.getPassport());
-        passport_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
-
+        if (user.getPassport() != null) {
+            StorageReference passportImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_PASSPORT_PHOTO + ".jpg");
+            UploadTask passport_task = passportImageRef.putBytes(user.getPassport());
+            passport_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+        }
         db.collection("PrivateClient")
                 .document(user.getUser_name())
                 .set(data)
@@ -424,15 +428,18 @@ public class FireStoreDB implements DataBaseInterface {
 
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference personalImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_BUSINESS_APPROVAL + ".jpg");
-        StorageReference passportImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_OWNER_ID + ".jpg");
-        UploadTask business_approval_task = personalImageRef.putBytes(user.getBusiness_approval_document());
-        business_approval_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
 
+        if (user.getBusiness_approval_document() != null) {
+            StorageReference personalImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_BUSINESS_APPROVAL + ".jpg");
+            UploadTask business_approval_task = personalImageRef.putBytes(user.getBusiness_approval_document());
+            business_approval_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+        }
 
-        UploadTask owner_id_task = passportImageRef.putBytes(user.getGetBusiness_owner_id());
-        owner_id_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
-
+        if (user.getGetBusiness_owner_id() != null) {
+            StorageReference passportImageRef = storageRef.child("images/" + user.getUser_name() + "/" + KEY_OWNER_ID + ".jpg");
+            UploadTask owner_id_task = passportImageRef.putBytes(user.getGetBusiness_owner_id());
+            owner_id_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+        }
 
         db.collection("BusinessClient")
                 .document(user.getUser_name())

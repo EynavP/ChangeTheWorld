@@ -94,14 +94,15 @@ public class CreateAccountPrivate extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, getString(R.string.password_invalid), Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (personal_chosen_photo == null){
-                Toast toast = Toast.makeText(this, getString(R.string.Invalid_personal_picture), Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            else if (passport_chosen_photo == null){
-                Toast toast = Toast.makeText(this, getString(R.string.Invalid_passport_picture), Toast.LENGTH_SHORT);
-                toast.show();
-            }else{
+//            else if (personal_chosen_photo == null){
+//                Toast toast = Toast.makeText(this, getString(R.string.Invalid_personal_picture), Toast.LENGTH_SHORT);
+//                toast.show();
+//            }
+//            else if (passport_chosen_photo == null){
+//                Toast toast = Toast.makeText(this, getString(R.string.Invalid_passport_picture), Toast.LENGTH_SHORT);
+//                toast.show();
+//            }
+            else{
                 PrivateClient client = new PrivateClient(user_name,full_name,mail,phone,currency,password,personal_chosen_photo,passport_chosen_photo);
                 Intent intent = new Intent(this, MainActivity.class);
                 FireStoreDB.getInstance().VerifyAndSavePrivateClient(this, client, intent);

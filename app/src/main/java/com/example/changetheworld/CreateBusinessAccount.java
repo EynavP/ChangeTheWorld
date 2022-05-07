@@ -124,14 +124,14 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, getString(R.string.invalid_business_name), Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (business_chosen_approvel == null){
-                Toast toast = Toast.makeText(this, R.string.Invalid_business_approval_document, Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            else if (business_chosen_owner_id == null) {
-                Toast toast = Toast.makeText(this, R.string.Invalid_business_owner_id, Toast.LENGTH_SHORT);
-                toast.show();
-            }
+//            else if (business_chosen_approvel == null){
+//                Toast toast = Toast.makeText(this, R.string.Invalid_business_approval_document, Toast.LENGTH_SHORT);
+//                toast.show();
+//            }
+//            else if (business_chosen_owner_id == null) {
+//                Toast toast = Toast.makeText(this, R.string.Invalid_business_owner_id, Toast.LENGTH_SHORT);
+//                toast.show();
+//            }
             else {
                 BusinessClient business_client = new BusinessClient(business_name,mail,phone,user_name,password,business_owner_name,business_chosen_approvel,business_chosen_owner_id,business_state,business_city, business_street, business_no);
                 Intent intent = new Intent(this, BusinessLogin.class);
