@@ -3,6 +3,7 @@ package com.example.changetheworld;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -50,32 +51,31 @@ public class OrderPage extends AppCompatActivity {
         submit = findViewById(R.id.submit_btn);
         pickup_date =findViewById(R.id.pickup_date_value);
 
-        pickup_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar mcurrentDate = Calendar.getInstance();
-                mYear = mcurrentDate.get(Calendar.YEAR);
-                mMonth = mcurrentDate.get(Calendar.MONTH);
-                mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+        FireStoreDB.getInstance().LoadBusinessAddress(this, business_user_name, pick_from);
 
-                DatePickerDialog mDatePicker = new DatePickerDialog(OrderPage.this, new DatePickerDialog.OnDateSetListener() {
-                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                        Calendar myCalendar = Calendar.getInstance();
-                        myCalendar.set(Calendar.YEAR, selectedyear);
-                        myCalendar.set(Calendar.MONTH, selectedmonth);
-                        myCalendar.set(Calendar.DAY_OF_MONTH, selectedday);
-                        String myFormat = "dd/MM/yy"; //Change as you need
-                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
-                        pickup_date.setText(sdf.format(myCalendar.getTime()));
+        pickup_date.setOnClickListener(view -> {
+            Calendar mcurrentDate = Calendar.getInstance();
+            mYear = mcurrentDate.get(Calendar.YEAR);
+            mMonth = mcurrentDate.get(Calendar.MONTH);
+            mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
-                        mDay = selectedday;
-                        mMonth = selectedmonth;
-                        mYear = selectedyear;
-                    }
-                }, mYear, mMonth, mDay);
-                //mDatePicker.setTitle("Select date");
-                mDatePicker.show();
-            }
+            DatePickerDialog mDatePicker = new DatePickerDialog(OrderPage.this, new DatePickerDialog.OnDateSetListener() {
+                public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                    Calendar myCalendar = Calendar.getInstance();
+                    myCalendar.set(Calendar.YEAR, selectedyear);
+                    myCalendar.set(Calendar.MONTH, selectedmonth);
+                    myCalendar.set(Calendar.DAY_OF_MONTH, selectedday);
+                    String myFormat = "dd/MM/yy"; //Change as you need
+                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+                    pickup_date.setText(sdf.format(myCalendar.getTime()));
+
+                    mDay = selectedday;
+                    mMonth = selectedmonth;
+                    mYear = selectedyear;
+                }
+            }, mYear, mMonth, mDay);
+            //mDatePicker.setTitle("Select date");
+            mDatePicker.show();
         });
 
         cash.setOnClickListener(view -> {
@@ -116,6 +116,21 @@ public class OrderPage extends AppCompatActivity {
             }
         });
 
+        submit.setOnClickListener(view -> {
+            String from_currency = from.getSelectedItem().toString();
+            String to_currency = to.getSelectedItem().toString();
+            String from_amount = amount.getText().toString();
+            String to_amount = receive.getText().toString();
+            String date = pickup_date.getText().toString();
+            String business_address = pick_from.getText().toString();
+
+            if(payment_method.equals("cash")){
+                FireStoreDB.getInstance().PayByCash(this, business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
+            }
+            else if(payment_method.equals("wallet")){
+                FireStoreDB.getInstance().PayByWallet(this, business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
+            }
+        });
 
 
 

@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.changetheworld.OrderPage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -32,4 +34,7 @@ public interface DataBaseInterface {
     void loadCurrencyRates(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<business_currency_rate> bcrs);
     void saveChangeComissionRate(Context context,HashMap<String, String> comission_data, String business_user_name);
     void calculateChangeRate(Context context, String business_user_name, String from_currency, String to_currency, float amount, TextView receive);
+    void LoadBusinessAddress(Context context, String business_user_name, TextView pick_from);
+    void PayByCash(Context context, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address);
+    void PayByWallet(Context context, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address);
 }

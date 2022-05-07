@@ -867,6 +867,28 @@ public class FireStoreDB implements DataBaseInterface {
                 });
     }
 
+    @Override
+    public void LoadBusinessAddress(Context context, String business_user_name, TextView pick_from) {
+        db.collection("BusinessClient")
+                .document(business_user_name)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    ((Activity)context).runOnUiThread(()->{
+                        pick_from.setText(documentSnapshot.getString("address"));
+                    });
+                });
+    }
+
+    @Override
+    public void PayByCash(Context context, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address) {
+
+    }
+
+    @Override
+    public void PayByWallet(Context context, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address) {
+
+    }
+
     public void saveOpenHours(Context context,String user_name, ArrayList<OpenHours> openHours, Intent intent) {
 
         List<Task<Void>> tasks = new ArrayList<>();
