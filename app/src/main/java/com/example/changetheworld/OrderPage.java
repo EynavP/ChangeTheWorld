@@ -125,10 +125,10 @@ public class OrderPage extends AppCompatActivity {
             String business_address = pick_from.getText().toString();
 
             if(payment_method.equals("cash")){
-                FireStoreDB.getInstance().PayByCash(this, business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
+                FireStoreDB.getInstance().PayByCash(this, "PrivateClient", business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
             }
             else if(payment_method.equals("wallet")){
-                FireStoreDB.getInstance().PayByWallet(this, business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
+                FireStoreDB.getInstance().PayByWallet(this, "PrivateClient", business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
             }
         });
 

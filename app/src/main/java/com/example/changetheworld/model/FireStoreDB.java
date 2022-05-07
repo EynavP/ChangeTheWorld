@@ -20,7 +20,9 @@ import com.example.changetheworld.AdapterSearch;
 import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
 import com.example.changetheworld.BusinessProfileActivity;
+import com.example.changetheworld.OrderConfirm;
 import com.example.changetheworld.R;
+import com.example.changetheworld.client_home_page;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
@@ -369,7 +371,8 @@ public class FireStoreDB implements DataBaseInterface {
                                         .set(transactionData)
                                         .addOnSuccessListener(unused1 -> {
                                             Toast.makeText(context, action.equals("+") ? "deposit" : "withdraw" + " succeeded", Toast.LENGTH_LONG).show();
-                                            context.startActivity(intent);
+                                            if (intent != null)
+                                                context.startActivity(intent);
                                         })
                                         .addOnFailureListener(e -> {
                                             Toast.makeText(context, "Cannot add transaction",Toast.LENGTH_LONG).show();
@@ -880,12 +883,176 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void PayByCash(Context context, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address) {
+    public void PayByCash(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address) {
+        List<Task<DocumentSnapshot>> getDataTasks = new ArrayList<>();
 
+        AtomicReference<String> business_name = new AtomicReference<>();
+        AtomicReference<String> user_FullName = new AtomicReference<>();
+        AtomicReference<String> counter = new AtomicReference<>();
+
+        getDataTasks.add(db.collection("BusinessClient")
+                .document(business_user_name)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    business_name.set(documentSnapshot.getString("business_name"));
+                }));
+
+        getDataTasks.add(db.collection(user_type)
+                .document(client_user_name)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                        if (user_type == "PrivateClient")
+                                user_FullName.set(documentSnapshot.getString("full_name"));
+                        else
+                                user_FullName.set(documentSnapshot.getString("business_name"));
+                }));
+
+        getDataTasks.add(db.collection("CounterForUniqueID")
+                .document("value")
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    counter.set(documentSnapshot.getString("counter"));
+                }));
+
+        Tasks.whenAllSuccess(getDataTasks).addOnSuccessListener(objects -> {
+
+            List<Task<Void>> tasks = new ArrayList<>();
+
+            Map<String, Object> data = new HashMap<>();
+            data.put("user_fullName", user_FullName.get());
+            data.put("business_name", business_name.get());
+            data.put("payment_method", "cash");
+            data.put("from_currency", from_currency);
+            data.put("to_currency", to_currency);
+            data.put("from_amount", from_amount);
+            data.put("to_amount", to_amount);
+            data.put("date", date);
+            data.put("status", "pending");
+            data.put("id", counter.get());
+
+            tasks.add(db.collection(user_type)
+                    .document(client_user_name)
+                    .collection("OrdersByMe")
+                    .document(client_user_name + "*" + business_user_name + "*" + counter)
+                    .set(data));
+
+            tasks.add(db.collection("BusinessClient")
+                    .document(business_user_name)
+                    .collection("OrdersForMe")
+                    .document(client_user_name + "*" + business_user_name + "*" + counter)
+                    .set(data));
+
+            Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects1 -> {
+                Map<String, Object> updated_counter = new HashMap<>();
+                updated_counter.put("counter",  String.valueOf(Integer.parseInt(counter.get()) + 1));
+                db.collection("CounterForUniqueID")
+                        .document("value")
+                        .set(updated_counter)
+                        .addOnSuccessListener(unused -> {
+                            Toast.makeText(context, "Order Success", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(context, OrderConfirm.class);
+                            intent.putExtra("userName", client_user_name);
+                            context.startActivity(intent);
+                        });
+            });
+
+        });
     }
 
     @Override
-    public void PayByWallet(Context context, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address) {
+    public void PayByWallet(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address) {
+        db.collection(user_type)
+                .document(client_user_name)
+                .collection("Wallet")
+                .document(from_currency)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+
+                    Float balance = Float.parseFloat(documentSnapshot.getString("balance"));
+                    Float reduceBalance = Float.parseFloat(from_amount);
+                    if (balance - reduceBalance >= 0) {
+                        updateBalance(client_user_name, user_type, from_currency, reduceBalance, "-", context, null);
+
+                        List<Task<DocumentSnapshot>> getDataTasks = new ArrayList<>();
+
+                        AtomicReference<String> business_name = new AtomicReference<>();
+                        AtomicReference<String> user_FullName = new AtomicReference<>();
+                        AtomicReference<String> counter = new AtomicReference<>();
+
+                        getDataTasks.add(db.collection("BusinessClient")
+                                .document(business_user_name)
+                                .get()
+                                .addOnSuccessListener(documentSnapshot1 -> {
+                                    business_name.set(documentSnapshot1.getString("business_name"));
+                                }));
+
+                        getDataTasks.add(db.collection(user_type)
+                                .document(client_user_name)
+                                .get()
+                                .addOnSuccessListener(documentSnapshot2 -> {
+                                    if (user_type == "PrivateClient")
+                                        user_FullName.set(documentSnapshot2.getString("full_name"));
+                                    else
+                                        user_FullName.set(documentSnapshot2.getString("business_name"));
+                                }));
+
+                        getDataTasks.add(db.collection("CounterForUniqueID")
+                                .document("value")
+                                .get()
+                                .addOnSuccessListener(documentSnapshot3 -> {
+                                    counter.set(documentSnapshot3.getString("counter"));
+                                }));
+
+                        Tasks.whenAllSuccess(getDataTasks).addOnSuccessListener(objects -> {
+
+                            List<Task<Void>> tasks = new ArrayList<>();
+
+                            Map<String, Object> data = new HashMap<>();
+                            data.put("user_fullName", user_FullName.get());
+                            data.put("business_name", business_name.get());
+                            data.put("payment_method", "wallet");
+                            data.put("from_currency", from_currency);
+                            data.put("to_currency", to_currency);
+                            data.put("from_amount", from_amount);
+                            data.put("to_amount", to_amount);
+                            data.put("date", date);
+                            data.put("status", "pending");
+                            data.put("id", counter.get());
+
+                            tasks.add(db.collection(user_type)
+                                    .document(client_user_name)
+                                    .collection("OrdersByMe")
+                                    .document(client_user_name + "*" + business_user_name + "*" + counter)
+                                    .set(data));
+
+                            tasks.add(db.collection("BusinessClient")
+                                    .document(business_user_name)
+                                    .collection("OrdersForMe")
+                                    .document(client_user_name + "*" + business_user_name + "*" + counter)
+                                    .set(data));
+
+                            Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects1 -> {
+                                Map<String, Object> updated_counter = new HashMap<>();
+                                updated_counter.put("counter",  String.valueOf(Integer.parseInt(counter.get()) + 1));
+                                db.collection("CounterForUniqueID")
+                                        .document("value")
+                                        .set(updated_counter)
+                                        .addOnSuccessListener(unused1 -> {
+                                            Toast.makeText(context, "Order Success", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(context, OrderConfirm.class);
+                                            intent.putExtra("userName", client_user_name);
+                                            context.startActivity(intent);
+                                        });
+                            });
+
+                        });
+
+
+                    }
+                    else {
+                        Toast.makeText(context, "cannot complete order- balance below 0", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
 

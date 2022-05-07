@@ -35,6 +35,6 @@ public interface DataBaseInterface {
     void saveChangeComissionRate(Context context,HashMap<String, String> comission_data, String business_user_name);
     void calculateChangeRate(Context context, String business_user_name, String from_currency, String to_currency, float amount, TextView receive);
     void LoadBusinessAddress(Context context, String business_user_name, TextView pick_from);
-    void PayByCash(Context context, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address);
-    void PayByWallet(Context context, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address);
+    void PayByCash(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address);
+    void PayByWallet(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address);
 }
