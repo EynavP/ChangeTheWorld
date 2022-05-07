@@ -52,7 +52,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
         String openClose = data.get(i).getOpenClose();
         viewHolder.openClose.setText(openClose);
 
-        String businessAddress = data.get(i).getBusiness_street()+" "+data.get(i).getBusiness_no()+","+data.get(i).getBusiness_city();
+        String businessAddress = data.get(i).getBusiness_address();
         viewHolder.businessAddress.setText(businessAddress);
     }
 

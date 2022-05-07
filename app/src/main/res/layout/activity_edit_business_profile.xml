@@ -490,9 +490,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="198dp"
-                android:layout_marginTop="581dp"
-                android:layout_marginEnd="108dp"
+                android:layout_marginStart="191dp"
+                android:layout_marginTop="617dp"
+                android:layout_marginEnd="115dp"
                 android:inputType="time"
                 android:textSize="12sp" />
 
@@ -504,9 +504,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="196dp"
-                android:layout_marginTop="617dp"
-                android:layout_marginEnd="108dp"
+                android:layout_marginStart="195dp"
+                android:layout_marginTop="660dp"
+                android:layout_marginEnd="109dp"
                 android:inputType="time"
                 android:textSize="12sp" />
 
@@ -518,11 +518,12 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="194dp"
-                android:layout_marginTop="654dp"
-                android:layout_marginEnd="111dp"
+                android:layout_marginStart="196dp"
+                android:layout_marginTop="704dp"
+                android:layout_marginEnd="109dp"
                 android:inputType="time"
                 android:textSize="12sp" />
+
 
             <EditText
                 android:id="@+id/saturdayOpen"
@@ -532,12 +533,11 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="200dp"
-                android:layout_marginTop="693dp"
-                android:layout_marginEnd="113dp"
+                android:layout_marginStart="191dp"
+                android:layout_marginTop="746dp"
+                android:layout_marginEnd="108dp"
                 android:inputType="time"
                 android:textSize="12sp" />
-
 
             <EditText
                 android:id="@+id/sundayClose"
@@ -546,9 +546,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="289dp"
-                android:layout_marginTop="580dp"
-                android:layout_marginEnd="3dp"
+                android:layout_marginStart="288dp"
+                android:layout_marginTop="617dp"
+                android:layout_marginEnd="4dp"
                 android:inputType="time"
                 android:textSize="12sp" />
 
@@ -560,9 +560,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="288dp"
-                android:layout_marginTop="617dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="291dp"
+                android:layout_marginTop="659dp"
+                android:layout_marginEnd="7dp"
                 android:inputType="time"
                 android:textSize="12sp" />
 
@@ -574,9 +574,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="288dp"
-                android:layout_marginTop="655dp"
-                android:layout_marginEnd="18dp"
+                android:layout_marginStart="294dp"
+                android:layout_marginTop="704dp"
+                android:layout_marginEnd="12dp"
                 android:inputType="time"
                 android:textSize="12sp" />
 
@@ -588,9 +588,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="287dp"
-                android:layout_marginTop="692dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="293dp"
+                android:layout_marginTop="745dp"
+                android:layout_marginEnd="10dp"
                 android:inputType="time"
                 android:textSize="12sp" />
 
@@ -601,9 +601,9 @@
                 android:layout_below="@+id/businessApprovalDoc"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="148dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="161dp"
+                android:layout_marginStart="149dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="160dp"
                 android:text="@string/update" />
 
             <Button
@@ -612,9 +612,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="43dp"
+                android:layout_marginStart="42dp"
                 android:layout_marginLeft="78dp"
-                android:layout_marginTop="755dp"
+                android:layout_marginTop="793dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:fontFamily="@font/comfortaa"
                 android:paddingStart="35dp"
@@ -629,8 +629,8 @@
                 android:layout_height="34dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="767dp"
+                android:layout_marginStart="47dp"
+                android:layout_marginTop="803dp"
                 android:layout_marginEnd="123dp"
                 app:srcCompat="@drawable/uploadfile" />
 
@@ -640,9 +640,9 @@
                 android:layout_height="58dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="212dp"
+                android:layout_marginStart="211dp"
                 android:layout_marginLeft="71dp"
-                android:layout_marginTop="756dp"
+                android:layout_marginTop="790dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:fontFamily="@font/comfortaa"
                 android:paddingStart="35dp"
@@ -658,9 +658,9 @@
                 android:layout_below="@+id/uploadapprovalicon"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="217dp"
-                android:layout_marginTop="-32dp"
-                android:layout_marginEnd="144dp"
+                android:layout_marginStart="216dp"
+                android:layout_marginTop="-22dp"
+                android:layout_marginEnd="145dp"
                 app:srcCompat="@drawable/owner_name" />
 
 

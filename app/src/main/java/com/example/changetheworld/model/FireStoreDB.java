@@ -510,19 +510,20 @@ public class FireStoreDB implements DataBaseInterface {
                         List<DocumentSnapshot> business1 = queryDocumentSnapshots1.getDocuments();
                         ArrayList<Search> searchBusinessClients = new ArrayList<>();
                         for (int i = 0; i < business1.size(); i++) {
-                            Search tmp = new Search(business1.get(i).getString("user_name"), business1.get(i).getString("business_name"), "5", open_close_business.get(business1.get(i).getString("user_name")), business1.get(i).getString("state"), business1.get(i).getString("city"), business1.get(i).getString("street"), business1.get(i).getString("number"));
+                            Search tmp = new Search(business1.get(i).getString("user_name"), business1.get(i).getString("business_name"), "5",
+                                    open_close_business.get(business1.get(i).getString("user_name")), business1.get(i).getString("address"));
                             searchBusinessClients.add(tmp);
                         }
                         Thread t = new Thread(() -> {
                             AtomicInteger flag = new AtomicInteger();
                             if (searchBusinessClients.size() == 1){
-                                Float dis = locationDataApi.GetDistance(searchQuery, searchBusinessClients.get(0).getBusiness_state() + " " + searchBusinessClients.get(0).getBusiness_city() + " " + searchBusinessClients.get(0).getBusiness_street() + " " + searchBusinessClients.get(0).business_no);
+                                Float dis = locationDataApi.GetDistance(searchQuery, searchBusinessClients.get(0).getBusiness_address());
                                 searchBusinessClients.get(0).setDistance(String.valueOf(df.format(dis)));
                             }
                             searchBusinessClients.sort((businessClient1, businessClient2) -> {
-                                String business_address1 = businessClient1.getBusiness_state() + " " + businessClient1.getBusiness_city() + " " + businessClient1.getBusiness_street() + " " + businessClient1.getBusiness_no();
+                                String business_address1 = businessClient1.getBusiness_address() ;
                                 Float dis1 = locationDataApi.GetDistance(searchQuery, business_address1);
-                                String business_address2 = businessClient2.getBusiness_state() + " " + businessClient2.getBusiness_city() + " " + businessClient2.getBusiness_street() + " " + businessClient2.getBusiness_no();
+                                String business_address2 = businessClient2.getBusiness_address();
                                 Float dis2 = locationDataApi.GetDistance(searchQuery, business_address2);
                                 if (dis1 == null || dis2 == null) {
                                     flag.set(1);

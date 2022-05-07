@@ -8,21 +8,15 @@ public class Search {
     String OpenClose;
     String distance;
 
-    String business_state;
-    String business_city;
-    String business_street;
-    String business_no;
+    String business_address;
 
-    public Search(String userName, String businessName, String rate, String openClose, String business_state, String business_city, String business_street, String business_no) {
+    public Search(String userName, String businessName, String rate, String openClose, String business_address) {
         this.userName = userName;
         this.BusinessName = businessName;
         this.rate = rate;
         this.OpenClose = openClose;
         this.distance = "";
-        this.business_state = business_state;
-        this.business_city = business_city;
-        this.business_street = business_street;
-        this.business_no = business_no;
+        this.business_address = business_address;
     }
 
     public String getUserName() {
@@ -49,35 +43,7 @@ public class Search {
 
     public void setDistance(String distance) { this.distance = distance; }
 
-    public String getBusiness_state() {
-        return business_state;
-    }
+    public String getBusiness_address() { return business_address; }
 
-    public void setBusiness_state(String business_state) {
-        this.business_state = business_state;
-    }
-
-    public String getBusiness_city() {
-        return business_city;
-    }
-
-    public void setBusiness_city(String business_city) {
-        this.business_city = business_city;
-    }
-
-    public String getBusiness_street() {
-        return business_street;
-    }
-
-    public void setBusiness_street(String business_street) {
-        this.business_street = business_street;
-    }
-
-    public String getBusiness_no() {
-        return business_no;
-    }
-
-    public void setBusiness_no(String business_no) {
-        this.business_no = business_no;
-    }
+    public void setBusiness_address(String business_address) { this.business_address = business_address; }
 }
