@@ -147,6 +147,7 @@
     <string name="pickup_from">Pickup from</string>
     <string name="pickup_date">Pickup date</string>
     <string name="submit">Submit</string>
+    <string name="address">Address</string>
 
 
 </resources>
