@@ -48,7 +48,7 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
         profile = findViewById(R.id.profilePhoto);
         FireStoreDB.getInstance().LoadProfilePhoto(profile, userName);
         passportValue = findViewById(R.id.passport_value);
-        FireStoreDB.getInstance().checkPassportPhoto(passportValue, userName);
+        FireStoreDB.getInstance().checkExistPhoto(passportValue, userName, "passport_photo");
 
 
         drawerLayout = findViewById(R.id.drawer_menu);
@@ -68,7 +68,7 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
         FireStoreDB.getInstance().loadClientData(userName, full_name, mail_address, phone_number , local_currency);
         profile = findViewById(R.id.profilePhoto);
         FireStoreDB.getInstance().LoadProfilePhoto(profile, userName);
-        FireStoreDB.getInstance().checkPassportPhoto(passportValue, userName);
+        FireStoreDB.getInstance().checkExistPhoto(passportValue, userName, "passport_photo");
 
         editButton = findViewById(R.id.editBtn);
         editButton.setOnClickListener(view -> openEdit());

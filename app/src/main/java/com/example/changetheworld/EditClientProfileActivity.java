@@ -63,7 +63,7 @@ public class EditClientProfileActivity extends AppCompatActivity {
         profile = findViewById(R.id.profilePhoto);
         FireStoreDB.getInstance().LoadProfilePhoto(profile, userName);
         passportValue = findViewById(R.id.passport_value);
-        FireStoreDB.getInstance().checkPassportPhoto(passportValue, userName);
+        FireStoreDB.getInstance().checkExistPhoto(passportValue, userName, "passport_photo");
 
         //Personal photo load
         ImageView personal_photo = findViewById(R.id.update_profile_photo);
@@ -126,7 +126,7 @@ public class EditClientProfileActivity extends AppCompatActivity {
         FireStoreDB.getInstance().loadClientDataForEdit(userName, full_name, mail_address, phone_number , local_currency, password);
         profile = findViewById(R.id.profilePhoto);
         FireStoreDB.getInstance().LoadProfilePhoto(profile, userName);
-        FireStoreDB.getInstance().checkPassportPhoto(passportValue, userName);
+        FireStoreDB.getInstance().checkExistPhoto(passportValue, userName, "passport_photo");
 
     }
 
