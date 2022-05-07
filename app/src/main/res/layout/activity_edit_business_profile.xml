@@ -199,6 +199,22 @@
                 android:textStyle="bold" />
 
 
+            <TextView
+                android:id="@+id/localCurrency_title"
+                android:layout_width="161dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/maillAddress_value"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="78dp"
+                android:layout_marginTop="74dp"
+                android:layout_marginEnd="158dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/local_currency"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <ImageView
                 android:id="@+id/mail_icon"
                 android:layout_width="43dp"
@@ -223,73 +239,43 @@
                 android:layout_marginEnd="316dp"
                 app:srcCompat="@drawable/address_icon" />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/street_value"
-                android:layout_width="wrap_content"
+                android:layout_width="218dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Address_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="284dp"
+                android:layout_marginStart="75dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="104dp"
                 android:fontFamily="@font/comfortaa"
                 android:hint="@string/street"
                 android:textSize="14sp" />
 
-
-            <EditText
-                android:id="@+id/number_value"
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Address_title"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="125dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="217dp"
-                android:fontFamily="@font/comfortaa"
-                android:hint="@string/NO"
-                android:textSize="14sp" />
-
-
-            <EditText
-                android:id="@+id/city_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Address_title"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="187dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="113dp"
-                android:fontFamily="@font/comfortaa"
-                android:hint="@string/city"
-                android:textSize="14sp" />
-
             <Spinner
-                android:id="@+id/state_value"
-                android:layout_width="wrap_content"
-                android:layout_height="43dp"
-                android:layout_below="@+id/Address_title"
+                android:id="@+id/local_currency_value"
+                android:layout_width="215dp"
+                android:layout_height="37dp"
+                android:layout_below="@+id/localCurrency_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="290dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="78dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="104dp"
                 android:fontFamily="@font/comfortaa"
-                android:hint="@string/State"
+                android:hint="@string/local_currency"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/phoneNumber_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/street_value"
+                android:layout_below="@+id/localCurrency_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="80dp"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="55dp"
                 android:layout_marginEnd="188dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/phoneNumber"
@@ -318,9 +304,9 @@
                 android:layout_below="@+id/mail_icon"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="26dp"
-                android:layout_marginTop="127dp"
-                android:layout_marginEnd="317dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="166dp"
+                android:layout_marginEnd="318dp"
                 app:srcCompat="@drawable/phone_icon" />
 
             <TextView
