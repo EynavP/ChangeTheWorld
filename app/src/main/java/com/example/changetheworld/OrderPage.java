@@ -20,8 +20,10 @@ import android.widget.Toast;
 
 import com.example.changetheworld.model.FireStoreDB;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class OrderPage extends AppCompatActivity {
@@ -32,6 +34,8 @@ public class OrderPage extends AppCompatActivity {
     String payment_method, business_user_name, client_user_name;
     TextView receive, pick_from;
     int mYear,mMonth,mDay;
+    SimpleDateFormat sdf;
+    String myFormat;
 
 
     @Override
@@ -65,8 +69,8 @@ public class OrderPage extends AppCompatActivity {
                     myCalendar.set(Calendar.YEAR, selectedyear);
                     myCalendar.set(Calendar.MONTH, selectedmonth);
                     myCalendar.set(Calendar.DAY_OF_MONTH, selectedday);
-                    String myFormat = "dd/MM/yy"; //Change as you need
-                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+                    myFormat = "dd/MM/yy"; //Change as you need
+                    sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
                     pickup_date.setText(sdf.format(myCalendar.getTime()));
 
                     mDay = selectedday;
@@ -123,8 +127,28 @@ public class OrderPage extends AppCompatActivity {
             String to_amount = receive.getText().toString();
             String date = pickup_date.getText().toString();
             String business_address = pick_from.getText().toString();
+            Date order_date = null;
+            Date current_date = new Date();
 
-            if(payment_method.equals("cash")){
+            try {
+                order_date =  sdf.parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+            if(from_amount.isEmpty())
+                Toast.makeText(this, "Enter amount to convert", Toast.LENGTH_SHORT).show();
+            else if(to_currency.equals(from_currency))
+                Toast.makeText(this, "Pair must be different", Toast.LENGTH_SHORT).show();
+            else if(date.isEmpty())
+                Toast.makeText(this, "Please enter date",Toast.LENGTH_SHORT).show();
+            else if(payment_method == null  || payment_method.isEmpty())
+                Toast.makeText(this, "Please Choose payment method", Toast.LENGTH_SHORT).show();
+            else if( order_date == null || order_date.compareTo(current_date) < 0){
+                Toast.makeText(this, "Invalid Date",Toast.LENGTH_SHORT).show();
+            }
+            else if(payment_method.equals("cash")){
                 FireStoreDB.getInstance().PayByCash(this, "PrivateClient", business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
             }
             else if(payment_method.equals("wallet")){

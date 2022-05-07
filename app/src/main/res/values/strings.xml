@@ -158,6 +158,7 @@
     <string name="client_user_name">client_user_name</string>
     <string name="currencies_must_be_diffrent">currencies must be diffrent</string>
     <string name="Amount_shouldnt_be_zero">Amount shouldn\'t be zero</string>
+    <string name="orderID">orderID</string>
 
 
 </resources>

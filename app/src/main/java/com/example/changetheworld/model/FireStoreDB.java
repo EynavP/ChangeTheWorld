@@ -22,8 +22,6 @@ import com.example.changetheworld.AdapterWallet;
 import com.example.changetheworld.BusinessProfileActivity;
 import com.example.changetheworld.OrderConfirm;
 import com.example.changetheworld.R;
-import com.example.changetheworld.client_home_page;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -951,7 +949,8 @@ public class FireStoreDB implements DataBaseInterface {
                         .addOnSuccessListener(unused -> {
                             Toast.makeText(context, "Order Success", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(context, OrderConfirm.class);
-                            intent.putExtra("userName", client_user_name);
+                            intent.putExtra("business_user_name", business_user_name);
+                            intent.putExtra("orderID", client_user_name + "*" + business_user_name + "*" + counter);
                             context.startActivity(intent);
                         });
             });
@@ -1040,19 +1039,52 @@ public class FireStoreDB implements DataBaseInterface {
                                         .addOnSuccessListener(unused1 -> {
                                             Toast.makeText(context, "Order Success", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(context, OrderConfirm.class);
-                                            intent.putExtra("userName", client_user_name);
+                                            intent.putExtra("business_user_name", business_user_name);
+                                            intent.putExtra("orderID", client_user_name + "*" + business_user_name + "*" + counter);
                                             context.startActivity(intent);
                                         });
                             });
-
                         });
-
-
                     }
                     else {
                         Toast.makeText(context, "cannot complete order- balance below 0", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+    }
+
+    @Override
+    public void LoadOrder(Context context , String orderID, String business_user_name, TextView amount_from, TextView amount_to, TextView paymethod, TextView business_name, TextView business_address, TextView business_phone, TextView pickup_date, TextView cash_case_value, TextView currency_from, TextView currency_to){
+    ArrayList<Task<DocumentSnapshot>> tasks = new ArrayList<>();
+        Task<DocumentSnapshot> t = db.collection("BusinessClient")
+                .document(business_user_name)
+                .collection("OrdersForMe")
+                .document(orderID)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    amount_from.setText(documentSnapshot.getString("from_amount"));
+                    amount_to.setText(documentSnapshot.getString("to_amount"));
+                    paymethod.setText(documentSnapshot.getString("payment_method"));
+                    if(paymethod.getText().toString().equals("cash")){
+                        cash_case_value.setText("Price may be change");
+                    }
+                    business_name.setText(documentSnapshot.getString("business_name"));
+                    pickup_date.setText(documentSnapshot.getString("data"));
+                    currency_from.setText(documentSnapshot.getString("from_currency"));
+                    currency_to.setText(documentSnapshot.getString("to_currency"));
+                });
+
+        Task<DocumentSnapshot> t1 = db.collection("BusinessClient")
+                .document(business_user_name)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                   business_address.setText(documentSnapshot.getString("address"));
+                   business_phone.setText(documentSnapshot.getString("phone"));
+                });
+
+        tasks.add(t);
+        tasks.add(t1);
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {});
 
     }
 
