@@ -175,6 +175,7 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30sp"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.193"
         app:layout_constraintStart_toEndOf="@+id/amount_title"
@@ -233,7 +234,7 @@
         app:layout_constraintTop_toBottomOf="@+id/receive_title" />
 
 
-    <TextView
+    <EditText
         android:id="@+id/pickup_date_value"
         android:layout_width="225dp"
         android:layout_height="37dp"
@@ -244,6 +245,7 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="15sp"
+        android:focusable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toEndOf="@+id/pickup_date_title"
@@ -292,9 +294,10 @@
         android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.112" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

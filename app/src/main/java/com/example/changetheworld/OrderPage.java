@@ -2,13 +2,16 @@ package com.example.changetheworld;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,13 +19,18 @@ import android.widget.Toast;
 
 import com.example.changetheworld.model.FireStoreDB;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class OrderPage extends AppCompatActivity {
 
     Spinner from, to;
-    EditText amount;
+    EditText amount,pickup_date;
     Button cash, wallet, submit;
     String payment_method, business_user_name, client_user_name;
     TextView receive, pick_from;
+    int mYear,mMonth,mDay;
 
 
     @Override
@@ -40,6 +48,35 @@ public class OrderPage extends AppCompatActivity {
         receive = findViewById(R.id.receive_value);
         pick_from = findViewById(R.id.pickup_from_value);
         submit = findViewById(R.id.submit_btn);
+        pickup_date =findViewById(R.id.pickup_date_value);
+
+        pickup_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar mcurrentDate = Calendar.getInstance();
+                mYear = mcurrentDate.get(Calendar.YEAR);
+                mMonth = mcurrentDate.get(Calendar.MONTH);
+                mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog mDatePicker = new DatePickerDialog(OrderPage.this, new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                        Calendar myCalendar = Calendar.getInstance();
+                        myCalendar.set(Calendar.YEAR, selectedyear);
+                        myCalendar.set(Calendar.MONTH, selectedmonth);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, selectedday);
+                        String myFormat = "dd/MM/yy"; //Change as you need
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+                        pickup_date.setText(sdf.format(myCalendar.getTime()));
+
+                        mDay = selectedday;
+                        mMonth = selectedmonth;
+                        mYear = selectedyear;
+                    }
+                }, mYear, mMonth, mDay);
+                //mDatePicker.setTitle("Select date");
+                mDatePicker.show();
+            }
+        });
 
         cash.setOnClickListener(view -> {
             payment_method = "cash";
