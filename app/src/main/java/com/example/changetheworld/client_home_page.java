@@ -42,10 +42,10 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class client_home_page<OnResume> extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     RecyclerView recyclerView;
-    AdapterCurrency adapterCurrency;
     ArrayList<currency> items = new ArrayList<>();
     TextView userName;
     ImageView profilPhoto;
@@ -73,50 +73,17 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         setContentView(R.layout.activity_client_home_page);
         user_name = getIntent().getStringExtra(getString(R.string.userName));
         userName = findViewById(R.id.username);
-        String localCurrency = getIntent().getStringExtra(getString(R.string.localCurrency));
-        userName.setText(user_name+",");
+        recyclerView=findViewById(R.id.SubWalletRecycle);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         progressBar = findViewById(R.id.progressBar);
 
+        FireStoreDB.getInstance().loadClientLocalCurrency(this, user_name, items, recyclerView, progressBar);
+
+        profilPhoto = findViewById(R.id.profilePhoto);
+        FireStoreDB.getInstance().LoadProfilePhoto(profilPhoto, user_name);
+        userName.setText(user_name+",");
 
 
-        Thread t = new Thread(() -> {
-            ArrayList<String> symbols = new ArrayList<>();
-            if(!getString(R.string.USD).equals(localCurrency))
-                symbols.add(getString(R.string.USD) +'/'+localCurrency);
-            if(!getString(R.string.EUR).equals(localCurrency))
-                symbols.add(getString(R.string.EUR) +'/'+localCurrency);
-            if(!getString(R.string.CNY).equals(localCurrency))
-                symbols.add(getString(R.string.CNY) +'/'+localCurrency);
-            if(!getString(R.string.ILS).equals(localCurrency))
-                symbols.add(getString(R.string.ILS) +'/'+localCurrency);
-            if(!getString(R.string.GBP).equals(localCurrency))
-                symbols.add(getString(R.string.GBP) +'/'+localCurrency);
-
-            HashMap<String, ArrayList<Float>> currency_data = api.getCloseAndChangePrice(symbols);
-
-            runOnUiThread(() -> {
-                if (!localCurrency.equals(this.getString(R.string.USD)) && currency_data.get(getString(R.string.USD)) != null && currency_data.get(getString(R.string.USD)).size() > 0)
-                    items.add(new currency(R.drawable.usd,""+currency_data.get(getString(R.string.USD)).get(0) + currenciesToSymbol.get(localCurrency),""+(currency_data.get(getString(R.string.USD)).get(1)) + "%", this.getString(R.string.USD)));
-                if (!localCurrency.equals(getString(R.string.EUR)) && currency_data.get(getString(R.string.EUR)) != null && currency_data.get(getString(R.string.EUR)).size() > 0)
-                    items.add(new currency(R.drawable.eur,""+currency_data.get(getString(R.string.EUR)).get(0) + currenciesToSymbol.get(localCurrency),""+(currency_data.get(getString(R.string.EUR)).get(1)) + '%', this.getString(R.string.EUR)));
-                if (!localCurrency.equals(getString(R.string.CNY)) && currency_data.get(getString(R.string.CNY)) != null && currency_data.get(getString(R.string.CNY)).size() > 0)
-                    items.add(new currency(R.drawable.cny,""+currency_data.get(getString(R.string.CNY)).get(0) + currenciesToSymbol.get(localCurrency),""+(currency_data.get(getString(R.string.CNY)).get(1)) + '%', this.getString(R.string.CNY)));
-                if (!localCurrency.equals(getString(R.string.ILS)) && currency_data.get(getString(R.string.ILS)) != null && currency_data.get(getString(R.string.ILS)).size() > 0)
-                    items.add(new currency(R.drawable.ils,""+currency_data.get(getString(R.string.ILS)).get(0) + currenciesToSymbol.get(localCurrency),""+(currency_data.get(getString(R.string.ILS)).get(1)) + '%', this.getString(R.string.ILS)));
-                if (!localCurrency.equals(getString(R.string.GBP)) && currency_data.get(getString(R.string.GBP)) != null && currency_data.get(getString(R.string.GBP)).size() > 0)
-                    items.add(new currency(R.drawable.gbp,""+currency_data.get(getString(R.string.GBP)).get(0) + currenciesToSymbol.get(localCurrency),""+(currency_data.get(getString(R.string.GBP)).get(1)) + '%', this.getString(R.string.GBP)));
-
-                profilPhoto = findViewById(R.id.profilePhoto);
-                FireStoreDB.getInstance().LoadProfilePhoto(profilPhoto, user_name);
-                recyclerView=findViewById(R.id.SubWalletRecycle);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                adapterCurrency = new AdapterCurrency(this,items);
-                recyclerView.setAdapter(adapterCurrency);
-                progressBar.setVisibility(View.INVISIBLE);
-            });
-
-        });
-        t.start();
         autoCompleteTextView = findViewById(R.id.autoCompleteSearch);
         autoCompleteTextView.addTextChangedListener(new TextWatcher() {
             @Override

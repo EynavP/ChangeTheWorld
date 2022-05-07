@@ -19,7 +19,7 @@ public class AdapterCurrency extends RecyclerView.Adapter<AdapterCurrency.ViewHo
     private LayoutInflater layoutInflater;
     private List<currency> data;
 
-    AdapterCurrency(Context context, List<currency> data){
+    public AdapterCurrency(Context context, List<currency> data){
         this.layoutInflater =LayoutInflater.from(context);
         this.data=data;
 

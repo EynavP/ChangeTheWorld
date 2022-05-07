@@ -13,9 +13,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.AdapterBusinessCurrencyRate;
+import com.example.changetheworld.AdapterCurrency;
 import com.example.changetheworld.AdapterSearch;
 import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
@@ -1090,6 +1092,52 @@ public class FireStoreDB implements DataBaseInterface {
         tasks.add(t1);
         Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {});
 
+    }
+
+    @Override
+    public void loadClientLocalCurrency(Context context, String user_name, ArrayList<currency> items, RecyclerView recyclerView, ProgressBar progressBar) {
+        AtomicReference<String> localCurrency = new AtomicReference<>();
+        db.collection("PrivateClient")
+                .document(user_name)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    localCurrency.set(documentSnapshot.getString("currency"));
+
+                    Thread t = new Thread(() -> {
+                        ArrayList<String> symbols = new ArrayList<>();
+                        if(!"USD".equals(localCurrency.get()))
+                            symbols.add("USD" +'/'+ localCurrency.get());
+                        if(!"EUR".equals(localCurrency.get()))
+                            symbols.add("EUR" +'/'+ localCurrency.get());
+                        if(!"CNY".equals(localCurrency.get()))
+                            symbols.add("CNY" +'/'+ localCurrency.get());
+                        if(!"ILS".equals(localCurrency.get()))
+                            symbols.add("ILS" +'/'+ localCurrency.get());
+                        if(!"GBP".equals(localCurrency.get()))
+                            symbols.add("GBP" +'/'+ localCurrency.get());
+
+                        HashMap<String, ArrayList<Float>> currency_data = api.getCloseAndChangePrice(symbols);
+
+                        ((Activity)context).runOnUiThread(() -> {
+                            if (!localCurrency.get().equals("USD") && currency_data.get("USD") != null && currency_data.get("USD").size() > 0)
+                                items.add(new currency(R.drawable.usd,""+currency_data.get("USD").get(0) + currenciesToSymbol.get(localCurrency.get()),""+(currency_data.get("USD").get(1)) + "%", "USD"));
+                            if (!localCurrency.get().equals("EUR") && currency_data.get("EUR") != null && currency_data.get("EUR").size() > 0)
+                                items.add(new currency(R.drawable.eur,""+currency_data.get("EUR").get(0) + currenciesToSymbol.get(localCurrency.get()),""+(currency_data.get("EUR").get(1)) + '%',"EUR"));
+                            if (!localCurrency.get().equals("CNY") && currency_data.get("CNY") != null && currency_data.get("CNY").size() > 0)
+                                items.add(new currency(R.drawable.cny,""+currency_data.get("CNY").get(0) + currenciesToSymbol.get(localCurrency.get()),""+(currency_data.get("CNY").get(1)) + '%', "CNY"));
+                            if (!localCurrency.get().equals("ILS") && currency_data.get("ILS") != null && currency_data.get("ILS").size() > 0)
+                                items.add(new currency(R.drawable.ils,""+currency_data.get("ILS").get(0) + currenciesToSymbol.get(localCurrency.get()),""+(currency_data.get("ILS").get(1)) + '%', "ILS"));
+                            if (!localCurrency.get().equals("GBP") && currency_data.get("GBP") != null && currency_data.get("GBP").size() > 0)
+                                items.add(new currency(R.drawable.gbp,""+currency_data.get("GBP").get(0) + currenciesToSymbol.get(localCurrency.get()),""+(currency_data.get("GBP").get(1)) + '%', "GBP"));
+
+                            AdapterCurrency adapterCurrency = new AdapterCurrency(context,items);
+                            recyclerView.setAdapter(adapterCurrency);
+                            progressBar.setVisibility(View.INVISIBLE);
+                        });
+
+                    });
+                    t.start();
+                });
     }
 
     public void saveOpenHours(Context context,String user_name, ArrayList<OpenHours> openHours, Intent intent) {
