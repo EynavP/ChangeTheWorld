@@ -41,6 +41,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -821,21 +822,49 @@ public class FireStoreDB implements DataBaseInterface {
 
     @Override
     public void saveChangeComissionRate(Context context,HashMap<String, String> comission_data, String business_user_name) {
+
+        ArrayList<Task> tasks = new ArrayList<>();
+
         for (String pair: comission_data.keySet()) {
-            HashMap<String, String> data = new HashMap<>();
-            data.put(pair, comission_data.get(pair));
-            db.collection("BusinessClient")
+            HashMap<String, Object> data = new HashMap<>();
+            data.put(pair.replace("/",""), comission_data.get(pair));
+            tasks.add(db.collection("BusinessClient")
                     .document(business_user_name)
                     .collection("currencyComission")
                     .document(pair.replace("/","*"))
                     .set(data)
-                    .addOnSuccessListener(unused -> {
-                        Toast.makeText(context, "Update Rates", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(context, BusinessProfileActivity.class);
-                        intent.putExtra("userName", business_user_name);
-                        context.startActivity(intent);
-                    });
+            );
+
         }
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
+            Toast.makeText(context, "Update Rates", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, BusinessProfileActivity.class);
+            intent.putExtra("userName", business_user_name);
+            context.startActivity(intent);
+        });
+    }
+
+    @Override
+    public void calculateChangeRate(Context context, String business_user_name, String from_currency, String to_currency, float amount, TextView receive) {
+
+        ArrayList<String> pair = new ArrayList<>();
+        pair.add(from_currency + '/' + to_currency);
+        db.collection("BusinessClient")
+                .document(business_user_name)
+                .collection("currencyComission")
+                .document(from_currency + '*' + to_currency)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    float change_comission = Float.parseFloat(Objects.requireNonNull(documentSnapshot.getString(from_currency + to_currency)));
+                    Thread t = new Thread(()->{
+                        Float current_price = api.getCloseAndChangePrice(pair).get(from_currency).get(0);
+                        Float change_price = current_price * amount + change_comission;
+                        ((Activity)context).runOnUiThread(()->{
+                            receive.setText(String.valueOf(df.format(change_price)));
+                        });
+                    });
+                    t.start();
+                });
     }
 
     public void saveOpenHours(Context context,String user_name, ArrayList<OpenHours> openHours, Intent intent) {

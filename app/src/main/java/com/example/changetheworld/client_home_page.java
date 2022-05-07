@@ -170,6 +170,7 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
                 Intent intent = new Intent(this, search_result_page.class);
                 intent.putExtra("searchQuery", searchQuery);
                 intent.putExtra("radius", bar_text.getText().toString());
+                intent.putExtra(getString(R.string.client_user_name), user_name);
                 startActivity(intent);
             }
         });

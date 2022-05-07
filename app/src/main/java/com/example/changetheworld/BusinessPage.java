@@ -11,7 +11,7 @@ import com.example.changetheworld.model.FireStoreDB;
 
 public class BusinessPage extends AppCompatActivity {
 
-    String userName;
+    String userName, client_user_name;
     TextView business_name;
     TextView mail_address;
     TextView phone_number;
@@ -19,6 +19,7 @@ public class BusinessPage extends AppCompatActivity {
     TextView header;
     TextView address;
     TextView local_currency;
+
 
     TextView sundayHours, monThuHours, fridayHours, saturdayHours;
 
@@ -41,13 +42,16 @@ public class BusinessPage extends AppCompatActivity {
         fridayHours = findViewById(R.id.fridayHours);
         saturdayHours = findViewById(R.id.saturdayHours);
 
-        userName = getIntent().getStringExtra("user_name");
+        userName = getIntent().getStringExtra(getString(R.string.business_user_name));
+        client_user_name = getIntent().getStringExtra(getString(R.string.client_user_name));
         FireStoreDB.getInstance().loadBusinessData(userName,header, business_name, mail_address, phone_number, owner_name, address, local_currency, sundayHours, monThuHours, fridayHours, saturdayHours);
 
 
         newOrder = findViewById(R.id.new_order_btn);
         newOrder.setOnClickListener(view -> {
             Intent intent = new Intent(this,OrderPage.class);
+            intent.putExtra(getString(R.string.business_user_name), userName);
+            intent.putExtra(getString(R.string.client_user_name), client_user_name);
             startActivity(intent);
         });
     }

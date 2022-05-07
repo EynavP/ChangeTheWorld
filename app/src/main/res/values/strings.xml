@@ -154,6 +154,10 @@
     <string name="order_details">Order Details</string>
     <string name="don_t_forget_to_bring_your_id">Don\'t forget to bring your ID !</string>
     <string name="you_can_always">You can always see the order’s details on your orders page!</string>
+    <string name="business_user_name">business_user_name</string>
+    <string name="client_user_name">client_user_name</string>
+    <string name="currencies_must_be_diffrent">currencies must be diffrent</string>
+    <string name="Amount_shouldnt_be_zero">Amount shouldn\'t be zero</string>
 
 
 </resources>

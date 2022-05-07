@@ -138,6 +138,7 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
     private void openBusinessRates() {
         Intent intent = new Intent(this,Bussiness_rates.class);
         intent.putExtra(getString(R.string.userName), user_name);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 

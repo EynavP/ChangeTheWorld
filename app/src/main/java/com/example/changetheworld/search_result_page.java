@@ -20,6 +20,7 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
     RecyclerView recyclerView;
     ProgressBar progressBar;
     ArrayList<Search> filter_list;
+    String user_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,7 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         progressBar = findViewById(R.id.progressBar);
         filter_list = new ArrayList<>();
+        user_name = getIntent().getStringExtra(getString(R.string.client_user_name));
 
         if(progressBar.getVisibility() != View.INVISIBLE) {
             progressBar.setVisibility(View.VISIBLE);
@@ -51,7 +53,8 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(this,BusinessPage.class);
-        intent.putExtra("user_name", filter_list.get(position).getUserName());
+        intent.putExtra(getString(R.string.business_user_name), filter_list.get(position).getUserName());
+        intent.putExtra(getString(R.string.client_user_name), user_name);
         startActivity(intent);
     }
 }
