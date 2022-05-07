@@ -1,8 +1,5 @@
 package com.example.changetheworld.model;
 
-import com.example.changetheworld.R;
-import com.google.firebase.firestore.DocumentSnapshot;
-
 public class BusinessClient {
     private String business_name;
     private String mail_address;
@@ -12,12 +9,10 @@ public class BusinessClient {
     private String business_owner_name;
     private byte[] business_approval_document;
     private byte[] getBusiness_owner_id;
-    private String business_state;
-    private String business_city;
-    private String business_street;
-    private String business_no;
+    private String address;
+    private String local_currency;
 
-    public BusinessClient(String business_name, String mail_address, String phone, String user_name, String password, String business_owner_name, byte[] business_approval_document, byte[] getBusiness_owner_id, String business_state, String business_city, String business_street, String business_no) {
+    public BusinessClient(String business_name, String mail_address, String phone, String user_name, String password, String business_owner_name, byte[] business_approval_document, byte[] getBusiness_owner_id, String local_currency, String address) {
         this.business_name = business_name;
         this.mail_address = mail_address;
         this.phone = phone;
@@ -26,10 +21,9 @@ public class BusinessClient {
         this.business_owner_name = business_owner_name;
         this.business_approval_document = business_approval_document;
         this.getBusiness_owner_id = getBusiness_owner_id;
-        this.business_state = business_state;
-        this.business_city = business_city;
-        this.business_street = business_street;
-        this.business_no = business_no;
+        this.address = address;
+        this.local_currency = local_currency;
+
     }
 
     public String getBusiness_name() {
@@ -96,35 +90,19 @@ public class BusinessClient {
         this.getBusiness_owner_id = getBusiness_owner_id;
     }
 
-    public String getBusiness_state() {
-        return business_state;
+    public String getAddress() {
+        return address;
     }
 
-    public void setBusiness_state(String business_state) {
-        this.business_state = business_state;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getBusiness_city() {
-        return business_city;
+    public String getLocal_currency() {
+        return local_currency;
     }
 
-    public void setBusiness_city(String business_city) {
-        this.business_city = business_city;
-    }
-
-    public String getBusiness_street() {
-        return business_street;
-    }
-
-    public void setBusiness_street(String business_street) {
-        this.business_street = business_street;
-    }
-
-    public String getBusiness_no() {
-        return business_no;
-    }
-
-    public void setBusiness_no(String business_no) {
-        this.business_no = business_no;
+    public void setLocal_currency(String local_currency) {
+        this.local_currency = local_currency;
     }
 }

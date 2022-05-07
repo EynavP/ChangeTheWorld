@@ -7,26 +7,34 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.changetheworld.model.AutoCompleteApi;
+import com.example.changetheworld.model.AutoCompleteInterface;
 import com.example.changetheworld.model.BusinessClient;
 import com.example.changetheworld.model.FireStoreDB;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CreateBusinessAccount extends AppCompatActivity {
     Button returnLogin;
-    Spinner states;
+    Spinner local_currency;
     int flag = 0;
     int SELECT_PICTURE = 200;
     byte[] business_chosen_approvel;
     byte[] business_chosen_owner_id;
+    AutoCompleteInterface aci = new AutoCompleteApi();
+    AutoCompleteTextView address;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +42,10 @@ public class CreateBusinessAccount extends AppCompatActivity {
         returnLogin = findViewById(R.id.moveToLogin);
         returnLogin.setOnClickListener(view ->  { returnLoginPage(); });
 
-        states = (Spinner) findViewById(R.id.enterBusinessState);
+        local_currency = (Spinner) findViewById(R.id.enterBusinessLocalCurrency);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-        adapter.addAll(FireStoreDB.getInstance().stateToCurrency.keySet());
-        states.setAdapter(adapter);
+        adapter.addAll(FireStoreDB.getInstance().currenciesToSymbol.keySet());
+        local_currency.setAdapter(adapter);
 
 
 
@@ -67,8 +75,27 @@ public class CreateBusinessAccount extends AppCompatActivity {
         );
 
 
+        address = findViewById(R.id.enterAddressBusiness);
+        address.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String query = editable.toString();
+                Thread t = new Thread(() -> {
+                    ArrayList<String> result =  aci.getComplete(query);
+                    runOnUiThread(() -> {
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateBusinessAccount.this, android.R.layout.simple_dropdown_item_1line, result);
+                        address.setAdapter(adapter);
+                    });
+                });
+                t.start();
+            }
+        });
 
         Button CreateBusinessAccount = findViewById(R.id.createBusinessAccountButton);
         CreateBusinessAccount.setOnClickListener(view -> {
@@ -78,10 +105,7 @@ public class CreateBusinessAccount extends AppCompatActivity {
             String user_name = ((EditText) findViewById(R.id.enterBusinessUsername)).getText().toString();
             String password = ((EditText) findViewById(R.id.enterBusinessPassword)).getText().toString();
             String business_owner_name = ((EditText) findViewById(R.id.enterBusinessOwnerName)).getText().toString();
-            String business_state = ((Spinner) findViewById(R.id.enterBusinessState)).getSelectedItem().toString();
-            String business_city = ((EditText)findViewById(R.id.entercityBusiness)).getText().toString();
-            String business_street = ((EditText)findViewById(R.id.enterstreetBusiness)).getText().toString();
-            String business_no = ((EditText)findViewById(R.id.enternoBusiness)).getText().toString();
+
 
 
             if (business_name.isEmpty()){
@@ -92,21 +116,8 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, getString(R.string.Invalid_mail), Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (business_state.isEmpty()){
-                Toast toast = Toast.makeText(this, getString(R.string.Invalid_state), Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            else if (business_city.isEmpty()){
-                Toast toast = Toast.makeText(this, R.string.invalid_business_city, Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            else if (business_street == null){
-                Toast toast = Toast.makeText(this, R.string.invalid_business_street, Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            else if (business_no == null) {
-                Toast toast = Toast.makeText(this, R.string.invalid_business_number, Toast.LENGTH_SHORT);
-                toast.show();
+            else if (address.getText().toString().isEmpty()){
+                Toast.makeText(this, R.string.Invalid_address, Toast.LENGTH_SHORT).show();
             }
             else if (phone.isEmpty() || !phone.matches("^[0-9]*$")){
                 Toast toast = Toast.makeText(this, getString(R.string.Invalid_phone_number), Toast.LENGTH_SHORT);
@@ -133,7 +144,7 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 toast.show();
             }
             else {
-                BusinessClient business_client = new BusinessClient(business_name,mail,phone,user_name,password,business_owner_name,business_chosen_approvel,business_chosen_owner_id,business_state,business_city, business_street, business_no);
+                BusinessClient business_client = new BusinessClient(business_name,mail,phone,user_name,password,business_owner_name,business_chosen_approvel,business_chosen_owner_id,local_currency.getSelectedItem().toString(), address.getText().toString());
                 Intent intent = new Intent(this, BusinessLogin.class);
                 FireStoreDB.getInstance().VerifyAndSaveBusiness(this, business_client, intent);
             }

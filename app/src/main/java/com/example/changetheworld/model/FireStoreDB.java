@@ -412,10 +412,9 @@ public class FireStoreDB implements DataBaseInterface {
         final String KEY_OWNER_NAME = "owner_name";
         final String KEY_BUSINESS_APPROVAL = "business_approval";
         final String KEY_OWNER_ID = "owner_id";
-        final String KEY_STATE = "state";
-        final String KEY_CITY = "city";
-        final String KEY_STREET = "street";
-        final String KEY_NUMBER = "number";
+        final String KEY_ADDRESS = "address";
+        final String KEY_LOCAL_CURRENCY = "local_currency";
+
 
 
         Map<String, Object> data = new HashMap<>();
@@ -425,11 +424,8 @@ public class FireStoreDB implements DataBaseInterface {
         data.put(KEY_USER_NAME, user.getUser_name());
         data.put(KEY_PASSWORD, user.getPassword());
         data.put(KEY_OWNER_NAME, user.getBusiness_owner_name());
-        data.put(KEY_STATE, user.getBusiness_state());
-        data.put(KEY_CITY, user.getBusiness_city());
-        data.put(KEY_STREET, user.getBusiness_street());
-        data.put(KEY_NUMBER, user.getBusiness_no());
-
+        data.put(KEY_ADDRESS, user.getAddress());
+        data.put(KEY_LOCAL_CURRENCY, user.getLocal_currency());
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
@@ -448,7 +444,7 @@ public class FireStoreDB implements DataBaseInterface {
                 .addOnSuccessListener(unused -> Toast.makeText(context, "Business created successfully", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(context, "Fail create new business : " + e.toString(), Toast.LENGTH_LONG).show());
 
-        createDefaultWallet(user.getUser_name(), stateToCurrency.get(user.getBusiness_state()), "BusinessClient", context, intent);
+        createDefaultWallet(user.getUser_name(), user.getLocal_currency(), "BusinessClient", context, intent);
 
     }
 
@@ -640,7 +636,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadBusinessData(String user_name, TextView header, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, TextView state, TextView city, TextView street, TextView number, TextView sundayHours, TextView monThuHours, TextView fridayHours, TextView saturdayHours) {
+    public void loadBusinessData(String user_name, TextView header, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, TextView address, TextView local_currency, TextView sundayHours, TextView monThuHours, TextView fridayHours, TextView saturdayHours) {
         db.collection("BusinessClient")
                 .document(user_name)
                 .get()
@@ -652,12 +648,8 @@ public class FireStoreDB implements DataBaseInterface {
                         header.setText(documentSnapshot.getString("business_name"));
                     if (owner_name != null)
                         owner_name.setText(documentSnapshot.getString("owner_name"));
-                    String address = documentSnapshot.getString("street") + " " +
-                            documentSnapshot.getString("number") + ", " +
-                            documentSnapshot.getString("city") + ", " +
-                            documentSnapshot.getString("state");
-                    state.setText(address);
-
+                    address.setText(documentSnapshot.getString("address"));
+                    local_currency.setText(documentSnapshot.getString("local_currency"));
                     loadBusinessOpenHours(user_name, sundayHours, monThuHours, fridayHours, saturdayHours);
                 });
     }
@@ -698,7 +690,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadBusinessDataForEdit(String user_name, EditText business_name, EditText mail_address, EditText phone_number, EditText owner_name, Spinner state, EditText city,EditText street, EditText number, EditText password, EditText sundayOpen, EditText sundayClose, EditText monThuOpen, EditText monThuClose, EditText fridayOpen, EditText fridayClose, EditText saturdayOpen, EditText saturdayClose )  {
+    public void loadBusinessDataForEdit(String user_name, EditText business_name, EditText mail_address, EditText phone_number, EditText owner_name, Spinner local_currency, EditText address, EditText password, EditText sundayOpen, EditText sundayClose, EditText monThuOpen, EditText monThuClose, EditText fridayOpen, EditText fridayClose, EditText saturdayOpen, EditText saturdayClose )  {
         db.collection("BusinessClient")
                 .document(user_name)
                 .get()
@@ -707,13 +699,11 @@ public class FireStoreDB implements DataBaseInterface {
                     mail_address.setText(documentSnapshot.getString("mail"));
                     phone_number.setText(documentSnapshot.getString("phone"));
                     owner_name.setText(documentSnapshot.getString("owner_name"));
-                    city.setText(documentSnapshot.getString("city"));
-                    street.setText(documentSnapshot.getString("street"));
-                    number.setText(documentSnapshot.getString("number"));
+                    address.setText(documentSnapshot.getString("address"));
                     password.setText(documentSnapshot.getString("password"));
-                    ArrayList<String> states = new ArrayList<>();
-                    states.addAll(FireStoreDB.getInstance().stateToCurrency.keySet());
-                    state.setSelection(states.indexOf(documentSnapshot.getString("state")));
+                    ArrayList<String> local_currencies = new ArrayList<>();
+                    local_currencies.addAll(FireStoreDB.getInstance().currenciesToSymbol.keySet());
+                    local_currency.setSelection(local_currencies.indexOf(documentSnapshot.getString("local_currency")));
                     loadBusinessOpenHoursForEdit(user_name, sundayOpen, sundayClose, monThuOpen, monThuClose,fridayOpen, fridayClose, saturdayOpen, saturdayClose);
                 });
     }
@@ -762,10 +752,8 @@ public class FireStoreDB implements DataBaseInterface {
         final String KEY_OWNER_NAME = "owner_name";
         final String KEY_BUSINESS_APPROVAL = "business_approval";
         final String KEY_OWNER_ID = "owner_id";
-        final String KEY_STATE = "state";
-        final String KEY_CITY = "city";
-        final String KEY_STREET = "street";
-        final String KEY_NUMBER = "number";
+        final String KEY_ADDRESS = "address";
+        final String KEY_LOCAL_CURRENCY = "local_currency";
 
 
         Map<String, Object> data = new HashMap<>();
@@ -774,10 +762,8 @@ public class FireStoreDB implements DataBaseInterface {
         data.put(KEY_PHONE, business.getPhone());
         data.put(KEY_PASSWORD, business.getPassword());
         data.put(KEY_OWNER_NAME, business.getBusiness_owner_name());
-        data.put(KEY_STATE, business.getBusiness_state());
-        data.put(KEY_CITY, business.getBusiness_city());
-        data.put(KEY_STREET, business.getBusiness_street());
-        data.put(KEY_NUMBER, business.getBusiness_no());
+        data.put(KEY_ADDRESS, business.getAddress());
+        data.put(KEY_LOCAL_CURRENCY, business.getLocal_currency());
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 

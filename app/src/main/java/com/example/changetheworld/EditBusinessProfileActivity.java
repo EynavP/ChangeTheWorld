@@ -4,17 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.changetheworld.model.AutoCompleteApi;
+import com.example.changetheworld.model.AutoCompleteInterface;
 import com.example.changetheworld.model.BusinessClient;
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.OpenHours;
-import com.example.changetheworld.model.PrivateClient;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,11 +32,11 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
     EditText mail_address;
     EditText phone_number;
     EditText owner_name;
-    Spinner state;
-    EditText city;
-    EditText street;
-    EditText number;
+    Spinner local_currency;
     EditText password;
+    AutoCompleteTextView address;
+    AutoCompleteInterface aci = new AutoCompleteApi();
+
 
     EditText sundayOpen, sundayClose, monThuOpen, monThuClose, fridayOpen, fridayClose, saturdayOpen, saturdayClose;
 
@@ -43,19 +47,17 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_business_profile);
 
-        state = findViewById(R.id.state_value);
+        local_currency = findViewById(R.id.local_currency_value);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-        adapter.addAll(FireStoreDB.getInstance().stateToCurrency.keySet());
-        state.setAdapter(adapter);
-
+        adapter.addAll(FireStoreDB.getInstance().currenciesToSymbol.keySet());
+        local_currency.setAdapter(adapter);
+        address = findViewById(R.id.street_value);
         business_name = findViewById(R.id.business_name_value);
         mail_address = findViewById(R.id.maillAddress_value);
         phone_number = findViewById(R.id.phoneNumber_value);
         owner_name = findViewById(R.id.business_owner_name_value);
-        state = findViewById(R.id.state_value);
-        city = findViewById(R.id.city_value);
-        street = findViewById(R.id.street_value);
-        number = findViewById(R.id.number_value);
+
+
         password = findViewById(R.id.business_password_value);
 
         sundayOpen = findViewById(R.id.sundayOpen);
@@ -67,9 +69,33 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
         saturdayOpen = findViewById(R.id.saturdayOpen);
         saturdayClose = findViewById(R.id.saturdayClose);
 
+        address.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String query = editable.toString();
+                Thread t = new Thread(() -> {
+                    ArrayList<String> result =  aci.getComplete(query);
+                    if(result != null){
+                        runOnUiThread(() -> {
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditBusinessProfileActivity.this, android.R.layout.simple_dropdown_item_1line, result);
+                            address.setAdapter(adapter);
+                        });
+                    }
+                });
+                t.start();
+            }
+        });
+
+
         userName = getIntent().getStringExtra("user_name");
         ((TextView)findViewById(R.id.business_username_profile_name)).setText(userName);
-        FireStoreDB.getInstance().loadBusinessDataForEdit(userName, business_name, mail_address, phone_number , owner_name, state, city, street, number, password, sundayOpen, sundayClose, monThuOpen, monThuClose, fridayOpen, fridayClose, saturdayOpen, saturdayClose);
+        FireStoreDB.getInstance().loadBusinessDataForEdit(userName, business_name, mail_address, phone_number , owner_name, local_currency, address, password, sundayOpen, sundayClose, monThuOpen, monThuClose, fridayOpen, fridayClose, saturdayOpen, saturdayClose);
 
         updateButton = findViewById(R.id.updateBtn);
         updateButton.setOnClickListener(view -> {
@@ -95,9 +121,10 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
                 try {
                     Date open = new SimpleDateFormat("HH:mm").parse(openHour.getOpen());
                     Date close = new SimpleDateFormat("HH:mm").parse(openHour.getClose());
-                    if (open.compareTo(close) > 0)
+                    if (open.compareTo(close) > 0){
                         Toast.makeText(this, "Opening hour cannot be later than closing hour", Toast.LENGTH_SHORT).show();
                         invalidOpenHours = 1;
+                    }
                 } catch (ParseException e) {
                     Toast.makeText(this, "Invalid open hour", Toast.LENGTH_SHORT).show();
                     invalidOpenHours = 1;
@@ -108,10 +135,8 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
             String new_mail_address = mail_address.getText().toString();
             String new_phone_number = phone_number.getText().toString();
             String new_owner_name = owner_name.getText().toString();
-            String new_state = state.getSelectedItem().toString();
-            String new_city = city.getText().toString();
-            String new_street = street.getText().toString();
-            String new_number = number.getText().toString();
+            String new_local_currency = local_currency.getSelectedItem().toString();
+            String new_address = address.getText().toString();
             String new_password = password.getText().toString();
 
             if (new_business_name.isEmpty()){
@@ -122,20 +147,8 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, getString(R.string.Invalid_mail), Toast.LENGTH_SHORT);
                 toast.show();
             }
-            else if (new_state.isEmpty()){
-                Toast toast = Toast.makeText(this, getString(R.string.Invalid_state), Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            else if (new_city.isEmpty()){
-                Toast toast = Toast.makeText(this, R.string.invalid_business_city, Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            else if (new_street == null){
-                Toast toast = Toast.makeText(this, R.string.invalid_business_street, Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            else if (new_number == null) {
-                Toast toast = Toast.makeText(this, R.string.invalid_business_number, Toast.LENGTH_SHORT);
+            else if (new_address.isEmpty()){
+                Toast toast = Toast.makeText(this, R.string.Invalid_Address, Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (new_phone_number.isEmpty() || !new_phone_number.matches("^[0-9]*$")){
@@ -150,18 +163,11 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, getString(R.string.invalid_business_name), Toast.LENGTH_SHORT);
                 toast.show();
             }
-//            else if (business_chosen_approvel == null){
-//                Toast toast = Toast.makeText(this, R.string.Invalid_business_approval_document, Toast.LENGTH_SHORT);
-//                toast.show();
-//            }
-//            else if (business_chosen_owner_id == null) {
-//                Toast toast = Toast.makeText(this, R.string.Invalid_business_owner_id, Toast.LENGTH_SHORT);
-//                toast.show();
-//            }
             else if (invalidOpenHours == 1){}
             else {
-                BusinessClient business_client = new BusinessClient(new_business_name,new_mail_address,new_phone_number,userName,new_password,new_owner_name,null, null,new_state,new_city, new_street, new_number);
+                BusinessClient business_client = new BusinessClient(new_business_name,new_mail_address,new_phone_number,userName,new_password,new_owner_name,null, null, new_local_currency, new_address);
                 Intent intent = new Intent(this, BusinessProfileActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 FireStoreDB.getInstance().updateBusinessProfile(this, business_client, openHours, intent);
             }
         });

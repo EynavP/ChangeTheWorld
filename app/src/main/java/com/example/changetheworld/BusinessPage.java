@@ -16,11 +16,9 @@ public class BusinessPage extends AppCompatActivity {
     TextView mail_address;
     TextView phone_number;
     TextView owner_name;
-    TextView state;
-    TextView city;
-    TextView street;
-    TextView number;
     TextView header;
+    TextView address;
+    TextView local_currency;
 
     TextView sundayHours, monThuHours, fridayHours, saturdayHours;
 
@@ -35,19 +33,16 @@ public class BusinessPage extends AppCompatActivity {
         business_name = findViewById(R.id.business_name_value);
         mail_address = findViewById(R.id.maillAddress_value);
         phone_number = findViewById(R.id.phoneNumber_value);
-        state = findViewById(R.id.state_value);
-        city = findViewById(R.id.city_value);
-        street = findViewById(R.id.street_value);
-        number = findViewById(R.id.number_value);
         header =  findViewById(R.id.business_username_profile_name);
-
+        local_currency = findViewById(R.id.local_currency_value);
+        address = findViewById(R.id.address_value);
         sundayHours = findViewById(R.id.sundayHours);
         monThuHours = findViewById(R.id.monThuHours);
         fridayHours = findViewById(R.id.fridayHours);
         saturdayHours = findViewById(R.id.saturdayHours);
 
         userName = getIntent().getStringExtra("user_name");
-        FireStoreDB.getInstance().loadBusinessData(userName,header, business_name, mail_address, phone_number, owner_name, state, city, street, number, sundayHours, monThuHours, fridayHours, saturdayHours);
+        FireStoreDB.getInstance().loadBusinessData(userName,header, business_name, mail_address, phone_number, owner_name, address, local_currency, sundayHours, monThuHours, fridayHours, saturdayHours);
 
 
         newOrder = findViewById(R.id.new_order_btn);

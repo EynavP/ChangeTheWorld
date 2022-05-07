@@ -148,6 +148,8 @@
     <string name="pickup_date">Pickup date</string>
     <string name="submit">Submit</string>
     <string name="address">Address</string>
+    <string name="Invalid_address">Invalid address</string>
+    <string name="Invalid_Address">Invalid Address</string>
 
 
 </resources>
