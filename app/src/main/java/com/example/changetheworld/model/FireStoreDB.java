@@ -951,6 +951,8 @@ public class FireStoreDB implements DataBaseInterface {
                             Intent intent = new Intent(context, OrderConfirm.class);
                             intent.putExtra("business_user_name", business_user_name);
                             intent.putExtra("orderID", client_user_name + "*" + business_user_name + "*" + counter);
+                            intent.putExtra("user_type",user_type);
+                            intent.putExtra("user_name",client_user_name);
                             context.startActivity(intent);
                         });
             });
@@ -1041,6 +1043,8 @@ public class FireStoreDB implements DataBaseInterface {
                                             Intent intent = new Intent(context, OrderConfirm.class);
                                             intent.putExtra("business_user_name", business_user_name);
                                             intent.putExtra("orderID", client_user_name + "*" + business_user_name + "*" + counter);
+                                            intent.putExtra("user_type",user_type);
+                                            intent.putExtra("user_name",client_user_name);
                                             context.startActivity(intent);
                                         });
                             });
@@ -1069,7 +1073,7 @@ public class FireStoreDB implements DataBaseInterface {
                         cash_case_value.setText("Price may be change");
                     }
                     business_name.setText(documentSnapshot.getString("business_name"));
-                    pickup_date.setText(documentSnapshot.getString("data"));
+                    pickup_date.setText(documentSnapshot.getString("date"));
                     currency_from.setText(documentSnapshot.getString("from_currency"));
                     currency_to.setText(documentSnapshot.getString("to_currency"));
                 });
