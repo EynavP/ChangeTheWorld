@@ -80,13 +80,13 @@ public class OrderPage extends AppCompatActivity {
 
         cash.setOnClickListener(view -> {
             payment_method = "cash";
-            cash.setBackgroundColor(Color.BLUE);
-            wallet.setBackgroundColor(R.drawable.payment_method_btn);
+            cash.setBackground(getResources().getDrawable(R.drawable.pressed_button));
+            wallet.setBackground(getResources().getDrawable(R.drawable.payment_method_btn));
         });
         wallet.setOnClickListener(view -> {
             payment_method = "wallet";
-            wallet.setBackgroundColor(Color.BLUE);
-            cash.setBackgroundColor(R.drawable.payment_method_btn);
+            wallet.setBackground(getResources().getDrawable(R.drawable.pressed_button));
+            cash.setBackground(getResources().getDrawable(R.drawable.payment_method_btn));
         });
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
