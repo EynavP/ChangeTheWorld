@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.changetheworld.model.FireStoreDB;
@@ -12,11 +13,12 @@ import com.example.changetheworld.model.Order;
 
 import java.util.ArrayList;
 
-public class OrdersActivity extends AppCompatActivity {
+public class OrdersActivity extends AppCompatActivity implements RecycleSubWalletClickInterface {
 
     RecyclerView recyclerView;
     String user_name;
     String user_type;
+    ArrayList<Order> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,16 @@ public class OrdersActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        ArrayList<Order> items = new ArrayList<>();
+        items = new ArrayList<>();
         FireStoreDB.getInstance().loadOrders(this, user_name, user_type, items, recyclerView);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(this, OrderConfirm.class);
+        intent.putExtra("user_type",user_type);
+        intent.putExtra("user_name",user_name);
+        intent.putExtra("orderID", items.get(position).getId());
+        startActivity(intent);
     }
 }

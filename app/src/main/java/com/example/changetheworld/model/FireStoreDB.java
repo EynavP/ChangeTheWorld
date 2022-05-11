@@ -985,18 +985,18 @@ public class FireStoreDB implements DataBaseInterface {
             data.put("to_amount", to_amount);
             data.put("date", date);
             data.put("status", "pending");
-            data.put("id", counter.get());
+            data.put("id", client_user_name + "*" + business_user_name + "*" + counter.get());
 
             tasks.add(db.collection(user_type)
                     .document(client_user_name)
                     .collection("OrdersByMe")
-                    .document(client_user_name + "*" + business_user_name + "*" + counter)
+                    .document(client_user_name + "*" + business_user_name + "*" + counter.get())
                     .set(data));
 
             tasks.add(db.collection("BusinessClient")
                     .document(business_user_name)
                     .collection("OrdersForMe")
-                    .document(client_user_name + "*" + business_user_name + "*" + counter)
+                    .document(client_user_name + "*" + business_user_name + "*" + counter.get())
                     .set(data));
 
             Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects1 -> {
@@ -1008,8 +1008,7 @@ public class FireStoreDB implements DataBaseInterface {
                         .addOnSuccessListener(unused -> {
                             Toast.makeText(context, "Order Success", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(context, OrderConfirm.class);
-                            intent.putExtra("business_user_name", business_user_name);
-                            intent.putExtra("orderID", client_user_name + "*" + business_user_name + "*" + counter);
+                            intent.putExtra("orderID", client_user_name + "*" + business_user_name + "*" + counter.get());
                             intent.putExtra("user_type",user_type);
                             intent.putExtra("user_name",client_user_name);
                             context.startActivity(intent);
@@ -1077,18 +1076,18 @@ public class FireStoreDB implements DataBaseInterface {
                             data.put("to_amount", to_amount);
                             data.put("date", date);
                             data.put("status", "pending");
-                            data.put("id", counter.get());
+                            data.put("id", client_user_name + "*" + business_user_name + "*" + counter.get());
 
                             tasks.add(db.collection(user_type)
                                     .document(client_user_name)
                                     .collection("OrdersByMe")
-                                    .document(client_user_name + "*" + business_user_name + "*" + counter)
+                                    .document(client_user_name + "*" + business_user_name + "*" + counter.get())
                                     .set(data));
 
                             tasks.add(db.collection("BusinessClient")
                                     .document(business_user_name)
                                     .collection("OrdersForMe")
-                                    .document(client_user_name + "*" + business_user_name + "*" + counter)
+                                    .document(client_user_name + "*" + business_user_name + "*" + counter.get())
                                     .set(data));
 
                             Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects1 -> {
@@ -1100,8 +1099,7 @@ public class FireStoreDB implements DataBaseInterface {
                                         .addOnSuccessListener(unused1 -> {
                                             Toast.makeText(context, "Order Success", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(context, OrderConfirm.class);
-                                            intent.putExtra("business_user_name", business_user_name);
-                                            intent.putExtra("orderID", client_user_name + "*" + business_user_name + "*" + counter);
+                                            intent.putExtra("orderID", client_user_name + "*" + business_user_name + "*" + counter.get());
                                             intent.putExtra("user_type",user_type);
                                             intent.putExtra("user_name",client_user_name);
                                             context.startActivity(intent);
@@ -1206,7 +1204,7 @@ public class FireStoreDB implements DataBaseInterface {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     List<DocumentSnapshot> orders = queryDocumentSnapshots.getDocuments();
                     for (int i = 0; i < orders.size(); i++) {
-                        Order tmp = new Order(orders.get(i).getString("from_currency"), orders.get(i).getString("to_currency"),
+                        Order tmp = new Order(orders.get(i).getString("id"), orders.get(i).getString("from_currency"), orders.get(i).getString("to_currency"),
                                 orders.get(i).getString("from_amount"), orders.get(i).getString("to_amount"), orders.get(i).getString("date"),
                                 orders.get(i).getString("business_name"), orders.get(i).getString("status"), orders.get(i).getString("payment_method"));
                         items.add(tmp);

@@ -19,8 +19,8 @@ public class OrderConfirm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_confirm);
-        business_user_name = getIntent().getStringExtra(getString(R.string.business_user_name));
         orderID = getIntent().getStringExtra(getString(R.string.orderID));
+        business_user_name = orderID.split("\\*")[1];
         go_back_home = findViewById(R.id.homeBtn);
         cash_case_value = findViewById(R.id.cash_case_value);
         amount_to = findViewById(R.id.receive_value);

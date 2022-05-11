@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class Order
 {
+    String id;
     String fromCurrency;
     String toCurrency;
     String amount;
@@ -16,7 +17,8 @@ public class Order
     ImageView QR_code;
     String paymentMethod;
 
-    public Order(String fromCurrency, String toCurrency, String amount, String received, String pickupDate, String name, String status, String paymentMethod) {
+    public Order(String id, String fromCurrency, String toCurrency, String amount, String received, String pickupDate, String name, String status, String paymentMethod) {
+        this.id = id;
         this.fromCurrency = fromCurrency;
         this.toCurrency = toCurrency;
         this.amount = amount;
@@ -26,6 +28,14 @@ public class Order
         this.status = status;
         this.QR_code = null;
         this.paymentMethod = paymentMethod;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFromCurrency() {

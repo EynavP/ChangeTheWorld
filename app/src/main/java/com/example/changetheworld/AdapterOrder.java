@@ -19,17 +19,19 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
 
         private LayoutInflater layoutInflater;
         private List<Order> data;
+        private RecycleSubWalletClickInterface recycleSubWalletClickInterface;
 
-        public AdapterOrder(Context context, List<Order> data){
+
+    public AdapterOrder(Context context, List<Order> data){
             this.layoutInflater =LayoutInflater.from(context);
             this.data=data;
-
-        }
+            this.recycleSubWalletClickInterface = (OrdersActivity)context;
+    }
         @NonNull
         @Override
         public AdapterOrder.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             View view = layoutInflater.inflate(R.layout.order_recycleview,viewGroup,false);
-            return new AdapterOrder.ViewHolder(view);
+            return new AdapterOrder.ViewHolder(view,recycleSubWalletClickInterface);
         }
 
         @Override
@@ -68,10 +70,10 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
 
         public class ViewHolder extends RecyclerView.ViewHolder{
 
-            TextView fromCurrency,toCurrency,amount,received,pickupDate,name,status,paymentMethod;
+            TextView fromCurrency,toCurrency,amount,received,pickupDate,name,status,paymentMethod, id;
 
 
-            public ViewHolder(@NonNull View itemView) {
+            public ViewHolder(@NonNull View itemView, RecycleSubWalletClickInterface recycleSubWalletClickInterface) {
                 super(itemView);
                 fromCurrency=itemView.findViewById(R.id.from_currency_value);
                 toCurrency=itemView.findViewById(R.id.to_currency_value);
@@ -81,6 +83,17 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
                 name=itemView.findViewById(R.id.businessName);
                 status=itemView.findViewById(R.id.status_value);
                 paymentMethod=itemView.findViewById(R.id.payment_method_value);
+                id = itemView.findViewById(R.id.order_id);
+
+                itemView.setOnClickListener(view -> {
+                    if(recycleSubWalletClickInterface != null){
+                        int position = getAdapterPosition();
+
+                        if(position != RecyclerView.NO_POSITION){
+                            recycleSubWalletClickInterface.onItemClick(position);
+                        }
+                    }
+                });
             }
         }
 }
