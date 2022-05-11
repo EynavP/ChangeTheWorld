@@ -160,6 +160,7 @@
     <string name="Amount_shouldnt_be_zero">Amount shouldn\'t be zero</string>
     <string name="orderID">orderID</string>
     <string name="status">status</string>
+    <string name="pickup__from">Pickup From:</string>
 
 
 </resources>

@@ -20,7 +20,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
         private LayoutInflater layoutInflater;
         private List<Order> data;
 
-        AdapterOrder(Context context, List<Order> data){
+        public AdapterOrder(Context context, List<Order> data){
             this.layoutInflater =LayoutInflater.from(context);
             this.data=data;
 
@@ -39,17 +39,17 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
             String fromCurrency = data.get(i).getFromCurrency();
             viewHolder.fromCurrency.setText(fromCurrency);
 
-            Date date = data.get(i).getPickupDate();
-            viewHolder.pickupDate.setText(date.toString());
+            String date = data.get(i).getPickupDate();
+            viewHolder.pickupDate.setText(date);
 
             String toCurrency = data.get(i).getToCurrency();
             viewHolder.toCurrency.setText(toCurrency);
 
-            float amount = data.get(i).getAmount();
-            viewHolder.amount.setText(Float.toString(amount));
+            String amount = data.get(i).getAmount();
+            viewHolder.amount.setText(amount);
 
-            float recevied= data.get(i).getReceived();
-            viewHolder.received.setText(Float.toString(recevied));
+            String recevied= data.get(i).getReceived();
+            viewHolder.received.setText(recevied);
 
             String paymentMethod= data.get(i).getPaymentMethod();
             viewHolder.paymentMethod.setText(paymentMethod);

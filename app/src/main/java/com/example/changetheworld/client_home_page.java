@@ -169,6 +169,13 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         startActivity(intent);
     }
 
+    public void openOrders(){
+
+        Intent intent = new Intent(this,OrdersActivity.class);
+        intent.putExtra(getString(R.string.userName), user_name);
+        intent.putExtra("user_type", "PrivateClient");
+        startActivity(intent);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -182,6 +189,8 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
             case R.id.nav_profile:
                 openProfile();
                 break;
+            case R.id.nav_orders:
+                openOrders();
         }
         return true;
     }

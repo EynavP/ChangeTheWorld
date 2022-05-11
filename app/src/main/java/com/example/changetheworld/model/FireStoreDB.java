@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.changetheworld.AdapterBusinessCurrencyRate;
 import com.example.changetheworld.AdapterBusinessCurrencyRateForShow;
 import com.example.changetheworld.AdapterCurrency;
+import com.example.changetheworld.AdapterOrder;
 import com.example.changetheworld.AdapterSearch;
 import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
@@ -1195,6 +1196,31 @@ public class FireStoreDB implements DataBaseInterface {
                     t.start();
                 });
     }
+
+    @Override
+    public void loadOrders(Context context, String user_name, String userType, ArrayList<Order> items, RecyclerView recyclerView) {
+        db.collection(userType)
+                .document(user_name)
+                .collection("OrdersByMe")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<DocumentSnapshot> orders = queryDocumentSnapshots.getDocuments();
+                    for (int i = 0; i < orders.size(); i++) {
+                        Order tmp = new Order(orders.get(i).getString("from_currency"), orders.get(i).getString("to_currency"),
+                                orders.get(i).getString("from_amount"), orders.get(i).getString("to_amount"), orders.get(i).getString("date"),
+                                orders.get(i).getString("business_name"), orders.get(i).getString("status"), orders.get(i).getString("payment_method"));
+                        items.add(tmp);
+                    }
+                    Thread t = new Thread(() -> {
+                        ((Activity) context).runOnUiThread(() -> {
+                            AdapterOrder adapterOrder = new AdapterOrder(context, items);
+                            recyclerView.setAdapter(adapterOrder);
+                        });
+                    });
+                    t.start();
+                });
+    }
+
 
     public void saveOpenHours(Context context,String user_name, ArrayList<OpenHours> openHours, Intent intent) {
 
