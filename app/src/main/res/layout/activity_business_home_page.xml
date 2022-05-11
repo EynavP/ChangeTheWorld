@@ -206,7 +206,8 @@
                     android:fontFamily="@font/comfortaa"
                     android:text="@string/sunday"
                     android:textAppearance="@style/littleTitle"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/Orders_title"

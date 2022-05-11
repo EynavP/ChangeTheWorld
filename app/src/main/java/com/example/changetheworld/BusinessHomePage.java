@@ -28,6 +28,7 @@ import com.example.changetheworld.model.AutoCompleteInterface;
 import com.example.changetheworld.model.Order;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
     Toolbar toolbar;
     AutoCompleteInterface aci = new AutoCompleteApi();
     SeekBar bar;
-    TextView bar_text;
+    TextView bar_text, dayDate, todayDate;
     ImageView search;
 
     @Override
@@ -117,6 +118,15 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
                 startActivity(intent);
             }
         });
+
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEE");
+        dayDate = findViewById(R.id.dayDate);
+        dayDate.setText(formatter.format(date));
+        formatter = new SimpleDateFormat("dd/MM/yyyy");
+        todayDate = findViewById(R.id.todayDate);
+        todayDate.setText(formatter.format(date));
+
 
     }
 
