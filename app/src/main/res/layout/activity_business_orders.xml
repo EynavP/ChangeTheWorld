@@ -4,34 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrdersActivity"
+    tools:context=".BusinessOrdersActivity"
     android:background="@drawable/wallet_back">
+
 
     <RelativeLayout
         android:id="@+id/topPage"
         android:layout_width="match_parent"
         android:layout_height="146dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="253dp"
-            android:layout_height="55dp"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="53dp"
-            android:layout_marginEnd="68dp"
+            android:layout_marginStart="79dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="61dp"
             android:fontFamily="@font/comfortaa"
             android:letterSpacing="0.25"
-            android:text="@string/my_orders"
+            android:text="@string/orders"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/my_orders_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="77dp"
+            android:background="@color/empty"
+            android:text="@string/my_orders" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/clients_orders_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="52dp"
+            android:layout_toStartOf="@+id/my_orders_btn"
+            android:background="@color/empty"
+            android:text="Clients Orders" />
+
 
     </RelativeLayout>
 
@@ -72,9 +102,5 @@
                 android:layout_height="match_parent" />
         </ScrollView>
     </RelativeLayout>
-
-
-
-
 
 </RelativeLayout>

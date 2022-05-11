@@ -161,6 +161,7 @@
     <string name="orderID">orderID</string>
     <string name="status">status</string>
     <string name="pickup__from">Pickup From:</string>
+    <string name="my_orders">My orders</string>
 
 
 </resources>
