@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.model.Order;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -29,30 +28,37 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
         @NonNull
         @Override
         public AdapterOrder.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            View view = layoutInflater.inflate(R.layout.business_recycler_view,viewGroup,false);
+            View view = layoutInflater.inflate(R.layout.order_recycleview,viewGroup,false);
             return new AdapterOrder.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull AdapterOrder.ViewHolder viewHolder, int i) {
 
+
             String fromCurrency = data.get(i).getFromCurrency();
             viewHolder.fromCurrency.setText(fromCurrency);
 
             Date date = data.get(i).getPickupDate();
-            viewHolder.editDate.setText(date.toString());
+            viewHolder.pickupDate.setText(date.toString());
 
             String toCurrency = data.get(i).getToCurrency();
             viewHolder.toCurrency.setText(toCurrency);
 
             float amount = data.get(i).getAmount();
-            viewHolder.fromAmount.setText(Float.toString(amount));
+            viewHolder.amount.setText(Float.toString(amount));
 
             float recevied= data.get(i).getReceived();
-            viewHolder.toAmount.setText(Float.toString(recevied));
+            viewHolder.received.setText(Float.toString(recevied));
 
             String paymentMethod= data.get(i).getPaymentMethod();
             viewHolder.paymentMethod.setText(paymentMethod);
+
+            String status= data.get(i).getStatus();
+            viewHolder.status.setText(status);
+
+            String name= data.get(i).getName();
+            viewHolder.name.setText(name);
         }
 
         @Override
@@ -62,17 +68,19 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
 
         public class ViewHolder extends RecyclerView.ViewHolder{
 
-            TextView editDate,editPickTime,fromAmount,fromCurrency,toAmount,toCurrency,paymentMethod;
+            TextView fromCurrency,toCurrency,amount,received,pickupDate,name,status,paymentMethod;
+
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
-                editDate=itemView.findViewById(R.id.editDate);
-                editPickTime=itemView.findViewById(R.id.EditPickUpTime);
-                fromAmount=itemView.findViewById(R.id.FromAmount);
-                fromCurrency=itemView.findViewById(R.id.FromCurrency);
-                toAmount=itemView.findViewById(R.id.ToAmount);
-                toCurrency=itemView.findViewById(R.id.ToCurrency);
-                paymentMethod=itemView.findViewById(R.id.PaymentMethod);
+                fromCurrency=itemView.findViewById(R.id.from_currency_value);
+                toCurrency=itemView.findViewById(R.id.to_currency_value);
+                amount=itemView.findViewById(R.id.amount_value);
+                received=itemView.findViewById(R.id.received_value);
+                pickupDate=itemView.findViewById(R.id.date_value);
+                name=itemView.findViewById(R.id.businessName);
+                status=itemView.findViewById(R.id.status_value);
+                paymentMethod=itemView.findViewById(R.id.payment_method_value);
             }
         }
 }

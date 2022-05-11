@@ -14,6 +14,9 @@
         android:theme="@style/Theme.ChangeTheWorld"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".OrdersActivity"
+            android:exported="false" />
+        <activity
             android:name=".Business_rate_for_show"
             android:exported="false" />
         <activity
