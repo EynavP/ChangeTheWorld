@@ -115,6 +115,8 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
                 Intent intent = new Intent(this, search_result_page.class);
                 intent.putExtra("searchQuery", searchQuery);
                 intent.putExtra("radius", bar_text.getText().toString());
+                intent.putExtra(getString(R.string.client_user_name), user_name);
+                intent.putExtra("user_type", "BusinessClient");
                 startActivity(intent);
             }
         });
@@ -153,12 +155,12 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
     }
 
     public void openBusinessOrders(){
-
         Intent intent = new Intent(this,BusinessOrdersActivity.class);
         intent.putExtra(getString(R.string.userName), user_name);
         intent.putExtra("user_type", "BusinessClient");
         startActivity(intent);
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){

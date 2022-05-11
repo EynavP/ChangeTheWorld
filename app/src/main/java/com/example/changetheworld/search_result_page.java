@@ -21,6 +21,7 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
     ProgressBar progressBar;
     ArrayList<Search> filter_list;
     String user_name;
+    String user_type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,7 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
         progressBar = findViewById(R.id.progressBar);
         filter_list = new ArrayList<>();
         user_name = getIntent().getStringExtra(getString(R.string.client_user_name));
-
+        user_type = getIntent().getStringExtra("user_type");
         if(progressBar.getVisibility() != View.INVISIBLE) {
             progressBar.setVisibility(View.VISIBLE);
         }
@@ -55,6 +56,7 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
         Intent intent = new Intent(this,BusinessPage.class);
         intent.putExtra(getString(R.string.business_user_name), filter_list.get(position).getUserName());
         intent.putExtra(getString(R.string.client_user_name), user_name);
+        intent.putExtra("user_type", user_type);
         startActivity(intent);
     }
 }

@@ -11,7 +11,7 @@ import com.example.changetheworld.model.FireStoreDB;
 
 public class BusinessPage extends AppCompatActivity {
 
-    String userName, client_user_name;
+    String userName, client_user_name, user_type;
     TextView business_name;
     TextView mail_address;
     TextView phone_number;
@@ -44,6 +44,7 @@ public class BusinessPage extends AppCompatActivity {
 
         userName = getIntent().getStringExtra(getString(R.string.business_user_name));
         client_user_name = getIntent().getStringExtra(getString(R.string.client_user_name));
+        user_type = getIntent().getStringExtra("user_type");
         FireStoreDB.getInstance().loadBusinessData(userName,header, business_name, mail_address, phone_number, owner_name, address, local_currency, sundayHours, monThuHours, fridayHours, saturdayHours);
 
 
@@ -52,6 +53,7 @@ public class BusinessPage extends AppCompatActivity {
             Intent intent = new Intent(this,OrderPage.class);
             intent.putExtra(getString(R.string.business_user_name), userName);
             intent.putExtra(getString(R.string.client_user_name), client_user_name);
+            intent.putExtra("user_type", user_type);
             startActivity(intent);
         });
 

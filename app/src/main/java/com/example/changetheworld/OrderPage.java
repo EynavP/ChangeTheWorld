@@ -31,7 +31,7 @@ public class OrderPage extends AppCompatActivity {
     Spinner from, to;
     EditText amount,pickup_date;
     Button cash, wallet, submit;
-    String payment_method, business_user_name, client_user_name;
+    String payment_method, business_user_name, client_user_name, user_type;
     TextView receive, pick_from;
     int mYear,mMonth,mDay;
     SimpleDateFormat sdf;
@@ -44,7 +44,7 @@ public class OrderPage extends AppCompatActivity {
         setContentView(R.layout.activity_order_page);
         business_user_name = getIntent().getStringExtra(getString(R.string.business_user_name));
         client_user_name = getIntent().getStringExtra(getString(R.string.client_user_name));
-
+        user_type = getIntent().getStringExtra("user_type");
         from = findViewById(R.id.from_value);
         to = findViewById(R.id.to_value);
         amount = findViewById(R.id.amount_value);
@@ -149,10 +149,10 @@ public class OrderPage extends AppCompatActivity {
                 Toast.makeText(this, "Invalid Date",Toast.LENGTH_SHORT).show();
             }
             else if(payment_method.equals("cash")){
-                FireStoreDB.getInstance().PayByCash(this, "PrivateClient", business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
+                FireStoreDB.getInstance().PayByCash(this, user_type, business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
             }
             else if(payment_method.equals("wallet")){
-                FireStoreDB.getInstance().PayByWallet(this, "PrivateClient", business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
+                FireStoreDB.getInstance().PayByWallet(this, user_type, business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
             }
         });
 
