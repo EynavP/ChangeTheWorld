@@ -855,15 +855,19 @@ public class FireStoreDB implements DataBaseInterface {
                             allPairs.put(s1+s2, value);
                         }
                         ArrayList<BusinessCurrencyRateForShow> sale_buy_prices = new ArrayList<>();
-                        for (Pair<String, String> p: pairs.keySet()) {
-                            String symbolId = currenciesToSymbol.get(p.first) + " " + currenciesToSymbol.get(p.second);
-                            String currencyName = p.first + " " + p.second;
-                            BusinessCurrencyRateForShow tmp = new BusinessCurrencyRateForShow(symbolId, currencyName,
-                                    pairs.get(p), allPairs.get(p.second + p.first));
-                            sale_buy_prices.add(tmp);
-                        }
-
                         Thread t = new Thread(() -> {
+                            for (Pair<String, String> p: pairs.keySet()) {
+                                String symbolId = currenciesToSymbol.get(p.first) + " " + currenciesToSymbol.get(p.second);
+                                String currencyName = p.first + " " + p.second;
+                                ArrayList<String> pair = new ArrayList<>();
+                                pair.add(p.first + '/' + p.second);
+                                pair.add(p.second + '/' + p.first);
+                                String sale_price = df.format(api.getCloseAndChangePrice(pair).get(p.first).get(0) + Float.parseFloat(pairs.get(p)));
+                                String buy_price =  df.format(api.getCloseAndChangePrice(pair).get(p.second).get(0) + Float.parseFloat(allPairs.get(p.second + p.first)));
+                                BusinessCurrencyRateForShow tmp = new BusinessCurrencyRateForShow(symbolId, currencyName,
+                                        sale_price, buy_price);
+                                sale_buy_prices.add(tmp);
+                            }
                             ((Activity) context).runOnUiThread(() -> {
                                 AdapterBusinessCurrencyRateForShow abcr = new AdapterBusinessCurrencyRateForShow(context, sale_buy_prices);
                                 recyclerView.setAdapter(abcr);
