@@ -23,7 +23,7 @@ public class BusinessPage extends AppCompatActivity {
 
     TextView sundayHours, monThuHours, fridayHours, saturdayHours;
 
-    Button newOrder;
+    Button newOrder, currencies_rates_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,14 @@ public class BusinessPage extends AppCompatActivity {
         newOrder = findViewById(R.id.new_order_btn);
         newOrder.setOnClickListener(view -> {
             Intent intent = new Intent(this,OrderPage.class);
+            intent.putExtra(getString(R.string.business_user_name), userName);
+            intent.putExtra(getString(R.string.client_user_name), client_user_name);
+            startActivity(intent);
+        });
+
+        currencies_rates_btn = findViewById(R.id.currencies_rates_btn);
+        currencies_rates_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(this,Business_rate_for_show.class);
             intent.putExtra(getString(R.string.business_user_name), userName);
             intent.putExtra(getString(R.string.client_user_name), client_user_name);
             startActivity(intent);

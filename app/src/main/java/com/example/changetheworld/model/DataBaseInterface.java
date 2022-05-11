@@ -31,6 +31,7 @@ public interface DataBaseInterface {
     void updateBusinessProfile(Context context, BusinessClient business,ArrayList<OpenHours> openHours, Intent intent);
     void checkExistPhoto(TextView value, String user_name, String type);
     void loadCurrencyRates(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<business_currency_rate> bcrs);
+    void loadCurrencyRatesForShow(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<BusinessCurrencyRateForShow> bcrs);
     void saveChangeComissionRate(Context context,HashMap<String, String> comission_data, String business_user_name);
     void calculateChangeRate(Context context, String business_user_name, String from_currency, String to_currency, float amount, TextView receive);
     void LoadBusinessAddress(Context context, String business_user_name, TextView pick_from);

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Pair;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.AdapterBusinessCurrencyRate;
+import com.example.changetheworld.AdapterBusinessCurrencyRateForShow;
 import com.example.changetheworld.AdapterCurrency;
 import com.example.changetheworld.AdapterSearch;
 import com.example.changetheworld.AdapterTransaction;
@@ -24,10 +26,12 @@ import com.example.changetheworld.AdapterWallet;
 import com.example.changetheworld.BusinessProfileActivity;
 import com.example.changetheworld.OrderConfirm;
 import com.example.changetheworld.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -821,6 +825,54 @@ public class FireStoreDB implements DataBaseInterface {
             });
         });
         t.start();
+    }
+
+    @Override
+    public void loadCurrencyRatesForShow(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<BusinessCurrencyRateForShow> bcrs) {
+        db.collection("BusinessClient")
+                    .document(user_name)
+                    .collection("currencyComission")
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        List<DocumentSnapshot> currency_pairs = queryDocumentSnapshots.getDocuments();
+                        HashMap<Pair<String, String>, String> pairs = new HashMap<>();
+                        HashMap<String, String> allPairs = new HashMap<>();
+
+                        for (int i = 0; i < currency_pairs.size(); i++) {
+                            Boolean exist = false;
+                            String pair = currency_pairs.get(i).getId();
+                            String s1 = pair.split("\\*")[0];
+                            String s2 = pair.split("\\*")[1];
+                            for (Pair<String, String> p: pairs.keySet()) {
+                                if (p.first.equals(s2) && p.second.equals(s1))
+                                    exist = true;
+                            }
+                            Pair<String, String> key = new Pair<>(s1, s2);
+                            String value = currency_pairs.get(i).getString(pair.replace("*", ""));
+                            if (!exist) {
+                                pairs.put(key, value);
+                            }
+                            allPairs.put(s1+s2, value);
+                        }
+                        ArrayList<BusinessCurrencyRateForShow> sale_buy_prices = new ArrayList<>();
+                        for (Pair<String, String> p: pairs.keySet()) {
+                            String symbolId = currenciesToSymbol.get(p.first) + " " + currenciesToSymbol.get(p.second);
+                            String currencyName = p.first + " " + p.second;
+                            BusinessCurrencyRateForShow tmp = new BusinessCurrencyRateForShow(symbolId, currencyName,
+                                    pairs.get(p), allPairs.get(p.second + p.first));
+                            sale_buy_prices.add(tmp);
+                        }
+
+                        Thread t = new Thread(() -> {
+                            ((Activity) context).runOnUiThread(() -> {
+                                AdapterBusinessCurrencyRateForShow abcr = new AdapterBusinessCurrencyRateForShow(context, sale_buy_prices);
+                                recyclerView.setAdapter(abcr);
+                                progressBar.setVisibility(View.INVISIBLE);
+
+                            });
+                        });
+                        t.start();
+                    });
     }
 
     @Override

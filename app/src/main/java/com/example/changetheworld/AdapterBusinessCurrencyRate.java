@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -68,9 +67,9 @@ public class AdapterBusinessCurrencyRate extends RecyclerView.Adapter<AdapterBus
         public ViewHolder(@NonNull View viewItem){
             super(viewItem);
             symbolId=viewItem.findViewById(R.id.symbolCurrency);
-            Exchangevalue=viewItem.findViewById(R.id.Exchange_value);
+            Exchangevalue=viewItem.findViewById(R.id.sale_price_value);
             currencyName=viewItem.findViewById(R.id.currency_name);
-            Sales_value=viewItem.findViewById(R.id.Sales_rate_value);
+            Sales_value=viewItem.findViewById(R.id.buy_price_value);
             update_sales_rate=viewItem.findViewById(R.id.update_value);
             update_sales_rate.addTextChangedListener(new TextWatcher() {
                 @Override

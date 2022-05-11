@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/Exchange_value"
+                android:id="@+id/sale_price_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/Sales_rate_value"
+                android:id="@+id/buy_price_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -46,7 +46,7 @@
 
 
             <TextView
-                android:id="@+id/value_title"
+                android:id="@+id/sale_price_title"
                 android:layout_width="127dp"
                 android:layout_height="19dp"
                 android:layout_marginStart="88dp"
@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/Sales_rate_title"
+                android:id="@+id/buy_price_title"
                 android:layout_width="127dp"
                 android:layout_height="19dp"
                 android:layout_marginStart="88dp"
