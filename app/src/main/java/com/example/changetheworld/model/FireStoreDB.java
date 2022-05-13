@@ -1212,7 +1212,11 @@ public class FireStoreDB implements DataBaseInterface {
                     }
                     Thread t = new Thread(() -> {
                         ((Activity) context).runOnUiThread(() -> {
-                            AdapterOrder adapterOrder = new AdapterOrder(context, items);
+                            AdapterOrder adapterOrder;
+                            if (userType.equals("PrivateClient"))
+                                adapterOrder = new AdapterOrder(context, items, "OrdersActivity");
+                            else
+                                adapterOrder = new AdapterOrder(context, items, "BusinessOrdersActivity");
                             recyclerView.setAdapter(adapterOrder);
                         });
                     });
