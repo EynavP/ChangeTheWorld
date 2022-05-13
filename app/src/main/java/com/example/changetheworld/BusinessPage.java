@@ -50,11 +50,7 @@ public class BusinessPage extends AppCompatActivity {
 
         newOrder = findViewById(R.id.new_order_btn);
         newOrder.setOnClickListener(view -> {
-            Intent intent = new Intent(this,OrderPage.class);
-            intent.putExtra(getString(R.string.business_user_name), userName);
-            intent.putExtra(getString(R.string.client_user_name), client_user_name);
-            intent.putExtra("user_type", user_type);
-            startActivity(intent);
+            FireStoreDB.getInstance().checkExistPassport(this, userName, client_user_name, user_type);
         });
 
         currencies_rates_btn = findViewById(R.id.currencies_rates_btn);

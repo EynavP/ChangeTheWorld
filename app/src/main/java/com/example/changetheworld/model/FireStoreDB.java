@@ -26,6 +26,7 @@ import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
 import com.example.changetheworld.BusinessProfileActivity;
 import com.example.changetheworld.OrderConfirm;
+import com.example.changetheworld.OrderPage;
 import com.example.changetheworld.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -1264,13 +1265,40 @@ public class FireStoreDB implements DataBaseInterface {
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         String path = "images/" + user_name + "/" + endOfPath + ".jpg";
         StorageReference pathReference = storageRef.child(path);
-        Task<byte[]> personal_photo = pathReference.getBytes(2000000000);
-        personal_photo.addOnSuccessListener(bytes -> {
+        Task<byte[]> photo = pathReference.getBytes(2000000000);
+        photo.addOnSuccessListener(bytes -> {
             value.setText("Exist");
         })
         .addOnFailureListener(e -> {
             value.setText("Non Exist");
         });
+    }
+
+    public void checkExistPassport(Context context, String business_user_name, String client_user_name, String user_type) {
+
+        if (user_type.equals("PrivateClient")) {
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+            String path = "images/" + client_user_name + "/" + KEY_PASSPORT_PHOTO + ".jpg";
+            StorageReference pathReference = storageRef.child(path);
+            Task<byte[]> photo = pathReference.getBytes(2000000000);
+            photo.addOnSuccessListener(bytes -> {
+                Intent intent = new Intent(context, OrderPage.class);
+                intent.putExtra("business_user_name", business_user_name);
+                intent.putExtra("client_user_name", client_user_name);
+                intent.putExtra("user_type", user_type);
+                context.startActivity(intent);
+            })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(context, "must upload passport photo first", Toast.LENGTH_SHORT).show();
+                    });
+        }
+        else {
+            Intent intent = new Intent(context, OrderPage.class);
+            intent.putExtra("business_user_name", business_user_name);
+            intent.putExtra(client_user_name, client_user_name);
+            intent.putExtra("user_type", user_type);
+            context.startActivity(intent);
+        }
     }
 
 }
