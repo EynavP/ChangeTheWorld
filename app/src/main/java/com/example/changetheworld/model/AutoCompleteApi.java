@@ -30,6 +30,9 @@ public class AutoCompleteApi implements AutoCompleteInterface{
             while (s.hasNext()){
                 result += s.next() + " ";
             }
+            if(result.charAt(result.length() -1) != ']'){
+                result += ']';
+            }
             urlConnection.disconnect();
             JSONArray data = new JSONArray(result);
             ArrayList<String> res = new ArrayList<>();

@@ -38,6 +38,9 @@ public class CurrencyDataApi implements CurrencyDataApiInterface{
             while (s.hasNext()){
                 result += s.next();
             }
+            if(result.charAt(result.length() -1) != ']'){
+                result += ']';
+            }
             urlConnection.disconnect();
             JSONArray data = new JSONArray(result);
             for(int i = 0; i < data.length(); i++){

@@ -30,6 +30,9 @@ public class LocationDataApi implements LocationDataApiInterface{
             while (s.hasNext()){
                 result += s.next();
             }
+            if(result.charAt(result.length() -1) != ']'){
+                result += ']';
+            }
             urlConnection.disconnect();
             JSONArray data = new JSONArray(result);
             return Float.parseFloat(String.valueOf(data.get(0)));

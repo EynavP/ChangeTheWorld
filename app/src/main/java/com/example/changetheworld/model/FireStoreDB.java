@@ -831,6 +831,7 @@ public class FireStoreDB implements DataBaseInterface {
 
     @Override
     public void loadCurrencyRatesForShow(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<BusinessCurrencyRateForShow> bcrs) {
+        // TODO: fix if there is no currencyComission
         db.collection("BusinessClient")
                     .document(user_name)
                     .collection("currencyComission")
@@ -864,8 +865,15 @@ public class FireStoreDB implements DataBaseInterface {
                                 ArrayList<String> pair = new ArrayList<>();
                                 pair.add(p.first + '/' + p.second);
                                 pair.add(p.second + '/' + p.first);
-                                String sale_price = df.format(api.getCloseAndChangePrice(pair).get(p.first).get(0) + Float.parseFloat(pairs.get(p)));
-                                String buy_price =  df.format(api.getCloseAndChangePrice(pair).get(p.second).get(0) + Float.parseFloat(allPairs.get(p.second + p.first)));
+                                String value1 = "0";
+                                String value2 = "0";
+                                if (pairs.get(p) != null)
+                                    value1 = pairs.get(p);
+                                if (allPairs.get(p.second + p.first) != null)
+                                    value2 = allPairs.get(p.second + p.first);
+
+                                String sale_price = df.format(api.getCloseAndChangePrice(pair).get(p.first).get(0) + Float.parseFloat(value1));
+                                String buy_price =  df.format(api.getCloseAndChangePrice(pair).get(p.second).get(0) + Float.parseFloat(value2));
                                 BusinessCurrencyRateForShow tmp = new BusinessCurrencyRateForShow(symbolId, currencyName,
                                         sale_price, buy_price);
                                 sale_buy_prices.add(tmp);
@@ -916,10 +924,13 @@ public class FireStoreDB implements DataBaseInterface {
                 .document(from_currency + '*' + to_currency)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
-                    float change_comission = Float.parseFloat(Objects.requireNonNull(documentSnapshot.getString(from_currency + to_currency)));
+                    float change_comission = 0 ;
+                    if (documentSnapshot != null && documentSnapshot.getString(from_currency + to_currency) != null)
+                        change_comission = Float.parseFloat(Objects.requireNonNull(documentSnapshot.getString(from_currency + to_currency)));
+                    float finalChange_comission = change_comission;
                     Thread t = new Thread(()->{
                         Float current_price = api.getCloseAndChangePrice(pair).get(from_currency).get(0);
-                        Float change_price = current_price * amount + change_comission;
+                        Float change_price = current_price * amount + finalChange_comission;
                         ((Activity)context).runOnUiThread(()->{
                             receive.setText(String.valueOf(df.format(change_price)));
                         });
