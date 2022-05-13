@@ -77,6 +77,7 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
     private void openEdit() {
         Intent intent = new Intent(this,EditClientProfileActivity.class);
         intent.putExtra("user_name", userName);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
