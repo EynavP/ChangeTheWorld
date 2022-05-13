@@ -22,11 +22,15 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
         private RecycleSubWalletClickInterface recycleSubWalletClickInterface;
 
 
-    public AdapterOrder(Context context, List<Order> data){
+    public AdapterOrder(Context context, List<Order> data, String activity){
             this.layoutInflater =LayoutInflater.from(context);
             this.data=data;
             // TODO: fix the casting that will fit both OrderActivity and BusinessOrderActivity
-            this.recycleSubWalletClickInterface = (OrdersActivity)context;
+            if (activity.equals("OrdersActivity"))
+                this.recycleSubWalletClickInterface = (OrdersActivity)context;
+            else
+                this.recycleSubWalletClickInterface = (BusinessOrdersActivity)context;
+
     }
         @NonNull
         @Override
