@@ -96,10 +96,12 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
                 if (query != null && !query.isEmpty()){
                     Thread t = new Thread(() -> {
                         ArrayList<String> result =  aci.getComplete(query);
-                        runOnUiThread(() -> {
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(client_home_page.this, android.R.layout.simple_dropdown_item_1line, result);
-                            autoCompleteTextView.setAdapter(adapter);
-                        });
+                        if(result != null) {
+                            runOnUiThread(() -> {
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(client_home_page.this, android.R.layout.simple_dropdown_item_1line, result);
+                                autoCompleteTextView.setAdapter(adapter);
+                            });
+                        }
                     });
                     t.start();
                 }

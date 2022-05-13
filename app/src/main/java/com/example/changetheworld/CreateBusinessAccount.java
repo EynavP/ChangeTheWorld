@@ -88,10 +88,12 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 String query = editable.toString();
                 Thread t = new Thread(() -> {
                     ArrayList<String> result =  aci.getComplete(query);
-                    runOnUiThread(() -> {
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateBusinessAccount.this, android.R.layout.simple_dropdown_item_1line, result);
-                        address.setAdapter(adapter);
-                    });
+                    if(result != null) {
+                        runOnUiThread(() -> {
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(CreateBusinessAccount.this, android.R.layout.simple_dropdown_item_1line, result);
+                            address.setAdapter(adapter);
+                        });
+                    }
                 });
                 t.start();
             }

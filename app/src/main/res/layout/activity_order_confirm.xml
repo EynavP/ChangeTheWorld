@@ -10,7 +10,13 @@
     <RelativeLayout
         android:id="@+id/topPage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="84dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,10 +29,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="96dp"
-            android:layout_marginLeft="96dp"
-            android:layout_marginTop="53dp"
-            android:layout_marginEnd="97dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="175dp"
             android:fontFamily="@font/comfortaa"
             android:text="@string/order_confirm"
             android:textAlignment="center"
@@ -47,6 +53,15 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp">
+
+        <ImageView
+            android:id="@+id/QRcodeIV"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="47dp" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -71,10 +86,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="188dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="184dp"
             android:fontFamily="@font/comfortaa"
             android:text="@string/order_details"
             android:textAlignment="center"

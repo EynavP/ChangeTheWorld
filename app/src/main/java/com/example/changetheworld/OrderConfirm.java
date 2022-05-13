@@ -3,17 +3,24 @@ package com.example.changetheworld;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.changetheworld.model.FireStoreDB;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class OrderConfirm extends AppCompatActivity {
 
     Button go_back_home;
     TextView amount_from, amount_to, paymethod, business_name, business_address, business_phone, pickup_date, cash_case_value, currency_from, currency_to;
     String user_type, orderID, business_user_name;
+    ImageView QRcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,7 @@ public class OrderConfirm extends AppCompatActivity {
         pickup_date = findViewById(R.id.pickup_date_value);
         currency_from = findViewById(R.id.currency_name_value);
         currency_to = findViewById(R.id.to_currency_name_value);
+        QRcode = findViewById(R.id.QRcodeIV);
         user_type = getIntent().getStringExtra("user_type");
 
         go_back_home.setOnClickListener(view -> {
@@ -48,6 +56,18 @@ public class OrderConfirm extends AppCompatActivity {
         });
         FireStoreDB.getInstance().LoadOrder(this ,orderID, business_user_name, amount_from, amount_to, paymethod, business_name, business_address, business_phone, pickup_date, cash_case_value, currency_from, currency_to);
 
+
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(orderID, BarcodeFormat.QR_CODE,85,85);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            QRcode.setImageBitmap(bitmap);
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
 
 
     }
