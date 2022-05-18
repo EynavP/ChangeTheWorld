@@ -21,13 +21,12 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class OrderConfirm extends AppCompatActivity {
 
-    Button go_back_home, business_address;
-    TextView amount_from, amount_to, paymethod, business_name, business_phone, pickup_date, cash_case_value, currency_from, currency_to;
+    Button  business_address;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     RatingBar rating_bar;
     Button go_back_home,SubmitRate,cancleRate;
-    TextView amount_from, amount_to, paymethod, business_name, business_address, business_phone, pickup_date, cash_case_value, currency_from, currency_to;
+    TextView amount_from, amount_to, paymethod, business_name, business_phone, pickup_date, cash_case_value, currency_from, currency_to;
     String user_type, orderID, business_user_name;
     ImageView QRcode;
     float myRating;
@@ -51,6 +50,7 @@ public class OrderConfirm extends AppCompatActivity {
         currency_to = findViewById(R.id.to_currency_name_value);
         QRcode = findViewById(R.id.QRcodeIV);
         user_type = getIntent().getStringExtra("user_type");
+        createNewContantDialog();
 
         business_address.setOnClickListener(view -> {
             FireStoreDB.getInstance().openOnMaps(this, business_address.getText().toString());
@@ -89,9 +89,10 @@ public class OrderConfirm extends AppCompatActivity {
     public void createNewContantDialog(){
         dialogBuilder= new AlertDialog.Builder(this);
         final View contactpopupView =getLayoutInflater().inflate(R.layout.ratepopup,null);
-        rating_bar=findViewById(R.id.ratingBar);
-        SubmitRate=findViewById(R.id.BtnSubmitRate);
-        cancleRate=findViewById(R.id.cancelRate);
+
+        rating_bar=(RatingBar) contactpopupView.findViewById(R.id.ratingBar);
+        SubmitRate=(Button) contactpopupView.findViewById(R.id.BtnSubmitRate);
+        cancleRate=(Button) contactpopupView.findViewById(R.id.cancelRate);
 
         dialogBuilder.setView(contactpopupView);
         dialog=dialogBuilder.create();
