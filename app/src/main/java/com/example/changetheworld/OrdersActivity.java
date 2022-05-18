@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -36,7 +35,7 @@ public class OrdersActivity extends AppCompatActivity implements RecycleSubWalle
         super.onResume();
 
         items = new ArrayList<>();
-        FireStoreDB.getInstance().loadOrders(this, user_name, user_type, items, recyclerView);
+        FireStoreDB.getInstance().loadOrdersAsClient(this, user_name, user_type, items, recyclerView);
     }
 
     @Override

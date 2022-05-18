@@ -1208,7 +1208,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadOrders(Context context, String user_name, String userType, ArrayList<Order> items, RecyclerView recyclerView) {
+    public void loadOrdersAsClient(Context context, String user_name, String userType, ArrayList<Order> items, RecyclerView recyclerView) {
         db.collection(userType)
                 .document(user_name)
                 .collection("OrdersByMe")
@@ -1221,7 +1221,6 @@ public class FireStoreDB implements DataBaseInterface {
                                 orders.get(i).getString("business_name"), orders.get(i).getString("status"), orders.get(i).getString("payment_method"));
                         items.add(tmp);
                     }
-                    Thread t = new Thread(() -> {
                         ((Activity) context).runOnUiThread(() -> {
                             AdapterOrder adapterOrder;
                             if (userType.equals("PrivateClient"))
@@ -1230,8 +1229,31 @@ public class FireStoreDB implements DataBaseInterface {
                                 adapterOrder = new AdapterOrder(context, items, "BusinessOrdersActivity");
                             recyclerView.setAdapter(adapterOrder);
                         });
+                });
+    }
+
+    @Override
+    public void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> items, RecyclerView recyclerView) {
+        db.collection(user_type)
+                .document(user_name)
+                .collection("OrdersForMe")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<DocumentSnapshot> orders = queryDocumentSnapshots.getDocuments();
+                    for (int i = 0; i < orders.size(); i++) {
+                        Order tmp = new Order(orders.get(i).getString("id"), orders.get(i).getString("from_currency"), orders.get(i).getString("to_currency"),
+                                orders.get(i).getString("from_amount"), orders.get(i).getString("to_amount"), orders.get(i).getString("date"),
+                                orders.get(i).getString("business_name"), orders.get(i).getString("status"), orders.get(i).getString("payment_method"));
+                        items.add(tmp);
+                    }
+                    ((Activity) context).runOnUiThread(() -> {
+                        AdapterOrder adapterOrder;
+                        if (user_type.equals("PrivateClient"))
+                            adapterOrder = new AdapterOrder(context, items, "OrdersActivity");
+                        else
+                            adapterOrder = new AdapterOrder(context, items, "BusinessOrdersActivity");
+                        recyclerView.setAdapter(adapterOrder);
                     });
-                    t.start();
                 });
     }
 

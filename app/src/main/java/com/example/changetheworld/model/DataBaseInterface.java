@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.changetheworld.BusinessOrdersActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicReference;
@@ -39,5 +41,6 @@ public interface DataBaseInterface {
     void PayByWallet(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address);
     void LoadOrder(Context context , String orderID, String business_user_name, TextView amount_from, TextView amount_to, TextView paymethod, TextView business_name, TextView business_address, TextView business_phone, TextView pickup_date, TextView cash_case_value, TextView currency_from, TextView currency_to);
     void loadClientLocalCurrency(Context context, String user_name, ArrayList<currency> items, RecyclerView recyclerView, ProgressBar progressBar);
-    void loadOrders(Context context, String user_name, String userType, ArrayList<Order> items, RecyclerView recyclerView);
+    void loadOrdersAsClient(Context context, String user_name, String userType, ArrayList<Order> items, RecyclerView recyclerView);
+    void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> items, RecyclerView recyclerView);
 }
