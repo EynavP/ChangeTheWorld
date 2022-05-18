@@ -1,11 +1,15 @@
 package com.example.changetheworld;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,19 +18,19 @@ import android.widget.Toast;
 
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.Wallet;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class WalletActivity extends AppCompatActivity implements RecycleSubWalletClickInterface{
+public class WalletActivity extends AppCompatActivity implements RecycleSubWalletClickInterface, NavigationView.OnNavigationItemSelectedListener {
 
     RecyclerView recyclerView;
     ArrayList<Wallet> items;
     String userName;
     String userType;
-    TextView user_nameTextView;
     TextView totalBalance;
     TextView symbol;
-
+    DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +39,7 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
 
         userName = getIntent().getStringExtra(getString(R.string.userName));
         userType =  getIntent().getStringExtra("user_type");
-      //  user_nameTextView = findViewById(R.id.user_name);
-     //   user_nameTextView.setText(userName + "'s wallet");
+
 
         recyclerView= findViewById(R.id.recycleWallet);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -66,5 +69,57 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         intent.putExtra("subWalletBalance",items.get(position).getBalance());
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
+    }
+
+    public void openWallet(){
+
+        Intent intent = new Intent(this,WalletActivity.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", "PrivateClient");
+        startActivity(intent);
+    }
+
+    public void openProfile(){
+
+        Intent intent = new Intent(this,ClientProfileActivity.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        startActivity(intent);
+    }
+
+    public void openOrders(){
+
+        Intent intent = new Intent(this,OrdersActivity.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", "PrivateClient");
+        startActivity(intent);
+    }
+
+    public void logOut(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch(menuItem.getItemId()){
+            case R.id.nav_home:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.nav_wallet:
+                openWallet();
+                break;
+            case R.id.nav_profile:
+                openProfile();
+                break;
+            case R.id.nav_orders:
+                openOrders();
+                break;
+            case R.id.nav_logout:
+                logOut();
+                break;
+        }
+        return true;
     }
 }

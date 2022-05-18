@@ -81,6 +81,19 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
         startActivity(intent);
     }
 
+    public void openOrders(){
+
+        Intent intent = new Intent(this,OrdersActivity.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", "PrivateClient");
+        startActivity(intent);
+    }
+
+    public void logOut(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -98,6 +111,12 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
                 break;
             case R.id.nav_profile:
                 drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.nav_orders:
+                openOrders();
+                break;
+            case R.id.nav_logout:
+                logOut();
                 break;
         }
         return true;

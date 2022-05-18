@@ -1,15 +1,20 @@
 package com.example.changetheworld;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.changetheworld.model.FireStoreDB;
+import com.google.android.material.navigation.NavigationView;
 
-public class BusinessPage extends AppCompatActivity {
+public class BusinessPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     String userName, client_user_name, user_type;
     TextView business_name;
@@ -19,8 +24,7 @@ public class BusinessPage extends AppCompatActivity {
     TextView header;
     Button address;
     TextView local_currency;
-
-
+    DrawerLayout drawerLayout;
 
     TextView sundayHours, monThuHours, fridayHours, saturdayHours;
 
@@ -65,5 +69,63 @@ public class BusinessPage extends AppCompatActivity {
         address.setOnClickListener(view -> {
             FireStoreDB.getInstance().openOnMaps(this, address.getText().toString());
         });
+    }
+
+    public void openWallet(){
+
+        Intent intent = new Intent(this,WalletActivity.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", "BusinessClient");
+        startActivity(intent);
+    }
+
+    public void openBusinessProfile(){
+
+        Intent intent = new Intent(this,BusinessProfileActivity.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        startActivity(intent);
+    }
+
+    private void openBusinessRates() {
+        Intent intent = new Intent(this,Bussiness_rates.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        startActivity(intent);
+    }
+
+    public void openBusinessOrders(){
+        Intent intent = new Intent(this,BusinessOrdersActivity.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", "BusinessClient");
+        startActivity(intent);
+    }
+
+    public void logOut(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch(menuItem.getItemId()){
+            case R.id.nav_home:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.nav_wallet:
+                openWallet();
+                break;
+            case R.id.nav_profile:
+                openBusinessProfile();
+                break;
+            case R.id.nav_update_rates:
+                openBusinessRates();
+                break;
+            case R.id.nav_orders:
+                openBusinessOrders();
+                break;
+            case R.id.nav_logout:
+                logOut();
+                break;
+        }
+        return true;
     }
 }
