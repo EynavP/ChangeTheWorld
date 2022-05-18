@@ -171,6 +171,12 @@
     <string name="exchanged">Exchanged</string>
     <string name="client_name">Client Name:</string>
     <string name="cancel">Cancel</string>
+    <string name="please_rate_business">Please rate Business</string>
+    <string name="messageRate1">Sorry to hear that :(</string>
+    <string name="messageRate2">you always accept suggestions</string>
+    <string name="messageRate3">Good enough!</string>
+    <string name="messageRate4">Great! Thank you!</string>
+    <string name="messageRate5">Awesome! You are the best!</string>
 
 
 </resources>
