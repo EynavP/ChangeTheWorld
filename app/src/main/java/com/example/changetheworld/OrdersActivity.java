@@ -1,7 +1,9 @@
 package com.example.changetheworld;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +26,8 @@ public class OrdersActivity extends AppCompatActivity implements RecycleSubWalle
     String user_type;
     ArrayList<Order> items;
     DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,16 @@ public class OrdersActivity extends AppCompatActivity implements RecycleSubWalle
         user_type = getIntent().getStringExtra("user_type");
         recyclerView = findViewById(R.id.ordersRecycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        drawerLayout = findViewById(R.id.drawer_menu);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar =(Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
