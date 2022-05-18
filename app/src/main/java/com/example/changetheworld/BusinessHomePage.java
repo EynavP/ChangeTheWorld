@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.changetheworld.model.AutoCompleteApi;
 import com.example.changetheworld.model.AutoCompleteInterface;
+import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.Order;
 import com.google.android.material.navigation.NavigationView;
 
@@ -37,25 +39,35 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
     RecyclerView recyclerView;
     ArrayList<Order> items;
     AdapterOrder adapter;
-    TextView userName;
-    String user_name;
+    String user_name, user_type;
     AutoCompleteTextView autoCompleteTextView;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
     AutoCompleteInterface aci = new AutoCompleteApi();
     SeekBar bar;
-    TextView bar_text, dayDate, todayDate;
+    TextView bar_text, dayDate, todayDate, userName, orders_for_today, new_orders, cash_orders;
     ImageView search;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FireStoreDB.getInstance().LoadOrdersStatus(this, orders_for_today, new_orders, cash_orders, user_type, user_name);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_home_page);
-
+        orders_for_today = findViewById(R.id.orders_FT_num);
+        new_orders = findViewById(R.id.new_orders_num);
+        cash_orders = findViewById(R.id.cash_order_num);
         userName = findViewById(R.id.username);
-        user_name = getIntent().getStringExtra(getString(R.string.userName));
         userName.setText(user_name);
+        user_name = getIntent().getStringExtra(getString(R.string.userName));
+        user_type = "BusinessClient";
+
+
 
 
         drawerLayout = findViewById(R.id.drawer_menu_business);
@@ -186,6 +198,7 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.nav_logout:
                 logOut();
+                break;
         }
         return true;
     }
