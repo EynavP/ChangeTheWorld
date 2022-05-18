@@ -2,12 +2,16 @@ package com.example.changetheworld;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.changetheworld.model.FireStoreDB;
 import com.google.zxing.BarcodeFormat;
@@ -19,8 +23,14 @@ public class OrderConfirm extends AppCompatActivity {
 
     Button go_back_home, business_address;
     TextView amount_from, amount_to, paymethod, business_name, business_phone, pickup_date, cash_case_value, currency_from, currency_to;
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    RatingBar rating_bar;
+    Button go_back_home,SubmitRate,cancleRate;
+    TextView amount_from, amount_to, paymethod, business_name, business_address, business_phone, pickup_date, cash_case_value, currency_from, currency_to;
     String user_type, orderID, business_user_name;
     ImageView QRcode;
+    float myRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,5 +84,49 @@ public class OrderConfirm extends AppCompatActivity {
         }
 
 
+    }
+
+    public void createNewContantDialog(){
+        dialogBuilder= new AlertDialog.Builder(this);
+        final View contactpopupView =getLayoutInflater().inflate(R.layout.ratepopup,null);
+        rating_bar=findViewById(R.id.ratingBar);
+        SubmitRate=findViewById(R.id.BtnSubmitRate);
+        cancleRate=findViewById(R.id.cancelRate);
+
+        dialogBuilder.setView(contactpopupView);
+        dialog=dialogBuilder.create();
+        dialog.show();
+
+
+        SubmitRate.setOnClickListener(view -> {
+            rating_bar.setOnRatingBarChangeListener((ratingBar, v, b) -> {
+                int rating=(int)v;
+                String message=null;
+
+                myRating= ratingBar.getRating();
+                switch (rating){
+                    case 1:
+                        message=getString(R.string.messageRate1);
+                        break;
+                    case 2:
+                        message=getString(R.string.messageRate2);
+                        break;
+                    case 3:
+                        message=getString(R.string.messageRate3);
+                        break;
+                    case 4:
+                        message=getString(R.string.messageRate4);
+                        break;
+                    case 5:
+                        message=getString(R.string.messageRate5);
+                        break;
+                }
+                Toast.makeText(this,"Your rating is:"+ message,Toast.LENGTH_SHORT).show();
+            });
+        });
+
+        cancleRate.setOnClickListener(view -> {
+            dialog.dismiss();
+        });
     }
 }
