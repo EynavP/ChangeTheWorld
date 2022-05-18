@@ -91,18 +91,11 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         startActivity(intent);
     }
 
-    public void openWallet(){
-
-        Intent intent = new Intent(this,WalletActivity.class);
-        intent.putExtra(getString(R.string.userName), userName);
-        intent.putExtra("user_type", "PrivateClient");
-        startActivity(intent);
-    }
-
     public void openProfile(){
 
         Intent intent = new Intent(this,ClientProfileActivity.class);
         intent.putExtra(getString(R.string.userName), userName);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
@@ -111,11 +104,13 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         Intent intent = new Intent(this,OrdersActivity.class);
         intent.putExtra(getString(R.string.userName), userName);
         intent.putExtra("user_type", "PrivateClient");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
     public void logOut(){
         Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
@@ -128,16 +123,18 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
                 if(userType.equals("PrivateClient")){
                     Intent intent = new Intent(this, client_home_page.class);
                     intent.putExtra(getString(R.string.userName),userName);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);
                 }
                 else {
                     Intent intent = new Intent(this, BusinessHomePage.class);
                     intent.putExtra(getString(R.string.userName),userName);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);
                 }
                 break;
             case R.id.nav_wallet:
-                openWallet();
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_profile:
                 openProfile();

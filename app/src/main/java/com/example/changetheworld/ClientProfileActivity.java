@@ -85,11 +85,13 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
         Intent intent = new Intent(this,OrdersActivity.class);
         intent.putExtra(getString(R.string.userName), userName);
         intent.putExtra("user_type", "PrivateClient");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
     public void logOut(){
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
@@ -98,6 +100,7 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
         Intent intent = new Intent(this,WalletActivity.class);
         intent.putExtra(getString(R.string.userName), userName);
         intent.putExtra("user_type", "PrivateClient");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
@@ -108,6 +111,7 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
                 Intent intent = new Intent(this,client_home_page.class);
                 intent.putExtra(getString(R.string.userName), userName);
                 intent.putExtra(getString(R.string.localCurrency), local_currency.getText().toString());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 break;
             case R.id.nav_profile:

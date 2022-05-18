@@ -72,6 +72,7 @@ public class OrdersActivity extends AppCompatActivity implements RecycleSubWalle
         Intent intent = new Intent(this,WalletActivity.class);
         intent.putExtra(getString(R.string.userName), user_name);
         intent.putExtra("user_type", "PrivateClient");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
@@ -79,19 +80,13 @@ public class OrdersActivity extends AppCompatActivity implements RecycleSubWalle
 
         Intent intent = new Intent(this,ClientProfileActivity.class);
         intent.putExtra(getString(R.string.userName), user_name);
-        startActivity(intent);
-    }
-
-    public void openOrders(){
-
-        Intent intent = new Intent(this,OrdersActivity.class);
-        intent.putExtra(getString(R.string.userName), user_name);
-        intent.putExtra("user_type", "PrivateClient");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
     public void logOut(){
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
@@ -103,6 +98,7 @@ public class OrdersActivity extends AppCompatActivity implements RecycleSubWalle
             case R.id.nav_home:
                 Intent intent = new Intent(this, client_home_page.class);
                 intent.putExtra(getString(R.string.userName),user_name);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 break;
             case R.id.nav_wallet:
@@ -112,7 +108,7 @@ public class OrdersActivity extends AppCompatActivity implements RecycleSubWalle
                 openProfile();
                 break;
             case R.id.nav_orders:
-                openOrders();
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_logout:
                 logOut();
