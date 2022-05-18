@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.BusinessOrdersActivity;
+import com.example.changetheworld.BusinessPage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,4 +44,5 @@ public interface DataBaseInterface {
     void loadClientLocalCurrency(Context context, String user_name, ArrayList<currency> items, RecyclerView recyclerView, ProgressBar progressBar);
     void loadOrdersAsClient(Context context, String user_name, String userType, ArrayList<Order> items, RecyclerView recyclerView);
     void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> pendding_items, ArrayList<Order> canceled_items,ArrayList<Order> approve_items,ArrayList<Order> complete_items, RecyclerView PanddingrecyclerView,RecyclerView CanclerecyclerView,RecyclerView ApproverecyclerView,RecyclerView CompleterecyclerView);
+    void openOnMaps(Context context, String address);
 }

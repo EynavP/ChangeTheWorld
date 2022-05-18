@@ -17,7 +17,7 @@ public class BusinessPage extends AppCompatActivity {
     TextView phone_number;
     TextView owner_name;
     TextView header;
-    TextView address;
+    Button address;
     TextView local_currency;
 
 
@@ -59,6 +59,10 @@ public class BusinessPage extends AppCompatActivity {
             intent.putExtra(getString(R.string.business_user_name), userName);
             intent.putExtra(getString(R.string.client_user_name), client_user_name);
             startActivity(intent);
+        });
+
+        address.setOnClickListener(view -> {
+            FireStoreDB.getInstance().openOnMaps(this, address.getText().toString());
         });
     }
 }
