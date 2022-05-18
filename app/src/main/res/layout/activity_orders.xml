@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OrdersActivity"
-    android:background="@drawable/wallet_back">
+    android:background="@drawable/wallet_back"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="end"
+    android:id="@+id/drawer_menu">
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/nav_view"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/open_menu"
+        android:layout_gravity="start" />
 
     <RelativeLayout
         android:id="@+id/topPage"
@@ -33,13 +44,27 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="339dp"
+            app:navigationIcon="@drawable/wallet_hum_icon">
+
+        </androidx.appcompat.widget.Toolbar>
+
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/middlePage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/topPage"
+        android:paddingTop="200dp"
 
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
@@ -77,4 +102,4 @@
 
 
 
-</RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

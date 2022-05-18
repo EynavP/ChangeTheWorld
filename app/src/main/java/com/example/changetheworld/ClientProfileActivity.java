@@ -28,7 +28,6 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
     ImageView profile;
     Button editButton;
     TextView passportValue;
-
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -81,6 +80,27 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
         startActivity(intent);
     }
 
+    public void openOrders(){
+
+        Intent intent = new Intent(this,OrdersActivity.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", "PrivateClient");
+        startActivity(intent);
+    }
+
+    public void logOut(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void openWallet(){
+
+        Intent intent = new Intent(this,WalletActivity.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", "PrivateClient");
+        startActivity(intent);
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -90,14 +110,17 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
                 intent.putExtra(getString(R.string.localCurrency), local_currency.getText().toString());
                 startActivity(intent);
                 break;
-            case R.id.nav_wallet:
-                Intent intent2 = new Intent(this,WalletActivity.class);
-                intent2.putExtra(getString(R.string.userName), userName);
-                intent2.putExtra("user_type", "PrivateClient");
-                startActivity(intent2);
-                break;
             case R.id.nav_profile:
                 drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.nav_orders:
+                openOrders();
+                break;
+            case R.id.nav_logout:
+                logOut();
+                break;
+            case R.id.nav_wallet:
+                openWallet();
                 break;
         }
         return true;

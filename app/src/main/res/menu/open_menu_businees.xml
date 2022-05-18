@@ -19,10 +19,6 @@
             android:title="Orders"
             android:icon="@drawable/order_icon"/>
 
-        <item
-            android:id="@+id/nav_search_history"
-            android:title="Search History"
-            android:icon="@drawable/search_history_icon" />
 
         <item
             android:id="@+id/nav_update_rates"
@@ -32,10 +28,7 @@
             android:id="@+id/nav_about"
             android:title="About"
             android:icon="@drawable/about_icon" />
-        <item
-            android:id="@+id/nav_setting"
-            android:title="Settings"
-            android:icon="@drawable/settings_icon" />
+
         <item
             android:id="@+id/nav_logout"
             android:title="Logout"

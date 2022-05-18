@@ -37,8 +37,6 @@ import java.util.ArrayList;
 public class BusinessHomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     RecyclerView currencies_rate_recycleview;
-    ArrayList<Order> items;
-    AdapterOrder adapter;
     String user_name, user_type;
     AutoCompleteTextView autoCompleteTextView;
     DrawerLayout drawerLayout;
@@ -175,7 +173,6 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
     private void openBusinessRates() {
         Intent intent = new Intent(this,Bussiness_rates.class);
         intent.putExtra(getString(R.string.userName), user_name);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
