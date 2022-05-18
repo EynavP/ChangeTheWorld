@@ -52,6 +52,7 @@ public class LocationDataApi implements LocationDataApiInterface{
     public HashMap<String, String> GetGeoLocation(String address) {
         String query = base_geo + address;
         URL url = null;
+        HashMap<String, String> response = new HashMap<>();
         try {
             url = new URL(query);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -66,8 +67,9 @@ public class LocationDataApi implements LocationDataApiInterface{
             }
             urlConnection.disconnect();
             JSONArray data = new JSONArray(result);
-
-
+            response.put("lan", data.getString(0));
+            response.put("long", data.getString(1));
+            return  response;
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

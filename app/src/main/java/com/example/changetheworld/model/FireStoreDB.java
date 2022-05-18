@@ -1312,10 +1312,14 @@ public class FireStoreDB implements DataBaseInterface {
 
     @Override
     public void openOnMaps(Context context, String address) {
-        String uri = "http://maps.google.com/maps?q=loc:" + "31.97043" + "," + "34.77283";
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        intent.setPackage("com.google.android.apps.maps");
-        context.startActivity(intent);
+        Thread t = new Thread(()->{
+            HashMap<String, String> res = locationDataApi.GetGeoLocation(address);
+            String uri = "http://maps.google.com/maps?q=loc:" + res.get("lan") + "," + res.get("long");
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            intent.setPackage("com.google.android.apps.maps");
+            context.startActivity(intent);
+        });
+        t.start();
     }
 
 
