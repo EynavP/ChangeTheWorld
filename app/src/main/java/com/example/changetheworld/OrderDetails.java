@@ -2,12 +2,16 @@ package com.example.changetheworld;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.changetheworld.model.FireStoreDB;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.lang.reflect.Field;
 
@@ -15,7 +19,7 @@ public class OrderDetails extends AppCompatActivity {
 
     TextView order_status_value, amount_value, currency_name_value, receive_value, to_currency_name_value, payment_method_value, client_name_value, phone_value, pickup_date_value;
     String orderID, user_name;
-    Button approve_btn, cancel_btn;
+    Button approve_btn, cancel_btn,scan_btn;
 
 
     @Override
@@ -51,8 +55,37 @@ public class OrderDetails extends AppCompatActivity {
             cancel_btn.setVisibility(View.INVISIBLE);
         }
 
+        scan_btn = findViewById(R.id.scan_btn);
+        scan_btn.setOnClickListener(view -> {
+            IntentIntegrator integrator = new IntentIntegrator((this));
+            integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+            integrator.setPrompt("Scan");
+            integrator.setCameraId(0);
+            integrator.setBeepEnabled(true);
+            integrator.setBarcodeImageEnabled(false);
+            integrator.setOrientationLocked(true);
+            integrator.initiateScan();
+        });
     }
 
+    @Override
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result!=null){
+            if(result.getContents() == null){
+                Toast.makeText(this,"Scan canceled",Toast.LENGTH_LONG).show();
+            }
+            else {
+                Toast.makeText(this,result.getContents(),Toast.LENGTH_LONG).show();
+            }
+        }
+        else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -61,4 +94,6 @@ public class OrderDetails extends AppCompatActivity {
                 currency_name_value, receive_value, to_currency_name_value, payment_method_value, client_name_value,
                 phone_value, pickup_date_value);
     }
+
+
 }

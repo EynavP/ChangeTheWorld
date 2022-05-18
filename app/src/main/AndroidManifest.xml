@@ -3,6 +3,7 @@
     package="com.example.changetheworld">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -27,9 +28,6 @@
             android:exported="false" />
         <activity
             android:name=".OrderConfirm"
-            android:exported="false" />
-        <activity
-            android:name=".ui.OrderConfirm"
             android:exported="false" />
         <activity
             android:name=".OrderPage"
