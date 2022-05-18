@@ -84,7 +84,6 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         user_type = "BusinessClient";
         progressBar = findViewById(R.id.progress_bar);
         ratingBar = findViewById(R.id.ratingBar);
-        ratingBar.setNumStars(5);
 
 
 

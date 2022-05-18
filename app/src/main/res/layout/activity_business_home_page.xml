@@ -78,17 +78,17 @@
 
             <TextView
                 android:id="@+id/username"
-                android:layout_width="190dp"
-                android:layout_height="wrap_content"
+                android:layout_width="202dp"
+                android:layout_height="35dp"
                 android:layout_below="@+id/welcome_back"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="62dp"
+                android:layout_marginStart="44dp"
                 android:layout_marginLeft="55dp"
-                android:layout_marginTop="-2dp"
-                android:layout_marginEnd="142dp"
-                android:letterSpacing="0.25"
+                android:layout_marginTop="-1dp"
+                android:layout_marginEnd="148dp"
                 android:fontFamily="@font/comfortaa"
+                android:letterSpacing="0.25"
                 android:text="@string/username"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -185,41 +185,32 @@
                 android:layout_marginTop="77dp"
                 android:layout_marginEnd="182dp" />
 
+
             <TextView
                 android:id="@+id/dayDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="31dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/Sunday"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/todayDate"
                 android:layout_width="134dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="17dp"
                 android:layout_toEndOf="@+id/dayDate"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/Date"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="235dp"
-                android:layout_height="40dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/small_rectangle" />
-
+                android:textSize="18sp" />
 
             <View
                 android:id="@+id/orderRec"
@@ -378,13 +369,12 @@
                 android:layout_height="41dp"
                 android:layout_below="@+id/rates_title"
                 android:layout_alignEnd="@+id/rateRec"
-                android:layout_alignStart="@+id/rateRec"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="11dp"
-                android:layout_marginStart="14dp"
+                android:layout_marginEnd="-45dp"
                 android:isIndicator="true"
+                android:numStars="5"
                 android:scaleX="0.5"
-                android:scaleY="0.5"/>
+                android:scaleY="0.5" />
 
             <TextView
                 android:id="@+id/currencies_rates_title"
@@ -398,14 +388,16 @@
                 android:text="@string/currencies_rates"
                 android:textSize="20sp" />
 
-            <ScrollView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="312dp"
                 android:layout_below="@id/currencies_rates_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginStart="0dp"
-                android:layout_marginEnd="0dp">
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/currencies_rates_recycle"
@@ -413,6 +405,7 @@
                     android:layout_height="479dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="0dp"
@@ -420,7 +413,7 @@
                     android:layout_marginTop="14dp"
                     android:layout_marginEnd="0dp"
                     android:layout_marginBottom="0dp" />
-            </ScrollView>
+            </RelativeLayout>
 
         </RelativeLayout>
     </RelativeLayout>
