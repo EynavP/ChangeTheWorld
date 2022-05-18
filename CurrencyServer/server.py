@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import socketserver
 import time
 import json
+from typing import Tuple
 from urllib import response
 from urllib.parse import parse_qs, urlparse
 import threading
@@ -28,6 +29,11 @@ class LocationApi:
         loc1 = (getLoc1.latitude,getLoc1.longitude)
         loc2 = (getLoc2.latitude,getLoc2.longitude)
         return hs.haversine(loc1,loc2)
+    
+    def GetGeoloc(self, address: str) -> Tuple:
+        getloc = self.loc.geocode(address)
+        loc = (getloc.latitude, getloc.longitude)
+        return loc
 
 
 
@@ -104,10 +110,13 @@ class MyServer(BaseHTTPRequestHandler):
             if 'symbol' in query_components.keys():
                 response = self.get_currency_data(query_components)
             
-            if 'location' in query_components.keys():
+            elif 'geolocation' in query_components.keys():
+                response = self.get_geolocation(query_components)
+
+            elif 'location' in query_components.keys():
                 response = self.get_location(query_components)
             
-            if 'autocomplete' in query_components.keys():
+            elif 'autocomplete' in query_components.keys():
                 response = self.api_autocomplete.GetComplition(query_components['autocomplete'][0])
 
             self.wfile.write(bytes(json.dumps(response),encoding='utf8'))
@@ -129,6 +138,12 @@ class MyServer(BaseHTTPRequestHandler):
         address_1 = address.split('/')[0]
         address_2 = address.split('/')[1]
         return [self.api_location.CalculateDistance(address_1=address_1, address_2=address_2)]
+    
+    def get_geolocation(self, query_components) -> list:
+        address = query_components['geolocation'][0]
+        print("here")
+        geo_loc = self.api_location.GetGeoloc(address)
+        return [geo_loc[0], geo_loc[1]]
 
 
 

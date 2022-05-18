@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Pair;
 import android.view.View;
 import android.widget.EditText;
@@ -1307,6 +1308,14 @@ public class FireStoreDB implements DataBaseInterface {
                         recyclerView.setAdapter(adapterOrder);
                     });
                 });
+    }
+
+    @Override
+    public void openOnMaps(Context context, String address) {
+        String uri = "http://maps.google.com/maps?q=loc:" + "31.97043" + "," + "34.77283";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setPackage("com.google.android.apps.maps");
+        context.startActivity(intent);
     }
 
 
