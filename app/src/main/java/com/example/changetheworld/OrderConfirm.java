@@ -30,6 +30,7 @@ public class OrderConfirm extends AppCompatActivity {
     String user_type, orderID, business_user_name;
     ImageView QRcode;
     float myRating;
+    int rating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,32 +100,32 @@ public class OrderConfirm extends AppCompatActivity {
         dialog.show();
 
 
-        SubmitRate.setOnClickListener(view -> {
-            rating_bar.setOnRatingBarChangeListener((ratingBar, v, b) -> {
-                int rating=(int)v;
-                String message=null;
+        SubmitRate.setOnClickListener(view -> FireStoreDB.getInstance().updateBusinessRate(rating, business_user_name));
 
-                myRating= ratingBar.getRating();
-                switch (rating){
-                    case 1:
-                        message=getString(R.string.messageRate1);
-                        break;
-                    case 2:
-                        message=getString(R.string.messageRate2);
-                        break;
-                    case 3:
-                        message=getString(R.string.messageRate3);
-                        break;
-                    case 4:
-                        message=getString(R.string.messageRate4);
-                        break;
-                    case 5:
-                        message=getString(R.string.messageRate5);
-                        break;
-                }
-                Toast.makeText(this,"Your rating is:"+ message,Toast.LENGTH_SHORT).show();
-                FireStoreDB.getInstance().updateBusinessRate(rating, business_user_name);
-            });
+
+        rating_bar.setOnRatingBarChangeListener((ratingBar, v, b) -> {
+            rating=(int)v;
+            String message=null;
+
+            myRating= ratingBar.getRating();
+            switch (rating){
+                case 1:
+                    message=getString(R.string.messageRate1);
+                    break;
+                case 2:
+                    message=getString(R.string.messageRate2);
+                    break;
+                case 3:
+                    message=getString(R.string.messageRate3);
+                    break;
+                case 4:
+                    message=getString(R.string.messageRate4);
+                    break;
+                case 5:
+                    message=getString(R.string.messageRate5);
+                    break;
+            }
+            Toast.makeText(this,"Your rating is:"+ message,Toast.LENGTH_SHORT).show();
         });
 
         cancleRate.setOnClickListener(view -> {

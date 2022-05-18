@@ -74,12 +74,13 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         orders_for_today = findViewById(R.id.orders_FT_num);
         new_orders = findViewById(R.id.new_orders_num);
         cash_orders = findViewById(R.id.cash_order_num);
+        user_name = getIntent().getStringExtra(getString(R.string.userName));
         userName = findViewById(R.id.username);
         userName.setText(user_name);
         number_of_rates_value = findViewById(R.id.number_of_rates_value);
         currencies_rate_recycleview = findViewById(R.id.currencies_rates_recycle);
         currencies_rate_recycleview.setLayoutManager(new LinearLayoutManager(this));
-        user_name = getIntent().getStringExtra(getString(R.string.userName));
+
         user_type = "BusinessClient";
         progressBar = findViewById(R.id.progress_bar);
         ratingBar = findViewById(R.id.ratingBar);
