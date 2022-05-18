@@ -71,7 +71,8 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
 
             if (userType.equals("BusinessClient")) {
                 String clientName = data.get(i).getClientName();
-                viewHolder.clientName.setText(clientName);
+                viewHolder.name.setText(clientName);
+                viewHolder.pickUpFromTitle.setText("Ordered By: ");
             }
         }
 
@@ -82,7 +83,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
 
         public class ViewHolder extends RecyclerView.ViewHolder{
 
-            TextView fromCurrency,toCurrency,amount,received,pickupDate,name,status,paymentMethod, id, clientName;
+            TextView fromCurrency,toCurrency,amount,received,pickupDate,name,status,paymentMethod, id, pickUpFromTitle;
 
 
             public ViewHolder(@NonNull View itemView, RecycleSubWalletClickInterface recycleSubWalletClickInterface) {
@@ -96,7 +97,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
                 status=itemView.findViewById(R.id.status_value);
                 paymentMethod=itemView.findViewById(R.id.payment_method_value);
                 id = itemView.findViewById(R.id.order_id);
-                clientName = itemView.findViewById(R.id.clientName);
+                pickUpFromTitle = itemView.findViewById(R.id.businessName_title);
 
                 itemView.setOnClickListener(view -> {
                     if(recycleSubWalletClickInterface != null){
