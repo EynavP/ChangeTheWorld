@@ -162,6 +162,10 @@
     <string name="status">status</string>
     <string name="pickup__from">Pickup From:</string>
     <string name="my_orders">My orders</string>
+    <string name="pannding">Pannding</string>
+    <string name="cancle">Cancle</string>
+    <string name="approve">Approve</string>
+    <string name="decline">Decline</string>
 
 
 </resources>

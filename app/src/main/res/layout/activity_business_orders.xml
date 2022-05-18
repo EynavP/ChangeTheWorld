@@ -7,7 +7,6 @@
     tools:context=".BusinessOrdersActivity"
     android:background="@drawable/wallet_back">
 
-
     <RelativeLayout
         android:id="@+id/topPage"
         android:layout_width="match_parent"
@@ -21,6 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
 
         <TextView
             android:id="@+id/title"
@@ -86,21 +86,161 @@
             android:layout_marginBottom="-20dp"
             android:background="@drawable/rec_items_design" />
 
-        <ScrollView
+        <RelativeLayout
+            android:id="@+id/PanddingRecycler"
             android:layout_width="match_parent"
-            android:layout_height="634dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="0dp"
-            android:layout_marginTop="49dp"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/ordersRecycle"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </ScrollView>
-    </RelativeLayout>
+                android:layout_height="179dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="49dp"
+                android:layout_marginEnd="0dp">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RVPanddingRecycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/TvPennding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/newGery"
+                android:text="@string/pannding" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/CancleRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/PanddingRecycler"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp">
+
+
+            <TextView
+                android:id="@+id/TvCancle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/newGery"
+                android:text="@string/decline" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="0dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RVApproveRecycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </ScrollView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/CompleteRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/CancleRecycler"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp">
+
+
+            <TextView
+                android:id="@+id/TvComplete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/newGery"
+                android:text="@string/approve" />
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="0dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RVCompleteRecycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </ScrollView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ApproveRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/CompleteRecycler"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp">
+
+
+            <TextView
+                android:id="@+id/TvApprove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/newGery"
+                android:text="Complete" />
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="0dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RVCancleRecycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </ScrollView>
+        </RelativeLayout>
+
+</RelativeLayout>
 </RelativeLayout>

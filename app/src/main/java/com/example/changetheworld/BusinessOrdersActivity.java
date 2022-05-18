@@ -30,7 +30,7 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
 
         user_name = getIntent().getStringExtra(getString(R.string.userName));
         user_type = getIntent().getStringExtra("user_type");
-        recyclerView = findViewById(R.id.ordersRecycle);
+        recyclerView = findViewById(R.id.RVPanddingRecycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         orders_as_client = findViewById(R.id.my_orders_btn);
         orders_as_business = findViewById(R.id.clients_orders_btn);
