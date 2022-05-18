@@ -28,9 +28,7 @@ import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
 import com.example.changetheworld.BusinessProfileActivity;
 import com.example.changetheworld.OrderConfirm;
-import com.example.changetheworld.OrderDetails;
 import com.example.changetheworld.OrderPage;
-import com.example.changetheworld.OrdersActivity;
 import com.example.changetheworld.R;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
@@ -1078,6 +1076,7 @@ public class FireStoreDB implements DataBaseInterface {
                             intent.putExtra("orderID", client_user_name + "*" + business_user_name + "*" + counter.get());
                             intent.putExtra("user_type",user_type);
                             intent.putExtra("user_name",client_user_name);
+                            intent.putExtra("status", "pending");
                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                             context.startActivity(intent);
                         });
@@ -1171,6 +1170,7 @@ public class FireStoreDB implements DataBaseInterface {
                                             intent.putExtra("orderID", client_user_name + "*" + business_user_name + "*" + counter.get());
                                             intent.putExtra("user_type",user_type);
                                             intent.putExtra("user_name",client_user_name);
+                                            intent.putExtra("status", "pending");
                                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                                             context.startActivity(intent);
                                         });
@@ -1185,7 +1185,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void LoadOrder(Context context , String orderID, String business_user_name, TextView amount_from, TextView amount_to, TextView paymethod, TextView business_name, TextView business_address, TextView business_phone, TextView pickup_date, TextView cash_case_value, TextView currency_from, TextView currency_to){
+    public void LoadOrder(Context context, String orderID, String business_user_name, TextView amount_from, TextView amount_to, TextView paymethod, TextView business_name, TextView business_address, TextView business_phone, TextView pickup_date, TextView cash_case_value, TextView currency_from, TextView currency_to, TextView status){
     ArrayList<Task<DocumentSnapshot>> tasks = new ArrayList<>();
         Task<DocumentSnapshot> t = db.collection("BusinessClient")
                 .document(business_user_name)
@@ -1203,6 +1203,7 @@ public class FireStoreDB implements DataBaseInterface {
                     pickup_date.setText(documentSnapshot.getString("date"));
                     currency_from.setText(documentSnapshot.getString("from_currency"));
                     currency_to.setText(documentSnapshot.getString("to_currency"));
+                    status.setText(documentSnapshot.getString("status"));
                 });
 
         Task<DocumentSnapshot> t1 = db.collection("BusinessClient")

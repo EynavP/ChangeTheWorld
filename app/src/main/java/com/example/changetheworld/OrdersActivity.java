@@ -64,6 +64,7 @@ public class OrdersActivity extends AppCompatActivity implements RecycleSubWalle
         intent.putExtra("user_type",user_type);
         intent.putExtra("user_name",user_name);
         intent.putExtra("orderID", items.get(position).getId());
+        intent.putExtra("status",items.get(position).getStatus());
         startActivity(intent);
     }
 

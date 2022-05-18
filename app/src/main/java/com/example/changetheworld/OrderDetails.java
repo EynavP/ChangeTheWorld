@@ -50,8 +50,6 @@ public class OrderDetails extends AppCompatActivity {
             FireStoreDB.getInstance().changeOrderStatus(orderID, user_name, "canceled", this, order_status_value, approve_btn, cancel_btn);
         });
 
-
-
         scan_btn = findViewById(R.id.scan_btn);
         scan_btn.setOnClickListener(view -> {
             IntentIntegrator integrator = new IntentIntegrator((this));
