@@ -167,7 +167,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/CompleteRecycler"
+            android:id="@+id/ApproveRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/CancleRecycler"
@@ -178,7 +178,7 @@
 
 
             <TextView
-                android:id="@+id/TvComplete"
+                android:id="@+id/TvApprove"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -198,17 +198,17 @@
                 android:layout_marginEnd="0dp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RVCompleteRecycle"
+                    android:id="@+id/RVApproveRecycle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </ScrollView>
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/ApproveRecycler"
+            android:id="@+id/CompleteRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/CompleteRecycler"
+            android:layout_below="@+id/ApproveRecycler"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="0dp"
@@ -216,7 +216,7 @@
 
 
             <TextView
-                android:id="@+id/TvApprove"
+                android:id="@+id/TvComplete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -236,7 +236,7 @@
                 android:layout_marginEnd="0dp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RVApproveRecycle"
+                    android:id="@+id/RVCompleteRecycle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </ScrollView>
