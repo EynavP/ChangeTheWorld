@@ -67,7 +67,10 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        if (userType.equals("BusinessClient")) {
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.open_menu_businees);
+        }
     }
 
     @Override
