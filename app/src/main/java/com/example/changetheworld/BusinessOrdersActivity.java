@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.Order;
@@ -15,7 +17,11 @@ import java.util.ArrayList;
 
 public class BusinessOrdersActivity extends AppCompatActivity implements RecycleSubWalletClickInterface {
 
-    RecyclerView recyclerView;
+    RecyclerView PanddingrecyclerView;
+    RecyclerView CanclerecyclerView;
+    RecyclerView ApproverecyclerView;
+    RecyclerView CompleterecyclerView;
+    TextView TVPannding,TVCancle,TVApprove,TVComplete;
     String user_name;
     String user_type;
     ArrayList<Order> items;
@@ -30,19 +36,54 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
 
         user_name = getIntent().getStringExtra(getString(R.string.userName));
         user_type = getIntent().getStringExtra("user_type");
-        recyclerView = findViewById(R.id.RVPanddingRecycle);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        PanddingrecyclerView = findViewById(R.id.RVPanddingRecycle);
+        PanddingrecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        CanclerecyclerView = findViewById(R.id.RVCancleRecycle);
+        CanclerecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ApproverecyclerView = findViewById(R.id.RVApproveRecycle);
+        ApproverecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        CompleterecyclerView = findViewById(R.id.RVCompleteRecycle);
+        CompleterecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         orders_as_client = findViewById(R.id.my_orders_btn);
         orders_as_business = findViewById(R.id.clients_orders_btn);
 
+        TVPannding=findViewById(R.id.TvPennding);
+        TVCancle=findViewById(R.id.TvCancle);
+        TVApprove=findViewById(R.id.TvApprove);
+        TVComplete=findViewById(R.id.TvComplete);
+
         orders_as_client.setOnClickListener(view -> {
+            MyOrders();
             items = new ArrayList<>();
-            FireStoreDB.getInstance().loadOrdersAsClient(this, user_name, user_type, items, recyclerView);
+            FireStoreDB.getInstance().loadOrdersAsClient(this, user_name, user_type, items, PanddingrecyclerView);
         });
         orders_as_business.setOnClickListener(view -> {
+            businessOrder();
             items = new ArrayList<>();
-            FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, items, recyclerView);
+            FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, items, PanddingrecyclerView);
         });
+    }
+
+    public void MyOrders(){
+        TVPannding.setText(R.string.my_Orders);
+        TVCancle.setVisibility(View.INVISIBLE);
+        TVApprove.setVisibility(View.INVISIBLE);
+        TVComplete.setVisibility(View.INVISIBLE);
+        CanclerecyclerView.setVisibility(View.INVISIBLE);
+        ApproverecyclerView.setVisibility(View.INVISIBLE);
+        CompleterecyclerView.setVisibility(View.INVISIBLE);
+    }
+
+    public void businessOrder(){
+            TVPannding.setText(R.string.pannding);
+            TVCancle.setVisibility(View.VISIBLE);
+            TVApprove.setVisibility(View.VISIBLE);
+            TVComplete.setVisibility(View.VISIBLE);
+            CanclerecyclerView.setVisibility(View.VISIBLE);
+            ApproverecyclerView.setVisibility(View.VISIBLE);
+            CompleterecyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -50,7 +91,7 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         super.onResume();
         items = new ArrayList<>();
         //FireStoreDB.getInstance().loadOrdersAsClient(this, user_name, user_type, items, recyclerView);
-        FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, items, recyclerView);
+        FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, items, PanddingrecyclerView);
     }
 
     @Override
@@ -61,4 +102,5 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         intent.putExtra("orderID", items.get(position).getId());
         startActivity(intent);
     }
+
 }
