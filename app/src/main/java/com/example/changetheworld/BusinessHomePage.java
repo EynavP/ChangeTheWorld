@@ -79,8 +79,6 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         ratingBar = findViewById(R.id.ratingBar);
 
 
-
-
         drawerLayout = findViewById(R.id.drawer_menu_business);
         navigationView = findViewById(R.id.nav_view);
         toolbar =(Toolbar) findViewById(R.id.toolbar);
