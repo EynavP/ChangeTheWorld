@@ -1076,6 +1076,7 @@ public class FireStoreDB implements DataBaseInterface {
                             intent.putExtra("orderID", client_user_name + "*" + business_user_name + "*" + counter.get());
                             intent.putExtra("user_type",user_type);
                             intent.putExtra("user_name",client_user_name);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                             context.startActivity(intent);
                         });
             });
@@ -1168,6 +1169,7 @@ public class FireStoreDB implements DataBaseInterface {
                                             intent.putExtra("orderID", client_user_name + "*" + business_user_name + "*" + counter.get());
                                             intent.putExtra("user_type",user_type);
                                             intent.putExtra("user_name",client_user_name);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                                             context.startActivity(intent);
                                         });
                             });
@@ -1524,6 +1526,7 @@ public class FireStoreDB implements DataBaseInterface {
                 intent.putExtra("business_user_name", business_user_name);
                 intent.putExtra("client_user_name", client_user_name);
                 intent.putExtra("user_type", user_type);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 context.startActivity(intent);
             })
                     .addOnFailureListener(e -> {
