@@ -102,7 +102,7 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(int position, String recycle_id) {
         if (TVPannding.getText().toString().equals(R.string.my_Orders)) {
             Intent intent = new Intent(this, OrderConfirm.class);
             intent.putExtra("user_type",user_type);
@@ -111,10 +111,16 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
             startActivity(intent);
         }
         else {
-
             Intent intent = new Intent(this, OrderDetails.class);
             intent.putExtra("user_name",user_name);
-            intent.putExtra("orderID", "yuval*eynavs*6");
+            if (recycle_id.equals("pending"))
+                intent.putExtra("orderID", pendding_items.get(position).getId());
+            if (recycle_id.equals("canceled"))
+                intent.putExtra("orderID", canceled_items.get(position).getId());
+            if (recycle_id.equals("approve"))
+                intent.putExtra("orderID", approve_items.get(position).getId());
+            if (recycle_id.equals("complete"))
+                intent.putExtra("orderID", complete_items.get(position).getId());
             startActivity(intent);
         }
     }

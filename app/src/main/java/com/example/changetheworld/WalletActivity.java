@@ -57,7 +57,7 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
 
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(int position, String recycle_id) {
         Intent intent = new Intent(this,SubWallet.class);
         intent.putExtra("subWalletName",items.get(position).getCurrency());
         intent.putExtra(getString(R.string.userName), userName);

@@ -84,7 +84,7 @@ public class AdapterWallet extends RecyclerView.Adapter<AdapterWallet.ViewHolder
                         int position = getAdapterPosition();
 
                         if(position != RecyclerView.NO_POSITION){
-                            recycleSubWalletClickInterface.onItemClick(position);
+                            recycleSubWalletClickInterface.onItemClick(position, "");
                         }
                     }
                 }

@@ -52,7 +52,7 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(int position, String recycle_id) {
         Intent intent = new Intent(this,BusinessPage.class);
         intent.putExtra(getString(R.string.business_user_name), filter_list.get(position).getUserName());
         intent.putExtra(getString(R.string.client_user_name), user_name);

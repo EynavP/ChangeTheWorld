@@ -80,7 +80,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
                     if(recycleSubWalletClickInterface!=null){
                         int position=getAdapterPosition();
                         if(position!=RecyclerView.NO_POSITION){
-                            recycleSubWalletClickInterface.onItemClick(position);
+                            recycleSubWalletClickInterface.onItemClick(position, "");
                         }
                     }
                 }

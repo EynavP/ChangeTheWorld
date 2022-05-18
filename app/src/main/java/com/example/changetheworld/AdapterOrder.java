@@ -104,7 +104,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
                         int position = getAdapterPosition();
 
                         if(position != RecyclerView.NO_POSITION){
-                            recycleSubWalletClickInterface.onItemClick(position);
+                            recycleSubWalletClickInterface.onItemClick(position, status.getText().toString());
                         }
                     }
                 });

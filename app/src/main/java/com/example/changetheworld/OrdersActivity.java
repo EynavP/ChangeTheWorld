@@ -39,7 +39,7 @@ public class OrdersActivity extends AppCompatActivity implements RecycleSubWalle
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(int position, String recycle_id) {
         Intent intent = new Intent(this, OrderConfirm.class);
         intent.putExtra("user_type",user_type);
         intent.putExtra("user_name",user_name);
