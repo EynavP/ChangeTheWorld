@@ -29,6 +29,7 @@ import com.example.changetheworld.BusinessProfileActivity;
 import com.example.changetheworld.OrderConfirm;
 import com.example.changetheworld.OrderPage;
 import com.example.changetheworld.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -1411,6 +1412,16 @@ public class FireStoreDB implements DataBaseInterface {
                     db.collection("BusinessClient")
                             .document(business_user_name)
                             .update(data);
+                });
+    }
+
+    @Override
+    public void loadOrderRates(String user_name, ImageView rate_star1, ImageView rate_star2, ImageView rate_star3, ImageView rate_star4, ImageView rate_star5) {
+        db.collection("BusinessClient")
+                .document(user_name)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    float rate = Float.parseFloat(documentSnapshot.getString("rate"));
                 });
     }
 

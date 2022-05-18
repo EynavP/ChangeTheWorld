@@ -47,12 +47,13 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
     AutoCompleteInterface aci = new AutoCompleteApi();
     SeekBar bar;
     TextView bar_text, dayDate, todayDate, userName, orders_for_today, new_orders, cash_orders;
-    ImageView search;
+    ImageView search, rate_star1, rate_star2, rate_star3, rate_star4, rate_star5;
 
     @Override
     protected void onResume() {
         super.onResume();
         FireStoreDB.getInstance().LoadOrdersStatus(this, orders_for_today, new_orders, cash_orders, user_type, user_name);
+        FireStoreDB.getInstance().loadOrderRates(user_name, rate_star1, rate_star2, rate_star3, rate_star4, rate_star5);
     }
 
     @Override
