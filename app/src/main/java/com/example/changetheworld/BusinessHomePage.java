@@ -161,6 +161,11 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         startActivity(intent);
     }
 
+    public void logOut(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){
@@ -178,7 +183,9 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.nav_orders:
                 openBusinessOrders();
-
+                break;
+            case R.id.nav_logout:
+                logOut();
         }
         return true;
     }

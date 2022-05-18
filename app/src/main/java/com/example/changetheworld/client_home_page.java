@@ -181,6 +181,11 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         startActivity(intent);
     }
 
+    public void logOut(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){
@@ -195,6 +200,8 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
                 break;
             case R.id.nav_orders:
                 openOrders();
+            case R.id.nav_logout:
+                logOut();
         }
         return true;
     }
