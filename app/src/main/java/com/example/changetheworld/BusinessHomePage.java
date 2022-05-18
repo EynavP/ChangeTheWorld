@@ -36,7 +36,7 @@ import java.util.ArrayList;
 
 public class BusinessHomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    RecyclerView recyclerView;
+    RecyclerView currencies_rate_recycleview;
     ArrayList<Order> items;
     AdapterOrder adapter;
     String user_name, user_type;
@@ -46,7 +46,7 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
     Toolbar toolbar;
     AutoCompleteInterface aci = new AutoCompleteApi();
     SeekBar bar;
-    TextView bar_text, dayDate, todayDate, userName, orders_for_today, new_orders, cash_orders;
+    TextView bar_text, dayDate, todayDate, userName, orders_for_today, new_orders, cash_orders,number_of_rates_value;
     ImageView search, rate_star1, rate_star2, rate_star3, rate_star4, rate_star5;
 
     @Override
@@ -65,6 +65,8 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         cash_orders = findViewById(R.id.cash_order_num);
         userName = findViewById(R.id.username);
         userName.setText(user_name);
+        number_of_rates_value = findViewById(R.id.number_of_rates_value);
+        currencies_rate_recycleview = findViewById(R.id.currencies_rates_recycle);
         user_name = getIntent().getStringExtra(getString(R.string.userName));
         user_type = "BusinessClient";
 

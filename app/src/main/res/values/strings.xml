@@ -116,7 +116,7 @@
     <string name="cash_orders">cash orders</string>
     <string name="new_rates">new rates</string>
     <string name="you_got">You got</string>
-    <string name="new_rates_from_customers">new rates from customers</string>
+    <string name="new_rates_from_customers">rates from customers</string>
     <string name="city">City</string>
     <string name="street">Street</string>
     <string name="invalid_business_city">Invalid business city</string>
@@ -177,6 +177,7 @@
     <string name="messageRate3">Good enough!</string>
     <string name="messageRate4">Great! Thank you!</string>
     <string name="messageRate5">Awesome! You are the best!</string>
+    <string name="your_rate">Your Rate</string>
 
 
 </resources>
