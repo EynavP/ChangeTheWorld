@@ -82,7 +82,6 @@ public class OrderDetails extends AppCompatActivity {
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-
     }
     @Override
     protected void onResume() {
@@ -98,8 +97,7 @@ public class OrderDetails extends AppCompatActivity {
         }
 
         if (!order_status_value.equals("complete")){
-            approve_btn.setVisibility(View.INVISIBLE);
-            cancel_btn.setVisibility(View.INVISIBLE);
+            scan_btn.setVisibility(View.INVISIBLE);
         }
     }
 
