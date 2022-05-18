@@ -1,17 +1,23 @@
 package com.example.changetheworld;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.changetheworld.model.FireStoreDB;
+import com.google.android.material.navigation.NavigationView;
 
-public class BusinessProfileActivity extends AppCompatActivity {
+public class BusinessProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     String userName;
     TextView business_name;
@@ -21,6 +27,9 @@ public class BusinessProfileActivity extends AppCompatActivity {
     TextView header;
     TextView local_currency;
     TextView address;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
 
     TextView sundayHours, monThuHours, fridayHours, saturdayHours;
 
@@ -47,6 +56,19 @@ public class BusinessProfileActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.business_username_profile_name)).setText(userName);
         editBtn = findViewById(R.id.editBtn);
         editBtn.setOnClickListener(view -> {OpenEditProfileBusiness();});
+
+        drawerLayout = findViewById(R.id.drawer_menu_business);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar =(Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void OpenEditProfileBusiness() {
@@ -61,5 +83,10 @@ public class BusinessProfileActivity extends AppCompatActivity {
         super.onResume();
         FireStoreDB.getInstance().loadBusinessData(userName, header, business_name, mail_address, phone_number, owner_name, address, local_currency, sundayHours, monThuHours, fridayHours, saturdayHours);
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 }
