@@ -50,10 +50,7 @@ public class OrderDetails extends AppCompatActivity {
             FireStoreDB.getInstance().changeOrderStatus(orderID, user_name, "canceled", this, order_status_value, approve_btn, cancel_btn);
         });
 
-        if (!order_status_value.equals("pending")){
-            approve_btn.setVisibility(View.INVISIBLE);
-            cancel_btn.setVisibility(View.INVISIBLE);
-        }
+
 
         scan_btn = findViewById(R.id.scan_btn);
         scan_btn.setOnClickListener(view -> {
@@ -78,7 +75,8 @@ public class OrderDetails extends AppCompatActivity {
                 Toast.makeText(this,"Scan canceled",Toast.LENGTH_LONG).show();
             }
             else {
-                Toast.makeText(this,result.getContents(),Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Scan Success",Toast.LENGTH_LONG).show();
+                FireStoreDB.getInstance().CompleteOrder(this, result.getContents());
             }
         }
         else {
@@ -93,6 +91,16 @@ public class OrderDetails extends AppCompatActivity {
         FireStoreDB.getInstance().loadBusinessOrder(orderID, user_name, order_status_value, amount_value,
                 currency_name_value, receive_value, to_currency_name_value, payment_method_value, client_name_value,
                 phone_value, pickup_date_value);
+
+        if (!order_status_value.equals("pending")){
+            approve_btn.setVisibility(View.INVISIBLE);
+            cancel_btn.setVisibility(View.INVISIBLE);
+        }
+
+        if (!order_status_value.equals("complete")){
+            approve_btn.setVisibility(View.INVISIBLE);
+            cancel_btn.setVisibility(View.INVISIBLE);
+        }
     }
 
 
