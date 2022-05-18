@@ -13,11 +13,12 @@ public class Order
     String received;
     String pickupDate;
     String name;
+    String clientName;
     String status;
     ImageView QR_code;
     String paymentMethod;
 
-    public Order(String id, String fromCurrency, String toCurrency, String amount, String received, String pickupDate, String name, String status, String paymentMethod) {
+    public Order(String id, String fromCurrency, String toCurrency, String amount, String received, String pickupDate, String name, String clientName, String status, String paymentMethod) {
         this.id = id;
         this.fromCurrency = fromCurrency;
         this.toCurrency = toCurrency;
@@ -25,6 +26,7 @@ public class Order
         this.received = received;
         this.pickupDate = pickupDate;
         this.name = name;
+        this.clientName = clientName;
         this.status = status;
         this.QR_code = null;
         this.paymentMethod = paymentMethod;
@@ -84,6 +86,14 @@ public class Order
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
     public String getStatus() {

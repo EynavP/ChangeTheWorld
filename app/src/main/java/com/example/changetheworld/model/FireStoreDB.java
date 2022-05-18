@@ -1022,7 +1022,7 @@ public class FireStoreDB implements DataBaseInterface {
                 .document(client_user_name)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
-                        if (user_type == "PrivateClient")
+                        if (user_type.equals("PrivateClient"))
                                 user_FullName.set(documentSnapshot.getString("full_name"));
                         else
                                 user_FullName.set(documentSnapshot.getString("business_name"));
@@ -1270,7 +1270,7 @@ public class FireStoreDB implements DataBaseInterface {
                     for (int i = 0; i < orders.size(); i++) {
                         Order tmp = new Order(orders.get(i).getString("id"), orders.get(i).getString("from_currency"), orders.get(i).getString("to_currency"),
                                 orders.get(i).getString("from_amount"), orders.get(i).getString("to_amount"), orders.get(i).getString("date"),
-                                orders.get(i).getString("business_name"), orders.get(i).getString("status"), orders.get(i).getString("payment_method"));
+                                orders.get(i).getString("business_name"), orders.get(i).getString("user_fullName"), orders.get(i).getString("status"), orders.get(i).getString("payment_method"));
                         items.add(tmp);
                     }
                         ((Activity) context).runOnUiThread(() -> {
@@ -1295,7 +1295,7 @@ public class FireStoreDB implements DataBaseInterface {
                     for (int i = 0; i < orders.size(); i++) {
                         Order tmp = new Order(orders.get(i).getString("id"), orders.get(i).getString("from_currency"), orders.get(i).getString("to_currency"),
                                 orders.get(i).getString("from_amount"), orders.get(i).getString("to_amount"), orders.get(i).getString("date"),
-                                orders.get(i).getString("business_name"), orders.get(i).getString("status"), orders.get(i).getString("payment_method"));
+                                orders.get(i).getString("business_name"), orders.get(i).getString("user_fullName"), orders.get(i).getString("status"), orders.get(i).getString("payment_method"));
                         items.add(tmp);
                     }
                     ((Activity) context).runOnUiThread(() -> {

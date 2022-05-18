@@ -20,6 +20,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
         private LayoutInflater layoutInflater;
         private List<Order> data;
         private RecycleSubWalletClickInterface recycleSubWalletClickInterface;
+        private String userType = "PrivateClient";
 
 
     public AdapterOrder(Context context, List<Order> data, String activity){
@@ -27,8 +28,10 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
             this.data=data;
             if (activity.equals("OrdersActivity"))
                 this.recycleSubWalletClickInterface = (OrdersActivity)context;
-            else
-                this.recycleSubWalletClickInterface = (BusinessOrdersActivity)context;
+            else {
+                this.recycleSubWalletClickInterface = (BusinessOrdersActivity) context;
+                userType = "BusinessClient";
+            }
 
     }
         @NonNull
@@ -65,6 +68,11 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
 
             String name= data.get(i).getName();
             viewHolder.name.setText(name);
+
+            if (userType.equals("BusinessClient")) {
+                String clientName = data.get(i).getClientName();
+                viewHolder.clientName.setText(clientName);
+            }
         }
 
         @Override
@@ -74,7 +82,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
 
         public class ViewHolder extends RecyclerView.ViewHolder{
 
-            TextView fromCurrency,toCurrency,amount,received,pickupDate,name,status,paymentMethod, id;
+            TextView fromCurrency,toCurrency,amount,received,pickupDate,name,status,paymentMethod, id, clientName;
 
 
             public ViewHolder(@NonNull View itemView, RecycleSubWalletClickInterface recycleSubWalletClickInterface) {
@@ -88,6 +96,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
                 status=itemView.findViewById(R.id.status_value);
                 paymentMethod=itemView.findViewById(R.id.payment_method_value);
                 id = itemView.findViewById(R.id.order_id);
+                clientName = itemView.findViewById(R.id.clientName);
 
                 itemView.setOnClickListener(view -> {
                     if(recycleSubWalletClickInterface != null){

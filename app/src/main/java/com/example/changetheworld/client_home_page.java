@@ -200,8 +200,10 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
                 break;
             case R.id.nav_orders:
                 openOrders();
+                break;
             case R.id.nav_logout:
                 logOut();
+                break;
         }
         return true;
     }
