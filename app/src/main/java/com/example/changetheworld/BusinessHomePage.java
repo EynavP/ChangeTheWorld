@@ -20,19 +20,24 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.changetheworld.model.AutoCompleteApi;
 import com.example.changetheworld.model.AutoCompleteInterface;
+import com.example.changetheworld.model.CurrencyDataApi;
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.Order;
+import com.example.changetheworld.model.currency;
 import com.google.android.material.navigation.NavigationView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BusinessHomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -47,19 +52,25 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
     AutoCompleteInterface aci = new AutoCompleteApi();
     SeekBar bar;
     TextView bar_text, dayDate, todayDate, userName, orders_for_today, new_orders, cash_orders,number_of_rates_value;
-    ImageView search, rate_star1, rate_star2, rate_star3, rate_star4, rate_star5;
+    ImageView search;
+    ArrayList<currency> pairs = new ArrayList<>();
+    ProgressBar progressBar;
+    RatingBar ratingBar;
+
 
     @Override
     protected void onResume() {
         super.onResume();
         FireStoreDB.getInstance().LoadOrdersStatus(this, orders_for_today, new_orders, cash_orders, user_type, user_name);
-        FireStoreDB.getInstance().loadOrderRates(user_name, rate_star1, rate_star2, rate_star3, rate_star4, rate_star5);
+        FireStoreDB.getInstance().loadOrderRates(user_name);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_home_page);
+
+
         orders_for_today = findViewById(R.id.orders_FT_num);
         new_orders = findViewById(R.id.new_orders_num);
         cash_orders = findViewById(R.id.cash_order_num);
@@ -67,8 +78,12 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         userName.setText(user_name);
         number_of_rates_value = findViewById(R.id.number_of_rates_value);
         currencies_rate_recycleview = findViewById(R.id.currencies_rates_recycle);
+        currencies_rate_recycleview.setLayoutManager(new LinearLayoutManager(this));
         user_name = getIntent().getStringExtra(getString(R.string.userName));
         user_type = "BusinessClient";
+        progressBar = findViewById(R.id.progress_bar);
+        ratingBar = findViewById(R.id.ratingBar);
+        ratingBar.setNumStars(5);
 
 
 
@@ -143,7 +158,7 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         formatter = new SimpleDateFormat("dd/MM/yyyy");
         todayDate = findViewById(R.id.todayDate);
         todayDate.setText(formatter.format(date));
-
+        FireStoreDB.getInstance().loadCurrencyDataPairs(this, user_name, pairs, currencies_rate_recycleview, progressBar, "BusinessClient");
 
     }
 

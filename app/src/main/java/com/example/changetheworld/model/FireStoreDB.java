@@ -29,7 +29,6 @@ import com.example.changetheworld.BusinessProfileActivity;
 import com.example.changetheworld.OrderConfirm;
 import com.example.changetheworld.OrderPage;
 import com.example.changetheworld.R;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -1218,13 +1217,17 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadClientLocalCurrency(Context context, String user_name, ArrayList<currency> items, RecyclerView recyclerView, ProgressBar progressBar) {
+    public void loadCurrencyDataPairs(Context context, String user_name, ArrayList<currency> items, RecyclerView recyclerView, ProgressBar progressBar, String user_type) {
         AtomicReference<String> localCurrency = new AtomicReference<>();
-        db.collection("PrivateClient")
+        String local = "currency";
+        if(user_type.equals("BusinessClient"))
+            local = "local_currency";
+        String finalLocal = local;
+        db.collection(user_type)
                 .document(user_name)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
-                    localCurrency.set(documentSnapshot.getString("currency"));
+                    localCurrency.set(documentSnapshot.getString(finalLocal));
 
                     Thread t = new Thread(() -> {
                         ArrayList<String> symbols = new ArrayList<>();
@@ -1418,12 +1421,14 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadOrderRates(String user_name, ImageView rate_star1, ImageView rate_star2, ImageView rate_star3, ImageView rate_star4, ImageView rate_star5) {
+    public void loadOrderRates(String user_name) {
+        AtomicReference<Float> rate = new AtomicReference<>((float) 0);
         db.collection("BusinessClient")
                 .document(user_name)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
-                    float rate = Float.parseFloat(documentSnapshot.getString("rate"));
+                    if(documentSnapshot.getString("rate") != null)
+                        rate.set(Float.parseFloat(Objects.requireNonNull(documentSnapshot.getString("rate"))));
                 });
     }
 

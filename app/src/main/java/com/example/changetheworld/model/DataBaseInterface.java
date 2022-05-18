@@ -11,13 +11,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.changetheworld.BusinessHomePage;
-import com.example.changetheworld.BusinessOrdersActivity;
-import com.example.changetheworld.BusinessPage;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicReference;
 
 public interface DataBaseInterface {
     void VerifyAndSavePrivateClient(Context context, PrivateClient user, Intent intent);
@@ -68,7 +63,7 @@ public interface DataBaseInterface {
 
     void LoadOrder(Context context, String orderID, String business_user_name, TextView amount_from, TextView amount_to, TextView paymethod, TextView business_name, TextView business_address, TextView business_phone, TextView pickup_date, TextView cash_case_value, TextView currency_from, TextView currency_to);
 
-    void loadClientLocalCurrency(Context context, String user_name, ArrayList<currency> items, RecyclerView recyclerView, ProgressBar progressBar);
+    void loadCurrencyDataPairs(Context context, String user_name, ArrayList<currency> items, RecyclerView recyclerView, ProgressBar progressBar, String user_type);
 
     void loadOrdersAsClient(Context context, String user_name, String userType, ArrayList<Order> items, RecyclerView recyclerView);
 
@@ -84,5 +79,5 @@ public interface DataBaseInterface {
 
     void updateBusinessRate(int rating, String business_user_name);
 
-    void loadOrderRates(String user_name, ImageView rate_star1, ImageView rate_star2, ImageView rate_star3, ImageView rate_star4, ImageView rate_star5);
+    void loadOrderRates(String user_name);
 }

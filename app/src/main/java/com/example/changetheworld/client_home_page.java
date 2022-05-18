@@ -8,22 +8,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 
 import android.text.Editable;
-import android.text.Layout;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
@@ -35,24 +30,19 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.changetheworld.model.AutoCompleteApi;
 import com.example.changetheworld.model.AutoCompleteInterface;
-import com.example.changetheworld.model.CurrencyDataApi;
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.currency;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class client_home_page<OnResume> extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     RecyclerView recyclerView;
     ArrayList<currency> items = new ArrayList<>();
     TextView userName;
     ImageView profilPhoto;
-    CurrencyDataApi api = new CurrencyDataApi();
     String user_name;
     ProgressBar progressBar;
-    HashMap<String, String> currenciesToSymbol = new HashMap<>();
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -65,11 +55,6 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        currenciesToSymbol.put("USD", " $");
-        currenciesToSymbol.put("EUR", " €");
-        currenciesToSymbol.put("GBP", " £");
-        currenciesToSymbol.put("CNY", " ¥");
-        currenciesToSymbol.put("ILS", " ₪");
         setContentView(R.layout.activity_client_home_page);
         user_name = getIntent().getStringExtra(getString(R.string.userName));
         userName = findViewById(R.id.username);
@@ -77,7 +62,7 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         progressBar = findViewById(R.id.progressBar);
 
-        FireStoreDB.getInstance().loadClientLocalCurrency(this, user_name, items, recyclerView, progressBar);
+        FireStoreDB.getInstance().loadCurrencyDataPairs(this, user_name, items, recyclerView, progressBar, "PrivateClient");
 
         profilPhoto = findViewById(R.id.profilePhoto);
         FireStoreDB.getInstance().LoadProfilePhoto(profilPhoto, user_name);

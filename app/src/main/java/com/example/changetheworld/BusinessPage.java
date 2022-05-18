@@ -21,6 +21,7 @@ public class BusinessPage extends AppCompatActivity {
     TextView local_currency;
 
 
+
     TextView sundayHours, monThuHours, fridayHours, saturdayHours;
 
     Button newOrder, currencies_rates_btn;
