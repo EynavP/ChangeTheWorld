@@ -17,8 +17,8 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class OrderConfirm extends AppCompatActivity {
 
-    Button go_back_home;
-    TextView amount_from, amount_to, paymethod, business_name, business_address, business_phone, pickup_date, cash_case_value, currency_from, currency_to;
+    Button go_back_home, business_address;
+    TextView amount_from, amount_to, paymethod, business_name, business_phone, pickup_date, cash_case_value, currency_from, currency_to;
     String user_type, orderID, business_user_name;
     ImageView QRcode;
 
@@ -41,6 +41,10 @@ public class OrderConfirm extends AppCompatActivity {
         currency_to = findViewById(R.id.to_currency_name_value);
         QRcode = findViewById(R.id.QRcodeIV);
         user_type = getIntent().getStringExtra("user_type");
+
+        business_address.setOnClickListener(view -> {
+            FireStoreDB.getInstance().openOnMaps(this, business_address.getText().toString());
+        });
 
         go_back_home.setOnClickListener(view -> {
             if(user_type.equals("PrivateClient")){

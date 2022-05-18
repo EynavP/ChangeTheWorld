@@ -24,7 +24,7 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
     TextView TVPannding,TVCancle,TVApprove,TVComplete;
     String user_name;
     String user_type;
-    ArrayList<Order> items;
+    ArrayList<Order> pendding_items, canceled_items, approve_items, complete_items;
     Button orders_as_client, orders_as_business;
 
 
@@ -54,16 +54,6 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         TVApprove=findViewById(R.id.TvApprove);
         TVComplete=findViewById(R.id.TvComplete);
 
-        orders_as_client.setOnClickListener(view -> {
-            MyOrders();
-            items = new ArrayList<>();
-            FireStoreDB.getInstance().loadOrdersAsClient(this, user_name, user_type, items, PanddingrecyclerView);
-        });
-        orders_as_business.setOnClickListener(view -> {
-            businessOrder();
-            items = new ArrayList<>();
-            FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, items, PanddingrecyclerView);
-        });
     }
 
     public void MyOrders(){
@@ -89,9 +79,26 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
     @Override
     protected void onResume() {
         super.onResume();
-        items = new ArrayList<>();
-        //FireStoreDB.getInstance().loadOrdersAsClient(this, user_name, user_type, items, recyclerView);
-        FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, items, PanddingrecyclerView);
+        businessOrder();
+        pendding_items = new ArrayList<>();
+        canceled_items = new ArrayList<>();
+        approve_items = new ArrayList<>();
+        complete_items = new ArrayList<>();
+        FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, PanddingrecyclerView, CanclerecyclerView, ApproverecyclerView, CompleterecyclerView);
+
+        orders_as_client.setOnClickListener(view -> {
+            MyOrders();
+            pendding_items = new ArrayList<>();
+            FireStoreDB.getInstance().loadOrdersAsClient(this, user_name, user_type, pendding_items, PanddingrecyclerView);
+        });
+        orders_as_business.setOnClickListener(view -> {
+            businessOrder();
+            pendding_items = new ArrayList<>();
+            canceled_items = new ArrayList<>();
+            approve_items = new ArrayList<>();
+            complete_items = new ArrayList<>();
+            FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, PanddingrecyclerView, CanclerecyclerView, ApproverecyclerView, CompleterecyclerView);
+        });
     }
 
     @Override
@@ -99,7 +106,7 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         Intent intent = new Intent(this, OrderConfirm.class);
         intent.putExtra("user_type",user_type);
         intent.putExtra("user_name",user_name);
-        intent.putExtra("orderID", items.get(position).getId());
+//        intent.putExtra("orderID", items.get(position).getId());
         startActivity(intent);
     }
 
