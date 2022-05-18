@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.changetheworld.OrderDetails;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -81,4 +83,6 @@ public interface DataBaseInterface {
     void updateBusinessRate(int rating, String business_user_name);
 
     void loadBusinessRate(String user_name, RatingBar ratingBar, TextView number_of_rates_value);
+
+    void CompleteOrder(Context context, String order_id);
 }

@@ -28,7 +28,9 @@ import com.example.changetheworld.AdapterTransaction;
 import com.example.changetheworld.AdapterWallet;
 import com.example.changetheworld.BusinessProfileActivity;
 import com.example.changetheworld.OrderConfirm;
+import com.example.changetheworld.OrderDetails;
 import com.example.changetheworld.OrderPage;
+import com.example.changetheworld.OrdersActivity;
 import com.example.changetheworld.R;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
@@ -1439,6 +1441,27 @@ public class FireStoreDB implements DataBaseInterface {
                 });
     }
 
+    @Override
+    public void CompleteOrder(Context context, String order_id) {
+        String business_user_name = order_id.split("\\*")[1];
+        String client_user_name = order_id.split("\\*")[0];
+        HashMap<String, Object> status = new HashMap<>();
+        status.put("status", "complete");
+        ArrayList<Task> tasks = new ArrayList<>();
+        Task<Void> update_business_task = db.collection("BusinessClient")
+                .document(business_user_name)
+                .collection("OrdersForMe")
+                .document(order_id)
+                .update(status);
+
+        Task<Void> update_client_task = db.collection("PrivateClient")
+                .document(client_user_name)
+                .collection("OrdersByMe")
+                .document(order_id)
+                .update(status);
+
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {}).addOnFailureListener(e -> Toast.makeText(context, "Failed to update order status", Toast.LENGTH_LONG).show());
+    }
 
 
     public void LoadOrdersStatus(Context context, TextView orders_for_today, TextView new_orders, TextView cash_orders, String user_type, String user_name) {
