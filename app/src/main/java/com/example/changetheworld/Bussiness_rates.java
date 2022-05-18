@@ -1,7 +1,9 @@
 package com.example.changetheworld;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +29,8 @@ public class Bussiness_rates extends AppCompatActivity implements NavigationView
     ProgressBar progressBar;
     String business_user_name;
     Button update;
+    NavigationView navigationView;
+    Toolbar toolbar;
     ArrayList<business_currency_rate> bcrs = new ArrayList<>();
     DrawerLayout drawerLayout;
 
@@ -38,6 +42,18 @@ public class Bussiness_rates extends AppCompatActivity implements NavigationView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         progressBar = findViewById(R.id.progressBar);
         business_user_name = getIntent().getStringExtra(getString(R.string.userName));
+
+        drawerLayout = findViewById(R.id.bussiness_rates);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar =(Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
+
         if(progressBar.getVisibility() != View.INVISIBLE) {
             progressBar.setVisibility(View.VISIBLE);
         }
@@ -77,8 +93,8 @@ public class Bussiness_rates extends AppCompatActivity implements NavigationView
         startActivity(intent);
     }
 
-    private void openBusinessRates() {
-        Intent intent = new Intent(this,Bussiness_rates.class);
+    private void openBusinessHomepage() {
+        Intent intent = new Intent(this,BusinessHomePage.class);
         intent.putExtra(getString(R.string.userName), business_user_name);
         startActivity(intent);
     }
@@ -99,7 +115,7 @@ public class Bussiness_rates extends AppCompatActivity implements NavigationView
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){
             case R.id.nav_home:
-                drawerLayout.closeDrawer(GravityCompat.START);
+                openBusinessHomepage();
                 break;
             case R.id.nav_wallet:
                 openWallet();
@@ -108,7 +124,7 @@ public class Bussiness_rates extends AppCompatActivity implements NavigationView
                 openBusinessProfile();
                 break;
             case R.id.nav_update_rates:
-                openBusinessRates();
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_orders:
                 openBusinessOrders();

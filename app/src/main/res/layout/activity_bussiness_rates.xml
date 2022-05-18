@@ -10,6 +10,14 @@
     android:id="@+id/bussiness_rates"
     android:background="@drawable/currency_page_back">
 
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/nav_view"
+        app:headerLayout="@layout/header_business"
+        app:menu="@menu/open_menu_businees"
+        android:layout_gravity="start" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,6 +32,20 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="339dp"
+            app:navigationIcon="@drawable/humburger_icon">
+
+        </androidx.appcompat.widget.Toolbar>
 
 
     <TextView

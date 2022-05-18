@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -147,8 +148,62 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         }
     }
 
+    public void openWallet(){
+
+        Intent intent = new Intent(this,WalletActivity.class);
+        intent.putExtra(getString(R.string.userName), user_name);
+        intent.putExtra("user_type", "BusinessClient");
+        startActivity(intent);
+    }
+
+    public void openBusinessHomepage(){
+
+        Intent intent = new Intent(this,BusinessHomePage.class);
+        intent.putExtra(getString(R.string.userName), user_name);
+        startActivity(intent);
+    }
+
+    private void openBusinessRates() {
+        Intent intent = new Intent(this,Bussiness_rates.class);
+        intent.putExtra(getString(R.string.userName), user_name);
+        startActivity(intent);
+    }
+
+    public void openBusinessProfile(){
+
+        Intent intent = new Intent(this,BusinessProfileActivity.class);
+        intent.putExtra(getString(R.string.userName), user_name);
+        startActivity(intent);
+    }
+
+    public void logOut(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch(menuItem.getItemId()){
+            case R.id.nav_home:
+                openBusinessHomepage();
+                break;
+            case R.id.nav_wallet:
+                openWallet();
+                break;
+            case R.id.nav_profile:
+                openBusinessProfile();
+                break;
+            case R.id.nav_update_rates:
+                openBusinessRates();
+                break;
+            case R.id.nav_orders:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.nav_logout:
+                logOut();
+                break;
+        }
+        return true;
     }
 }

@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +71,7 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         if (userType.equals("BusinessClient")) {
             navigationView.getMenu().clear();
             navigationView.inflateMenu(R.menu.open_menu_businees);
+
         }
     }
 
@@ -94,16 +96,22 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         startActivity(intent);
     }
 
-    public void openProfile(){
+    public void openClientProfile(){
 
         Intent intent = new Intent(this,ClientProfileActivity.class);
         intent.putExtra(getString(R.string.userName), userName);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
+    public void openBusinessProfile(){
 
-    public void openOrders(){
+        Intent intent = new Intent(this,BusinessProfileActivity.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+    }
 
+    public void openCleintOrders(){
         Intent intent = new Intent(this,OrdersActivity.class);
         intent.putExtra(getString(R.string.userName), userName);
         intent.putExtra("user_type", "PrivateClient");
@@ -111,9 +119,36 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         startActivity(intent);
     }
 
+    public void openBusinessOrders(){
+        Intent intent = new Intent(this,BusinessOrdersActivity.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", "BusinessClient");
+        startActivity(intent);
+    }
+
     public void logOut(){
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+    }
+
+    public void openClientHomePage(){
+        Intent intent = new Intent(this, client_home_page.class);
+        intent.putExtra(getString(R.string.userName),userName);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+    }
+
+    public void openBusinessHomePage(){
+        Intent intent = new Intent(this, BusinessHomePage.class);
+        intent.putExtra(getString(R.string.userName),userName);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+    }
+
+    private void openBusinessRates() {
+        Intent intent = new Intent(this,Bussiness_rates.class);
+        intent.putExtra(getString(R.string.userName), userName);
         startActivity(intent);
     }
 
@@ -124,29 +159,36 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         switch(menuItem.getItemId()){
             case R.id.nav_home:
                 if(userType.equals("PrivateClient")){
-                    Intent intent = new Intent(this, client_home_page.class);
-                    intent.putExtra(getString(R.string.userName),userName);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
+                    openClientHomePage();
                 }
                 else {
-                    Intent intent = new Intent(this, BusinessHomePage.class);
-                    intent.putExtra(getString(R.string.userName),userName);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
+                   openBusinessHomePage();
                 }
                 break;
             case R.id.nav_wallet:
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_profile:
-                openProfile();
+                if(userType.equals("PrivateClient")){
+                    openClientProfile();
+                }
+                else {
+                    openBusinessProfile();
+                }
                 break;
             case R.id.nav_orders:
-                openOrders();
+                if(userType.equals("PrivateClient")){
+                    openCleintOrders();
+                }
+                else {
+                    openBusinessOrders();
+                }
                 break;
             case R.id.nav_logout:
                 logOut();
+                break;
+            case R.id.nav_update_rates:
+                openBusinessRates();
                 break;
         }
         return true;
