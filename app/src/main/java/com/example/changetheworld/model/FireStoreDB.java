@@ -832,60 +832,112 @@ public class FireStoreDB implements DataBaseInterface {
     @Override
     public void loadCurrencyRatesForShow(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<BusinessCurrencyRateForShow> bcrs) {
         // TODO: fix if there is no currencyComission
+
+
         db.collection("BusinessClient")
                     .document(user_name)
                     .collection("currencyComission")
                     .get()
                     .addOnSuccessListener(queryDocumentSnapshots -> {
                         List<DocumentSnapshot> currency_pairs = queryDocumentSnapshots.getDocuments();
-                        HashMap<Pair<String, String>, String> pairs = new HashMap<>();
-                        HashMap<String, String> allPairs = new HashMap<>();
-
-                        for (int i = 0; i < currency_pairs.size(); i++) {
-                            Boolean exist = false;
-                            String pair = currency_pairs.get(i).getId();
-                            String s1 = pair.split("\\*")[0];
-                            String s2 = pair.split("\\*")[1];
-                            for (Pair<String, String> p: pairs.keySet()) {
-                                if (p.first.equals(s2) && p.second.equals(s1))
-                                    exist = true;
+                        if (currency_pairs.size() == 0) {
+                            ArrayList<String> pairs = new ArrayList<>();
+                            for (String s1: currenciesToSymbol.keySet()) {
+                                for (String s2: currenciesToSymbol.keySet()) {
+                                    if (!s1.equals(s2)){
+                                        pairs.add(s1 + " " + s2);
+                                    }
+                                }
                             }
-                            Pair<String, String> key = new Pair<>(s1, s2);
-                            String value = currency_pairs.get(i).getString(pair.replace("*", ""));
-                            if (!exist) {
-                                pairs.put(key, value);
-                            }
-                            allPairs.put(s1+s2, value);
-                        }
-                        ArrayList<BusinessCurrencyRateForShow> sale_buy_prices = new ArrayList<>();
-                        Thread t = new Thread(() -> {
-                            for (Pair<String, String> p: pairs.keySet()) {
-                                String symbolId = currenciesToSymbol.get(p.first) + " " + currenciesToSymbol.get(p.second);
-                                String currencyName = p.first + " " + p.second;
-                                ArrayList<String> pair = new ArrayList<>();
-                                pair.add(p.first + '/' + p.second);
-                                pair.add(p.second + '/' + p.first);
-                                String value1 = "0";
-                                String value2 = "0";
-                                if (pairs.get(p) != null)
-                                    value1 = pairs.get(p);
-                                if (allPairs.get(p.second + p.first) != null)
-                                    value2 = allPairs.get(p.second + p.first);
 
-                                String sale_price = df.format(api.getCloseAndChangePrice(pair).get(p.first).get(0) + Float.parseFloat(value1));
-                                String buy_price =  df.format(api.getCloseAndChangePrice(pair).get(p.second).get(0) + Float.parseFloat(value2));
-                                BusinessCurrencyRateForShow tmp = new BusinessCurrencyRateForShow(symbolId, currencyName,
-                                        sale_price, buy_price);
-                                sale_buy_prices.add(tmp);
-                            }
-                            ((Activity) context).runOnUiThread(() -> {
-                                AdapterBusinessCurrencyRateForShow abcr = new AdapterBusinessCurrencyRateForShow(context, sale_buy_prices);
-                                recyclerView.setAdapter(abcr);
-                                progressBar.setVisibility(View.INVISIBLE);
+                            HashMap<Pair<String, String>, String> pairs1 = new HashMap<>();
 
+                            for (int i = 0; i < pairs.size(); i++) {
+                                Boolean exist = false;
+                                String pair = pairs.get(i);
+                                String s1 = pair.split(" ")[0];
+                                String s2 = pair.split(" ")[1];
+                                for (Pair<String, String> p: pairs1.keySet()) {
+                                    if (p.first.equals(s2) && p.second.equals(s1))
+                                        exist = true;
+                                }
+                                Pair<String, String> key = new Pair<>(s1, s2);
+                                if (!exist) {
+                                    pairs1.put(key, "0");
+                                }
+                            }
+
+                            ArrayList<BusinessCurrencyRateForShow> sale_buy_prices = new ArrayList<>();
+                            Thread t = new Thread(() -> {
+                                for (Pair<String, String> p: pairs1.keySet()) {
+                                    String symbolId = currenciesToSymbol.get(p.first) + " " + currenciesToSymbol.get(p.second);
+                                    String currencyName = p.first + " " + p.second;
+                                    ArrayList<String> pair = new ArrayList<>();
+                                    pair.add(p.first + '/' + p.second);
+                                    pair.add(p.second + '/' + p.first);
+
+                                    String sale_price = df.format(api.getCloseAndChangePrice(pair).get(p.first).get(0));
+                                    String buy_price =  df.format(api.getCloseAndChangePrice(pair).get(p.second).get(0));
+                                    BusinessCurrencyRateForShow tmp = new BusinessCurrencyRateForShow(symbolId, currencyName,
+                                            sale_price, buy_price);
+                                    sale_buy_prices.add(tmp);
+                                }
+                                ((Activity) context).runOnUiThread(() -> {
+                                    AdapterBusinessCurrencyRateForShow abcr = new AdapterBusinessCurrencyRateForShow(context, sale_buy_prices);
+                                    recyclerView.setAdapter(abcr);
+                                    progressBar.setVisibility(View.INVISIBLE);
+
+                                });
                             });
-                        });
-                        t.start();
+                            t.start();
+
+                        }
+
+                        else {
+
+                            HashMap<Pair<String, String>, String> pairs = new HashMap<>();
+                            HashMap<String, String> allPairs = new HashMap<>();
+
+                            for (int i = 0; i < currency_pairs.size(); i++) {
+                                Boolean exist = false;
+                                String pair = currency_pairs.get(i).getId();
+                                String s1 = pair.split("\\*")[0];
+                                String s2 = pair.split("\\*")[1];
+                                for (Pair<String, String> p : pairs.keySet()) {
+                                    if (p.first.equals(s2) && p.second.equals(s1))
+                                        exist = true;
+                                }
+                                Pair<String, String> key = new Pair<>(s1, s2);
+                                String value = currency_pairs.get(i).getString(pair.replace("*", ""));
+                                if (!exist) {
+                                    pairs.put(key, value);
+                                }
+                                allPairs.put(s1 + s2, value);
+                            }
+                            ArrayList<BusinessCurrencyRateForShow> sale_buy_prices = new ArrayList<>();
+                            Thread t = new Thread(() -> {
+                                for (Pair<String, String> p : pairs.keySet()) {
+                                    String symbolId = currenciesToSymbol.get(p.first) + " " + currenciesToSymbol.get(p.second);
+                                    String currencyName = p.first + " " + p.second;
+                                    ArrayList<String> pair = new ArrayList<>();
+                                    pair.add(p.first + '/' + p.second);
+                                    pair.add(p.second + '/' + p.first);
+
+                                    String sale_price = df.format(api.getCloseAndChangePrice(pair).get(p.first).get(0) + Float.parseFloat(pairs.get(p)));
+                                    String buy_price = df.format(api.getCloseAndChangePrice(pair).get(p.second).get(0) + Float.parseFloat(allPairs.get(p.second + p.first)));
+                                    BusinessCurrencyRateForShow tmp = new BusinessCurrencyRateForShow(symbolId, currencyName,
+                                            sale_price, buy_price);
+                                    sale_buy_prices.add(tmp);
+                                }
+                                ((Activity) context).runOnUiThread(() -> {
+                                    AdapterBusinessCurrencyRateForShow abcr = new AdapterBusinessCurrencyRateForShow(context, sale_buy_prices);
+                                    recyclerView.setAdapter(abcr);
+                                    progressBar.setVisibility(View.INVISIBLE);
+
+                                });
+                            });
+                            t.start();
+                        }
                     });
     }
 
