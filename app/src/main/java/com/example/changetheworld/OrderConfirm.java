@@ -19,6 +19,8 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.util.function.Function;
+
 public class OrderConfirm extends AppCompatActivity {
 
     Button  business_address;
@@ -26,17 +28,19 @@ public class OrderConfirm extends AppCompatActivity {
     private AlertDialog dialog;
     RatingBar rating_bar;
     Button go_back_home,SubmitRate,cancleRate;
-    TextView amount_from, amount_to, paymethod, business_name, business_phone, pickup_date, cash_case_value, currency_from, currency_to;
-    String user_type, orderID, business_user_name;
+    TextView amount_from, amount_to, paymethod, business_name, business_phone, pickup_date, cash_case_value, currency_from, currency_to, status_value;
+    String user_type, orderID, business_user_name, order_status;
     ImageView QRcode;
     float myRating;
     int rating;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_confirm);
         orderID = getIntent().getStringExtra(getString(R.string.orderID));
+        status_value = findViewById(R.id.status_value);
         business_user_name = orderID.split("\\*")[1];
         go_back_home = findViewById(R.id.homeBtn);
         cash_case_value = findViewById(R.id.cash_case_value);
@@ -51,7 +55,8 @@ public class OrderConfirm extends AppCompatActivity {
         currency_to = findViewById(R.id.to_currency_name_value);
         QRcode = findViewById(R.id.QRcodeIV);
         user_type = getIntent().getStringExtra("user_type");
-        createNewContantDialog();
+        order_status = getIntent().getStringExtra("status");
+
 
         business_address.setOnClickListener(view -> {
             FireStoreDB.getInstance().openOnMaps(this, business_address.getText().toString());
@@ -69,8 +74,7 @@ public class OrderConfirm extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        FireStoreDB.getInstance().LoadOrder(this ,orderID, business_user_name, amount_from, amount_to, paymethod, business_name, business_address, business_phone, pickup_date, cash_case_value, currency_from, currency_to);
-
+        FireStoreDB.getInstance().LoadOrder(this ,orderID, business_user_name, amount_from, amount_to, paymethod, business_name, business_address, business_phone, pickup_date, cash_case_value, currency_from, currency_to, status_value);
 
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
@@ -83,11 +87,15 @@ public class OrderConfirm extends AppCompatActivity {
             e.printStackTrace();
 
         }
-
-
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(order_status.equals("complete"))
+            createNewContantDialog();
     }
 
-    public void createNewContantDialog(){
+    public void  createNewContantDialog(){
         dialogBuilder= new AlertDialog.Builder(this);
         final View contactpopupView =getLayoutInflater().inflate(R.layout.ratepopup,null);
 
