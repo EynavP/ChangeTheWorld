@@ -1334,6 +1334,41 @@ public class FireStoreDB implements DataBaseInterface {
         t.start();
     }
 
+    @Override
+    public void LoadOrdersStatus(Context context, TextView orders_for_today, TextView new_orders, TextView cash_orders, String user_type, String user_name) {
+        db.collection(user_type)
+                .document(user_name)
+                .collection("OrdersForMe")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<DocumentSnapshot> orders = queryDocumentSnapshots.getDocuments();
+                   int order_for_today_cnt = 0 , new_orders_cnt = 0, cash_orders_cnt = 0;
+                   SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
+                   String current_date = formatter.format(new Date());
+
+                    for (DocumentSnapshot doc: orders) {
+                        if (doc.getString("date").equals(current_date)){
+                            order_for_today_cnt ++;
+                        }
+                        if(doc.getString("status").equals("pending")){
+                            new_orders_cnt ++;
+                        }
+                        if(doc.getString("payment_method").equals("cash")){
+                            cash_orders_cnt ++;
+                        }
+                    }
+                    int finalOrder_for_today_cnt = order_for_today_cnt;
+                    int finalNew_orders_cnt = new_orders_cnt;
+                    int finalCash_orders_cnt = cash_orders_cnt;
+                    ((Activity)context).runOnUiThread(()->{
+                        orders_for_today.setText(""+finalOrder_for_today_cnt);
+                        new_orders.setText(""+ finalNew_orders_cnt);
+                        cash_orders.setText(""+ finalCash_orders_cnt);
+                    });
+                });
+
+    }
+
 
     public void saveOpenHours(Context context,String user_name, ArrayList<OpenHours> openHours, Intent intent) {
 

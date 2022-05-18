@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.changetheworld.BusinessHomePage;
 import com.example.changetheworld.BusinessOrdersActivity;
 import com.example.changetheworld.BusinessPage;
 
@@ -32,6 +33,9 @@ public interface DataBaseInterface {
     void loadBusinessData(String user_name, TextView header, TextView business_name, TextView mail_address, TextView phone_number, TextView owner_name, TextView address, TextView local_currency, TextView sundayHours, TextView monThuHours, TextView fridayHours, TextView saturdayHours);
     void loadBusinessDataForEdit(String user_name, EditText business_name, EditText mail_address, EditText phone_number, EditText owner_name, Spinner local_currency, EditText address, EditText password, EditText sundayOpen, EditText sundayClose, EditText monThuOpen, EditText monThuClose, EditText fridayOpen, EditText fridayClose, EditText saturdayOpen, EditText saturdayClose );
     void updateBusinessProfile(Context context, BusinessClient business,ArrayList<OpenHours> openHours, Intent intent);
+
+    void LoadOrdersStatus(Context context, TextView orders_for_today, TextView new_orders, TextView cash_orders, String user_type, String user_name);
+
     void checkExistPhoto(TextView value, String user_name, String type);
     void loadCurrencyRates(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<business_currency_rate> bcrs);
     void loadCurrencyRatesForShow(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<BusinessCurrencyRateForShow> bcrs);
