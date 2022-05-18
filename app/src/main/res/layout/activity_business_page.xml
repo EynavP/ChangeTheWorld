@@ -181,6 +181,18 @@
                     android:layout_marginEnd="321dp"
                     app:srcCompat="@drawable/mail_icon" />
 
+                <ImageView
+                    android:id="@+id/curreny_icon"
+                    android:layout_width="43dp"
+                    android:layout_height="34dp"
+                    android:layout_below="@+id/address_icon"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginEnd="321dp"
+                    app:srcCompat="@drawable/currency_icon" />
+
                 <TextView
                     android:id="@+id/address_title"
                     android:layout_width="140dp"
@@ -205,11 +217,11 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="76dp"
-                    android:layout_marginTop="64dp"
+                    android:layout_marginTop="76dp"
                     android:layout_marginEnd="199dp"
                     android:fontFamily="@font/comfortaa"
                     android:text="@string/local_currency"
-                    android:textColor="@color/black"
+                    android:textAllCaps="false"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -226,18 +238,22 @@
                     app:srcCompat="@drawable/address_icon" />
 
 
-                <TextView
+                <Button
                     android:id="@+id/address_value"
-                    android:layout_width="274dp"
-                    android:layout_height="32dp"
+                    android:layout_width="286dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/address_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="78dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginEnd="45dp"
+                    android:layout_marginStart="62dp"
+                    android:layout_marginTop="-3dp"
+                    android:layout_marginEnd="49dp"
+                    android:background="?android:attr/selectableItemBackground"
                     android:fontFamily="@font/comfortaa"
                     android:hint="@string/street"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -292,7 +308,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="175dp"
+                    android:layout_marginTop="183dp"
                     android:layout_marginEnd="319dp"
                     app:srcCompat="@drawable/phone_icon" />
 

@@ -176,20 +176,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date_value" />
 
-        <TextView
-            android:id="@+id/clientName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginBottom="22dp"
-            android:fontFamily="@font/comfortaa"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/status_value"
-            app:layout_constraintTop_toBottomOf="@+id/payment_method_value" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
