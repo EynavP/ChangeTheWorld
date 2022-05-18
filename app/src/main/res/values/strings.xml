@@ -167,6 +167,10 @@
     <string name="approve">Approve</string>
     <string name="decline">Decline</string>
     <string name="my_Orders">My Orders</string>
+    <string name="you_exchange">You exchange</string>
+    <string name="exchanged">Exchanged</string>
+    <string name="client_name">Client Name:</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>
