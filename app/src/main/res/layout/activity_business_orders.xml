@@ -160,7 +160,7 @@
                 android:layout_marginEnd="0dp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RVApproveRecycle"
+                    android:id="@+id/RVCancleRecycle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </ScrollView>
@@ -236,7 +236,7 @@
                 android:layout_marginEnd="0dp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RVCancleRecycle"
+                    android:id="@+id/RVApproveRecycle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </ScrollView>
