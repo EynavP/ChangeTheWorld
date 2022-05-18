@@ -103,11 +103,20 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
 
     @Override
     public void onItemClick(int position) {
-        Intent intent = new Intent(this, OrderConfirm.class);
-        intent.putExtra("user_type",user_type);
-        intent.putExtra("user_name",user_name);
-//        intent.putExtra("orderID", items.get(position).getId());
-        startActivity(intent);
+        if (TVPannding.getText().toString().equals(R.string.my_Orders)) {
+            Intent intent = new Intent(this, OrderConfirm.class);
+            intent.putExtra("user_type",user_type);
+            intent.putExtra("user_name",user_name);
+            intent.putExtra("orderID", pendding_items.get(position).getId());
+            startActivity(intent);
+        }
+        else {
+
+            Intent intent = new Intent(this, OrderDetails.class);
+            intent.putExtra("user_name",user_name);
+            intent.putExtra("orderID", "yuval*eynavs*6");
+            startActivity(intent);
+        }
     }
 
 }

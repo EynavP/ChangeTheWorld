@@ -1114,7 +1114,7 @@ public class FireStoreDB implements DataBaseInterface {
                                 .document(client_user_name)
                                 .get()
                                 .addOnSuccessListener(documentSnapshot2 -> {
-                                    if (user_type == "PrivateClient")
+                                    if (user_type.equals("PrivateClient"))
                                         user_FullName.set(documentSnapshot2.getString("full_name"));
                                     else
                                         user_FullName.set(documentSnapshot2.getString("business_name"));
@@ -1332,6 +1332,25 @@ public class FireStoreDB implements DataBaseInterface {
             context.startActivity(intent);
         });
         t.start();
+    }
+
+    @Override
+    public void loadBusinessOrder(String orderID,String user_name,TextView order_status_value,TextView amount_value, TextView currency_name_value,TextView receive_value, TextView to_currency_name_value, TextView payment_method_value,TextView client_name_value, TextView phone_value,TextView pickup_date_value) {
+        db.collection("BusinessClient")
+                .document(user_name)
+                .collection("OrdersForMe")
+                .document(orderID)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    order_status_value.setText(documentSnapshot.getString("status"));
+                    amount_value.setText(documentSnapshot.getString("from_amount"));
+                    currency_name_value.setText(documentSnapshot.getString("from_currency"));
+                    receive_value.setText(documentSnapshot.getString("to_amount"));
+                    to_currency_name_value.setText(documentSnapshot.getString("to_currency"));
+                    payment_method_value.setText(documentSnapshot.getString("payment_method"));
+                    client_name_value.setText(documentSnapshot.getString("user_fullName"));
+                    pickup_date_value.setText(documentSnapshot.getString("date"));
+                });
     }
 
 
