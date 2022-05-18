@@ -2,6 +2,10 @@ package com.example.changetheworld;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +26,9 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
+
 public class WalletActivity extends AppCompatActivity implements RecycleSubWalletClickInterface, NavigationView.OnNavigationItemSelectedListener {
+
 
     RecyclerView recyclerView;
     ArrayList<Wallet> items;
@@ -31,6 +37,10 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
     TextView totalBalance;
     TextView symbol;
     DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +56,16 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
 
         totalBalance = findViewById(R.id.balance);
         symbol = findViewById(R.id.symbol);
+
+        drawerLayout = findViewById(R.id.drawer_menu);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar =(Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
 
 
     }

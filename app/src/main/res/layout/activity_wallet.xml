@@ -5,7 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WalletActivity"
-    android:background="@drawable/wallet_back">
+    android:background="@drawable/wallet_back"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="end"
+    android:id="@+id/drawer_menu">
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/nav_view"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/open_menu"
+        android:layout_gravity="start" />
 
 
     <RelativeLayout

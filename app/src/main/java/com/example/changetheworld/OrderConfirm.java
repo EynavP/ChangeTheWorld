@@ -100,7 +100,10 @@ public class OrderConfirm extends AppCompatActivity {
         dialog.show();
 
 
-        SubmitRate.setOnClickListener(view -> FireStoreDB.getInstance().updateBusinessRate(rating, business_user_name));
+        SubmitRate.setOnClickListener(view -> {
+                FireStoreDB.getInstance().updateBusinessRate(rating, business_user_name);
+                dialog.dismiss();
+        });
 
 
         rating_bar.setOnRatingBarChangeListener((ratingBar, v, b) -> {
