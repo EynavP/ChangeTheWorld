@@ -1,21 +1,27 @@
 package com.example.changetheworld;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.Order;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class BusinessOrdersActivity extends AppCompatActivity implements RecycleSubWalletClickInterface {
+public class BusinessOrdersActivity extends AppCompatActivity implements RecycleSubWalletClickInterface,NavigationView.OnNavigationItemSelectedListener {
 
     RecyclerView PanddingrecyclerView;
     RecyclerView CanclerecyclerView;
@@ -24,6 +30,9 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
     TextView TVPannding,TVCancle,TVApprove,TVComplete;
     String user_name;
     String user_type;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
     ArrayList<Order> pendding_items, canceled_items, approve_items, complete_items;
     Button orders_as_client, orders_as_business;
 
@@ -53,6 +62,19 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         TVCancle=findViewById(R.id.TvCancle);
         TVApprove=findViewById(R.id.TvApprove);
         TVComplete=findViewById(R.id.TvComplete);
+
+        drawerLayout = findViewById(R.id.drawer_menu_business);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar =(Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -125,4 +147,8 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         }
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
 }

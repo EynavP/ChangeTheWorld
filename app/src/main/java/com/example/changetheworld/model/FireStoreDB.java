@@ -1374,11 +1374,13 @@ public class FireStoreDB implements DataBaseInterface {
 
     @Override
     public void changeOrderStatus(String orderID, String user_name, String new_status, Context context, TextView order_status_value, Button approve_btn, Button cancel_btn) {
+        String business_user_name = orderID.split("\\*")[1];
+        String client_user_name = orderID.split("\\*")[0];
+        ArrayList<Task> tasks = new ArrayList<>();
         Map<String, Object> data = new HashMap<>();
         data.put("status", new_status);
-
-        db.collection("BusinessClient")
-                .document(user_name)
+        Task<Void> update_business = db.collection("BusinessClient")
+                .document(business_user_name)
                 .collection("OrdersForMe")
                 .document(orderID)
                 .update(data)
@@ -1391,6 +1393,15 @@ public class FireStoreDB implements DataBaseInterface {
                         cancel_btn.setVisibility(View.INVISIBLE);
                     }
                 });
+        Task<Void> update_client = db.collection("PrivateClient")
+                .document(client_user_name)
+                .collection("OrdersByMe")
+                .document(orderID)
+                .update(data);
+
+        tasks.add(update_business);
+        tasks.add(update_client);
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {});
     }
 
     @Override
@@ -1460,6 +1471,8 @@ public class FireStoreDB implements DataBaseInterface {
                 .document(order_id)
                 .update(status);
 
+        tasks.add(update_business_task);
+        tasks.add(update_client_task);
         Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {}).addOnFailureListener(e -> Toast.makeText(context, "Failed to update order status", Toast.LENGTH_LONG).show());
     }
 
