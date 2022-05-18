@@ -42,5 +42,5 @@ public interface DataBaseInterface {
     void LoadOrder(Context context , String orderID, String business_user_name, TextView amount_from, TextView amount_to, TextView paymethod, TextView business_name, TextView business_address, TextView business_phone, TextView pickup_date, TextView cash_case_value, TextView currency_from, TextView currency_to);
     void loadClientLocalCurrency(Context context, String user_name, ArrayList<currency> items, RecyclerView recyclerView, ProgressBar progressBar);
     void loadOrdersAsClient(Context context, String user_name, String userType, ArrayList<Order> items, RecyclerView recyclerView);
-    void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> items, RecyclerView recyclerView);
+    void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> pendding_items, ArrayList<Order> canceled_items,ArrayList<Order> approve_items,ArrayList<Order> complete_items, RecyclerView PanddingrecyclerView,RecyclerView CanclerecyclerView,RecyclerView ApproverecyclerView,RecyclerView CompleterecyclerView);
 }

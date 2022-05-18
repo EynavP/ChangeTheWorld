@@ -1285,7 +1285,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> items, RecyclerView recyclerView) {
+    public void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> pendding_items, ArrayList<Order> canceled_items,ArrayList<Order> approve_items,ArrayList<Order> complete_items, RecyclerView PanddingrecyclerView,RecyclerView CanclerecyclerView,RecyclerView ApproverecyclerView,RecyclerView CompleterecyclerView) {
         db.collection(user_type)
                 .document(user_name)
                 .collection("OrdersForMe")
@@ -1296,15 +1296,27 @@ public class FireStoreDB implements DataBaseInterface {
                         Order tmp = new Order(orders.get(i).getString("id"), orders.get(i).getString("from_currency"), orders.get(i).getString("to_currency"),
                                 orders.get(i).getString("from_amount"), orders.get(i).getString("to_amount"), orders.get(i).getString("date"),
                                 orders.get(i).getString("business_name"), orders.get(i).getString("user_fullName"), orders.get(i).getString("status"), orders.get(i).getString("payment_method"));
-                        items.add(tmp);
+                        if (orders.get(i).getString("status").equals("pending"))
+                            pendding_items.add(tmp);
+                        if (orders.get(i).getString("status").equals("canceled"))
+                            canceled_items.add(tmp);
+                        if (orders.get(i).getString("status").equals("approve"))
+                            approve_items.add(tmp);
+                        if (orders.get(i).getString("status").equals("complete"))
+                            complete_items.add(tmp);
                     }
                     ((Activity) context).runOnUiThread(() -> {
-                        AdapterOrder adapterOrder;
-                        if (user_type.equals("PrivateClient"))
-                            adapterOrder = new AdapterOrder(context, items, "OrdersActivity");
-                        else
-                            adapterOrder = new AdapterOrder(context, items, "BusinessOrdersActivity");
-                        recyclerView.setAdapter(adapterOrder);
+                        AdapterOrder adapterOrderPendding, adapterOrderCanceled, adapterOrderApprove, adapterOrderComplete;
+                        adapterOrderPendding = new AdapterOrder(context, pendding_items, "BusinessOrdersActivity");
+                        adapterOrderCanceled = new AdapterOrder(context, canceled_items, "BusinessOrdersActivity");
+                        adapterOrderApprove = new AdapterOrder(context, approve_items, "BusinessOrdersActivity");
+                        adapterOrderComplete = new AdapterOrder(context, complete_items, "BusinessOrdersActivity");
+
+                        PanddingrecyclerView.setAdapter(adapterOrderPendding);
+                        ApproverecyclerView.setAdapter(adapterOrderApprove);
+                        CanclerecyclerView.setAdapter(adapterOrderCanceled);
+                        CompleterecyclerView.setAdapter(adapterOrderComplete);
+
                     });
                 });
     }
