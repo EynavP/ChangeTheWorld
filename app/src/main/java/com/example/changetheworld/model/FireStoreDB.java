@@ -16,7 +16,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changetheworld.AdapterBusinessCurrencyRate;
@@ -30,12 +29,10 @@ import com.example.changetheworld.BusinessProfileActivity;
 import com.example.changetheworld.OrderConfirm;
 import com.example.changetheworld.OrderPage;
 import com.example.changetheworld.R;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -1384,6 +1381,36 @@ public class FireStoreDB implements DataBaseInterface {
                         approve_btn.setVisibility(View.INVISIBLE);
                         cancel_btn.setVisibility(View.INVISIBLE);
                     }
+                });
+    }
+
+    @Override
+    public void updateBusinessRate(int rating, String business_user_name) {
+        AtomicReference<Float> rate = new AtomicReference<>((float) 0);
+        AtomicReference<Integer> num_of_rates = new AtomicReference<>(0);
+
+        db.collection("BusinessClient")
+                .document(business_user_name)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.getString("rate") == null) {
+                        rate.set((float) 0);
+                        num_of_rates.set(1);
+                    }
+                    else {
+                        rate.set(Float.parseFloat(documentSnapshot.getString("rate")));
+                        num_of_rates.set(Integer.parseInt(documentSnapshot.getString("num_of_rates")) + 1);
+                    }
+
+                    rate.set(rate.get() + (rating - rate.get())/num_of_rates.get());
+
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("rate", String.valueOf(rate));
+                    data.put("num_of_rates", String.valueOf(num_of_rates));
+
+                    db.collection("BusinessClient")
+                            .document(business_user_name)
+                            .update(data);
                 });
     }
 

@@ -123,6 +123,7 @@ public class OrderConfirm extends AppCompatActivity {
                         break;
                 }
                 Toast.makeText(this,"Your rating is:"+ message,Toast.LENGTH_SHORT).show();
+                FireStoreDB.getInstance().updateBusinessRate(rating, business_user_name);
             });
         });
 

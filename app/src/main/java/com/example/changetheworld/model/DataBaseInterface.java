@@ -81,4 +81,6 @@ public interface DataBaseInterface {
                            TextView phone_value, TextView pickup_date_value);
 
     void changeOrderStatus(String orderID, String user_name, String new_status, Context context, TextView order_status_value, Button approve_btn,Button cancel_btn);
+
+    void updateBusinessRate(int rating, String business_user_name);
 }
