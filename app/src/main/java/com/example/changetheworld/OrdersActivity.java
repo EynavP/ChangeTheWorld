@@ -101,7 +101,9 @@ public class OrdersActivity extends AppCompatActivity implements RecycleSubWalle
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){
             case R.id.nav_home:
-                drawerLayout.closeDrawer(GravityCompat.START);
+                Intent intent = new Intent(this, client_home_page.class);
+                intent.putExtra(getString(R.string.userName),user_name);
+                startActivity(intent);
                 break;
             case R.id.nav_wallet:
                 openWallet();
