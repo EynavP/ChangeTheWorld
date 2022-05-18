@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Pair;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -1051,6 +1052,7 @@ public class FireStoreDB implements DataBaseInterface {
             data.put("date", date);
             data.put("status", "pending");
             data.put("id", client_user_name + "*" + business_user_name + "*" + counter.get());
+            data.put("client_type", user_type);
 
             tasks.add(db.collection(user_type)
                     .document(client_user_name)
@@ -1142,6 +1144,7 @@ public class FireStoreDB implements DataBaseInterface {
                             data.put("date", date);
                             data.put("status", "pending");
                             data.put("id", client_user_name + "*" + business_user_name + "*" + counter.get());
+                            data.put("client_type", user_type);
 
                             tasks.add(db.collection(user_type)
                                     .document(client_user_name)
@@ -1350,6 +1353,37 @@ public class FireStoreDB implements DataBaseInterface {
                     payment_method_value.setText(documentSnapshot.getString("payment_method"));
                     client_name_value.setText(documentSnapshot.getString("user_fullName"));
                     pickup_date_value.setText(documentSnapshot.getString("date"));
+
+                    String client_user_name = documentSnapshot.getString("id").split("\\*")[0];
+
+                    db.collection(documentSnapshot.getString("client_type"))
+                            .document(client_user_name)
+                            .get()
+                            .addOnSuccessListener(documentSnapshot1 -> {
+                                phone_value.setText(documentSnapshot1.getString("phone"));
+                            });
+
+                });
+    }
+
+    @Override
+    public void changeOrderStatus(String orderID, String user_name, String new_status, Context context, TextView order_status_value, Button approve_btn, Button cancel_btn) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("status", new_status);
+
+        db.collection("BusinessClient")
+                .document(user_name)
+                .collection("OrdersForMe")
+                .document(orderID)
+                .update(data)
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(context, "Order" + new_status, Toast.LENGTH_SHORT).show();
+                    order_status_value.setText(new_status);
+
+                    if (!order_status_value.equals("pending")){
+                        approve_btn.setVisibility(View.INVISIBLE);
+                        cancel_btn.setVisibility(View.INVISIBLE);
+                    }
                 });
     }
 
