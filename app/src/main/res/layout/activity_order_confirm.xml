@@ -434,23 +434,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.093"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
+        <Button
             android:id="@+id/pickup_address_value"
-            android:layout_width="wrap_content"
+            android:layout_width="286dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/pickup_from_value"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="159dp"
-            android:layout_marginTop="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="111dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="1dp"
             android:layout_toEndOf="@+id/pickup_address_title"
+            android:background="?android:attr/selectableItemBackground"
             android:fontFamily="@font/comfortaa"
+            android:hint="@string/street"
             android:text="@string/businessAddress"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
             android:textColor="@color/appBlueColor"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.093"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/phone_value"
@@ -458,9 +460,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/pickup_address_value"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="175dp"
-            android:layout_marginTop="29dp"
-            android:layout_toEndOf="@+id/pickup_address_title"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="172dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="36dp"
             android:fontFamily="@font/comfortaa"
             android:text="@string/phoneNumber"
             android:textColor="@color/appBlueColor"
