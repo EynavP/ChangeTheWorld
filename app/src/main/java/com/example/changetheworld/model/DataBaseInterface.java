@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -79,5 +80,5 @@ public interface DataBaseInterface {
 
     void updateBusinessRate(int rating, String business_user_name);
 
-    void loadOrderRates(String user_name);
+    void loadBusinessRate(String user_name, RatingBar ratingBar, TextView number_of_rates_value);
 }

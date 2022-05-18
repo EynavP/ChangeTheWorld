@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -1421,16 +1422,24 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadOrderRates(String user_name) {
-        AtomicReference<Float> rate = new AtomicReference<>((float) 0);
+    public void loadBusinessRate(String user_name, RatingBar ratingBar, TextView number_of_rates_value) {
         db.collection("BusinessClient")
                 .document(user_name)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
-                    if(documentSnapshot.getString("rate") != null)
-                        rate.set(Float.parseFloat(Objects.requireNonNull(documentSnapshot.getString("rate"))));
+                    if(documentSnapshot.getString("rate") != null){
+                        ratingBar.setRating(Float.parseFloat(documentSnapshot.getString("rate")));
+                        number_of_rates_value.setText(documentSnapshot.getString("num_of_rates"));
+                    }
+                    else {
+                        ratingBar.setRating(0);
+                        number_of_rates_value.setText("0");
+
+                    }
                 });
     }
+
+
 
     public void LoadOrdersStatus(Context context, TextView orders_for_today, TextView new_orders, TextView cash_orders, String user_type, String user_name) {
         db.collection(user_type)

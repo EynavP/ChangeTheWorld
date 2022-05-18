@@ -11,14 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -28,7 +25,6 @@ import android.widget.Toast;
 
 import com.example.changetheworld.model.AutoCompleteApi;
 import com.example.changetheworld.model.AutoCompleteInterface;
-import com.example.changetheworld.model.CurrencyDataApi;
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.Order;
 import com.example.changetheworld.model.currency;
@@ -37,7 +33,6 @@ import com.google.android.material.navigation.NavigationView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class BusinessHomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -62,7 +57,7 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
     protected void onResume() {
         super.onResume();
         FireStoreDB.getInstance().LoadOrdersStatus(this, orders_for_today, new_orders, cash_orders, user_type, user_name);
-        FireStoreDB.getInstance().loadOrderRates(user_name);
+        FireStoreDB.getInstance().loadBusinessRate(user_name, ratingBar, number_of_rates_value);
     }
 
     @Override
