@@ -168,10 +168,11 @@ public class OrderPage extends AppCompatActivity {
             String date = pickup_date.getText().toString();
             String business_address = pick_from.getText().toString();
             Date order_date = null;
-            Date current_date = new Date(System.currentTimeMillis()-24*60*60*1000);;
+            Date current_date = new Date(System.currentTimeMillis()-24*60*60*1000);
 
             try {
-                order_date =  sdf.parse(date);
+                if (!date.isEmpty())
+                    order_date =  sdf.parse(date);
             } catch (ParseException e) {
                 Toast.makeText(this, "Please enter date",Toast.LENGTH_SHORT).show();
             }
