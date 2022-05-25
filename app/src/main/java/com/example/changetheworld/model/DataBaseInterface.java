@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 public interface DataBaseInterface {
     void VerifyAndSavePrivateClient(Context context, PrivateClient user, Intent intent);
@@ -74,9 +75,9 @@ public interface DataBaseInterface {
 
     void loadBusinessOrder(String orderID, String user_name, TextView order_status_value, TextView amount_value,
                            TextView currency_name_value, TextView receive_value, TextView to_currency_name_value, TextView payment_method_value, TextView client_name_value,
-                           TextView phone_value, TextView pickup_date_value);
+                           TextView phone_value, TextView pickup_date_value, Button approve_btn, Button cancel_btn, Button scan_btn);
 
-    void changeOrderStatus(String orderID, String user_name, String new_status, Context context, TextView order_status_value, Button approve_btn,Button cancel_btn);
+    void changeOrderStatus(String orderID, String user_name, String new_status, Context context, TextView order_status_value, Button approve_btn,Button cancel_btn,TextView payment_method_value,TextView amount_value,TextView currency_name_value);
 
     void updateBusinessRate(int rating, String business_user_name);
 

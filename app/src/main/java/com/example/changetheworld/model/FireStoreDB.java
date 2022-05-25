@@ -376,7 +376,6 @@ public class FireStoreDB implements DataBaseInterface {
                                         .document()
                                         .set(transactionData)
                                         .addOnSuccessListener(unused1 -> {
-                                            Toast.makeText(context, action.equals("+") ? "deposit" : "withdraw" + " succeeded", Toast.LENGTH_LONG).show();
                                             if (intent != null)
                                                 context.startActivity(intent);
                                         })
@@ -1345,7 +1344,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadBusinessOrder(String orderID,String user_name,TextView order_status_value,TextView amount_value, TextView currency_name_value,TextView receive_value, TextView to_currency_name_value, TextView payment_method_value,TextView client_name_value, TextView phone_value,TextView pickup_date_value) {
+    public void loadBusinessOrder(String orderID, String user_name, TextView order_status_value, TextView amount_value, TextView currency_name_value, TextView receive_value, TextView to_currency_name_value, TextView payment_method_value, TextView client_name_value, TextView phone_value, TextView pickup_date_value, Button approve_btn, Button cancel_btn, Button scan_btn) {
         db.collection("BusinessClient")
                 .document(user_name)
                 .collection("OrdersForMe")
@@ -1363,6 +1362,15 @@ public class FireStoreDB implements DataBaseInterface {
 
                     String client_user_name = documentSnapshot.getString("id").split("\\*")[0];
 
+                    if (!order_status_value.getText().toString().equals("pending")){
+                        approve_btn.setVisibility(View.INVISIBLE);
+                        cancel_btn.setVisibility(View.INVISIBLE);
+                    }
+
+                    if (!order_status_value.getText().toString().equals("complete")){
+                        scan_btn.setVisibility(View.INVISIBLE);
+                    }
+
                     db.collection(documentSnapshot.getString("client_type"))
                             .document(client_user_name)
                             .get()
@@ -1373,8 +1381,34 @@ public class FireStoreDB implements DataBaseInterface {
                 });
     }
 
+    private void refundUser(String client_user_name, TextView amount_value, TextView currency_name_value, Context context) {
+        AtomicReference<String> user_type = new AtomicReference<>();
+        Task<DocumentSnapshot> task_client = db.collection("PrivateClient")
+                .document(client_user_name)
+                .get();
+
+        Task<DocumentSnapshot> task_business = db.collection("BusinessClient")
+                .document(client_user_name)
+                .get();
+
+        List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
+        tasks.add(task_client);
+        tasks.add(task_business);
+
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
+            DocumentSnapshot client = (DocumentSnapshot) objects.get(0);
+            if (client.exists()) {
+                user_type.set("PrivateClient");
+            } else {
+                user_type.set("BusinessClient");
+            }
+            updateBalance(client_user_name, user_type.get(), currency_name_value.getText().toString() , Float.parseFloat(amount_value.getText().toString()), "+", context, null);
+
+        });
+    }
+
     @Override
-    public void changeOrderStatus(String orderID, String user_name, String new_status, Context context, TextView order_status_value, Button approve_btn, Button cancel_btn) {
+    public void changeOrderStatus(String orderID, String user_name, String new_status, Context context, TextView order_status_value, Button approve_btn, Button cancel_btn, TextView payment_method_value, TextView amount_value,TextView currency_name_value) {
         String business_user_name = orderID.split("\\*")[1];
         String client_user_name = orderID.split("\\*")[0];
         ArrayList<Task> tasks = new ArrayList<>();
@@ -1392,6 +1426,12 @@ public class FireStoreDB implements DataBaseInterface {
                     if (!order_status_value.equals("pending")){
                         approve_btn.setVisibility(View.INVISIBLE);
                         cancel_btn.setVisibility(View.INVISIBLE);
+                        if (order_status_value.getText().toString().equals("canceled") && !payment_method_value.getText().toString().equals("cash")){
+                            refundUser(client_user_name, amount_value, currency_name_value, context);
+                        }
+                        else{
+                            updateBalance(user_name, "BusinessClient", currency_name_value.getText().toString() , Float.parseFloat(amount_value.getText().toString()), "+", context, null);
+                        }
                     }
                 });
         Task<Void> update_client = db.collection("PrivateClient")
@@ -1476,7 +1516,6 @@ public class FireStoreDB implements DataBaseInterface {
         tasks.add(update_client_task);
         Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {}).addOnFailureListener(e -> Toast.makeText(context, "Failed to update order status", Toast.LENGTH_LONG).show());
     }
-
 
     public void LoadOrdersStatus(Context context, TextView orders_for_today, TextView new_orders, TextView cash_orders, String user_type, String user_name) {
         db.collection(user_type)

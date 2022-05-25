@@ -136,14 +136,18 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         else {
             Intent intent = new Intent(this, OrderDetails.class);
             intent.putExtra("user_name",user_name);
-            if (recycle_id.equals("pending"))
+            if (recycle_id.equals("pending")) {
                 intent.putExtra("orderID", pendding_items.get(position).getId());
-            if (recycle_id.equals("canceled"))
+            }
+            if (recycle_id.equals("canceled")) {
                 intent.putExtra("orderID", canceled_items.get(position).getId());
-            if (recycle_id.equals("approve"))
+            }
+            if (recycle_id.equals("approve")) {
                 intent.putExtra("orderID", approve_items.get(position).getId());
-            if (recycle_id.equals("complete"))
+            }
+            if (recycle_id.equals("complete")) {
                 intent.putExtra("orderID", complete_items.get(position).getId());
+            }
             startActivity(intent);
         }
     }
