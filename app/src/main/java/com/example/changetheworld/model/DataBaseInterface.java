@@ -69,7 +69,7 @@ public interface DataBaseInterface {
 
     void loadOrdersAsClient(Context context, String user_name, String userType, ArrayList<Order> items, RecyclerView recyclerView);
 
-    void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> pendding_items, ArrayList<Order> canceled_items, ArrayList<Order> approve_items, ArrayList<Order> complete_items, RecyclerView PanddingrecyclerView, RecyclerView CanclerecyclerView, RecyclerView ApproverecyclerView, RecyclerView CompleterecyclerView);
+    void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> pendding_items, ArrayList<Order> canceled_items, ArrayList<Order> approve_items, ArrayList<Order> complete_items, RecyclerView orders_RV, String listClicked);
 
     void openOnMaps(Context context, String address);
 

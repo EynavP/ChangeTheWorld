@@ -9,7 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +35,8 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
     Toolbar toolbar;
     ArrayList<Order> pendding_items, canceled_items, approve_items, complete_items;
     Button orders_as_client, orders_as_business;
+    String listClicked = "pending";
+
 
 
     @Override
@@ -80,12 +84,14 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
 
     public void businessOrder(){
             TVPannding.setText(R.string.pannding);
+            listClicked = "pending";
             TVCancle.setVisibility(View.VISIBLE);
             TVApprove.setVisibility(View.VISIBLE);
             TVComplete.setVisibility(View.VISIBLE);
             orders_RV.setVisibility(View.VISIBLE);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onResume() {
         super.onResume();
@@ -94,21 +100,65 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         canceled_items = new ArrayList<>();
         approve_items = new ArrayList<>();
         complete_items = new ArrayList<>();
-        FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, PanddingrecyclerView, CanclerecyclerView, ApproverecyclerView, CompleterecyclerView);
+        FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
+
+            TVPannding.setOnClickListener(view -> {
+                listClicked = "pending";
+                TVPannding.setTextColor(R.color.appBlueColor);
+                TVCancle.setTextColor(R.color.black);
+                TVComplete.setTextColor(R.color.black);
+                TVApprove.setTextColor(R.color.black);
+                FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
+
+            });
+
+            TVCancle.setOnClickListener(view -> {
+                listClicked = "canceled";
+                TVCancle.setTextColor(R.color.appBlueColor);
+                TVPannding.setTextColor(R.color.black);
+                TVComplete.setTextColor(R.color.black);
+                TVApprove.setTextColor(R.color.black);
+                FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
+
+            });
+
+            TVApprove.setOnClickListener(view -> {
+                listClicked = "approve";
+                TVApprove.setTextColor(R.color.appBlueColor);
+                TVPannding.setTextColor(R.color.black);
+                TVComplete.setTextColor(R.color.black);
+                TVCancle.setTextColor(R.color.black);
+                FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
+
+            });
+
+            TVComplete.setOnClickListener(view -> {
+                listClicked = "complete";
+                TVComplete.setTextColor(R.color.appBlueColor);
+                TVPannding.setTextColor(R.color.black);
+                TVApprove.setTextColor(R.color.black);
+                TVCancle.setTextColor(R.color.black);
+                FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
+
+            });
 
         orders_as_client.setOnClickListener(view -> {
             MyOrders();
             pendding_items = new ArrayList<>();
-            FireStoreDB.getInstance().loadOrdersAsClient(this, user_name, user_type, pendding_items, PanddingrecyclerView);
+            FireStoreDB.getInstance().loadOrdersAsClient(this, user_name, user_type, pendding_items, orders_RV);
         });
         orders_as_business.setOnClickListener(view -> {
             businessOrder();
+            listClicked = "pending";
             pendding_items = new ArrayList<>();
             canceled_items = new ArrayList<>();
             approve_items = new ArrayList<>();
             complete_items = new ArrayList<>();
-            FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, PanddingrecyclerView, CanclerecyclerView, ApproverecyclerView, CompleterecyclerView);
+            FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
         });
+
+
+
     }
 
     @Override

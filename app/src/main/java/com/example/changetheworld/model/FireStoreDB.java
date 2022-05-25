@@ -1297,7 +1297,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> pendding_items, ArrayList<Order> canceled_items,ArrayList<Order> approve_items,ArrayList<Order> complete_items, RecyclerView PanddingrecyclerView,RecyclerView CanclerecyclerView,RecyclerView ApproverecyclerView,RecyclerView CompleterecyclerView) {
+    public void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> pendding_items, ArrayList<Order> canceled_items,ArrayList<Order> approve_items,ArrayList<Order> complete_items, RecyclerView orders_RV,String listClicked) {
         db.collection(user_type)
                 .document(user_name)
                 .collection("OrdersForMe")
@@ -1324,11 +1324,14 @@ public class FireStoreDB implements DataBaseInterface {
                         adapterOrderApprove = new AdapterOrder(context, approve_items, "BusinessOrdersActivity");
                         adapterOrderComplete = new AdapterOrder(context, complete_items, "BusinessOrdersActivity");
 
-                        PanddingrecyclerView.setAdapter(adapterOrderPendding);
-                        ApproverecyclerView.setAdapter(adapterOrderApprove);
-                        CanclerecyclerView.setAdapter(adapterOrderCanceled);
-                        CompleterecyclerView.setAdapter(adapterOrderComplete);
-
+                        if (listClicked.equals("pending"))
+                            orders_RV.setAdapter(adapterOrderPendding);
+                        if (listClicked.equals("canceled"))
+                            orders_RV.setAdapter(adapterOrderCanceled);
+                        if (listClicked.equals("approve"))
+                            orders_RV.setAdapter(adapterOrderApprove);
+                        if (listClicked.equals("complete"))
+                            orders_RV.setAdapter(adapterOrderComplete);
                     });
                 });
     }
