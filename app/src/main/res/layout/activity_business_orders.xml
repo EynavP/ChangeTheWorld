@@ -111,161 +111,72 @@
             android:layout_marginBottom="-20dp"
             android:background="@drawable/rec_items_design" />
 
-        <RelativeLayout
-            android:id="@+id/PanddingRecycler"
+        <LinearLayout
+            android:id="@+id/LL_btns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="179dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="49dp"
-                android:layout_marginEnd="0dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RVPanddingRecycle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </ScrollView>
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/TvPennding"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="30dp"
-                android:background="@color/newGery"
-                android:text="pending" />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/CancleRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/PanddingRecycler"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp">
-
+                android:layout_weight="1"
+                android:fontFamily="@font/comfortaa"
+                android:text="Pending"
+                android:textAlignment="center"
+                android:textColor="@color/appBlueColor" />
 
             <TextView
                 android:id="@+id/TvCancle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="1dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="30dp"
-                android:background="@color/newGery"
-                android:text="@string/decline" />
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="0dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RVCancleRecycle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </ScrollView>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/ApproveRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/CancleRecycler"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp">
-
+                android:layout_weight="1"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/decline"
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/TvApprove"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="1dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="30dp"
-                android:background="@color/newGery"
-                android:text="@string/approve" />
-
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="0dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RVApproveRecycle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </ScrollView>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/CompleteRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ApproveRecycler"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp">
-
+                android:layout_weight="1"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/approve"
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/TvComplete"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="1dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="30dp"
-                android:background="@color/newGery"
+                android:textAlignment="center"
+                android:fontFamily="@font/comfortaa"
+                android:layout_weight="1"
                 android:text="Complete" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orders_RV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/LL_btns"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp" />
 
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="0dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RVCompleteRecycle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </ScrollView>
-        </RelativeLayout>
 
 </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

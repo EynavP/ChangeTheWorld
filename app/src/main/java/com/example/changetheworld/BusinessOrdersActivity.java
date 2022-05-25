@@ -24,10 +24,7 @@ import java.util.ArrayList;
 
 public class BusinessOrdersActivity extends AppCompatActivity implements RecycleSubWalletClickInterface,NavigationView.OnNavigationItemSelectedListener {
 
-    RecyclerView PanddingrecyclerView;
-    RecyclerView CanclerecyclerView;
-    RecyclerView ApproverecyclerView;
-    RecyclerView CompleterecyclerView;
+    RecyclerView orders_RV;
     TextView TVPannding,TVCancle,TVApprove,TVComplete;
     String user_name;
     String user_type;
@@ -47,14 +44,8 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         user_name = getIntent().getStringExtra(getString(R.string.userName));
         user_type = getIntent().getStringExtra("user_type");
 
-        PanddingrecyclerView = findViewById(R.id.RVPanddingRecycle);
-        PanddingrecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        CanclerecyclerView = findViewById(R.id.RVCancleRecycle);
-        CanclerecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ApproverecyclerView = findViewById(R.id.RVApproveRecycle);
-        ApproverecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        CompleterecyclerView = findViewById(R.id.RVCompleteRecycle);
-        CompleterecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        orders_RV = findViewById(R.id.orders_RV);
+        orders_RV.setLayoutManager(new LinearLayoutManager(this));
 
         orders_as_client = findViewById(R.id.my_orders_btn);
         orders_as_business = findViewById(R.id.clients_orders_btn);
@@ -84,9 +75,7 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         TVCancle.setVisibility(View.INVISIBLE);
         TVApprove.setVisibility(View.INVISIBLE);
         TVComplete.setVisibility(View.INVISIBLE);
-        CanclerecyclerView.setVisibility(View.INVISIBLE);
-        ApproverecyclerView.setVisibility(View.INVISIBLE);
-        CompleterecyclerView.setVisibility(View.INVISIBLE);
+        orders_RV.setVisibility(View.INVISIBLE);
     }
 
     public void businessOrder(){
@@ -94,9 +83,7 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
             TVCancle.setVisibility(View.VISIBLE);
             TVApprove.setVisibility(View.VISIBLE);
             TVComplete.setVisibility(View.VISIBLE);
-            CanclerecyclerView.setVisibility(View.VISIBLE);
-            ApproverecyclerView.setVisibility(View.VISIBLE);
-            CompleterecyclerView.setVisibility(View.VISIBLE);
+            orders_RV.setVisibility(View.VISIBLE);
     }
 
     @Override
