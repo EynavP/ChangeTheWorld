@@ -106,7 +106,7 @@ public class EditClientProfileActivity extends AppCompatActivity {
                 toast.show();
             }
             else if (new_password.isEmpty() || !new_password.matches("^[A-Za-z0-9]*$")) {
-                Toast toast = Toast.makeText(this, getString(R.string.password_invalid), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT);
                 toast.show();
             }
             else{

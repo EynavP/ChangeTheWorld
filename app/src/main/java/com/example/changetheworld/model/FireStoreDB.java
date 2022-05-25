@@ -323,7 +323,7 @@ public class FireStoreDB implements DataBaseInterface {
                 }
 
                 ((Activity) context).runOnUiThread(() -> {
-                    items.add(new Wallet(doc_data.get(finalLocal_currency),finalLocal_currency,finalUser_name,currenciesToSymbol.get(finalLocal_currency),doc_data.get(finalLocal_currency),currenciesToSymbol.get(finalLocal_currency)));
+                    items.add(new Wallet(df.format(Float.parseFloat(doc_data.get(finalLocal_currency))),finalLocal_currency,finalUser_name,currenciesToSymbol.get(finalLocal_currency),df.format(Float.parseFloat(doc_data.get(finalLocal_currency))),currenciesToSymbol.get(finalLocal_currency)));
                     sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(doc_data.get(finalLocal_currency)))));
                     AdapterWallet adapterWallet = new AdapterWallet(context, items);
                     recyclerView.setAdapter(adapterWallet);
@@ -351,7 +351,7 @@ public class FireStoreDB implements DataBaseInterface {
                     else{
                         new_balance = Float.parseFloat(documentSnapshot.getString("balance")) - amount_in_foreign_currency;
                         if(new_balance < 0){
-                            Toast.makeText(context, "Cannot Complete Action, Balance below 0",Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Cannot complete action, balance below 0",Toast.LENGTH_LONG).show();
                             return;
                         }
                     }

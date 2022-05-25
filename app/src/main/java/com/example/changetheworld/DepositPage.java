@@ -115,32 +115,30 @@ public class DepositPage extends AppCompatActivity {
 
 
             if (from.isEmpty() || Float.parseFloat(from) <= 0){
-                Toast toast = Toast.makeText(this, R.string.from_invalid,Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, "Invalid from amount",Toast.LENGTH_LONG);
                 toast.show();
             }
             else if (cardNumber.isEmpty()){
-                Toast toast = Toast.makeText(this, R.string.carnNumber_invalid,Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, "Invalid card number",Toast.LENGTH_LONG);
                 toast.show();
             }
             else if (ownerName.isEmpty() || !ownerName.matches("[a-zA-z\\s]*$")){
-                Toast toast = Toast.makeText(this, R.string.ownerName_invalid,Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, "Invalid owner name",Toast.LENGTH_LONG);
                 toast.show();
             }
             else if (ownerId.isEmpty()){
-                Toast toast = Toast.makeText(this, R.string.ownerId_invalid,Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, "Invalid owner id",Toast.LENGTH_LONG);
                 toast.show();
             }
             else if (expireDate.isEmpty() || YearMonth.now(ZoneId.systemDefault()).isAfter(lastValidMonth)){
-                Toast toast = Toast.makeText(this, R.string.expireDate_invalid,Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, "Invalid expire date",Toast.LENGTH_LONG);
                 toast.show();
             }
             else if (cvv.isEmpty() || cvv.length() != 3){
-                Toast toast = Toast.makeText(this, R.string.cvv_invalid,Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, "Invalid cvv",Toast.LENGTH_LONG);
                 toast.show();
             }
             else if (to == null || to.isEmpty()){
-                Toast toast = Toast.makeText(this, R.string.invalid_deposite_amount,Toast.LENGTH_LONG);
-                toast.show();
             }
             else {
                 Intent intent = new Intent(this, SubWallet.class);
@@ -151,7 +149,7 @@ public class DepositPage extends AppCompatActivity {
                 FireStoreDB.getInstance().updateBalance(userName, userType, subWalletName, Float.parseFloat(to), "+", this, intent);
             }
             } catch (DateTimeParseException dtpe) {
-                Toast toast = Toast.makeText(this, R.string.expireDate_invalid,Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, "Invalid expire date",Toast.LENGTH_LONG);
                 toast.show();
             }
         });

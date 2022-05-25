@@ -102,24 +102,22 @@ public class WithdrawPage extends AppCompatActivity {
 
 
                 if (from.isEmpty() || Float.parseFloat(from) <= 0){
-                    Toast toast = Toast.makeText(this, R.string.from_invalid,Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(this, "Invalid from amount",Toast.LENGTH_LONG);
                     toast.show();
                 }
                 else if (bankName.isEmpty()){
-                    Toast toast = Toast.makeText(this, R.string.bankName_invalid ,Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(this, "Invalid bank name" ,Toast.LENGTH_LONG);
                     toast.show();
                 }
                 else if (swiftCode.isEmpty() || !swiftCode.matches("^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$")){
-                    Toast toast = Toast.makeText(this, R.string.swiftCode_invalid,Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(this, "Invalid swift code",Toast.LENGTH_LONG);
                     toast.show();
                 }
                 else if (accountNumber.isEmpty()){
-                    Toast toast = Toast.makeText(this, R.string.accountNumber_invalid,Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(this, "Invalid account number",Toast.LENGTH_LONG);
                     toast.show();
                 }
                 else if (to == null || to.isEmpty()){
-                    Toast toast = Toast.makeText(this, R.string.invalid_deposite_amount,Toast.LENGTH_LONG);
-                    toast.show();
                 }
                 else {
                     Intent intent = new Intent(this, SubWallet.class);
