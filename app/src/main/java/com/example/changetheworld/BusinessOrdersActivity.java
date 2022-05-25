@@ -75,7 +75,7 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
     }
 
     public void MyOrders(){
-        TVPannding.setText(R.string.my_Orders);
+        TVPannding.setText("");
         TVCancle.setVisibility(View.INVISIBLE);
         TVApprove.setVisibility(View.INVISIBLE);
         TVComplete.setVisibility(View.INVISIBLE);
@@ -104,40 +104,40 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
 
             TVPannding.setOnClickListener(view -> {
                 listClicked = "pending";
-                TVPannding.setTextColor(R.color.appBlueColor);
-                TVCancle.setTextColor(R.color.black);
-                TVComplete.setTextColor(R.color.black);
-                TVApprove.setTextColor(R.color.black);
+                TVPannding.setTextColor(Color.BLUE);
+                TVCancle.setTextColor(Color.BLACK);
+                TVComplete.setTextColor(Color.BLACK);
+                TVApprove.setTextColor(Color.BLACK);
                 FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
 
             });
 
             TVCancle.setOnClickListener(view -> {
                 listClicked = "canceled";
-                TVCancle.setTextColor(R.color.appBlueColor);
-                TVPannding.setTextColor(R.color.black);
-                TVComplete.setTextColor(R.color.black);
-                TVApprove.setTextColor(R.color.black);
+                TVCancle.setTextColor(Color.BLUE);
+                TVPannding.setTextColor(Color.BLACK);
+                TVComplete.setTextColor(Color.BLACK);
+                TVApprove.setTextColor(Color.BLACK);
                 FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
 
             });
 
             TVApprove.setOnClickListener(view -> {
                 listClicked = "approve";
-                TVApprove.setTextColor(R.color.appBlueColor);
-                TVPannding.setTextColor(R.color.black);
-                TVComplete.setTextColor(R.color.black);
-                TVCancle.setTextColor(R.color.black);
+                TVApprove.setTextColor(Color.BLUE);
+                TVPannding.setTextColor(Color.BLACK);
+                TVComplete.setTextColor(Color.BLACK);
+                TVCancle.setTextColor(Color.BLACK);
                 FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
 
             });
 
             TVComplete.setOnClickListener(view -> {
                 listClicked = "complete";
-                TVComplete.setTextColor(R.color.appBlueColor);
-                TVPannding.setTextColor(R.color.black);
-                TVApprove.setTextColor(R.color.black);
-                TVCancle.setTextColor(R.color.black);
+                TVComplete.setTextColor(Color.BLUE);
+                TVPannding.setTextColor(Color.BLACK);
+                TVApprove.setTextColor(Color.BLACK);
+                TVCancle.setTextColor(Color.BLACK);
                 FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
 
             });
