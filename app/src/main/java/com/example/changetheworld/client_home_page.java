@@ -106,7 +106,7 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                bar_text.setText("KM "+ i) ;
+                bar_text.setText(i + " KM") ;
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) { }

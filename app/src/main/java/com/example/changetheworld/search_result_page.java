@@ -61,7 +61,7 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
         }
         String searchQuery = getIntent().getStringExtra("searchQuery");
         String radius = getIntent().getStringExtra("radius");
-        radius = radius.substring(3);
+        radius = radius.substring(0, radius.length() -3);
         FireStoreDB.getInstance().searchChange(searchQuery, radius, recyclerView, this, progressBar, filter_list);
     }
 

@@ -173,7 +173,7 @@ public class OrderPage extends AppCompatActivity {
             try {
                 order_date =  sdf.parse(date);
             } catch (ParseException e) {
-                e.printStackTrace();
+                Toast.makeText(this, "Please enter date",Toast.LENGTH_SHORT).show();
             }
 
 

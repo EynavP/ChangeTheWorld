@@ -57,7 +57,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="165dp"
+                    android:layout_marginTop="167dp"
                     android:layout_marginEnd="62dp"
                     android:layout_toStartOf="@+id/currencies_rates_btn"
                     android:background="@drawable/order_icon_2"
@@ -404,7 +404,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="230dp"
-                    android:layout_marginTop="422dp"
+                    android:layout_marginTop="495dp"
                     android:layout_marginEnd="77dp" />
 
                 <TextView
@@ -427,7 +427,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="230dp"
-                    android:layout_marginTop="469dp"
+                    android:layout_marginTop="544dp"
                     android:layout_marginEnd="77dp" />
 
                 <TextView
@@ -437,9 +437,9 @@
                     android:layout_below="@+id/fridayHours"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="231dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="76dp" />
+                    android:layout_marginStart="230dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="77dp" />
 
 
             </RelativeLayout>
