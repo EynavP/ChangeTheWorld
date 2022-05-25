@@ -3,7 +3,6 @@ package com.example.changetheworld;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.core.view.GravityCompat;
@@ -14,18 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.Wallet;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+import android.app.*;
 
 
 public class WalletActivity extends AppCompatActivity implements RecycleSubWalletClickInterface, NavigationView.OnNavigationItemSelectedListener {
