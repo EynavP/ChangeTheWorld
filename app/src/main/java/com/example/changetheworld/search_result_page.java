@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.Search;
@@ -22,6 +24,8 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
     ArrayList<Search> filter_list;
     String user_name;
     String user_type;
+    Spinner To_Currency_Spinner;
+    Spinner From_Currency_Spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,15 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
         filter_list = new ArrayList<>();
         user_name = getIntent().getStringExtra(getString(R.string.client_user_name));
         user_type = getIntent().getStringExtra("user_type");
+
+        To_Currency_Spinner = (Spinner) findViewById(R.id.SpinnerTo);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        adapter.addAll(FireStoreDB.getInstance().currenciesToSymbol.keySet());
+        To_Currency_Spinner.setAdapter(adapter);
+
+        From_Currency_Spinner = (Spinner) findViewById(R.id.SpinnerFrom);
+        From_Currency_Spinner.setAdapter(adapter);
+
         if(progressBar.getVisibility() != View.INVISIBLE) {
             progressBar.setVisibility(View.VISIBLE);
         }
