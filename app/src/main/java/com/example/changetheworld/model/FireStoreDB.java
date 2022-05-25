@@ -376,8 +376,10 @@ public class FireStoreDB implements DataBaseInterface {
                                         .document()
                                         .set(transactionData)
                                         .addOnSuccessListener(unused1 -> {
-                                            if (intent != null)
+                                            if (intent != null) {
+                                                intent.putExtra("subWalletBalance",df.format(new_balance));
                                                 context.startActivity(intent);
+                                            }
                                         })
                                         .addOnFailureListener(e -> {
                                             Toast.makeText(context, "Cannot add transaction",Toast.LENGTH_LONG).show();
