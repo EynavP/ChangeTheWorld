@@ -65,9 +65,11 @@
 
             <TextView
                 android:id="@+id/AddressRec"
-                android:layout_width="238dp"
-                android:layout_height="31dp"
+                android:layout_width="303dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginRight="5dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/businessAddress"
                 android:textSize="16sp"
