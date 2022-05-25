@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -98,6 +99,44 @@ public class OrderPage extends AppCompatActivity {
         adapter.addAll(FireStoreDB.getInstance().currenciesToSymbol.keySet());
         from.setAdapter(adapter);
         to.setAdapter(adapter);
+
+        to.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(!amount.getText().toString().isEmpty() && !from.getSelectedItem().toString().equals(to.getSelectedItem().toString())){
+                    FireStoreDB.getInstance().calculateChangeRate(OrderPage.this, business_user_name, from.getSelectedItem().toString(),
+                            to.getSelectedItem().toString(), Float.parseFloat(amount.getText().toString()), receive);
+                }
+                else if(amount.getText().toString().isEmpty()){
+                    receive.setText("");
+                    Toast.makeText(OrderPage.this, getString(R.string.Amount_shouldnt_be_zero) , Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(OrderPage.this, getString(R.string.currencies_must_be_diffrent), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) { }
+        });
+
+        from.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(!amount.getText().toString().isEmpty() && !from.getSelectedItem().toString().equals(to.getSelectedItem().toString())){
+                    FireStoreDB.getInstance().calculateChangeRate(OrderPage.this, business_user_name, from.getSelectedItem().toString(),
+                            to.getSelectedItem().toString(), Float.parseFloat(amount.getText().toString()), receive);
+                }
+                else if(amount.getText().toString().isEmpty()){
+                    receive.setText("");
+                    Toast.makeText(OrderPage.this, getString(R.string.Amount_shouldnt_be_zero) , Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(OrderPage.this, getString(R.string.currencies_must_be_diffrent), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) { }
+        });
 
         amount.addTextChangedListener(new TextWatcher() {
             @Override
