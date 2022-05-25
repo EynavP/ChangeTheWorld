@@ -30,6 +30,7 @@ import com.example.changetheworld.BusinessProfileActivity;
 import com.example.changetheworld.OrderConfirm;
 import com.example.changetheworld.OrderPage;
 import com.example.changetheworld.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -45,6 +46,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -1475,6 +1477,35 @@ public class FireStoreDB implements DataBaseInterface {
         tasks.add(update_business_task);
         tasks.add(update_client_task);
         Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {}).addOnFailureListener(e -> Toast.makeText(context, "Failed to update order status", Toast.LENGTH_LONG).show());
+    }
+
+    @Override
+    public void SortByPrice(ArrayList<Search> filter_list, String from_currency, String to_currency, RecyclerView recyclerView) {
+        if(filter_list.size() > 1 && !from_currency.equals(to_currency)){
+            List<Task> tasks = new ArrayList<>();
+            HashMap<String, Float> change_to_comission = new HashMap<>();
+            for (Search s: filter_list) {
+                Task tmp = db.collection("BusinessClient")
+                        .document(s.userName)
+                        .collection("currencyComission")
+                        .document(from_currency + '*' + to_currency)
+                        .get();
+                tasks.add(tmp);
+            }
+            Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
+                for (int i = 0; i < objects.size(); i++){
+                    DocumentSnapshot tmp = (DocumentSnapshot) objects.get(i);
+                    change_to_comission.put(filter_list.get(i).userName, Float.valueOf(tmp.getString(from_currency + to_currency)));
+                }
+                Collections.sort(filter_list, (o1, o2) -> {
+                    if (change_to_comission.get(o1.userName) < change_to_comission.get(o2.userName)){
+                        return -1;
+                    }
+                    else {return 1; }
+                });
+                recyclerView.getAdapter().notifyDataSetChanged();
+            });
+        }
     }
 
 

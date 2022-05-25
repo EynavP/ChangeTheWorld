@@ -154,24 +154,7 @@
                 android:inputType="textPassword"
                 android:paddingStart="20dp" />
 
-            <Button
-                android:id="@+id/forgotPass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/editTextTextPassword"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="197dp"
-                android:layout_marginLeft="197dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="43dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:fontFamily="@font/comfortaa"
-                android:text="@string/forgot_pass"
-                android:textAppearance="@style/forgot_pass"
-                android:textColor="@color/black"
-                android:textSize="13sp" />
+
 
         </RelativeLayout>
 

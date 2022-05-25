@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
@@ -26,6 +27,7 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
     String user_type;
     Spinner To_Currency_Spinner;
     Spinner From_Currency_Spinner;
+    Button sort_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,15 @@ public class search_result_page extends AppCompatActivity implements RecycleSubW
         filter_list = new ArrayList<>();
         user_name = getIntent().getStringExtra(getString(R.string.client_user_name));
         user_type = getIntent().getStringExtra("user_type");
+        sort_btn = findViewById(R.id.BtnSort);
+        sort_btn.setOnClickListener(view -> {
+            if(filter_list.size() > 0){
+                String from_currency = From_Currency_Spinner.getSelectedItem().toString();
+                String to_currency = To_Currency_Spinner.getSelectedItem().toString();
+                FireStoreDB.getInstance().SortByPrice(filter_list, from_currency, to_currency, recyclerView);
+            }
+        });
+
 
         To_Currency_Spinner = (Spinner) findViewById(R.id.SpinnerTo);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);

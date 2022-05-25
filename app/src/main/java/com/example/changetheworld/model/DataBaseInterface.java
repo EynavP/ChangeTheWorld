@@ -83,4 +83,6 @@ public interface DataBaseInterface {
     void loadBusinessRate(String user_name, RatingBar ratingBar, TextView number_of_rates_value);
 
     void CompleteOrder(Context context, String order_id);
+
+    void SortByPrice(ArrayList<Search> filter_list, String from_currency, String to_currency, RecyclerView recyclerView);
 }
