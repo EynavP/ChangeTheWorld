@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,7 +45,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
         viewHolder.businessName.setText(businessName);
 
         String rate = data.get(i).getRate();
-        viewHolder.rate.setText(rate);
+        viewHolder.ratingBar.setRating(Float.parseFloat(rate));
 
         String distance = data.get(i).getDistance()+"KM";
         viewHolder.distance.setText(distance);
@@ -58,30 +59,26 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
     @Override
     public int getItemCount() {
-        Log.d("Yuval", "getItemCount: " + data.size());
         return data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView businessName,rate,distance,openClose,businessAddress;
+        TextView businessName,distance,openClose,businessAddress;
+        RatingBar ratingBar;
 
         public ViewHolder(@NonNull View itemView, RecycleSubWalletClickInterface recycleSubWalletClickInterface) {
             super(itemView);
             businessName=itemView.findViewById(R.id.businessNameRec);
-            rate=itemView.findViewById(R.id.rateRec);
+            ratingBar=itemView.findViewById(R.id.ratingBar);
             distance=itemView.findViewById(R.id.distanceRec);
             openClose=itemView.findViewById(R.id.open_close);
             businessAddress=itemView.findViewById(R.id.AddressRec);
-            itemView.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View view) {
-                    if(recycleSubWalletClickInterface!=null){
-                        int position=getAdapterPosition();
-                        if(position!=RecyclerView.NO_POSITION){
-                            recycleSubWalletClickInterface.onItemClick(position, "");
-                        }
+            itemView.setOnClickListener(view -> {
+                if(recycleSubWalletClickInterface!=null){
+                    int position=getAdapterPosition();
+                    if(position!=RecyclerView.NO_POSITION){
+                        recycleSubWalletClickInterface.onItemClick(position, "");
                     }
                 }
             });
