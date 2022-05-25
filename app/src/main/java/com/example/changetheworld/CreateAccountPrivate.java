@@ -87,15 +87,15 @@ public class CreateAccountPrivate extends AppCompatActivity {
                 toast.show();
             }
             else if (user_name.isEmpty() || user_name.contains(" ")){
-                Toast toast = Toast.makeText(this, getString(R.string.user_name_invalid), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "Invalid username", Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (password.isEmpty() || !password.matches("^[A-Za-z0-9]*$")){
-                Toast toast = Toast.makeText(this, getString(R.string.password_invalid), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (personal_chosen_photo == null){
-                Toast toast = Toast.makeText(this, getString(R.string.Invalid_personal_picture), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "Invalid profile photo", Toast.LENGTH_SHORT);
                 toast.show();
             }
 //            else if (passport_chosen_photo == null){
