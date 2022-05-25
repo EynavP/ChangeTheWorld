@@ -378,9 +378,10 @@ public class FireStoreDB implements DataBaseInterface {
                                         .document()
                                         .set(transactionData)
                                         .addOnSuccessListener(unused1 -> {
-                                            Toast.makeText(context, action.equals("+") ? "deposit" : "withdraw" + " succeeded", Toast.LENGTH_LONG).show();
-                                            if (intent != null)
+                                            if (intent != null) {
+                                                intent.putExtra("subWalletBalance",df.format(new_balance));
                                                 context.startActivity(intent);
+                                            }
                                         })
                                         .addOnFailureListener(e -> {
                                             Toast.makeText(context, "Cannot add transaction",Toast.LENGTH_LONG).show();
@@ -1298,7 +1299,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> pendding_items, ArrayList<Order> canceled_items,ArrayList<Order> approve_items,ArrayList<Order> complete_items, RecyclerView PanddingrecyclerView,RecyclerView CanclerecyclerView,RecyclerView ApproverecyclerView,RecyclerView CompleterecyclerView) {
+    public void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> pendding_items, ArrayList<Order> canceled_items,ArrayList<Order> approve_items,ArrayList<Order> complete_items, RecyclerView orders_RV,String listClicked) {
         db.collection(user_type)
                 .document(user_name)
                 .collection("OrdersForMe")
@@ -1325,11 +1326,14 @@ public class FireStoreDB implements DataBaseInterface {
                         adapterOrderApprove = new AdapterOrder(context, approve_items, "BusinessOrdersActivity");
                         adapterOrderComplete = new AdapterOrder(context, complete_items, "BusinessOrdersActivity");
 
-                        PanddingrecyclerView.setAdapter(adapterOrderPendding);
-                        ApproverecyclerView.setAdapter(adapterOrderApprove);
-                        CanclerecyclerView.setAdapter(adapterOrderCanceled);
-                        CompleterecyclerView.setAdapter(adapterOrderComplete);
-
+                        if (listClicked.equals("pending"))
+                            orders_RV.setAdapter(adapterOrderPendding);
+                        if (listClicked.equals("canceled"))
+                            orders_RV.setAdapter(adapterOrderCanceled);
+                        if (listClicked.equals("approve"))
+                            orders_RV.setAdapter(adapterOrderApprove);
+                        if (listClicked.equals("complete"))
+                            orders_RV.setAdapter(adapterOrderComplete);
                     });
                 });
     }
@@ -1347,7 +1351,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void loadBusinessOrder(String orderID,String user_name,TextView order_status_value,TextView amount_value, TextView currency_name_value,TextView receive_value, TextView to_currency_name_value, TextView payment_method_value,TextView client_name_value, TextView phone_value,TextView pickup_date_value) {
+    public void loadBusinessOrder(String orderID, String user_name, TextView order_status_value, TextView amount_value, TextView currency_name_value, TextView receive_value, TextView to_currency_name_value, TextView payment_method_value, TextView client_name_value, TextView phone_value, TextView pickup_date_value, Button approve_btn, Button cancel_btn, Button scan_btn) {
         db.collection("BusinessClient")
                 .document(user_name)
                 .collection("OrdersForMe")
@@ -1365,6 +1369,15 @@ public class FireStoreDB implements DataBaseInterface {
 
                     String client_user_name = documentSnapshot.getString("id").split("\\*")[0];
 
+                    if (!order_status_value.getText().toString().equals("pending")){
+                        approve_btn.setVisibility(View.INVISIBLE);
+                        cancel_btn.setVisibility(View.INVISIBLE);
+                    }
+
+                    if (!order_status_value.getText().toString().equals("complete")){
+                        scan_btn.setVisibility(View.INVISIBLE);
+                    }
+
                     db.collection(documentSnapshot.getString("client_type"))
                             .document(client_user_name)
                             .get()
@@ -1375,8 +1388,34 @@ public class FireStoreDB implements DataBaseInterface {
                 });
     }
 
+    private void refundUser(String client_user_name, TextView amount_value, TextView currency_name_value, Context context) {
+        AtomicReference<String> user_type = new AtomicReference<>();
+        Task<DocumentSnapshot> task_client = db.collection("PrivateClient")
+                .document(client_user_name)
+                .get();
+
+        Task<DocumentSnapshot> task_business = db.collection("BusinessClient")
+                .document(client_user_name)
+                .get();
+
+        List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
+        tasks.add(task_client);
+        tasks.add(task_business);
+
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
+            DocumentSnapshot client = (DocumentSnapshot) objects.get(0);
+            if (client.exists()) {
+                user_type.set("PrivateClient");
+            } else {
+                user_type.set("BusinessClient");
+            }
+            updateBalance(client_user_name, user_type.get(), currency_name_value.getText().toString() , Float.parseFloat(amount_value.getText().toString()), "+", context, null);
+
+        });
+    }
+
     @Override
-    public void changeOrderStatus(String orderID, String user_name, String new_status, Context context, TextView order_status_value, Button approve_btn, Button cancel_btn) {
+    public void changeOrderStatus(String orderID, String user_name, String new_status, Context context, TextView order_status_value, Button approve_btn, Button cancel_btn, TextView payment_method_value, TextView amount_value,TextView currency_name_value) {
         String business_user_name = orderID.split("\\*")[1];
         String client_user_name = orderID.split("\\*")[0];
         ArrayList<Task> tasks = new ArrayList<>();
@@ -1394,6 +1433,12 @@ public class FireStoreDB implements DataBaseInterface {
                     if (!order_status_value.equals("pending")){
                         approve_btn.setVisibility(View.INVISIBLE);
                         cancel_btn.setVisibility(View.INVISIBLE);
+                        if (order_status_value.getText().toString().equals("canceled") && !payment_method_value.getText().toString().equals("cash")){
+                            refundUser(client_user_name, amount_value, currency_name_value, context);
+                        }
+                        else{
+                            updateBalance(user_name, "BusinessClient", currency_name_value.getText().toString() , Float.parseFloat(amount_value.getText().toString()), "+", context, null);
+                        }
                     }
                 });
         Task<Void> update_client = db.collection("PrivateClient")
@@ -1507,7 +1552,6 @@ public class FireStoreDB implements DataBaseInterface {
             });
         }
     }
-
 
     public void LoadOrdersStatus(Context context, TextView orders_for_today, TextView new_orders, TextView cash_orders, String user_type, String user_name) {
         db.collection(user_type)

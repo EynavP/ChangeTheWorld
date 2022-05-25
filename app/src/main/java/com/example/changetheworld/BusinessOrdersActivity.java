@@ -9,7 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,10 +26,7 @@ import java.util.ArrayList;
 
 public class BusinessOrdersActivity extends AppCompatActivity implements RecycleSubWalletClickInterface,NavigationView.OnNavigationItemSelectedListener {
 
-    RecyclerView PanddingrecyclerView;
-    RecyclerView CanclerecyclerView;
-    RecyclerView ApproverecyclerView;
-    RecyclerView CompleterecyclerView;
+    RecyclerView orders_RV;
     TextView TVPannding,TVCancle,TVApprove,TVComplete;
     String user_name;
     String user_type;
@@ -36,6 +35,8 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
     Toolbar toolbar;
     ArrayList<Order> pendding_items, canceled_items, approve_items, complete_items;
     Button orders_as_client, orders_as_business;
+    String listClicked = "pending";
+
 
 
     @Override
@@ -47,14 +48,8 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         user_name = getIntent().getStringExtra(getString(R.string.userName));
         user_type = getIntent().getStringExtra("user_type");
 
-        PanddingrecyclerView = findViewById(R.id.RVPanddingRecycle);
-        PanddingrecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        CanclerecyclerView = findViewById(R.id.RVCancleRecycle);
-        CanclerecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ApproverecyclerView = findViewById(R.id.RVApproveRecycle);
-        ApproverecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        CompleterecyclerView = findViewById(R.id.RVCompleteRecycle);
-        CompleterecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        orders_RV = findViewById(R.id.orders_RV);
+        orders_RV.setLayoutManager(new LinearLayoutManager(this));
 
         orders_as_client = findViewById(R.id.my_orders_btn);
         orders_as_business = findViewById(R.id.clients_orders_btn);
@@ -84,21 +79,19 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         TVCancle.setVisibility(View.INVISIBLE);
         TVApprove.setVisibility(View.INVISIBLE);
         TVComplete.setVisibility(View.INVISIBLE);
-        CanclerecyclerView.setVisibility(View.INVISIBLE);
-        ApproverecyclerView.setVisibility(View.INVISIBLE);
-        CompleterecyclerView.setVisibility(View.INVISIBLE);
+        orders_RV.setVisibility(View.INVISIBLE);
     }
 
     public void businessOrder(){
             TVPannding.setText(R.string.pannding);
+            listClicked = "pending";
             TVCancle.setVisibility(View.VISIBLE);
             TVApprove.setVisibility(View.VISIBLE);
             TVComplete.setVisibility(View.VISIBLE);
-            CanclerecyclerView.setVisibility(View.VISIBLE);
-            ApproverecyclerView.setVisibility(View.VISIBLE);
-            CompleterecyclerView.setVisibility(View.VISIBLE);
+            orders_RV.setVisibility(View.VISIBLE);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onResume() {
         super.onResume();
@@ -107,21 +100,65 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         canceled_items = new ArrayList<>();
         approve_items = new ArrayList<>();
         complete_items = new ArrayList<>();
-        FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, PanddingrecyclerView, CanclerecyclerView, ApproverecyclerView, CompleterecyclerView);
+        FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
+
+            TVPannding.setOnClickListener(view -> {
+                listClicked = "pending";
+                TVPannding.setTextColor(R.color.appBlueColor);
+                TVCancle.setTextColor(R.color.black);
+                TVComplete.setTextColor(R.color.black);
+                TVApprove.setTextColor(R.color.black);
+                FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
+
+            });
+
+            TVCancle.setOnClickListener(view -> {
+                listClicked = "canceled";
+                TVCancle.setTextColor(R.color.appBlueColor);
+                TVPannding.setTextColor(R.color.black);
+                TVComplete.setTextColor(R.color.black);
+                TVApprove.setTextColor(R.color.black);
+                FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
+
+            });
+
+            TVApprove.setOnClickListener(view -> {
+                listClicked = "approve";
+                TVApprove.setTextColor(R.color.appBlueColor);
+                TVPannding.setTextColor(R.color.black);
+                TVComplete.setTextColor(R.color.black);
+                TVCancle.setTextColor(R.color.black);
+                FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
+
+            });
+
+            TVComplete.setOnClickListener(view -> {
+                listClicked = "complete";
+                TVComplete.setTextColor(R.color.appBlueColor);
+                TVPannding.setTextColor(R.color.black);
+                TVApprove.setTextColor(R.color.black);
+                TVCancle.setTextColor(R.color.black);
+                FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
+
+            });
 
         orders_as_client.setOnClickListener(view -> {
             MyOrders();
             pendding_items = new ArrayList<>();
-            FireStoreDB.getInstance().loadOrdersAsClient(this, user_name, user_type, pendding_items, PanddingrecyclerView);
+            FireStoreDB.getInstance().loadOrdersAsClient(this, user_name, user_type, pendding_items, orders_RV);
         });
         orders_as_business.setOnClickListener(view -> {
             businessOrder();
+            listClicked = "pending";
             pendding_items = new ArrayList<>();
             canceled_items = new ArrayList<>();
             approve_items = new ArrayList<>();
             complete_items = new ArrayList<>();
-            FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, PanddingrecyclerView, CanclerecyclerView, ApproverecyclerView, CompleterecyclerView);
+            FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
         });
+
+
+
     }
 
     @Override
@@ -136,14 +173,18 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         else {
             Intent intent = new Intent(this, OrderDetails.class);
             intent.putExtra("user_name",user_name);
-            if (recycle_id.equals("pending"))
+            if (recycle_id.equals("pending")) {
                 intent.putExtra("orderID", pendding_items.get(position).getId());
-            if (recycle_id.equals("canceled"))
+            }
+            if (recycle_id.equals("canceled")) {
                 intent.putExtra("orderID", canceled_items.get(position).getId());
-            if (recycle_id.equals("approve"))
+            }
+            if (recycle_id.equals("approve")) {
                 intent.putExtra("orderID", approve_items.get(position).getId());
-            if (recycle_id.equals("complete"))
+            }
+            if (recycle_id.equals("complete")) {
                 intent.putExtra("orderID", complete_items.get(position).getId());
+            }
             startActivity(intent);
         }
     }

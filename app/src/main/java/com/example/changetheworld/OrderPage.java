@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -22,6 +23,7 @@ import com.example.changetheworld.model.FireStoreDB;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -98,6 +100,44 @@ public class OrderPage extends AppCompatActivity {
         from.setAdapter(adapter);
         to.setAdapter(adapter);
 
+        to.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(!amount.getText().toString().isEmpty() && !from.getSelectedItem().toString().equals(to.getSelectedItem().toString())){
+                    FireStoreDB.getInstance().calculateChangeRate(OrderPage.this, business_user_name, from.getSelectedItem().toString(),
+                            to.getSelectedItem().toString(), Float.parseFloat(amount.getText().toString()), receive);
+                }
+                else if(amount.getText().toString().isEmpty()){
+                    receive.setText("");
+                    Toast.makeText(OrderPage.this, getString(R.string.Amount_shouldnt_be_zero) , Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(OrderPage.this, getString(R.string.currencies_must_be_diffrent), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) { }
+        });
+
+        from.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(!amount.getText().toString().isEmpty() && !from.getSelectedItem().toString().equals(to.getSelectedItem().toString())){
+                    FireStoreDB.getInstance().calculateChangeRate(OrderPage.this, business_user_name, from.getSelectedItem().toString(),
+                            to.getSelectedItem().toString(), Float.parseFloat(amount.getText().toString()), receive);
+                }
+                else if(amount.getText().toString().isEmpty()){
+                    receive.setText("");
+                    Toast.makeText(OrderPage.this, getString(R.string.Amount_shouldnt_be_zero) , Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(OrderPage.this, getString(R.string.currencies_must_be_diffrent), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) { }
+        });
+
         amount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -128,7 +168,7 @@ public class OrderPage extends AppCompatActivity {
             String date = pickup_date.getText().toString();
             String business_address = pick_from.getText().toString();
             Date order_date = null;
-            Date current_date = new Date();
+            Date current_date = new Date(System.currentTimeMillis()-24*60*60*1000);;
 
             try {
                 order_date =  sdf.parse(date);
