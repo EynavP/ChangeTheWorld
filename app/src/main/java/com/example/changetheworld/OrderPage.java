@@ -22,6 +22,7 @@ import com.example.changetheworld.model.FireStoreDB;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -128,7 +129,7 @@ public class OrderPage extends AppCompatActivity {
             String date = pickup_date.getText().toString();
             String business_address = pick_from.getText().toString();
             Date order_date = null;
-            Date current_date = new Date();
+            Date current_date = new Date(System.currentTimeMillis()-24*60*60*1000);;
 
             try {
                 order_date =  sdf.parse(date);
