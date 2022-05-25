@@ -523,7 +523,8 @@ public class FireStoreDB implements DataBaseInterface {
                         List<DocumentSnapshot> business1 = queryDocumentSnapshots1.getDocuments();
                         ArrayList<Search> searchBusinessClients = new ArrayList<>();
                         for (int i = 0; i < business1.size(); i++) {
-                            Search tmp = new Search(business1.get(i).getString("user_name"), business1.get(i).getString("business_name"), "5",
+                            String rate = business1.get(i).getString("rate") != null ? business1.get(i).getString("rate") : "0";
+                            Search tmp = new Search(business1.get(i).getString("user_name"), business1.get(i).getString("business_name"), rate,
                                     open_close_business.get(business1.get(i).getString("user_name")), business1.get(i).getString("address"));
                             searchBusinessClients.add(tmp);
                         }
