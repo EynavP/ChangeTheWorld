@@ -131,7 +131,7 @@
                 android:fontFamily="@font/comfortaa"
                 android:text="Pending"
                 android:textAlignment="center"
-                android:textColor="@color/appBlueColor" />
+                android:textColor="#3F51B5" />
 
             <TextView
                 android:id="@+id/TvCancle"
@@ -140,7 +140,8 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/decline"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/TvApprove"
@@ -151,7 +152,8 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/approve"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/TvComplete"
@@ -162,19 +164,28 @@
                 android:textAlignment="center"
                 android:fontFamily="@font/comfortaa"
                 android:layout_weight="1"
-                android:text="Complete" />
+                android:text="Complete"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/orders_RV"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/LL_btns"
+            android:layout_alignBottom="@+id/rectangle_6"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
             android:layout_marginStart="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="0dp" />
+            android:layout_marginBottom="409dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/orders_RV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/LL_btns"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="15dp" />
+        </ScrollView>
 
 
 
