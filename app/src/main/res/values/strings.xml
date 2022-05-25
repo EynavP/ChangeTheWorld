@@ -178,6 +178,9 @@
     <string name="messageRate4">Great! Thank you!</string>
     <string name="messageRate5">Awesome! You are the best!</string>
     <string name="your_rate">Your Rate</string>
+    <string name="From_Currency">From Currency</string>
+    <string name="To_Currency">To Currency</string>
+    <string name="sort">Sort</string>
 
 
 </resources>
