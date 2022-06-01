@@ -114,7 +114,9 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
             }
         });
         bar = findViewById(R.id.seekBar);
+        bar.setProgress(50);
         bar_text = findViewById(R.id.seekBarText);
+        bar_text.setText("50 KM");
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {

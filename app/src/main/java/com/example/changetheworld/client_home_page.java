@@ -103,6 +103,8 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         navigationView.setNavigationItemSelectedListener(this);
         bar = findViewById(R.id.seekBar);
         bar_text = findViewById(R.id.seekBarText);
+        bar.setProgress(50);
+        bar_text.setText("50 KM");
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
