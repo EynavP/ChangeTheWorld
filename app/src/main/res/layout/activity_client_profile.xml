@@ -332,10 +332,11 @@
                 android:layout_height="50dp"
                 android:layout_below="@+id/phone_icon"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="46dp"
                 android:layout_marginTop="41dp"
-                android:layout_marginEnd="298dp"
+                android:layout_marginEnd="315dp"
                 android:layout_marginBottom="202dp"
                 app:srcCompat="@drawable/currency_icon" />
 
