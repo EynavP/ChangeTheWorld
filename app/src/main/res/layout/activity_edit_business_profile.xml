@@ -586,15 +586,15 @@
                 android:layout_marginEnd="160dp"
                 android:text="@string/update" />
 
-            <Button
+            <TextView
                 android:id="@+id/businessApprovalDoc"
                 android:layout_width="138dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="42dp"
+                android:layout_marginStart="49dp"
                 android:layout_marginLeft="78dp"
-                android:layout_marginTop="793dp"
+                android:layout_marginTop="801dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:fontFamily="@font/comfortaa"
                 android:paddingStart="35dp"
@@ -615,15 +615,15 @@
                 android:clickable="true"
                 app:srcCompat="@drawable/uploadfile" />
 
-            <Button
+            <TextView
                 android:id="@+id/businessOwnerId"
                 android:layout_width="152dp"
                 android:layout_height="58dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="211dp"
+                android:layout_marginStart="233dp"
                 android:layout_marginLeft="71dp"
-                android:layout_marginTop="790dp"
+                android:layout_marginTop="805dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:fontFamily="@font/comfortaa"
                 android:paddingStart="35dp"
