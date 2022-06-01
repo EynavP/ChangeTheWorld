@@ -3,13 +3,17 @@ package com.example.changetheworld;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +24,8 @@ import com.example.changetheworld.model.BusinessClient;
 import com.example.changetheworld.model.FireStoreDB;
 import com.example.changetheworld.model.OpenHours;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +33,7 @@ import java.util.Date;
 
 public class EditBusinessProfileActivity extends AppCompatActivity {
 
+    private static final int SELECT_PICTURE = 200;
     String userName;
     EditText business_name;
     EditText mail_address;
@@ -41,6 +48,10 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
     EditText sundayOpen, sundayClose, monThuOpen, monThuClose, fridayOpen, fridayClose, saturdayOpen, saturdayClose;
 
     Button updateButton;
+    ImageView business_approval_doc, owner_id;
+    private int flag;
+    private byte[] business_chosen_approvel;
+    private  byte[] business_chosen_owner_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +67,7 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
         mail_address = findViewById(R.id.maillAddress_value);
         phone_number = findViewById(R.id.phoneNumber_value);
         owner_name = findViewById(R.id.business_owner_name_value);
-
-
         password = findViewById(R.id.business_password_value);
-
         sundayOpen = findViewById(R.id.sundayOpen);
         sundayClose = findViewById(R.id.sundayClose);
         monThuOpen = findViewById(R.id.monThuOpen);
@@ -68,6 +76,18 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
         fridayClose = findViewById(R.id.fridayClose);
         saturdayOpen = findViewById(R.id.saturdayOpen);
         saturdayClose = findViewById(R.id.saturdayClose);
+        business_approval_doc = findViewById(R.id.uploadapprovalicon);
+        owner_id = findViewById(R.id.ApprovalDocumentIcon);
+
+        business_approval_doc.setOnClickListener(view -> {
+            flag = 1;
+            imageChooser();
+        });
+        owner_id.setOnClickListener(view -> {
+            flag =2;
+            imageChooser();
+        });
+
 
         address.addTextChangedListener(new TextWatcher() {
             @Override
@@ -172,4 +192,55 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void imageChooser() {
+
+        // create an instance of the
+        // intent of the type image
+        Intent i = new Intent();
+
+        i.setType(getString(R.string.image_path));
+        i.setAction(Intent.ACTION_GET_CONTENT);
+
+        // pass the constant to compare it
+        // with the returned requestCode
+        startActivityForResult(Intent.createChooser(i, getString(R.string.Select_Picture)), SELECT_PICTURE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            // compare the resultCode with the
+            // SELECT_PICTURE constant
+            if (requestCode == SELECT_PICTURE) {
+                // Get the url of the image from data
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri) {
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                        //personal_chosen_photo = selectedImageUri.toString();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        byte[] photo_byte = baos.toByteArray();
+
+                        if (flag == 1){
+                            business_chosen_approvel = photo_byte;
+                            Toast.makeText(this, getString(R.string.Business_Approval_Upload_Success), Toast.LENGTH_SHORT).show();
+                        }
+
+                        if (flag == 2) {
+                            business_chosen_owner_id = photo_byte;
+                            Toast.makeText(this, getString(R.string.Owner_ID_Upload_Success), Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
 }

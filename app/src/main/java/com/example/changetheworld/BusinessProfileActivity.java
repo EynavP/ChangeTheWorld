@@ -74,7 +74,6 @@ public class BusinessProfileActivity extends AppCompatActivity implements Naviga
 
     private void OpenEditProfileBusiness() {
         Intent intent = new Intent(this,EditBusinessProfileActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         intent.putExtra("user_name", userName);
         startActivity(intent);
     }
