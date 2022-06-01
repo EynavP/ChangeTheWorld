@@ -651,8 +651,6 @@ public class FireStoreDB implements DataBaseInterface {
                 .update(data)
                 .addOnSuccessListener(unused -> {
                     Toast.makeText(context, "Client updated successfully", Toast.LENGTH_SHORT).show();
-                    intent.putExtra("userName", client.getUser_name());
-                    context.startActivity(intent);
                 })
                 .addOnFailureListener(e -> Toast.makeText(context, "Fail update new client : " + e.toString(), Toast.LENGTH_LONG).show());
 
@@ -1618,8 +1616,6 @@ public class FireStoreDB implements DataBaseInterface {
         Tasks
                 .whenAllSuccess(tasks).addOnSuccessListener(objects -> {
             Toast.makeText(context, "business updated successfully", Toast.LENGTH_SHORT).show();
-            intent.putExtra("userName", user_name);
-            context.startActivity(intent);
         })
                 .addOnFailureListener(e -> Toast.makeText(context, "Fail update business : " + e.toString(), Toast.LENGTH_LONG).show());
     }

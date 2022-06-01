@@ -126,15 +126,15 @@ public class CreateBusinessAccount extends AppCompatActivity {
                 toast.show();
             }
             else if (user_name.isEmpty() || user_name.contains(" ")){
-                Toast toast = Toast.makeText(this, getString(R.string.user_name_invalid), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "Invalid userName", Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (password.isEmpty() || !password.matches("^[A-Za-z0-9]*$")){
-                Toast toast = Toast.makeText(this, getString(R.string.password_invalid), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (business_owner_name.isEmpty() || !business_owner_name.matches("[a-zA-z\\s]*$")){
-                Toast toast = Toast.makeText(this, getString(R.string.invalid_business_name), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "Invalid business owner name", Toast.LENGTH_SHORT);
                 toast.show();
             }
             else if (business_chosen_approvel == null){

@@ -167,7 +167,7 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
             else {
                 BusinessClient business_client = new BusinessClient(new_business_name,new_mail_address,new_phone_number,userName,new_password,new_owner_name,null, null, new_local_currency, new_address);
                 Intent intent = new Intent(this, BusinessProfileActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                finish();
                 FireStoreDB.getInstance().updateBusinessProfile(this, business_client, openHours, intent);
             }
         });
