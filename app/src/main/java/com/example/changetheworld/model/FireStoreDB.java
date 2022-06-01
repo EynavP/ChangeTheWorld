@@ -30,7 +30,6 @@ import com.example.changetheworld.BusinessProfileActivity;
 import com.example.changetheworld.OrderConfirm;
 import com.example.changetheworld.OrderPage;
 import com.example.changetheworld.R;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -46,7 +45,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -454,11 +452,21 @@ public class FireStoreDB implements DataBaseInterface {
         db.collection("BusinessClient")
                 .document(user.getUser_name())
                 .set(data)
-                .addOnSuccessListener(unused -> Toast.makeText(context, "Business created successfully", Toast.LENGTH_SHORT).show())
+                .addOnSuccessListener(unused ->
+                {
+                    Toast.makeText(context, "Business created successfully", Toast.LENGTH_SHORT).show();
+                    HashMap<String, String> commission = new HashMap<String, String>();
+                    for (String sym1: currenciesToSymbol.keySet()) {
+                        for (String sym2: currenciesToSymbol.keySet()) {
+                            if(!sym1.equals(sym2)){
+                                commission.put(sym1 + "/" + sym2, "0");
+                            }
+                        }
+                    }
+                    saveChangeComissionRate(context, commission, user.getUser_name(), true);
+                })
                 .addOnFailureListener(e -> Toast.makeText(context, "Fail create new business : " + e.toString(), Toast.LENGTH_LONG).show());
-
         createDefaultWallet(user.getUser_name(), user.getLocal_currency(), "BusinessClient", context, intent);
-
     }
 
     @Override
@@ -946,7 +954,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void saveChangeComissionRate(Context context,HashMap<String, String> comission_data, String business_user_name) {
+    public void saveChangeComissionRate(Context context, HashMap<String, String> comission_data, String business_user_name, boolean new_rates) {
 
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -962,10 +970,12 @@ public class FireStoreDB implements DataBaseInterface {
 
         }
         Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
-            Toast.makeText(context, "Update Rates", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(context, BusinessProfileActivity.class);
-            intent.putExtra("userName", business_user_name);
-            context.startActivity(intent);
+            if (!new_rates){
+                Toast.makeText(context, "Update Rates", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, BusinessProfileActivity.class);
+                intent.putExtra("userName", business_user_name);
+                context.startActivity(intent);
+            }
         });
     }
 

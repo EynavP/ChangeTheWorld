@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicReference;
 
 public interface DataBaseInterface {
     void VerifyAndSavePrivateClient(Context context, PrivateClient user, Intent intent);
@@ -53,7 +52,7 @@ public interface DataBaseInterface {
 
     void loadCurrencyRatesForShow(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<BusinessCurrencyRateForShow> bcrs);
 
-    void saveChangeComissionRate(Context context, HashMap<String, String> comission_data, String business_user_name);
+    void saveChangeComissionRate(Context context, HashMap<String, String> comission_data, String business_user_name, boolean new_rates);
 
     void calculateChangeRate(Context context, String business_user_name, String from_currency, String to_currency, float amount, TextView receive);
 
