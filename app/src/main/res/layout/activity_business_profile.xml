@@ -220,6 +220,18 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
+            <ImageView
+                android:id="@+id/currency_icon_icon"
+                android:layout_width="43dp"
+                android:layout_height="34dp"
+                android:layout_below="@+id/address_icon"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="322dp"
+                app:srcCompat="@drawable/currency_icon" />
+
             <TextView
                 android:id="@+id/local_currency_title"
                 android:layout_width="140dp"
@@ -308,12 +320,12 @@
                 android:id="@+id/phone_icon"
                 android:layout_width="46dp"
                 android:layout_height="35dp"
-                android:layout_below="@+id/mail_icon"
+                android:layout_below="@+id/currency_icon_icon"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="166dp"
-                android:layout_marginEnd="329dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginEnd="321dp"
                 app:srcCompat="@drawable/phone_icon" />
 
             <TextView
@@ -352,9 +364,9 @@
                 android:layout_below="@+id/phone_icon"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="19dp"
-                android:layout_marginEnd="331dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="319dp"
                 app:srcCompat="@drawable/owner_name" />
 
             <TextView
@@ -380,9 +392,9 @@
                 android:layout_below="@+id/phone_icon"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="76dp"
-                android:layout_marginEnd="330dp"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="84dp"
+                android:layout_marginEnd="320dp"
                 app:srcCompat="@drawable/open_hour_icon" />
 
             <TextView
