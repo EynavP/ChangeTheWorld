@@ -21,10 +21,10 @@
 
             <TextView
                 android:id="@+id/currencyName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="28dp"
                 android:layout_marginTop="36dp"
-                android:layout_marginEnd="40dp"
+                android:layout_marginEnd="36dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/value"
                 android:textAlignment="center"
