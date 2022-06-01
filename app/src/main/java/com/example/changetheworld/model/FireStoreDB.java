@@ -651,8 +651,6 @@ public class FireStoreDB implements DataBaseInterface {
                 .update(data)
                 .addOnSuccessListener(unused -> {
                     Toast.makeText(context, "Client updated successfully", Toast.LENGTH_SHORT).show();
-                    intent.putExtra("userName", client.getUser_name());
-                    context.startActivity(intent);
                 })
                 .addOnFailureListener(e -> Toast.makeText(context, "Fail update new client : " + e.toString(), Toast.LENGTH_LONG).show());
 
@@ -1385,8 +1383,12 @@ public class FireStoreDB implements DataBaseInterface {
                         cancel_btn.setVisibility(View.INVISIBLE);
                     }
 
-                    if (!order_status_value.getText().toString().equals("complete")){
+                    if (!order_status_value.getText().toString().equals("approve")){
                         scan_btn.setVisibility(View.INVISIBLE);
+                    }
+
+                    if (order_status_value.getText().toString().equals("approve")){
+                        scan_btn.setVisibility(View.VISIBLE);
                     }
 
                     db.collection(documentSnapshot.getString("client_type"))
@@ -1426,7 +1428,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void changeOrderStatus(String orderID, String user_name, String new_status, Context context, TextView order_status_value, Button approve_btn, Button cancel_btn, TextView payment_method_value, TextView amount_value,TextView currency_name_value) {
+    public void changeOrderStatus(String orderID, String user_name, String new_status, Context context, TextView order_status_value, Button approve_btn, Button cancel_btn, TextView payment_method_value, TextView amount_value,TextView currency_name_value, Button scan_btn) {
         String business_user_name = orderID.split("\\*")[1];
         String client_user_name = orderID.split("\\*")[0];
         ArrayList<Task> tasks = new ArrayList<>();
@@ -1449,6 +1451,7 @@ public class FireStoreDB implements DataBaseInterface {
                         }
                         else{
                             updateBalance(user_name, "BusinessClient", currency_name_value.getText().toString() , Float.parseFloat(amount_value.getText().toString()), "+", context, null);
+                            scan_btn.setVisibility(View.VISIBLE);
                         }
                     }
                 });
@@ -1618,8 +1621,6 @@ public class FireStoreDB implements DataBaseInterface {
         Tasks
                 .whenAllSuccess(tasks).addOnSuccessListener(objects -> {
             Toast.makeText(context, "business updated successfully", Toast.LENGTH_SHORT).show();
-            intent.putExtra("userName", user_name);
-            context.startActivity(intent);
         })
                 .addOnFailureListener(e -> Toast.makeText(context, "Fail update business : " + e.toString(), Toast.LENGTH_LONG).show());
     }

@@ -74,7 +74,10 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
     protected void onResume() {
         super.onResume();
         items = new ArrayList<Wallet>();
-
+        if (userType.equals("BusinessClient")) {
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.open_menu_businees);
+        }
         FireStoreDB.getInstance().LoadWallets(this, userName, userType, items, recyclerView, totalBalance, symbol);
     }
 

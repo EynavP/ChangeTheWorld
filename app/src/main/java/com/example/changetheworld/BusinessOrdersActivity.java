@@ -35,7 +35,7 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
     Toolbar toolbar;
     ArrayList<Order> pendding_items, canceled_items, approve_items, complete_items;
     Button orders_as_client, orders_as_business;
-    String listClicked = "pending";
+    String listClicked = "";
 
 
 
@@ -84,7 +84,8 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
 
     public void businessOrder(){
             TVPannding.setText(R.string.pannding);
-            listClicked = "pending";
+            if (listClicked == "")
+                listClicked = "pending";
             TVCancle.setVisibility(View.VISIBLE);
             TVApprove.setVisibility(View.VISIBLE);
             TVComplete.setVisibility(View.VISIBLE);
@@ -100,6 +101,7 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         canceled_items = new ArrayList<>();
         approve_items = new ArrayList<>();
         complete_items = new ArrayList<>();
+
         FireStoreDB.getInstance().loadOrdersAsBusiness(this, user_name, user_type, pendding_items, canceled_items, approve_items, complete_items, orders_RV, listClicked);
 
             TVPannding.setOnClickListener(view -> {
