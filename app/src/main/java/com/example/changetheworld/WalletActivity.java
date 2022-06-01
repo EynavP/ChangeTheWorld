@@ -147,7 +147,19 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
         startActivity(intent);
     }
 
+    public void openBusinessAbout(){
+        Intent intent = new Intent(this,AboutPage.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", "BusinessClient");
+        startActivity(intent);
+    }
 
+    public void openClientAbout(){
+        Intent intent = new Intent(this,AboutPage.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", "PrivateClient");
+        startActivity(intent);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -185,6 +197,13 @@ public class WalletActivity extends AppCompatActivity implements RecycleSubWalle
             case R.id.nav_update_rates:
                 openBusinessRates();
                 break;
+            case R.id.nav_about:
+                if(userType.equals("PrivateClient")){
+                    openClientAbout();
+                }
+                else {
+                    openBusinessAbout();
+                }
         }
         return true;
     }

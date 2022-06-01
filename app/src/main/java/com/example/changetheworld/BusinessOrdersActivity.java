@@ -203,6 +203,12 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
         intent.putExtra(getString(R.string.userName), user_name);
         startActivity(intent);
     }
+    public void openAbout(){
+        Intent intent = new Intent(this,AboutPage.class);
+        intent.putExtra(getString(R.string.userName), user_name);
+        intent.putExtra("user_type", "BusinessClient");
+        startActivity(intent);
+    }
 
     private void openBusinessRates() {
         Intent intent = new Intent(this,Bussiness_rates.class);
@@ -243,6 +249,9 @@ public class BusinessOrdersActivity extends AppCompatActivity implements Recycle
                 break;
             case R.id.nav_logout:
                 logOut();
+                break;
+            case R.id.nav_about:
+                openAbout();
                 break;
         }
         return true;
