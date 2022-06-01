@@ -164,6 +164,7 @@ public class CreateAccountPrivate extends AppCompatActivity {
 
     public void returnLoginPage(){
         Intent intent = new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 

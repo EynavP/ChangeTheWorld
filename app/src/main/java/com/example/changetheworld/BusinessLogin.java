@@ -47,11 +47,13 @@ public class BusinessLogin extends AppCompatActivity {
 
     public void openCreateBusinessAccount(){
         Intent intent = new Intent(this,CreateBusinessAccount.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
     public void gotoLoginClient(){
         Intent intent = new Intent(this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 }

@@ -206,6 +206,7 @@ public class CreateBusinessAccount extends AppCompatActivity {
 //Return to login business
     public void returnLoginPage(){
         Intent intent = new Intent(this,BusinessLogin.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 }
