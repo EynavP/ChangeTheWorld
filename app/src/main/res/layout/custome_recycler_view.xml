@@ -21,16 +21,17 @@
 
             <TextView
                 android:id="@+id/currencyName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="28dp"
                 android:layout_marginTop="36dp"
-                android:layout_marginEnd="40dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/value"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toStartOf="@+id/daily_title"
+                app:layout_constraintHorizontal_bias="0.828"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
