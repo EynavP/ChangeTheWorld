@@ -103,6 +103,13 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
         startActivity(intent);
     }
 
+    public void openAbout(){
+        Intent intent = new Intent(this,AboutPage.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", "PrivateClient");
+        startActivity(intent);
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -124,6 +131,9 @@ public class ClientProfileActivity extends AppCompatActivity implements Navigati
                 break;
             case R.id.nav_wallet:
                 openWallet();
+                break;
+            case R.id.nav_about:
+                openAbout();
                 break;
         }
         return true;

@@ -106,6 +106,12 @@ public class BusinessProfileActivity extends AppCompatActivity implements Naviga
         startActivity(intent);
     }
 
+    public void openAbout(){
+        Intent intent = new Intent(this,AboutPage.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", "BusinessClient");
+        startActivity(intent);
+    }
     public void openBusinessOrders(){
         Intent intent = new Intent(this,BusinessOrdersActivity.class);
         intent.putExtra(getString(R.string.userName), userName);
@@ -138,6 +144,9 @@ public class BusinessProfileActivity extends AppCompatActivity implements Naviga
                 break;
             case R.id.nav_logout:
                 logOut();
+                break;
+            case R.id.nav_about:
+                openAbout();
                 break;
         }
         return true;

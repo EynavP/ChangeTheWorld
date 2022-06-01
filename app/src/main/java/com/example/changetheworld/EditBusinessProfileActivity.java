@@ -185,7 +185,7 @@ public class EditBusinessProfileActivity extends AppCompatActivity {
             }
             else if (invalidOpenHours == 1){}
             else {
-                BusinessClient business_client = new BusinessClient(new_business_name,new_mail_address,new_phone_number,userName,new_password,new_owner_name,null, null, new_local_currency, new_address);
+                BusinessClient business_client = new BusinessClient(new_business_name,new_mail_address,new_phone_number,userName,new_password,new_owner_name,business_chosen_approvel, business_chosen_owner_id, new_local_currency, new_address);
                 Intent intent = new Intent(this, BusinessProfileActivity.class);
                 finish();
                 FireStoreDB.getInstance().updateBusinessProfile(this, business_client, openHours, intent);

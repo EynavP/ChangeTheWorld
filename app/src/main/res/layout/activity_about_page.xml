@@ -1,136 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AboutPage"
-    android:background="@color/homePage_bac">
+    android:background="@color/homePage_bac"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="end"
+    android:id="@+id/drawer_menu">
 
-    <ImageView
-        android:id="@+id/ImageBack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/order_circles"
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.345">
+        app:menu="@menu/open_menu" />
 
-    </ImageView>
+    <RelativeLayout
+        android:id="@+id/Relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/TvAboutTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:textSize="30dp"
-        android:text="@string/change_the_world"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </TextView>
+        <ImageView
+            android:id="@+id/ImageBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/order_circles"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.345">
 
-    <TextView
-        android:id="@+id/TvAboutContent"
-        android:layout_width="396dp"
-        android:layout_height="482dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/About_content"
-        android:textAlignment="center"
-        android:textSize="23dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TvAboutTitle">
+        </ImageView>
 
-    </TextView>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="39dp"
+            android:layout_height="29dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="356dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.044"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/humburger_icon">
 
-    <TextView
-        android:id="@+id/TvContentTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Contant Us:"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TvAboutContent">
+        </androidx.appcompat.widget.Toolbar>
 
-    </TextView>
+        <TextView
+            android:id="@+id/TvAboutTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="66dp"
+            android:layout_marginEnd="92dp"
+            android:text="@string/change_the_world"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
-    <TextView
-        android:id="@+id/TvNivMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="@string/Tv_nivMail"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TvAboutContent">
+        <TextView
+            android:id="@+id/TvAboutContent"
+            android:layout_width="402dp"
+            android:layout_height="294dp"
+            android:layout_below="@+id/toolbar"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="79dp"
+            android:layout_marginEnd="0dp"
+            android:text="@string/About_content"
+            android:textAlignment="center"
+            android:textSize="17dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TvAboutTitle">
 
-    </TextView>
+        </TextView>
 
-    <TextView
-        android:id="@+id/TvKoralMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="@string/About_koral"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TvAboutContent">
+        <TextView
+            android:id="@+id/TvContentTitle"
+            android:layout_width="151dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TvAboutContent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="247dp"
+            android:text="Contant Us:"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.081"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TvAboutContent">
 
-    </TextView>
+        </TextView>
 
-    <TextView
-        android:id="@+id/TvEynavMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:text="@string/About_eynav"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.121"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TvAboutContent">
+        <TextView
+            android:id="@+id/TvNivMail"
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TvContentTitle"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="84dp"
+            android:text="@string/Tv_nivMail"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.115"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TvAboutContent">
 
-    </TextView>
+        </TextView>
 
-    <TextView
-        android:id="@+id/TvYuvalMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:text="@string/About_yuval"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.146"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TvAboutContent">
+        <TextView
+            android:id="@+id/TvKoralMail"
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TvYuvalMail"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="75dp"
+            android:text="@string/About_koral"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.158"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TvAboutContent">
 
-    </TextView>
+        </TextView>
 
 
-    <TextView
-        android:id="@+id/TvSamiMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:text="@string/about_smai"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TvAboutContent">
+        <TextView
+            android:id="@+id/TvEynavMail"
+            android:layout_width="323dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TvNivMail"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="77dp"
+            android:text="@string/About_eynav"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.121"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TvAboutContent">
 
-    </TextView>
+        </TextView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/TvYuvalMail"
+            android:layout_width="323dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TvEynavMail"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="77dp"
+            android:text="@string/About_yuval"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.146"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TvAboutContent">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/TvSamiMail"
+            android:layout_width="329dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TvKoralMail"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="71dp"
+            android:text="@string/about_smai"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.17"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TvAboutContent">
+
+        </TextView>
+        \ </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -168,6 +168,13 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         startActivity(intent);
     }
 
+    public void openAbout(){
+        Intent intent = new Intent(this,AboutPage.class);
+        intent.putExtra(getString(R.string.userName), user_name);
+        intent.putExtra("user_type", "PrivateClient");
+        startActivity(intent);
+    }
+
     public void logOut(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -190,6 +197,9 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
                 break;
             case R.id.nav_logout:
                 logOut();
+                break;
+            case R.id.nav_about:
+                openAbout();
                 break;
         }
         return true;

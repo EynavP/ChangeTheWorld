@@ -90,6 +90,12 @@ public class OrdersActivity extends AppCompatActivity implements RecycleSubWalle
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
+    public void openAbout(){
+        Intent intent = new Intent(this,AboutPage.class);
+        intent.putExtra(getString(R.string.userName), user_name);
+        intent.putExtra("user_type", "PrivateClient");
+        startActivity(intent);
+    }
 
 
 
@@ -113,6 +119,9 @@ public class OrdersActivity extends AppCompatActivity implements RecycleSubWalle
                 break;
             case R.id.nav_logout:
                 logOut();
+                break;
+            case R.id.nav_about:
+                openAbout();
                 break;
         }
         return true;
