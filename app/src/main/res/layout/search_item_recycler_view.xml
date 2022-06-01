@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cardContainer"
             android:layout_width="match_parent"
-            android:layout_height="117dp"
+            android:layout_height="125dp"
             android:background="@color/homePage_bac">
 
             <TextView
@@ -68,7 +68,6 @@
                 android:layout_width="303dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="4dp"
                 android:layout_marginRight="5dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/businessAddress"
@@ -76,20 +75,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.398"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rateRec" />
+                app:layout_constraintTop_toBottomOf="@+id/distanceRec" />
 
-            <TextView
-                android:id="@+id/rateRec"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/comfortaa"
-                android:text="@string/rate"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.182"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/businessNameRec" />
+
 
             <ImageView
                 android:id="@+id/topLine"
@@ -104,20 +92,17 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
-                android:layout_width="233dp"
-                android:layout_height="40dp"
-                android:layout_alignEnd="@+id/rateRec"
-                android:layout_marginBottom="1dp"
+                android:layout_width="237dp"
+                android:layout_height="39dp"
+
                 android:isIndicator="true"
                 android:numStars="5"
                 android:scaleX="0.5"
                 android:scaleY="0.5"
-                app:layout_constraintBottom_toTopOf="@+id/AddressRec"
                 app:layout_constraintEnd_toStartOf="@+id/distanceRec"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/businessNameRec"
-                app:layout_constraintTop_toBottomOf="@+id/businessNameRec"
-                app:layout_constraintVertical_bias="0.833" />
+                app:layout_constraintHorizontal_bias="0.19"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/businessNameRec" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
