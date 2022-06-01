@@ -63,7 +63,7 @@ public class Bussiness_rates extends AppCompatActivity implements NavigationView
             for (business_currency_rate bcr: bcrs) {
                 comission_data.put(bcr.getCurrencyName(), bcr.getUpdate_sales_rate());
             }
-            FireStoreDB.getInstance().saveChangeComissionRate(this, comission_data, business_user_name);
+            FireStoreDB.getInstance().saveChangeComissionRate(this, comission_data, business_user_name, false);
         });
     }
 

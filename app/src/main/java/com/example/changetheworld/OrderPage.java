@@ -176,8 +176,6 @@ public class OrderPage extends AppCompatActivity {
             } catch (ParseException e) {
                 Toast.makeText(this, "Please enter date",Toast.LENGTH_SHORT).show();
             }
-
-
             if(from_amount.isEmpty())
                 Toast.makeText(this, "Enter amount to convert", Toast.LENGTH_SHORT).show();
             else if(to_currency.equals(from_currency))
@@ -196,13 +194,6 @@ public class OrderPage extends AppCompatActivity {
                 FireStoreDB.getInstance().PayByWallet(this, user_type, business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
             }
         });
-
-
-
-
-
-
-
     }
 
 
