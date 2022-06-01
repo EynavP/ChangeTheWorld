@@ -66,7 +66,7 @@ public class EditClientProfileActivity extends AppCompatActivity {
         FireStoreDB.getInstance().checkExistPhoto(passportValue, userName, "passport_photo");
 
         //Personal photo load
-        ImageView personal_photo = findViewById(R.id.update_profile_photo);
+        ImageView personal_photo = ((ImageView) findViewById(R.id.update_profile_photo));
         personal_photo.setOnClickListener(v -> {
                     flag = 1;
                     imageChooser();
@@ -74,7 +74,7 @@ public class EditClientProfileActivity extends AppCompatActivity {
         );
 
         //Passport photo load
-        ImageView passport_photo = (findViewById(R.id.uploadPassport));
+        ImageView passport_photo = ((ImageView) findViewById(R.id.updatePassport));
         passport_photo.setOnClickListener(v -> {
                     flag = 2;
                     imageChooser();
@@ -112,8 +112,8 @@ public class EditClientProfileActivity extends AppCompatActivity {
             else{
                 PrivateClient client = new PrivateClient(userName,new_full_name,new_mail_address,new_phone_number, new_local_currency, new_password,personal_chosen_photo,passport_chosen_photo);
                 Intent intent = new Intent(this, ClientProfileActivity.class);
-                FireStoreDB.getInstance().updateClientProfile(this, client, intent);
                 finish();
+                FireStoreDB.getInstance().updateClientProfile(this, client, intent);
             }
 
         });
@@ -157,6 +157,7 @@ public class EditClientProfileActivity extends AppCompatActivity {
 
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                        //personal_chosen_photo = selectedImageUri.toString();
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] photo_byte = baos.toByteArray();

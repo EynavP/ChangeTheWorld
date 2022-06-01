@@ -389,7 +389,7 @@
                 android:textSize="14sp" />
 
             <ImageView
-                android:id="@+id/uploadPassport"
+                android:id="@+id/updatePassport"
                 android:layout_width="36dp"
                 android:layout_height="31dp"
                 android:layout_below="@+id/localCurrency_title"
