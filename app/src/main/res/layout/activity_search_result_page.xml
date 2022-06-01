@@ -48,27 +48,29 @@
 
         <Spinner
             android:id="@+id/SpinnerFrom"
-            android:layout_width="231dp"
-            android:layout_height="36dp"
+            android:layout_width="118dp"
+            android:layout_height="48dp"
             android:layout_below="@+id/search_results_title"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="88dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="92dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="101dp"
+            android:padding="10dp"
+            android:layout_marginEnd="261dp"
             android:prompt="@string/From_Currency"
             android:spinnerMode="dropdown"></Spinner>
 
         <Spinner
             android:id="@+id/SpinnerTo"
-            android:layout_width="wrap_content"
-            android:layout_height="37dp"
+            android:layout_width="109dp"
+            android:layout_height="49dp"
             android:layout_below="@+id/search_results_title"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="92dp"
-            android:layout_marginTop="86dp"
-            android:layout_marginEnd="92dp"
+            android:layout_marginStart="209dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="93dp"
+            android:padding="10dp"
             android:prompt="@string/To_Currency"
             android:spinnerMode="dropdown"></Spinner>
 
@@ -78,8 +80,8 @@
             android:layout_height="38dp"
             android:layout_below="@+id/search_results_title"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="86dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="108dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/sort"></androidx.appcompat.widget.AppCompatButton>
 
         <ImageView
@@ -89,9 +91,9 @@
             android:layout_below="@+id/search_results_title"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="180dp"
-            android:layout_marginTop="59dp"
-            android:layout_marginEnd="183dp"
+            android:layout_marginStart="157dp"
+            android:layout_marginTop="115dp"
+            android:layout_marginEnd="206dp"
             app:srcCompat="@drawable/arrow" />
 
 
