@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -49,6 +50,7 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
     ArrayList<currency> pairs = new ArrayList<>();
     ProgressBar progressBar;
     RatingBar ratingBar;
+    View orderRec;
 
 
     @Override
@@ -152,6 +154,11 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         todayDate = findViewById(R.id.todayDate);
         todayDate.setText(formatter.format(date));
         FireStoreDB.getInstance().loadCurrencyDataPairs(this, user_name, pairs, currencies_rate_recycleview, progressBar, "BusinessClient");
+
+        orderRec = findViewById(R.id.orderRec);
+        orderRec.setOnClickListener(view -> {
+            openBusinessOrders();
+        });
 
     }
 

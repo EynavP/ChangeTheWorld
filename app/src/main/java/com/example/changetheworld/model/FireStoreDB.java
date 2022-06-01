@@ -969,7 +969,7 @@ public class FireStoreDB implements DataBaseInterface {
         }
         Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
             if (!new_rates){
-                Toast.makeText(context, "Update Rates", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Rates updated", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, BusinessProfileActivity.class);
                 intent.putExtra("userName", business_user_name);
                 context.startActivity(intent);

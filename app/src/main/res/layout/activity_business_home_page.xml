@@ -174,18 +174,6 @@
             android:layout_marginEnd="0dp">
 
 
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/todayDate"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="181dp"
-                android:layout_marginTop="77dp"
-                android:layout_marginEnd="182dp" />
-
-
             <TextView
                 android:id="@+id/dayDate"
                 android:layout_width="wrap_content"
@@ -412,7 +400,17 @@
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginEnd="0dp"
-                    android:layout_marginBottom="0dp" />
+                    android:layout_marginBottom="0dp" >
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="181dp"
+                    android:layout_marginTop="175dp"
+                    android:layout_marginEnd="182dp" />
             </RelativeLayout>
 
         </RelativeLayout>
