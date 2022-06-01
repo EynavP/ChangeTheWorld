@@ -21,8 +21,6 @@ public class OrderDetails extends AppCompatActivity {
     TextView order_status_value, amount_value, currency_name_value, receive_value, to_currency_name_value, payment_method_value, client_name_value, phone_value, pickup_date_value;
     String orderID, user_name;
     Button approve_btn, cancel_btn,scan_btn;
-    AtomicReference<String> user_type = new AtomicReference<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +42,12 @@ public class OrderDetails extends AppCompatActivity {
 
         approve_btn =findViewById(R.id.approve_btn);
         approve_btn.setOnClickListener(view -> {
-            FireStoreDB.getInstance().changeOrderStatus(orderID, user_name, "approve", this, order_status_value, approve_btn, cancel_btn, payment_method_value, amount_value, currency_name_value);
+            FireStoreDB.getInstance().changeOrderStatus(orderID, user_name, "approve", this, order_status_value, approve_btn, cancel_btn, payment_method_value, amount_value, currency_name_value, scan_btn);
         });
 
         cancel_btn = findViewById(R.id.cancel_btn);
         cancel_btn.setOnClickListener(view -> {
-            FireStoreDB.getInstance().changeOrderStatus(orderID, user_name, "canceled", this, order_status_value, approve_btn, cancel_btn, payment_method_value, amount_value, currency_name_value);
+            FireStoreDB.getInstance().changeOrderStatus(orderID, user_name, "canceled", this, order_status_value, approve_btn, cancel_btn, payment_method_value, amount_value, currency_name_value, scan_btn);
         });
 
         scan_btn = findViewById(R.id.scan_btn);
