@@ -1290,7 +1290,7 @@ public class FireStoreDB implements DataBaseInterface {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     List<DocumentSnapshot> orders = queryDocumentSnapshots.getDocuments();
-                    for (int i = 0; i < orders.size(); i++) {
+                    for (int i = orders.size() - 1; i >= 0; i--) {
                         Order tmp = new Order(orders.get(i).getString("id"), orders.get(i).getString("from_currency"), orders.get(i).getString("to_currency"),
                                 orders.get(i).getString("from_amount"), orders.get(i).getString("to_amount"), orders.get(i).getString("date"),
                                 orders.get(i).getString("business_name"), orders.get(i).getString("user_fullName"), orders.get(i).getString("status"), orders.get(i).getString("payment_method"));
@@ -1309,13 +1309,20 @@ public class FireStoreDB implements DataBaseInterface {
 
     @Override
     public void loadOrdersAsBusiness(Context context, String user_name, String user_type, ArrayList<Order> pendding_items, ArrayList<Order> canceled_items,ArrayList<Order> approve_items,ArrayList<Order> complete_items, RecyclerView orders_RV,String listClicked) {
+
         db.collection(user_type)
                 .document(user_name)
                 .collection("OrdersForMe")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+
                     List<DocumentSnapshot> orders = queryDocumentSnapshots.getDocuments();
-                    for (int i = 0; i < orders.size(); i++) {
+                    pendding_items.clear();
+                    canceled_items.clear();
+                    approve_items.clear();
+                    complete_items.clear();
+
+                    for (int i = orders.size() - 1; i >= 0; i--) {
                         Order tmp = new Order(orders.get(i).getString("id"), orders.get(i).getString("from_currency"), orders.get(i).getString("to_currency"),
                                 orders.get(i).getString("from_amount"), orders.get(i).getString("to_amount"), orders.get(i).getString("date"),
                                 orders.get(i).getString("business_name"), orders.get(i).getString("user_fullName"), orders.get(i).getString("status"), orders.get(i).getString("payment_method"));
@@ -1328,6 +1335,7 @@ public class FireStoreDB implements DataBaseInterface {
                         if (orders.get(i).getString("status").equals("complete"))
                             complete_items.add(tmp);
                     }
+
                     ((Activity) context).runOnUiThread(() -> {
                         AdapterOrder adapterOrderPendding, adapterOrderCanceled, adapterOrderApprove, adapterOrderComplete;
                         adapterOrderPendding = new AdapterOrder(context, pendding_items, "BusinessOrdersActivity");
@@ -1440,7 +1448,7 @@ public class FireStoreDB implements DataBaseInterface {
                 .document(orderID)
                 .update(data)
                 .addOnSuccessListener(unused -> {
-                    Toast.makeText(context, "Order" + new_status, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Order " + new_status, Toast.LENGTH_SHORT).show();
                     order_status_value.setText(new_status);
 
                     if (!order_status_value.equals("pending")){
