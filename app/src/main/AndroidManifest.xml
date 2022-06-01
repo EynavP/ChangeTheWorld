@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ChangeTheWorld"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AboutPage"
+            android:exported="false" />
+        <activity
             android:name=".OrderDetails"
             android:exported="false" />
         <activity

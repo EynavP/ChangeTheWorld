@@ -181,6 +181,13 @@
     <string name="From_Currency">From Currency</string>
     <string name="To_Currency">To Currency</string>
     <string name="sort">Sort</string>
+    <string name="change_the_world">Change The World</string>
+    <string name="About_content">Our application is a marketplace that connects people who want to exchange money and the exchangers who provide the exchange services. Thanks to our innovative technology and a digital wallet-based model, the user can deposit money in the app and search for a business anywhere he wants in the world. The user can place an order for now or for a future date. All of this he will be able to do with his money in the app. Money exchange businesses will be able to exchange funds among themselves without help from a third party.</string>
+    <string name="Tv_nivMail">vaknin34@gmail.com</string>
+    <string name="About_koral">koraldduel3112@gmail.com</string>
+    <string name="About_eynav">onevptaya@gmail.com</string>
+    <string name="About_yuval">yuval.amir998@gmail.com</string>
+    <string name="about_smai">samuelkrief1004@gmail.com</string>
 
 
 </resources>
