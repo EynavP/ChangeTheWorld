@@ -120,7 +120,7 @@ public class client_home_page<OnResume> extends AppCompatActivity implements Nav
         search.setOnClickListener(view -> {
             String searchQuery = autoCompleteTextView.getText().toString();
 
-            if ((searchQuery == null && searchQuery.isEmpty())|| bar_text.getText().length() <= 2){
+            if ((searchQuery == null || searchQuery.isEmpty()) || Integer.parseInt(bar_text.getText().toString().split(" ")[0]) == 0){
                 Toast.makeText(this, R.string.Invalid_location, Toast.LENGTH_SHORT).show();
             }else {
                 Intent intent = new Intent(this, search_result_page.class);

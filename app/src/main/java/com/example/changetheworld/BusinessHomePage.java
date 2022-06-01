@@ -120,7 +120,7 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                bar_text.setText("KM "+ i) ;
+                bar_text.setText(i + " KM") ;
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -132,7 +132,7 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         search.setOnClickListener(view -> {
             String searchQuery = autoCompleteTextView.getText().toString();
 
-            if ((searchQuery == null && searchQuery.isEmpty())|| bar_text.getText().length() <= 2){
+            if ((searchQuery == null || searchQuery.isEmpty()) || Integer.parseInt(bar_text.getText().toString().split(" ")[0]) == 0){
                 Toast.makeText(this, R.string.Invalid_location, Toast.LENGTH_SHORT).show();
             }else {
                 Intent intent = new Intent(this, search_result_page.class);

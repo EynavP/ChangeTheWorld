@@ -144,22 +144,22 @@
                 android:layout_below="@+id/search_bar"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="77dp"
+                android:layout_marginStart="49dp"
                 android:layout_marginTop="23dp"
-                android:layout_marginEnd="49dp"
+                android:layout_marginEnd="77dp"
                 android:max="100"
                 android:progress="0" />
 
             <TextView
                 android:id="@+id/seekBarText"
-                android:layout_width="wrap_content"
+                android:layout_width="71dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/autoCompleteSearch"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="27dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="326dp"
+                android:layout_marginStart="334dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="7dp"
                 android:text="KM" />
         </RelativeLayout>
 
