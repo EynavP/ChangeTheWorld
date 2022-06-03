@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void openCreateNewAccount(){
         Intent intent = new Intent(this,CreateAccountPrivate.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 

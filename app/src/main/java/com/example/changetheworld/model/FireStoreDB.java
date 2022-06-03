@@ -111,7 +111,7 @@ public class FireStoreDB implements DataBaseInterface {
         return single_instance;
     }
 
-    private void createDefaultWallet(String userName, String localCurrency, String type, Context context, Intent intent) {
+    private void createDefaultWallet(String userName, String type, Context context, Intent intent) {
 
         List<Task<Void>> tasks = new ArrayList<>();
 
@@ -122,8 +122,6 @@ public class FireStoreDB implements DataBaseInterface {
             walletData.put("user_name", userName);
             walletData.put("balance", "0");
             walletData.put("symbol",  currenciesToSymbol.get(c));
-            walletData.put("symbolLocalCurrency", currenciesToSymbol.get(localCurrency));
-            walletData.put("localCurrency", localCurrency);
 
             Task<Void> task_wallet = db.collection(type)
                     .document(userName)
@@ -205,7 +203,7 @@ public class FireStoreDB implements DataBaseInterface {
                 .addOnSuccessListener(unused -> Toast.makeText(context, "Client created successfully", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(context, "Fail create new client : " + e.toString(), Toast.LENGTH_LONG).show());
 
-        createDefaultWallet(user.getUser_name(), user.getLocal_currency(), "PrivateClient", context, intent);
+        createDefaultWallet(user.getUser_name(), "PrivateClient", context, intent);
     }
 
     @Override
@@ -321,6 +319,7 @@ public class FireStoreDB implements DataBaseInterface {
                 }
 
                 ((Activity) context).runOnUiThread(() -> {
+                    
                     items.add(new Wallet(df.format(Float.parseFloat(doc_data.get(finalLocal_currency))),finalLocal_currency,finalUser_name,currenciesToSymbol.get(finalLocal_currency),df.format(Float.parseFloat(doc_data.get(finalLocal_currency))),currenciesToSymbol.get(finalLocal_currency)));
                     sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(doc_data.get(finalLocal_currency)))));
                     AdapterWallet adapterWallet = new AdapterWallet(context, items);
@@ -465,7 +464,7 @@ public class FireStoreDB implements DataBaseInterface {
                     saveChangeComissionRate(context, commission, user.getUser_name(), true);
                 })
                 .addOnFailureListener(e -> Toast.makeText(context, "Fail create new business : " + e.toString(), Toast.LENGTH_LONG).show());
-        createDefaultWallet(user.getUser_name(), user.getLocal_currency(), "BusinessClient", context, intent);
+        createDefaultWallet(user.getUser_name(), "BusinessClient", context, intent);
     }
 
     @Override
