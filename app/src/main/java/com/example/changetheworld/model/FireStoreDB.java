@@ -319,7 +319,7 @@ public class FireStoreDB implements DataBaseInterface {
                 }
 
                 ((Activity) context).runOnUiThread(() -> {
-                    
+                    //TODO: Fail here
                     items.add(new Wallet(df.format(Float.parseFloat(doc_data.get(finalLocal_currency))),finalLocal_currency,finalUser_name,currenciesToSymbol.get(finalLocal_currency),df.format(Float.parseFloat(doc_data.get(finalLocal_currency))),currenciesToSymbol.get(finalLocal_currency)));
                     sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(doc_data.get(finalLocal_currency)))));
                     AdapterWallet adapterWallet = new AdapterWallet(context, items);
