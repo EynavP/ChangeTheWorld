@@ -169,7 +169,7 @@ public class FireStoreDB implements DataBaseInterface {
         final String KEY_FULL_NAME = "full_name";
         final String KEY_PHONE = "phone";
         final String KEY_MAIL = "mail";
-        final String KEY_CURRENCY = "currency";
+        final String KEY_CURRENCY = "local_currency";
         final String KEY_USER_NAME = "user_name";
         final String KEY_PASSWORD = "password";
         final String KEY_PERSONAL_PHOTO = "personal_photo";
@@ -285,50 +285,54 @@ public class FireStoreDB implements DataBaseInterface {
                 walletsData.add(tmp_wallet);
             }
 
-            HashMap<String, String> doc_data = new HashMap<>();
-            ArrayList<String> symbols_for_api = new ArrayList<>();
-            String local_currency = "";
-            String user_name1 = "";
-            for (DocumentSnapshot data : walletsData) {
-                String balance = data.getString("balance");
-                String currency = data.getString("currency");
-                local_currency = data.getString("localCurrency");
-                user_name1 = data.getString("user_name");
-                doc_data.put(currency, balance);
-                if(!currency.equals(local_currency))
-                    symbols_for_api.add((currency + '/' + local_currency));
-            }
+            db.collection(user_type)
+                    .document(user_name)
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        String local_currency = documentSnapshot.getString("local_currency");
 
-            String finalUser_name = user_name1;
-            String finalLocal_currency = local_currency;
+                        HashMap<String, String> doc_data = new HashMap<>();
+                        ArrayList<String> symbols_for_api = new ArrayList<>();
+                        String user_name1 = "";
+                        for (DocumentSnapshot data : walletsData) {
+                            String balance = data.getString("balance");
+                            String currency = data.getString("currency");
+                            user_name1 = data.getString("user_name");
+                            doc_data.put(currency, balance);
+                            if(!currency.equals(local_currency))
+                                symbols_for_api.add((currency + '/' + local_currency));
+                        }
+
+                        String finalUser_name = user_name1;
+                        String finalLocal_currency = local_currency;
 
 
+                        Thread t = new Thread(() -> {
 
-            Thread t = new Thread(() -> {
+                            HashMap<String, ArrayList<Float>> price = api.getCloseAndChangePrice(symbols_for_api);
 
-                HashMap<String, ArrayList<Float>> price = api.getCloseAndChangePrice(symbols_for_api);
+                            for (String c : price.keySet()) {
+                                float val = price.get(c).get(0);
+                                local_currencey_value.set(df.format(val * Float.parseFloat(doc_data.get(c))));
+                                Wallet walletData = new Wallet(df.format(Float.parseFloat(doc_data.get(c))), c, finalUser_name, currenciesToSymbol.get(c), local_currencey_value.get(), currenciesToSymbol.get(finalLocal_currency));
+                                ((Activity) context).runOnUiThread(() -> {
+                                    items.add(walletData);
+                                    sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(walletData.getValueLocalCurrency()))));
+                                });
+                            }
 
-                for (String c : price.keySet()) {
-                    float val = price.get(c).get(0);
-                    local_currencey_value.set(df.format(val * Float.parseFloat(doc_data.get(c))));
-                    Wallet walletData = new Wallet(df.format(Float.parseFloat(doc_data.get(c))), c, finalUser_name, currenciesToSymbol.get(c), local_currencey_value.get(), currenciesToSymbol.get(finalLocal_currency));
-                    ((Activity) context).runOnUiThread(() -> {
-                        items.add(walletData);
-                        sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(walletData.getValueLocalCurrency()))));
+                            ((Activity) context).runOnUiThread(() -> {
+                                //TODO: Fail here
+                                items.add(new Wallet(df.format(Float.parseFloat(doc_data.get(finalLocal_currency))),finalLocal_currency,finalUser_name,currenciesToSymbol.get(finalLocal_currency),df.format(Float.parseFloat(doc_data.get(finalLocal_currency))),currenciesToSymbol.get(finalLocal_currency)));
+                                sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(doc_data.get(finalLocal_currency)))));
+                                AdapterWallet adapterWallet = new AdapterWallet(context, items);
+                                recyclerView.setAdapter(adapterWallet);
+                                totalBalance.setText(String.valueOf(df.format(sum.get())));
+                                symbol.setText(currenciesToSymbol.get(finalLocal_currency));
+                            });
+                        });
+                        t.start();
                     });
-                }
-
-                ((Activity) context).runOnUiThread(() -> {
-                    //TODO: Fail here
-                    items.add(new Wallet(df.format(Float.parseFloat(doc_data.get(finalLocal_currency))),finalLocal_currency,finalUser_name,currenciesToSymbol.get(finalLocal_currency),df.format(Float.parseFloat(doc_data.get(finalLocal_currency))),currenciesToSymbol.get(finalLocal_currency)));
-                    sum.updateAndGet(v -> new Float((float) (v + Float.parseFloat(doc_data.get(finalLocal_currency)))));
-                    AdapterWallet adapterWallet = new AdapterWallet(context, items);
-                    recyclerView.setAdapter(adapterWallet);
-                    totalBalance.setText(String.valueOf(df.format(sum.get())));
-                    symbol.setText(currenciesToSymbol.get(finalLocal_currency));
-                });
-            });
-            t.start();
         });
     }
 
@@ -593,7 +597,7 @@ public class FireStoreDB implements DataBaseInterface {
             full_name.setText(documentSnapshot.getString("full_name"));
             mail_address.setText(documentSnapshot.getString("mail"));
             phone_number.setText(documentSnapshot.getString("phone"));
-            local_currency.setText(documentSnapshot.getString("currency"));
+            local_currency.setText(documentSnapshot.getString("local_currency"));
         });
     }
 
@@ -609,7 +613,7 @@ public class FireStoreDB implements DataBaseInterface {
                     password.setText(documentSnapshot.getString("password"));
                     ArrayList<String> currencies = new ArrayList<>();
                     currencies.addAll(FireStoreDB.getInstance().currenciesToSymbol.keySet());
-                    local_currency.setSelection(currencies.indexOf(documentSnapshot.getString("currency")));
+                    local_currency.setSelection(currencies.indexOf(documentSnapshot.getString("local_currency")));
                 });
     }
 
@@ -618,7 +622,7 @@ public class FireStoreDB implements DataBaseInterface {
         final String KEY_FULL_NAME = "full_name";
         final String KEY_PHONE = "phone";
         final String KEY_MAIL = "mail";
-        final String KEY_CURRENCY = "currency";
+        final String KEY_CURRENCY = "local_currency";
         final String KEY_PASSWORD = "password";
         final String KEY_PERSONAL_PHOTO = "personal_photo";
         final String KEY_PASSPORT_PHOTO = "passport_photo";
@@ -1233,9 +1237,7 @@ public class FireStoreDB implements DataBaseInterface {
     @Override
     public void loadCurrencyDataPairs(Context context, String user_name, ArrayList<currency> items, RecyclerView recyclerView, ProgressBar progressBar, String user_type) {
         AtomicReference<String> localCurrency = new AtomicReference<>();
-        String local = "currency";
-        if(user_type.equals("BusinessClient"))
-            local = "local_currency";
+        String local = "local_currency";
         String finalLocal = local;
         db.collection(user_type)
                 .document(user_name)
