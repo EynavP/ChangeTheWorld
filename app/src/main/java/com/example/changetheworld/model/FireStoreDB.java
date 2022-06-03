@@ -452,8 +452,7 @@ public class FireStoreDB implements DataBaseInterface {
         db.collection("BusinessClient")
                 .document(user.getUser_name())
                 .set(data)
-                .addOnSuccessListener(unused ->
-                {
+                .addOnSuccessListener(unused -> {
                     Toast.makeText(context, "Business created successfully", Toast.LENGTH_SHORT).show();
                     HashMap<String, String> commission = new HashMap<String, String>();
                     for (String sym1: currenciesToSymbol.keySet()) {
