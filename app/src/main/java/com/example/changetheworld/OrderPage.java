@@ -3,9 +3,6 @@ package com.example.changetheworld;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,10 +20,10 @@ import com.example.changetheworld.model.FireStoreDB;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class OrderPage extends AppCompatActivity {
 
@@ -38,7 +35,7 @@ public class OrderPage extends AppCompatActivity {
     int mYear,mMonth,mDay;
     SimpleDateFormat sdf;
     String myFormat;
-
+    AtomicReference<Float> change_profit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +102,7 @@ public class OrderPage extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(!amount.getText().toString().isEmpty() && !from.getSelectedItem().toString().equals(to.getSelectedItem().toString())){
                     FireStoreDB.getInstance().calculateChangeRate(OrderPage.this, business_user_name, from.getSelectedItem().toString(),
-                            to.getSelectedItem().toString(), Float.parseFloat(amount.getText().toString()), receive);
+                            to.getSelectedItem().toString(), Float.parseFloat(amount.getText().toString()), receive, change_profit);
                 }
                 else if(amount.getText().toString().isEmpty()){
                     receive.setText("");
@@ -124,7 +121,7 @@ public class OrderPage extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(!amount.getText().toString().isEmpty() && !from.getSelectedItem().toString().equals(to.getSelectedItem().toString())){
                     FireStoreDB.getInstance().calculateChangeRate(OrderPage.this, business_user_name, from.getSelectedItem().toString(),
-                            to.getSelectedItem().toString(), Float.parseFloat(amount.getText().toString()), receive);
+                            to.getSelectedItem().toString(), Float.parseFloat(amount.getText().toString()), receive, change_profit);
                 }
                 else if(amount.getText().toString().isEmpty()){
                     receive.setText("");
@@ -149,7 +146,7 @@ public class OrderPage extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 if(!editable.toString().isEmpty() && !from.getSelectedItem().toString().equals(to.getSelectedItem().toString())){
                     FireStoreDB.getInstance().calculateChangeRate(OrderPage.this, business_user_name, from.getSelectedItem().toString(),
-                            to.getSelectedItem().toString(), Float.parseFloat(editable.toString()), receive);
+                            to.getSelectedItem().toString(), Float.parseFloat(editable.toString()), receive, change_profit);
                 }
                 else if(editable.toString().isEmpty()){
                     receive.setText("");
@@ -188,10 +185,10 @@ public class OrderPage extends AppCompatActivity {
                 Toast.makeText(this, "Invalid Date",Toast.LENGTH_SHORT).show();
             }
             else if(payment_method.equals("cash")){
-                FireStoreDB.getInstance().PayByCash(this, user_type, business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
+                FireStoreDB.getInstance().PayByCash(this, user_type, business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address, change_profit);
             }
             else if(payment_method.equals("wallet")){
-                FireStoreDB.getInstance().PayByWallet(this, user_type, business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address);
+                FireStoreDB.getInstance().PayByWallet(this, user_type, business_user_name, client_user_name, from_currency, to_currency, from_amount, to_amount, date , business_address, change_profit);
             }
         });
     }

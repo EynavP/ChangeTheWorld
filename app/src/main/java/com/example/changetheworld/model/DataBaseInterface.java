@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 public interface DataBaseInterface {
     void VerifyAndSavePrivateClient(Context context, PrivateClient user, Intent intent);
@@ -54,13 +55,13 @@ public interface DataBaseInterface {
 
     void saveChangeComissionRate(Context context, HashMap<String, String> comission_data, String business_user_name, boolean new_rates);
 
-    void calculateChangeRate(Context context, String business_user_name, String from_currency, String to_currency, float amount, TextView receive);
+    void calculateChangeRate(Context context, String business_user_name, String from_currency, String to_currency, float amount, TextView receive, AtomicReference<Float> change_profit);
 
     void LoadBusinessAddress(Context context, String business_user_name, TextView pick_from);
 
-    void PayByCash(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address);
+    void PayByCash(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address, AtomicReference<Float> change_profit);
 
-    void PayByWallet(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address);
+    void PayByWallet(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address, AtomicReference<Float> change_profit);
 
     void LoadOrder(Context context, String orderID, String business_user_name, TextView amount_from, TextView amount_to, TextView paymethod, TextView business_name, TextView business_address, TextView business_phone, TextView pickup_date, TextView cash_case_value, TextView currency_from, TextView currency_to, TextView status);
 

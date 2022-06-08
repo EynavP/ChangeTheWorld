@@ -428,8 +428,9 @@ public class FireStoreDB implements DataBaseInterface {
         final String KEY_OWNER_ID = "owner_id";
         final String KEY_ADDRESS = "address";
         final String KEY_LOCAL_CURRENCY = "local_currency";
-
-
+        final String KEY_NUMBER_OF_TRADES = "number_of_trades";
+        final String KEY_TOTAL_PROFIT = "total_profit";
+        final String KEY_AVG_PROFIT = "avg_profit";
 
         Map<String, Object> data = new HashMap<>();
         data.put(KEY_BUSINESS_NAME, user.getBusiness_name());
@@ -440,6 +441,9 @@ public class FireStoreDB implements DataBaseInterface {
         data.put(KEY_OWNER_NAME, user.getBusiness_owner_name());
         data.put(KEY_ADDRESS, user.getAddress());
         data.put(KEY_LOCAL_CURRENCY, user.getLocal_currency());
+        data.put(KEY_NUMBER_OF_TRADES, "0");
+        data.put(KEY_TOTAL_PROFIT, "0");
+        data.put(KEY_AVG_PROFIT, "0");
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
@@ -980,7 +984,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void calculateChangeRate(Context context, String business_user_name, String from_currency, String to_currency, float amount, TextView receive) {
+    public void calculateChangeRate(Context context, String business_user_name, String from_currency, String to_currency, float amount, TextView receive, AtomicReference<Float> change_profit) {
 
         ArrayList<String> pair = new ArrayList<>();
         pair.add(from_currency + '/' + to_currency);
@@ -996,10 +1000,21 @@ public class FireStoreDB implements DataBaseInterface {
                     float finalChange_comission = change_comission;
                     Thread t = new Thread(()->{
                         Float current_price = api.getCloseAndChangePrice(pair).get(from_currency).get(0);
-                        Float change_price = current_price * amount + finalChange_comission;
-                        ((Activity)context).runOnUiThread(()->{
-                            receive.setText(String.valueOf(df.format(change_price)));
-                        });
+                        Float change_price = (current_price + finalChange_comission) * amount;
+                        Float price_without_commission = current_price * amount;
+                        change_profit.set(price_without_commission - change_price);
+                        ArrayList<String> profit_pair = new ArrayList<>();
+                        db.collection("BusinessClient")
+                                .document(business_user_name)
+                                .get()
+                                .addOnSuccessListener(documentSnapshot1 -> {
+                                    profit_pair.add(to_currency + "/" + documentSnapshot1.getString("local_currency"));
+                                    Float convert_local_currency_price =  api.getCloseAndChangePrice(pair).get(to_currency).get(0);
+                                    change_profit.set(change_profit.get() * convert_local_currency_price);
+                                    ((Activity)context).runOnUiThread(()->{
+                                        receive.setText(String.valueOf(df.format(change_price)));
+                                    });
+                                });
                     });
                     t.start();
                 });
@@ -1018,7 +1033,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void PayByCash(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address) {
+    public void PayByCash(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address, AtomicReference<Float> change_profit) {
         List<Task<DocumentSnapshot>> getDataTasks = new ArrayList<>();
 
         AtomicReference<String> business_name = new AtomicReference<>();
@@ -1065,6 +1080,7 @@ public class FireStoreDB implements DataBaseInterface {
             data.put("status", "pending");
             data.put("id", client_user_name + "*" + business_user_name + "*" + counter.get());
             data.put("client_type", user_type);
+            data.put("change_profit", change_profit.get());
 
             tasks.add(db.collection(user_type)
                     .document(client_user_name)
@@ -1100,7 +1116,7 @@ public class FireStoreDB implements DataBaseInterface {
     }
 
     @Override
-    public void PayByWallet(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address) {
+    public void PayByWallet(Context context, String user_type, String business_user_name, String client_user_name, String from_currency, String to_currency, String from_amount, String to_amount, String date, String business_address, AtomicReference<Float> change_profit) {
         db.collection(user_type)
                 .document(client_user_name)
                 .collection("Wallet")
@@ -1159,6 +1175,7 @@ public class FireStoreDB implements DataBaseInterface {
                             data.put("status", "pending");
                             data.put("id", client_user_name + "*" + business_user_name + "*" + counter.get());
                             data.put("client_type", user_type);
+                            data.put("change_profit", change_profit.get());
 
                             tasks.add(db.collection(user_type)
                                     .document(client_user_name)
@@ -1528,7 +1545,33 @@ public class FireStoreDB implements DataBaseInterface {
         String client_user_name = order_id.split("\\*")[0];
         HashMap<String, Object> status = new HashMap<>();
         status.put("status", "complete");
+
         ArrayList<Task> tasks = new ArrayList<>();
+
+        Task<DocumentSnapshot> update_business_statistics = db.collection("BusinessClient")
+                .document(business_user_name)
+                .collection("OrdersForMe")
+                .document(order_id)
+                .get().addOnSuccessListener(documentSnapshot -> {
+                    Float profit = (Float) documentSnapshot.get("change_profit");
+                    db.collection("BusinessClient")
+                            .document(business_user_name)
+                            .get().addOnSuccessListener(documentSnapshot1 -> {
+                                Float new_total = (Float) documentSnapshot1.get("total_profit") + profit;
+                                int new_number_of_trades = (Integer) documentSnapshot1.get("number_of_trades") + 1;
+                                Float new_avg = new_total / new_number_of_trades;
+                                HashMap<String, Object> data_to_update = new HashMap<>();
+                                data_to_update.put("total_profit", new_total);
+                                data_to_update.put("number_of_trades", new_number_of_trades);
+                                data_to_update.put("avg_profit", new_avg);
+                                db.collection("BusinessClient")
+                                        .document(business_user_name)
+                                        .update(data_to_update);
+                    });
+                });
+
+
+
         Task<Void> update_business_task = db.collection("BusinessClient")
                 .document(business_user_name)
                 .collection("OrdersForMe")
@@ -1543,6 +1586,7 @@ public class FireStoreDB implements DataBaseInterface {
 
         tasks.add(update_business_task);
         tasks.add(update_client_task);
+        tasks.add(update_business_statistics);
         Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {}).addOnFailureListener(e -> Toast.makeText(context, "Failed to update order status", Toast.LENGTH_LONG).show());
     }
 
