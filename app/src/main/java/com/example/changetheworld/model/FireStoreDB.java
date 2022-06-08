@@ -862,7 +862,6 @@ public class FireStoreDB implements DataBaseInterface {
 
     @Override
     public void loadCurrencyRatesForShow(Context context, String user_name, RecyclerView recyclerView, ProgressBar progressBar, ArrayList<BusinessCurrencyRateForShow> bcrs) {
-        // TODO: fix if there is no currencyComission
 
 
         db.collection("BusinessClient")
@@ -954,8 +953,8 @@ public class FireStoreDB implements DataBaseInterface {
                                     pair.add(p.first + '/' + p.second);
                                     pair.add(p.second + '/' + p.first);
 
-                                    String sale_price = df.format(api.getCloseAndChangePrice(pair).get(p.first).get(0) + Float.parseFloat(pairs.get(p)));
-                                    String buy_price = df.format(api.getCloseAndChangePrice(pair).get(p.second).get(0) + Float.parseFloat(allPairs.get(p.second + p.first)));
+                                    String sale_price = df.format(api.getCloseAndChangePrice(pair).get(p.first).get(0) - Float.parseFloat(pairs.get(p)));
+                                    String buy_price = df.format(api.getCloseAndChangePrice(pair).get(p.second).get(0) - Float.parseFloat(allPairs.get(p.second + p.first)));
                                     BusinessCurrencyRateForShow tmp = new BusinessCurrencyRateForShow(symbolId, currencyName,
                                             sale_price, buy_price);
                                     sale_buy_prices.add(tmp);
@@ -1015,7 +1014,7 @@ public class FireStoreDB implements DataBaseInterface {
                     float finalChange_comission = change_comission;
                     Thread t = new Thread(()->{
                         Float current_price = api.getCloseAndChangePrice(pair).get(from_currency).get(0);
-                        Float change_price = (current_price + finalChange_comission) * amount;
+                        Float change_price = (current_price - finalChange_comission) * amount;
                         Float price_without_commission = current_price * amount;
                         change_profit.set(price_without_commission - change_price);
                         ArrayList<String> profit_pair = new ArrayList<>();
@@ -1025,7 +1024,10 @@ public class FireStoreDB implements DataBaseInterface {
                                 .addOnSuccessListener(documentSnapshot1 -> {
                                     new Thread(()->{
                                         profit_pair.add(to_currency + "/" + documentSnapshot1.getString("local_currency"));
-                                        Float convert_local_currency_price =  api.getCloseAndChangePrice(profit_pair).get(to_currency).get(0);
+                                        float convert_local_currency_price = 1.0F;
+                                        if (!to_currency.equals(documentSnapshot1.getString("local_currency"))){
+                                            convert_local_currency_price = api.getCloseAndChangePrice(profit_pair).get(to_currency).get(0);
+                                        }
                                         change_profit.set(change_profit.get() * convert_local_currency_price);
                                         ((Activity)context).runOnUiThread(()->{
                                             receive.setText(String.valueOf(df.format(change_price)));
@@ -1626,7 +1628,7 @@ public class FireStoreDB implements DataBaseInterface {
                     change_to_comission.put(filter_list.get(i).userName, Float.valueOf(tmp.getString(from_currency + to_currency)));
                 }
                 Collections.sort(filter_list, (o1, o2) -> {
-                    if (change_to_comission.get(o1.userName) < change_to_comission.get(o2.userName)){
+                    if (change_to_comission.get(o1.userName) > change_to_comission.get(o2.userName)){
                         return -1;
                     }
                     else {return 1; }
