@@ -793,28 +793,42 @@ public class FireStoreDB implements DataBaseInterface {
         data.put(KEY_ADDRESS, business.getAddress());
         data.put(KEY_LOCAL_CURRENCY, business.getLocal_currency());
 
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-
-        if (business.getBusiness_approval_document() != null) {
-            StorageReference Business_approvalRef = storageRef.child("images/" + business.getUser_name() + "/" + KEY_BUSINESS_APPROVAL + ".jpg");
-            UploadTask Business_approval_task = Business_approvalRef.putBytes(business.getBusiness_approval_document());
-            Business_approval_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
-        }
-
-        if (business.getGetBusiness_owner_id() != null) {
-            StorageReference owner_idRef = storageRef.child("images/" + business.getUser_name() + "/" + KEY_OWNER_ID + ".jpg");
-            UploadTask owner_idTask = owner_idRef.putBytes(business.getGetBusiness_owner_id());
-            owner_idTask.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
-        }
-
         db.collection("BusinessClient")
                 .document(business.getUser_name())
-                .update(data)
-                .addOnSuccessListener(unused -> {
-                    saveOpenHours(context, business.getUser_name(), openHours, intent);
-                })
-                .addOnFailureListener(e -> Toast.makeText(context, "Fail update business : " + e.toString(), Toast.LENGTH_LONG).show());
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    String prev_local = documentSnapshot.getString("local_currency");
+                    ArrayList<String> pair = new ArrayList<>();
+                    pair.add(prev_local + "/" + business.getLocal_currency());
+                    new Thread(()-> {
+                        Float rate = api.getCloseAndChangePrice(pair).get(prev_local).get(0);
+                        Float new_total = Float.parseFloat(documentSnapshot.getString("total_profit")) * rate;
+                        Float new_avg = new_total / Integer.parseInt(documentSnapshot.getString("number_of_trades"));
+                        data.put("total_profit", new_total);
+                        data.put("avg_profit", new_avg);
+                        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
+                        if (business.getBusiness_approval_document() != null) {
+                            StorageReference Business_approvalRef = storageRef.child("images/" + business.getUser_name() + "/" + KEY_BUSINESS_APPROVAL + ".jpg");
+                            UploadTask Business_approval_task = Business_approvalRef.putBytes(business.getBusiness_approval_document());
+                            Business_approval_task.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+                        }
+
+                        if (business.getGetBusiness_owner_id() != null) {
+                            StorageReference owner_idRef = storageRef.child("images/" + business.getUser_name() + "/" + KEY_OWNER_ID + ".jpg");
+                            UploadTask owner_idTask = owner_idRef.putBytes(business.getGetBusiness_owner_id());
+                            owner_idTask.addOnFailureListener(e -> Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show());
+                        }
+
+                        db.collection("BusinessClient")
+                                .document(business.getUser_name())
+                                .update(data)
+                                .addOnSuccessListener(unused -> {
+                                    saveOpenHours(context, business.getUser_name(), openHours, intent);
+                                })
+                                .addOnFailureListener(e -> Toast.makeText(context, "Fail update business : " + e.toString(), Toast.LENGTH_LONG).show());
+                    }).start();
+                });
 
     }
 
@@ -1554,12 +1568,12 @@ public class FireStoreDB implements DataBaseInterface {
                 .collection("OrdersForMe")
                 .document(order_id)
                 .get().addOnSuccessListener(documentSnapshot -> {
-                    Float profit = (Float) documentSnapshot.get("change_profit");
+                    Float profit = Float.parseFloat(documentSnapshot.getString("change_profit"));
                     db.collection("BusinessClient")
                             .document(business_user_name)
                             .get().addOnSuccessListener(documentSnapshot1 -> {
-                                Float new_total = (Float) documentSnapshot1.get("total_profit") + profit;
-                                int new_number_of_trades = (Integer) documentSnapshot1.get("number_of_trades") + 1;
+                                Float new_total = Float.parseFloat(documentSnapshot1.getString("total_profit")) + profit;
+                                int new_number_of_trades = Integer.parseInt(documentSnapshot1.getString("number_of_trades")) + 1;
                                 Float new_avg = new_total / new_number_of_trades;
                                 HashMap<String, Object> data_to_update = new HashMap<>();
                                 data_to_update.put("total_profit", new_total);
