@@ -35,7 +35,7 @@ public class OrderPage extends AppCompatActivity {
     int mYear,mMonth,mDay;
     SimpleDateFormat sdf;
     String myFormat;
-    AtomicReference<Float> change_profit;
+    AtomicReference<Float> change_profit = new AtomicReference<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
