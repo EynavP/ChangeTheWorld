@@ -71,9 +71,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="343dp"
-                android:layout_marginTop="130dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginStart="345dp"
+                android:layout_marginTop="92dp"
+                android:layout_marginEnd="30dp"
                 android:background="@drawable/edit_icon" />
 
             <TextView
@@ -98,10 +98,11 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/profileBTop"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp">
 
@@ -228,7 +229,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginEnd="322dp"
                 app:srcCompat="@drawable/currency_icon" />
 
@@ -236,11 +237,11 @@
                 android:id="@+id/local_currency_title"
                 android:layout_width="140dp"
                 android:layout_height="19dp"
-                android:layout_below="@+id/maillAddress_value"
+                android:layout_below="@+id/state_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="82dp"
-                android:layout_marginTop="77dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="193dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/local_currency"
@@ -252,11 +253,11 @@
                 android:id="@+id/address_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="41dp"
-                android:layout_below="@+id/full_name_icon"
+                android:layout_below="@+id/mail_icon"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="19dp"
-                android:layout_marginTop="98dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginEnd="313dp"
                 app:srcCompat="@drawable/address_icon" />
 
@@ -290,11 +291,11 @@
                 android:id="@+id/phoneNumber_title"
                 android:layout_width="99dp"
                 android:layout_height="22dp"
-                android:layout_below="@+id/local_currency_title"
+                android:layout_below="@+id/local_currency_value"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="81dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="195dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/phoneNumber"
@@ -324,7 +325,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="23dp"
-                android:layout_marginTop="29dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginEnd="321dp"
                 app:srcCompat="@drawable/phone_icon" />
 
@@ -336,7 +337,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="80dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="195dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/owner_name"
@@ -365,7 +366,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginEnd="319dp"
                 app:srcCompat="@drawable/owner_name" />
 
@@ -377,7 +378,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="80dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="195dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/open_hours"
@@ -387,13 +388,13 @@
 
             <ImageView
                 android:id="@+id/open_hour_icon"
-                android:layout_width="55dp"
-                android:layout_height="43dp"
-                android:layout_below="@+id/phone_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/owner_name_icon"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="320dp"
                 app:srcCompat="@drawable/open_hour_icon" />
 
@@ -419,7 +420,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="80dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginEnd="195dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/monday_thursday"
@@ -433,7 +434,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="80dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginEnd="230dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/friday"
@@ -447,7 +448,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="80dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginEnd="230dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/saturday"
@@ -455,50 +456,42 @@
 
             <TextView
                 android:id="@+id/sundayHours"
-                android:layout_width="90dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/business_owner_name_value"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="230dp"
-                android:layout_marginTop="517dp"
-                android:layout_marginEnd="77dp" />
+                android:layout_marginStart="231dp"
+                android:layout_marginTop="37dp" />
 
             <TextView
                 android:id="@+id/monThuHours"
-                android:layout_width="78dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sundayHours"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="230dp"
-                android:layout_marginTop="542dp"
-                android:layout_marginEnd="77dp" />
+                android:layout_marginStart="231dp"
+                android:layout_marginTop="568dp" />
 
             <TextView
                 android:id="@+id/fridayHours"
-                android:layout_width="79dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/monThuHours"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
                 android:layout_marginStart="230dp"
-                android:layout_marginTop="567dp"
-                android:layout_marginEnd="77dp" />
+                android:layout_marginTop="592dp" />
 
             <TextView
                 android:id="@+id/saturdayHours"
-                android:layout_width="87dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/fridayHours"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="230dp"
-                android:layout_marginTop="591dp"
-                android:layout_marginEnd="77dp" />
+                android:layout_marginStart="231dp"
+                android:layout_marginTop="615dp" />
 
 
         </RelativeLayout>

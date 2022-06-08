@@ -80,7 +80,7 @@ public class AdapterBusinessCurrencyRate extends RecyclerView.Adapter<AdapterBus
                 public void afterTextChanged(Editable editable) {
                     String current_update_sales = editable.toString();
                     if (!current_update_sales.isEmpty() && !current_update_sales.equals("."))
-                        Sales_value.setText(df.format(Float.parseFloat(Sales_value.getText().toString()) + Float.parseFloat(current_update_sales)));
+                        Sales_value.setText(df.format(Float.parseFloat(Sales_value.getText().toString()) - Float.parseFloat(current_update_sales)));
                     else{
                         Sales_value.setText(Exchangevalue.getText().toString());
                     }
