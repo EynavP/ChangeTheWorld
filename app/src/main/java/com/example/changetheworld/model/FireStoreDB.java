@@ -30,6 +30,7 @@ import com.example.changetheworld.BusinessProfileActivity;
 import com.example.changetheworld.OrderConfirm;
 import com.example.changetheworld.OrderPage;
 import com.example.changetheworld.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -38,6 +39,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.ParseException;
@@ -50,6 +53,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Observable;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -1647,6 +1651,45 @@ public class FireStoreDB implements DataBaseInterface {
                     numOrderValue.setText(documentSnapshot.getString("number_of_trades"));
                     totalProfitValue.setText(documentSnapshot.getString("total_profit"));
                     averagePerTrade.setText(documentSnapshot.getString("avg_profit"));
+                });
+    }
+
+    @Override
+    public void updateOrderRateStatus(String orderID) {
+        String business_user_name = orderID.split("\\*")[1];
+        String client_user_name = orderID.split("\\*")[0];
+        ArrayList<Task> tasks = new ArrayList<>();
+        Map<String, Object> data = new HashMap<>();
+        data.put("rated", "true");
+        Task<Void> update_business = db.collection("BusinessClient")
+                .document(business_user_name)
+                .collection("OrdersForMe")
+                .document(orderID)
+                .update(data);
+
+        Task<Void> update_client = db.collection("PrivateClient")
+                .document(client_user_name)
+                .collection("OrdersByMe")
+                .document(orderID)
+                .update(data);
+
+        tasks.add(update_business);
+        tasks.add(update_client);
+        Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {});
+    }
+
+    @Override
+    public void checkOrderRated(String orderID, Context context, RateFlag rateFlag) {
+        String business_user_name = orderID.split("\\*")[1];
+        db.collection("BusinessClient")
+                .document(business_user_name)
+                .collection("OrdersForMe")
+                .document(orderID)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if(documentSnapshot.getString("status").equals("complete") && documentSnapshot.getString("rated") == null) {
+                       rateFlag.setRate(1);
+                    }
                 });
     }
 

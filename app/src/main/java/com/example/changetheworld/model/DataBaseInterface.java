@@ -1,5 +1,6 @@
 package com.example.changetheworld.model;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Button;
@@ -12,8 +13,13 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.changetheworld.OrderConfirm;
+
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
 
 public interface DataBaseInterface {
@@ -88,4 +94,8 @@ public interface DataBaseInterface {
     void SortByPrice(ArrayList<Search> filter_list, String from_currency, String to_currency, RecyclerView recyclerView);
 
     void loadBusinessStatistics(String user_name, TextView numOrderValue, TextView totalProfitValue, TextView averagePerTrade);
+
+    void updateOrderRateStatus(String orderID);
+
+    void checkOrderRated(String orderID, Context context, RateFlag rateFlag);
 }

@@ -3,6 +3,7 @@ package com.example.changetheworld;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -14,11 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.changetheworld.model.FireStoreDB;
+import com.example.changetheworld.model.RateFlag;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.lang.reflect.Method;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
 public class OrderConfirm extends AppCompatActivity {
@@ -33,7 +39,8 @@ public class OrderConfirm extends AppCompatActivity {
     ImageView QRcode;
     float myRating;
     int rating;
-
+    RateFlag rateFlag = new RateFlag();
+    Observer observer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,15 @@ public class OrderConfirm extends AppCompatActivity {
         QRcode = findViewById(R.id.QRcodeIV);
         user_type = getIntent().getStringExtra("user_type");
         order_status = getIntent().getStringExtra("status");
+
+        observer = new Observer() {
+            @Override
+            public void update(Observable observable, Object o) {
+                createNewContantDialog();
+            }
+        };
+        rateFlag.addObserver(observer);
+
 
 
         business_address.setOnClickListener(view -> {
@@ -88,12 +104,13 @@ public class OrderConfirm extends AppCompatActivity {
 
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-        if(order_status.equals("complete"))
-            createNewContantDialog();
+        FireStoreDB.getInstance().checkOrderRated(orderID, this, rateFlag);
     }
+
 
     public void  createNewContantDialog(){
         dialogBuilder= new AlertDialog.Builder(this);
@@ -137,6 +154,7 @@ public class OrderConfirm extends AppCompatActivity {
                     break;
             }
             Toast.makeText(this,"Your rating is:"+ message,Toast.LENGTH_SHORT).show();
+            FireStoreDB.getInstance().updateOrderRateStatus(orderID);
         });
 
         cancleRate.setOnClickListener(view -> {
