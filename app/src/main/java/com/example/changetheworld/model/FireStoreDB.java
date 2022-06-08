@@ -1023,12 +1023,14 @@ public class FireStoreDB implements DataBaseInterface {
                                 .document(business_user_name)
                                 .get()
                                 .addOnSuccessListener(documentSnapshot1 -> {
-                                    profit_pair.add(to_currency + "/" + documentSnapshot1.getString("local_currency"));
-                                    Float convert_local_currency_price =  api.getCloseAndChangePrice(pair).get(to_currency).get(0);
-                                    change_profit.set(change_profit.get() * convert_local_currency_price);
-                                    ((Activity)context).runOnUiThread(()->{
-                                        receive.setText(String.valueOf(df.format(change_price)));
-                                    });
+                                    new Thread(()->{
+                                        profit_pair.add(to_currency + "/" + documentSnapshot1.getString("local_currency"));
+                                        Float convert_local_currency_price =  api.getCloseAndChangePrice(profit_pair).get(to_currency).get(0);
+                                        change_profit.set(change_profit.get() * convert_local_currency_price);
+                                        ((Activity)context).runOnUiThread(()->{
+                                            receive.setText(String.valueOf(df.format(change_price)));
+                                        });
+                                    }).start();
                                 });
                     });
                     t.start();
