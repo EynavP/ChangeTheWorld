@@ -39,7 +39,6 @@ public class EditClientProfileActivity extends AppCompatActivity {
     int flag = 0;
 
     Button updateButton;
-    Button backButton;
 
 
     @Override
@@ -116,8 +115,6 @@ public class EditClientProfileActivity extends AppCompatActivity {
             }
 
         });
-        backButton = findViewById(R.id.backBtn);
-        backButton.setOnClickListener(view -> finish());
     }
 
     protected void onResume() {

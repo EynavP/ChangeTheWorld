@@ -27,8 +27,6 @@ public class SubWallet extends AppCompatActivity {
     TextView totalBalance;
     TextView totalBalanceSymbol;
 
-    Button backBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +54,15 @@ public class SubWallet extends AppCompatActivity {
             moveToWithdraw();
         });
 
-        backBtn = findViewById(R.id.backBtn);
-        backBtn.setOnClickListener(view -> {finish();});
 
+    }
 
+    private void moveToWallet() {
+        Intent intent = new Intent(this,WalletActivity.class);
+        intent.putExtra(getString(R.string.userName), userName);
+        intent.putExtra("user_type", userType);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
     }
 
     @Override
@@ -74,6 +77,8 @@ public class SubWallet extends AppCompatActivity {
         intent.putExtra(getString(R.string.userName), userName);
         intent.putExtra("userType", userType);
         intent.putExtra("localCurrencySymbol", localCurrencySymbol);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
         startActivity(intent);
     }
     public void moveToWithdraw(){
@@ -82,6 +87,7 @@ public class SubWallet extends AppCompatActivity {
         intent.putExtra(getString(R.string.userName), userName);
         intent.putExtra("userType", userType);
         intent.putExtra("localCurrencySymbol", localCurrencySymbol);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
