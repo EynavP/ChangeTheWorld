@@ -1645,9 +1645,9 @@ public class FireStoreDB implements DataBaseInterface {
                 .document(user_name)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
-                    numOrderValue.setText(documentSnapshot.getString("number_of_trades"));
-                    totalProfitValue.setText(documentSnapshot.getString("total_profit"));
-                    averagePerTrade.setText(documentSnapshot.getString("avg_profit"));
+                    numOrderValue.setText(df.format(Float.parseFloat(documentSnapshot.getString("number_of_trades"))));
+                    totalProfitValue.setText(df.format(Float.parseFloat(documentSnapshot.getString("total_profit"))));
+                    averagePerTrade.setText(df.format(Float.parseFloat(documentSnapshot.getString("avg_profit"))));
                 });
     }
 
