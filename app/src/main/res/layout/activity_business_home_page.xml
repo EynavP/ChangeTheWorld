@@ -18,6 +18,9 @@
         app:menu="@menu/open_menu_businees"
         android:layout_gravity="start" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
@@ -220,6 +223,18 @@
                 android:layout_toEndOf="@+id/orderRec"
                 android:background="@drawable/medium_rectangle" />
 
+            <View
+                android:id="@+id/StaticRec"
+                android:layout_width="wrap_content"
+                android:layout_height="103dp"
+                android:layout_below="@+id/orderRec"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/medium_rectangle" />
+
             <TextView
                 android:id="@+id/order_title"
                 android:layout_width="wrap_content"
@@ -230,6 +245,18 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/orders"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/staticTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/StaticRec"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/performance"
                 android:textSize="20sp" />
 
             <TextView
@@ -329,6 +356,42 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/numOrderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/StaticRec"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/staticTitle"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/num_orders"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/TotalProfitTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/numOrderTitle"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/staticTitle"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/total_profit"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/averagePerTradeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TotalProfitTitle"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/staticTitle"
+                android:fontFamily="@font/comfortaa"
+                android:text="@string/average_per_trade"
+                android:textSize="12sp" />
+
+            <TextView
                 android:id="@+id/number_of_rates_value"
                 android:layout_width="54dp"
                 android:layout_height="wrap_content"
@@ -336,6 +399,41 @@
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="49dp"
                 android:layout_toEndOf="@+id/you_got_title"
+                android:fontFamily="@font/comfortaa"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/numOrderValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/StaticRec"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/numOrderTitle"
+                android:fontFamily="@font/comfortaa"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/TotalProfitValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/numOrderValue"
+                android:layout_alignTop="@+id/StaticRec"
+                android:layout_marginStart="-14dp"
+                android:layout_marginTop="47dp"
+                android:layout_toEndOf="@+id/numOrderTitle"
+                android:fontFamily="@font/comfortaa"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/averagePerTrade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TotalProfitValue"
+                android:layout_alignTop="@+id/StaticRec"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="73dp"
+                android:layout_toEndOf="@+id/numOrderTitle"
                 android:fontFamily="@font/comfortaa"
                 android:textSize="12sp" />
 
@@ -368,7 +466,7 @@
                 android:id="@+id/currencies_rates_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/orderRec"
+                android:layout_below="@+id/StaticRec"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="21dp"
                 android:layout_marginTop="20dp"
@@ -400,7 +498,7 @@
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginEnd="0dp"
-                    android:layout_marginBottom="0dp" >
+                    android:layout_marginBottom="0dp">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
@@ -415,4 +513,5 @@
 
         </RelativeLayout>
     </RelativeLayout>
+    </ScrollView>
 </androidx.drawerlayout.widget.DrawerLayout>

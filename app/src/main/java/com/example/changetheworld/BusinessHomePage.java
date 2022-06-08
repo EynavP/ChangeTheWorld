@@ -45,7 +45,7 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
     Toolbar toolbar;
     AutoCompleteInterface aci = new AutoCompleteApi();
     SeekBar bar;
-    TextView bar_text, dayDate, todayDate, userName, orders_for_today, new_orders, cash_orders,number_of_rates_value;
+    TextView bar_text, dayDate, todayDate, userName, orders_for_today, new_orders, cash_orders,number_of_rates_value, numOrderValue,TotalProfitValue,averagePerTrade;
     ImageView search;
     ArrayList<currency> pairs = new ArrayList<>();
     ProgressBar progressBar;
