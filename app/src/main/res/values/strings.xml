@@ -192,6 +192,8 @@
     <string name="num_orders">Number of orders:</string>
     <string name="total_profit">Total Profit:</string>
     <string name="average_per_trade">Average per trade:</string>
+    <string name="order">Order</string>
+    <string name="rates">Rates</string>
 
 
 </resources>

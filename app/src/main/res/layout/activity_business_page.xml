@@ -57,8 +57,8 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="167dp"
-                    android:layout_marginEnd="62dp"
+                    android:layout_marginTop="139dp"
+                    android:layout_marginEnd="60dp"
                     android:layout_toStartOf="@+id/currencies_rates_btn"
                     android:background="@drawable/order_icon_2"
                     android:tooltipText="@string/new_order" />
@@ -69,10 +69,38 @@
                     android:layout_height="50dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="168dp"
+                    android:layout_marginTop="140dp"
                     android:layout_marginEnd="123dp"
                     android:background="@drawable/currency_rate_icon"
                     android:tooltipText="@string/currencies_rates" />
+
+                <TextView
+                    android:id="@+id/order_title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="123dp"
+                    android:layout_marginTop="196dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="@string/order"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/rates_title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="231dp"
+                    android:layout_marginTop="196dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="@string/rates"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
 
             </RelativeLayout>
@@ -222,6 +250,7 @@
                     android:fontFamily="@font/comfortaa"
                     android:text="@string/local_currency"
                     android:textAllCaps="false"
+                    android:textColor="#000000"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
