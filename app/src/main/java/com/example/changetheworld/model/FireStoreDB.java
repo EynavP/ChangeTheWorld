@@ -1099,7 +1099,7 @@ public class FireStoreDB implements DataBaseInterface {
             data.put("status", "pending");
             data.put("id", client_user_name + "*" + business_user_name + "*" + counter.get());
             data.put("client_type", user_type);
-            data.put("change_profit", change_profit.get());
+            data.put("change_profit", String.valueOf(change_profit.get()));
 
             tasks.add(db.collection(user_type)
                     .document(client_user_name)
@@ -1194,7 +1194,7 @@ public class FireStoreDB implements DataBaseInterface {
                             data.put("status", "pending");
                             data.put("id", client_user_name + "*" + business_user_name + "*" + counter.get());
                             data.put("client_type", user_type);
-                            data.put("change_profit", change_profit.get());
+                            data.put("change_profit", String.valueOf(change_profit.get()));
 
                             tasks.add(db.collection(user_type)
                                     .document(client_user_name)
@@ -1580,9 +1580,9 @@ public class FireStoreDB implements DataBaseInterface {
                                 int new_number_of_trades = Integer.parseInt(documentSnapshot1.getString("number_of_trades")) + 1;
                                 Float new_avg = new_total / new_number_of_trades;
                                 HashMap<String, Object> data_to_update = new HashMap<>();
-                                data_to_update.put("total_profit", new_total);
-                                data_to_update.put("number_of_trades", new_number_of_trades);
-                                data_to_update.put("avg_profit", new_avg);
+                                data_to_update.put("total_profit", String.valueOf(new_total));
+                                data_to_update.put("number_of_trades", String.valueOf(new_number_of_trades));
+                                data_to_update.put("avg_profit", String.valueOf(new_avg));
                                 db.collection("BusinessClient")
                                         .document(business_user_name)
                                         .update(data_to_update);
