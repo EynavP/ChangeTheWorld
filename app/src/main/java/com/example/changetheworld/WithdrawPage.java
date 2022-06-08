@@ -125,6 +125,7 @@ public class WithdrawPage extends AppCompatActivity {
                     intent.putExtra(getString(R.string.userName), userName);
                     intent.putExtra("userType", userType);
                     intent.putExtra("localCurrencySymbol",localCurrencySymbol);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     FireStoreDB.getInstance().updateBalance(userName, userType, subWalletName, Float.parseFloat(to), "-", this, intent);
                 }
 
