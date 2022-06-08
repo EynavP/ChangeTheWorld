@@ -1634,6 +1634,18 @@ public class FireStoreDB implements DataBaseInterface {
         }
     }
 
+    @Override
+    public void loadBusinessStatistics(String user_name, TextView numOrderValue, TextView totalProfitValue, TextView averagePerTrade) {
+        db.collection("BusinessClient")
+                .document(user_name)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    numOrderValue.setText(documentSnapshot.getString("number_of_trades"));
+                    totalProfitValue.setText(documentSnapshot.getString("total_profit"));
+                    averagePerTrade.setText(documentSnapshot.getString("avg_profit"));
+                });
+    }
+
     public void LoadOrdersStatus(Context context, TextView orders_for_today, TextView new_orders, TextView cash_orders, String user_type, String user_name) {
         db.collection(user_type)
                 .document(user_name)

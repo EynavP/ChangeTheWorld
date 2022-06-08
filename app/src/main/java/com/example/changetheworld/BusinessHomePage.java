@@ -58,6 +58,7 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         super.onResume();
         FireStoreDB.getInstance().LoadOrdersStatus(this, orders_for_today, new_orders, cash_orders, user_type, user_name);
         FireStoreDB.getInstance().loadBusinessRate(user_name, ratingBar, number_of_rates_value);
+        FireStoreDB.getInstance().loadBusinessStatistics(user_name, numOrderValue, TotalProfitValue, averagePerTrade);
     }
 
     @Override
@@ -75,6 +76,10 @@ public class BusinessHomePage extends AppCompatActivity implements NavigationVie
         number_of_rates_value = findViewById(R.id.number_of_rates_value);
         currencies_rate_recycleview = findViewById(R.id.currencies_rates_recycle);
         currencies_rate_recycleview.setLayoutManager(new LinearLayoutManager(this));
+        numOrderValue = findViewById(R.id.numOrderValue);
+        TotalProfitValue = findViewById(R.id.TotalProfitValue);
+        averagePerTrade = findViewById(R.id.averagePerTrade);
+
 
         user_type = "BusinessClient";
         progressBar = findViewById(R.id.progress_bar);

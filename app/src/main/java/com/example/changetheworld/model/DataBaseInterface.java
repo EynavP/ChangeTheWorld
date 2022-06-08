@@ -86,4 +86,6 @@ public interface DataBaseInterface {
     void CompleteOrder(Context context, String order_id);
 
     void SortByPrice(ArrayList<Search> filter_list, String from_currency, String to_currency, RecyclerView recyclerView);
+
+    void loadBusinessStatistics(String user_name, TextView numOrderValue, TextView totalProfitValue, TextView averagePerTrade);
 }
