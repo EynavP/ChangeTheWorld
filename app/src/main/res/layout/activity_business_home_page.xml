@@ -209,7 +209,7 @@
                 android:layout_height="143dp"
                 android:layout_below="@+id/todayDate"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="26dp"
                 android:layout_marginTop="28dp"
                 android:background="@drawable/medium_rectangle" />
 
@@ -218,21 +218,21 @@
                 android:layout_width="159dp"
                 android:layout_height="143dp"
                 android:layout_below="@+id/todayDate"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="31dp"
                 android:layout_marginTop="29dp"
                 android:layout_toEndOf="@+id/orderRec"
                 android:background="@drawable/medium_rectangle" />
 
             <View
                 android:id="@+id/StaticRec"
-                android:layout_width="wrap_content"
-                android:layout_height="103dp"
+                android:layout_width="327dp"
+                android:layout_height="102dp"
                 android:layout_below="@+id/orderRec"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="39dp"
                 android:background="@drawable/medium_rectangle" />
 
             <TextView
@@ -266,7 +266,7 @@
                 android:layout_alignStart="@+id/rateRec"
                 android:layout_alignTop="@+id/rateRec"
                 android:layout_marginStart="9dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="3dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/your_rate"
                 android:textAlignment="center"

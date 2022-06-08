@@ -17,7 +17,7 @@
     <RelativeLayout
         android:id="@+id/top_search_result_page"
         android:layout_width="match_parent"
-        android:layout_height="228dp"
+        android:layout_height="202dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -34,10 +34,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="66dp"
-            android:layout_marginLeft="66dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginEnd="54dp"
+            android:layout_marginStart="62dp"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="54dp"
+            android:layout_marginEnd="59dp"
             android:fontFamily="@font/comfortaa"
             android:letterSpacing="0.25"
             android:text="@string/search_results"
@@ -54,9 +54,9 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="101dp"
-            android:padding="10dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="261dp"
+            android:padding="10dp"
             android:prompt="@string/From_Currency"
             android:spinnerMode="dropdown"></Spinner>
 
@@ -68,7 +68,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="209dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="93dp"
             android:padding="10dp"
             android:prompt="@string/To_Currency"
@@ -80,7 +80,7 @@
             android:layout_height="38dp"
             android:layout_below="@+id/search_results_title"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="16dp"
             android:text="@string/sort"></androidx.appcompat.widget.AppCompatButton>
 
@@ -92,7 +92,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="157dp"
-            android:layout_marginTop="115dp"
+            android:layout_marginTop="65dp"
             android:layout_marginEnd="206dp"
             app:srcCompat="@drawable/arrow" />
 

@@ -300,13 +300,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <TextView
             android:id="@+id/to_currency_name_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="328dp"
+            android:layout_marginLeft="336dp"
             android:layout_marginTop="100dp"
             android:layout_toEndOf="@+id/receive_value"
             android:fontFamily="@font/comfortaa"
@@ -318,7 +319,6 @@
             app:layout_constraintHorizontal_bias="0.078"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/pickup_from_title"

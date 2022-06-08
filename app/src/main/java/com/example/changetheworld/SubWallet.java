@@ -74,7 +74,6 @@ public class SubWallet extends AppCompatActivity {
         intent.putExtra(getString(R.string.userName), userName);
         intent.putExtra("userType", userType);
         intent.putExtra("localCurrencySymbol", localCurrencySymbol);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
     public void moveToWithdraw(){
@@ -83,7 +82,6 @@ public class SubWallet extends AppCompatActivity {
         intent.putExtra(getString(R.string.userName), userName);
         intent.putExtra("userType", userType);
         intent.putExtra("localCurrencySymbol", localCurrencySymbol);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 

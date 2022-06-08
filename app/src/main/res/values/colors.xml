@@ -18,4 +18,5 @@
     <color name="searchColor">#BAFFFFFF</color>
     <color name="red">#EA2929</color>
     <color name="empty">#00000000</color>
+    <color name="gray">#C4C4C4</color>
 </resources>
