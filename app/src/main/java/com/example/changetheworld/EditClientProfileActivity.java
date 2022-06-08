@@ -112,7 +112,6 @@ public class EditClientProfileActivity extends AppCompatActivity {
             else{
                 PrivateClient client = new PrivateClient(userName,new_full_name,new_mail_address,new_phone_number, new_local_currency, new_password,personal_chosen_photo,passport_chosen_photo);
                 Intent intent = new Intent(this, ClientProfileActivity.class);
-                finish();
                 FireStoreDB.getInstance().updateClientProfile(this, client, intent);
             }
 

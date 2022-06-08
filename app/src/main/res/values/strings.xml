@@ -188,6 +188,10 @@
     <string name="About_eynav">onevptaya@gmail.com</string>
     <string name="About_yuval">yuval.amir998@gmail.com</string>
     <string name="about_smai">samuelkrief1004@gmail.com</string>
+    <string name="performance">Performance</string>
+    <string name="num_orders">Number of orders:</string>
+    <string name="total_profit">Total Profit:</string>
+    <string name="average_per_trade">Average per trade:</string>
 
 
 </resources>
