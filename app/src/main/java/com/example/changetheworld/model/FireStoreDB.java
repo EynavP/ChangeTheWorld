@@ -547,7 +547,7 @@ public class FireStoreDB implements DataBaseInterface {
                             searchBusinessClients.add(tmp);
                         }
                         Thread t = new Thread(() -> {
-                            AtomicInteger flag = new AtomicInteger();
+                            AtomicInteger flag = new AtomicInteger(0);
                             if (searchBusinessClients.size() == 1){
                                 Float dis = locationDataApi.GetDistance(searchQuery, searchBusinessClients.get(0).getBusiness_address());
                                 searchBusinessClients.get(0).setDistance(String.valueOf(df.format(dis)));
@@ -806,11 +806,13 @@ public class FireStoreDB implements DataBaseInterface {
                     ArrayList<String> pair = new ArrayList<>();
                     pair.add(prev_local + "/" + business.getLocal_currency());
                     new Thread(()-> {
-                        Float rate = api.getCloseAndChangePrice(pair).get(prev_local).get(0);
-                        Float new_total = Float.parseFloat(documentSnapshot.getString("total_profit")) * rate;
-                        Float new_avg = new_total / Integer.parseInt(documentSnapshot.getString("number_of_trades"));
-                        data.put("total_profit", new_total);
-                        data.put("avg_profit", new_avg);
+                        if(!prev_local.equals(business.getLocal_currency())) {
+                            Float rate = api.getCloseAndChangePrice(pair).get(prev_local).get(0);
+                            Float new_total = Float.parseFloat(documentSnapshot.getString("total_profit")) * rate;
+                            Float new_avg = new_total / Integer.parseInt(documentSnapshot.getString("number_of_trades"));
+                            data.put("total_profit", new_total);
+                            data.put("avg_profit", new_avg);
+                        }
                         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
                         if (business.getBusiness_approval_document() != null) {
