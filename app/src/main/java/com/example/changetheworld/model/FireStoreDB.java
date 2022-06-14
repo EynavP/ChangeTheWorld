@@ -1635,7 +1635,7 @@ public class FireStoreDB implements DataBaseInterface {
                     change_to_comission.put(filter_list.get(i).userName, Float.valueOf(tmp.getString(from_currency + to_currency)));
                 }
                 Collections.sort(filter_list, (o1, o2) -> {
-                    if (change_to_comission.get(o1.userName) > change_to_comission.get(o2.userName)){
+                    if (change_to_comission.get(o1.userName) < change_to_comission.get(o2.userName)){
                         return -1;
                     }
                     else {return 1; }
