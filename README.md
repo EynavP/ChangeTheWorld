@@ -1,10 +1,10 @@
 # Change The World
 ## Team members
-Niv Vaknin - [Niv's Git](https://github.com/vaknin34)
-Koral Duel - [Koral's Git](https://github.com/koralduel)
-Eynav Ptia - [Eynav's Git](https://github.com/EynavP)
-Yuval Amir - [Yuval's Git](https://github.com/yuvalamir123)
-Samuel Krief - [Samuel's Git](https://github.com/SamuelKrief)
+Niv Vaknin - [Niv's Git](https://github.com/vaknin34)</br>
+Koral Duel - [Koral's Git](https://github.com/koralduel)</br>
+Eynav Ptia - [Eynav's Git](https://github.com/EynavP)</br>
+Yuval Amir - [Yuval's Git](https://github.com/yuvalamir123)</br>
+Samuel Krief - [Samuel's Git](https://github.com/SamuelKrief)</br>
 
 
 ![screenShot](https://github.com/vaknin34/ChangeTheWorld/blob/master/1.jpg)
